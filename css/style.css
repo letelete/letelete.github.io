@@ -20,6 +20,14 @@ body {
   -webkit-transition: opacity 0.4s; /* Safari */
 }
 
+.under-construction {
+  width: 100%;
+  background-color: #e74c3c;
+  color: white;
+  text-align: center;
+  padding: 0;
+}
+
 ul,
 li {
   padding: 0;
