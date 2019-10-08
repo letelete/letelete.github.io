@@ -1,0 +1,11 @@
+:root {
+  --color-background-primary: rgb(255, 255, 255);
+  --color-accent-primary: #3742fa;
+  --color-accent-primary-60: rgba(0, 8, 255, 0.6);
+  --color-text-primary: rgba(255, 255, 255, 0.87);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-text-hint: rgba(255, 255, 255, 0.34);
+
+  --color--navigation: rgba(0, 8, 255, 0.34);
+  --color--navigation-active: rgba(0, 8, 255);
+}

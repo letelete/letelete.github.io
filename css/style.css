@@ -1,0 +1,273 @@
+@import "colors.css";
+@import "fonts.css";
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: var(--color-background-primary);
+  overflow-x: hidden;
+  font-family: var(--font-sans-serif);
+  margin: 0 auto;
+  font-weight: 400;
+  line-height: 1.5;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.4s;
+  -webkit-transition: opacity 0.4s; /* Safari */
+}
+
+ul,
+li {
+  padding: 0;
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+header,
+main,
+footer {
+  max-width: 1164px;
+  margin: 0 auto;
+}
+
+header {
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+  display: block;
+  text-align: center;
+}
+
+@media (max-height: 900px) {
+  header {
+    padding-top: 0rem;
+  }
+}
+
+.fa {
+  font-size: 24px;
+  color: var(--color-accent-primary);
+}
+
+.fa:hover {
+  color: var(--color-accent-primary-60);
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: var(--font-sans-serif);
+}
+
+.description {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: var(--font-sans-serif);
+}
+
+.navigation-list-item:hover,
+.text-button:hover {
+  text-decoration: underline;
+}
+
+.text-emphasis,
+.text-button {
+  font-weight: 300;
+  background-image: linear-gradient(120deg, #fed330 0%, #fed330 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 80%;
+  transition: background-size 0.25s ease-in;
+}
+
+.text-button {
+  font-family: var(--font-mono);
+  color: var(--color-accent-primary);
+  font-size: 24px;
+}
+
+.text-button:hover {
+  background-color: #fed330;
+}
+
+.main-wrapper {
+  text-align: center;
+}
+
+.main-container {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.socials-list {
+  margin: 0;
+}
+
+.socials-list-items,
+.navigation-list-item {
+  display: inline-block;
+}
+
+.socials-list-items .fa,
+.navigation-list-item {
+  padding: 5px;
+}
+
+.welcome-message-container {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.welcome-message {
+  font-family: var(--font-mono);
+  color: var(--color-accent-primary);
+  text-align: left;
+  font-size: 40px;
+}
+
+header .socials-list {
+  margin-top: 40px;
+}
+
+header .socials-list-items .fa {
+  color: black;
+}
+
+header .socials-list-items .fa:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navigation-list-item {
+  color: var(--color--navigation);
+  font-size: 24px;
+}
+
+#navigation-selected {
+  font-weight: 500;
+  color: var(--color-accent-primary);
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.about-hero,
+.about-text {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+
+@media (max-width: 550px) {
+  .about-hero,
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    flex: 1;
+  }
+}
+
+.project {
+  text-align: center;
+  overflow: hidden;
+}
+
+.project-hero,
+.project-text {
+  display: inline-block;
+  width: 50%;
+}
+
+.hero-right .project-text,
+.project-hero {
+  float: left;
+}
+
+.hero-right .project-hero,
+.project-text {
+  float: right;
+  overflow: hidden;
+}
+
+.project-text {
+  text-align: left;
+}
+
+.hero-right .project-text {
+  text-align: right;
+}
+
+.project-hero {
+  text-align: center;
+}
+
+@media (max-width: 550px) {
+  .project-hero,
+  .project-text {
+    display: block;
+    width: 100%;
+  }
+
+  .project-hero {
+    float: left;
+  }
+
+  .project-text {
+    float: right;
+    overflow: hidden;
+    text-align: left;
+  }
+}
+
+.contact-form,
+.project-action-button {
+  padding-left: 5px;
+}
+
+.contact-form:hover,
+.project-action-button:hover {
+  background-color: #fed330;
+}
+
+.contact-form p,
+.project-action-button p {
+  display: inline;
+  margin-left: 1.5rem;
+  font-family: var(--font-mono);
+  color: var(--color-accent-primary);
+  font-size: 24px;
+}
+
+footer {
+  margin-top: 10%;
+  text-align: center;
+  padding: 50px;
+  color: var(--color-accent-primary);
+}
+
+footer .navigation-list-item {
+  font-size: 16px;
+  color: var(--color-accent-primary);
+  font-family: var(--font-mono);
+}
