@@ -24,3 +24,11 @@
     flex: 1;
   }
 }
+
+[data-theme="light"] .about-hero img {
+  content: url(../images/san-francisco.svg);
+}
+
+[data-theme="dark"] .about-hero img {
+  content: url(../images/san-francisco-dark.svg);
+}

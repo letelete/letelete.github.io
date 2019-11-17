@@ -16,11 +16,11 @@ header .socials-list {
 }
 
 header .socials-list-items .fa {
-  color: black;
+  color: var(--color-text-primary);
 }
 
 header .socials-list-items .fa:hover {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--color-text-secondary);
 }
 
 .welcome-message-container {
@@ -45,11 +45,13 @@ header .socials-list-items .fa:hover {
 }
 
 .navigation-list-item {
-  color: var(--color--navigation);
+  color: var(--color-accent-primary);
+  opacity: 0.6;
   font-size: 24px;
 }
 
 #navigation-selected {
   font-weight: 500;
   color: var(--color-accent-primary);
+  opacity: 1;
 }

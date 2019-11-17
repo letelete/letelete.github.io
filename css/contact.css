@@ -5,7 +5,7 @@
 
 .contact-form:hover,
 .project-action-button:hover {
-  background-color: #fed330;
+  background-color: var(--color-accent-secondary);
 }
 
 .contact-form p,

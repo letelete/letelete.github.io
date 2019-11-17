@@ -77,9 +77,10 @@
       ga("create", "UA-127374125-2", "auto");
       ga("send", "pageview");
     </script>
+    <script src="js/dark-mode.js"></script>
   </head>
 
-  <body onload="document.body.style.opacity='1'">
+  <body>
     <header class="header">
       <div class="welcome-message-container">
         <h1 class="welcome-message no-center">
@@ -118,7 +119,16 @@
           >
         </ul>
       </nav>
+      <div class="toggle-container">
+        <input
+          type="checkbox"
+          id="switch"
+          name="theme"
+          class="switch-theme"
+        /><label for="switch">Switch color mode</label>
+      </div>
     </header>
+
     <main class="about">
       <div class="about-hero">
         <a
@@ -164,12 +174,12 @@
               HOME
             </li></a
           >
-          <a href="/work">
+          <a href="work">
             <li value="work" class="navigation-list-item">
               WORK
             </li></a
           >
-          <a href="/contact">
+          <a href="contact">
             <li value="contact" class="navigation-list-item">
               CONTACT
             </li></a
