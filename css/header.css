@@ -43,15 +43,3 @@ header .socials-list-items .fa:hover {
     text-align: left;
   }
 }
-
-.navigation-list-item {
-  color: var(--color-accent-primary);
-  opacity: 0.6;
-  font-size: 24px;
-}
-
-#navigation-selected {
-  font-weight: 500;
-  color: var(--color-accent-primary);
-  opacity: 1;
-}
