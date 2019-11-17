@@ -1,0 +1,45 @@
+header {
+  padding-top: 7rem;
+  padding-bottom: 3.5rem;
+  display: block;
+  text-align: center;
+}
+
+@media (max-height: 900px) {
+  header {
+    padding-top: 0rem;
+  }
+}
+
+header .socials-list {
+  margin-top: 40px;
+}
+
+header .socials-list-items .fa {
+  color: black;
+}
+
+header .socials-list-items .fa:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.welcome-message-container {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.welcome-message {
+  font-family: var(--font-mono);
+  color: var(--color-accent-primary);
+  text-align: left;
+}
+
+.navigation-list-item {
+  color: var(--color--navigation);
+  font-size: 24px;
+}
+
+#navigation-selected {
+  font-weight: 500;
+  color: var(--color-accent-primary);
+}

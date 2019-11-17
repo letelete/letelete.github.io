@@ -1,0 +1,26 @@
+.about {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.about-hero {
+  text-align: center;
+}
+
+.about-hero,
+.about-text {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+
+@media (max-width: 600px) {
+  .about-hero,
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    flex: 1;
+  }
+}
