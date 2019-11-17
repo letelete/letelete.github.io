@@ -174,3 +174,7 @@ footer {
 .navigation-list-item {
   padding: 5px;
 }
+
+.icon.hello_hand {
+  width: 48px;
+}
