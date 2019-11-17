@@ -48,7 +48,7 @@
   }
 
   .project.contrast {
-    background: #f5f5f5;
+    background: var(--color-project-contrast);
   }
 
   .project,
