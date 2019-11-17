@@ -32,6 +32,16 @@ header .socials-list-items .fa:hover {
   font-family: var(--font-mono);
   color: var(--color-accent-primary);
   text-align: left;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .welcome-message {
+    text-align: center;
+  }
+  .welcome-message.no-center {
+    text-align: left;
+  }
 }
 
 .navigation-list-item {
