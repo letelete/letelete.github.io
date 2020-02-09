@@ -5,12 +5,13 @@ const theme = new Theme();
 window.onload = function() {
   fadeInDocumentBody();
   theme.applyPreferedThemeOrDefault();
-  initializeThemeCheckbox();
+  updateThemeOnCheckboxChange();
+  waveHelloHandOnClick();
 };
 
 const fadeInDocumentBody = () => (document.body.style.opacity = "1");
 
-const initializeThemeCheckbox = () => {
+const updateThemeOnCheckboxChange = () => {
   const checkbox = document.getElementsByClassName("switch-theme")[0];
   if (!checkbox) {
     console.log("Theme checkbox object is null.");
@@ -29,4 +30,19 @@ const performPageTransition = () => {
   window.setTimeout(() => {
     document.documentElement.classList.remove("transition");
   }, 1000);
+};
+
+const waveHelloHandOnClick = () => {
+  document
+    .getElementsByClassName("hello-hand")[0]
+    .addEventListener("click", async function() {
+      const animationTrigger = "animate";
+      if (this.className.includes(animationTrigger)) {
+        return null;
+      }
+      const originClassName = this.className;
+      this.className = `${originClassName} ${animationTrigger}`;
+      await new Promise(r => setTimeout(r, 1000));
+      this.className = originClassName;
+    });
 };

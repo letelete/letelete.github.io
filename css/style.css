@@ -10,6 +10,8 @@
 
 @import "switch.css";
 
+@import "hello-hand.css";
+
 *,
 *:before,
 *:after {
@@ -191,6 +193,6 @@ figcaption {
   opacity: 1;
 }
 
-.icon.hello_hand {
+.hello-hand {
   width: 48px;
 }
