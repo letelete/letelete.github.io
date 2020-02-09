@@ -73,6 +73,10 @@ footer {
   }
 }
 
+figcaption {
+  color: var(--color-text-hint);
+}
+
 .fa,
 .description,
 .text-button {
