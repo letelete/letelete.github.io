@@ -23,24 +23,21 @@
         padding: 0;
         margin: 0;
       }
-
       body,
       html {
         width: 100%;
         height: 100%;
         color: rgba(0, 0, 0, 0.84);
-        font-family: 'Comfortaa', cursive;
+        font-family: Comfortaa, cursive;
       }
-
       h1,
       h2,
       h3,
       h4,
       h5,
       h6 {
-        font-family: 'Spectral', serif;
+        font-family: Spectral, serif;
       }
-
       .main {
         width: 100%;
         height: 100%;
@@ -49,23 +46,23 @@
         flex-flow: column;
         flex-wrap: nowrap;
       }
-
       .main__section--left {
         display: none;
       }
-
       .main__section--right {
         flex: 1 1 100%;
       }
 
-      .main__section--left .img-container {
+      .main__section--left .video-container {
         width: 100%;
         height: 100%;
         position: relative;
-        background-image: url('./images/work.gif');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+      }
+
+      .main__section--left .video-container .video-container__content {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
       }
 
       .main__section--right {
@@ -75,7 +72,6 @@
         flex-flow: column;
         padding: 1em 2em;
       }
-
       .contact {
         margin-top: 2.5em;
         list-style: none;
@@ -85,41 +81,32 @@
         justify-content: center;
         align-items: center;
       }
-
       .contact__item {
         font-size: 1.5em;
       }
-
       .contact__item a {
         color: rgba(0, 0, 0, 0.84);
       }
-
       .contact__item a:visited {
         color: rgba(0, 0, 0, 0.84);
       }
-
       .contact__item a:hover {
         color: orange;
       }
-
       .contact__item:nth-child(n + 2) {
         margin-left: 0.75em;
       }
-
       @media (min-width: 600px) {
         .main {
           flex-flow: row;
         }
-
         .main__section--left {
           display: block;
         }
-
         .main__section--left,
         .main__section--right {
           flex: 1 1 50%;
         }
-
         .contact {
           margin-top: 1.5em;
         }
@@ -130,10 +117,22 @@
     <main class="main">
       <section class="main__section main__section--left">
         <figure
-          title="Infinitely looped scene of a man digging in the ground from 'The Ballad of Buster Scruggs (2018)' movie"
-          aria-label="Infinitely looped scene of a man digging in the ground from 'The Ballad of Buster Scruggs (2018)' movie"
-          class="img-container"
-        ></figure>
+          class="video-container"
+          title="Perfectly looped scene of a man digging in the ground from 'The Ballad of Buster Scruggs (2018)' movie"
+          aria-label="Perfectly looped scene of a man digging in the ground from 'The Ballad of Buster Scruggs (2018)' movie"
+        >
+          <video
+            class="video-container__content"
+            autoplay
+            loop
+            muted
+            playsinline
+            poster="./images/work.jpg"
+          >
+            <source src="./images/work.webm" type="video/webm" />
+            <source src="./images/work.mp4" type="video/mp4" />
+          </video>
+        </figure>
       </section>
       <section class="main__section main__section--right">
         <div>
