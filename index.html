@@ -1,194 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="theme-color" content="#3742fa" />
-    <meta name="author" content="Bruno Kawka - Portfolio" />
-    <meta
-      name="description"
-      content="I develop web solutions; JS+React & Node Full-Stack with expertise in frontend; learning about UI/UX • GCI '18 Winner"
-    />
-    <meta
-      name="keywords"
-      content="Bruno Kawka, Software Engineer, Web Developer, Wev Engineer, Software Developer, Google Code-In Grand Prize Winner, GCI Winner, UI/UX, JavaScript, React, Portfolio, Personal Website, Blog"
-    />
-    <meta property="og:title" content="Bruno Kawka Portfolio" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://kawka.me" />
-    <meta property="og:image" content="images/og.png" />
-
-    <title>Bruno Kawka - Web Developer</title>
-
-    <link rel="canonical" href="https://kawka.me" />
-    <link rel="shortcut icon" href="images/fav/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bruno Kawka - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="images/fav/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="images/fav/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="images/fav/favicon-16x16.png"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:400,500,700|Ubuntu+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Spectral&display=swap"
       rel="stylesheet"
     />
-    <!-- End Google Analytics -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css"
       integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY="
       crossorigin="anonymous"
     />
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
 
-    <link href="css/style.css" rel="stylesheet" />
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        color: rgba(0, 0, 0, 0.84);
+        font-family: 'Comfortaa', cursive;
+      }
 
-    <!-- Google Analytics -->
-    <script>
-      (function(i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-          i[r] ||
-          function() {
-            (i[r].q = i[r].q || []).push(arguments);
-          }),
-          (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-      })(
-        window,
-        document,
-        "script",
-        "https://www.google-analytics.com/analytics.js",
-        "ga"
-      );
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: 'Spectral', serif;
+      }
 
-      ga("create", "UA-127374125-2", "auto");
-      ga("send", "pageview");
-    </script>
-    <script src="js/main.js" type ="module"></script>
-    <script src="js/theme.js" type="module"></script>
+      .main {
+        width: 100%;
+        height: 100%;
+        background: #f5f5f5;
+        display: flex;
+        flex-flow: column;
+        flex-wrap: nowrap;
+      }
+
+      .main__section--left {
+        display: none;
+      }
+
+      .main__section--right {
+        flex: 1 1 100%;
+      }
+
+      .main__section--left .img-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background-image: url('./images/work.gif');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .main__section--right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        padding: 1em 2em;
+      }
+
+      .contact {
+        margin-top: 2.5em;
+        list-style: none;
+        display: flex;
+        flex-flow: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .contact__item {
+        font-size: 1.5em;
+      }
+
+      .contact__item a {
+        color: rgba(0, 0, 0, 0.84);
+      }
+
+      .contact__item a:visited {
+        color: rgba(0, 0, 0, 0.84);
+      }
+
+      .contact__item a:hover {
+        color: orange;
+      }
+
+      .contact__item:nth-child(n + 2) {
+        margin-left: 0.75em;
+      }
+
+      @media (min-width: 600px) {
+        .main {
+          flex-flow: row;
+        }
+
+        .main__section--left {
+          display: block;
+        }
+
+        .main__section--left,
+        .main__section--right {
+          flex: 1 1 50%;
+        }
+
+        .contact {
+          margin-top: 1.5em;
+        }
+      }
+    </style>
   </head>
-
   <body>
-    <header class="header">
-      <div class="welcome-message-container">
-        <h1 class="welcome-message no-center">
-          Hi <img class="icon hello-hand" src="images/hello.png"></img> I'm Bruno Kawka.<br />
-          A Software Developer Focused On Creating Amazing Web Experiences
-        </h1>
-      </div>
-      <ul class="socials-list">
-        <li class="socials-list-items">
-          <a href="https://www.github.com/letelete">
-            <i class="fa fa-github" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li class="socials-list-items">
-          <a href="https://www.linkedin.com/in/brunokawka">
-            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-          </a>
-        </li>
-      </ul>
-      <nav class="navigation-list">
-        <ul>
-          <a href="/"
-            ><li class="navigation-list-item navigation-selected">
-              HOME
-            </li></a
-          >
-          <a href="/work">
-            <li class="navigation-list-item">
-              WORK
-            </li></a
-          >
-          <a href="/contact">
-            <li class="navigation-list-item">
-              CONTACT
-            </li></a
-          >
-        </ul>
-      </nav>
-      <div class="toggle-container">
-        <input
-          type="checkbox"
-          id="switch"
-          name="theme"
-          class="switch-theme"
-        /><label for="switch">Switch color mode</label>
-      </div>
-    </header>
-
-    <main class="about">
-      <div class="about-hero">
-        <a
-          href="https://medium.com/@brunokawka/my-google-code-in-2018-adventure-with-mifos-initiative-3a65848b0025"
-        >
-          <figure>
-            <img src="images/san-francisco.svg" alt="San Francisco" />
-            <figcaption>My GCI story</figcaption>
-          </figure>
-        </a>
-      </div>
-
-      <div class="about-text">
-        <h1 class="title">Who am I?</h1>
-        <article class="description">
-          I'm a Poland-based, software developer keen on constantly improving in the software engineering field.
-        </article>
-        <br />
-        <article class="description">
-          Every day I set my sights high. 
-          Winning the international Google Code-In contest was one of them.
-        </article>
-      </div>
+    <main class="main">
+      <section class="main__section main__section--left">
+        <figure
+          title="Infinitely looped scene of a man digging in the ground from 'The Ballad of Buster Scruggs (2018)' movie"
+          aria-label="Infinitely looped scene of a man digging in the ground from 'The Ballad of Buster Scruggs (2018)' movie"
+          class="img-container"
+        ></figure>
+      </section>
+      <section class="main__section main__section--right">
+        <div>
+          <h1>Shh 🤫 Don't tell anyone.</h1>
+          <p>This site is under construction. Redesign coming soon.</p>
+          <ul class="contact">
+            <li class="contact__item">
+              <a href="https://t.me/letelete" title="Message me on Telegram">
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="contact__item">
+              <a href="mailto:brunokawka@gmail.com" title="Send me an email">
+                <i class="fa fa-inbox" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="contact__item">
+              <a
+                href="https://github.com/letelete"
+                title="See my GitHub profile"
+              >
+                <i class="fa fa-github" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="contact__item">
+              <a
+                href="https://linkedin.com/in/brunokawka"
+                title="Add me on LinkedIn"
+              >
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
-
-    <footer class="footer">
-      <ul class="socials-list">
-        <li class="socials-list-items">
-          <a href="https://www.github.com/letelete">
-            <i class="fa fa-github" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li class="socials-list-items">
-          <a href="https://www.linkedin.com/in/brunokawka">
-            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-          </a>
-        </li>
-      </ul>
-      <nav class="navigation-list">
-        <ul>
-          <a href="/"
-            ><li value="about" class="navigation-list-item navigation-selected">
-              HOME
-            </li></a
-          >
-          <a href="work">
-            <li value="work" class="navigation-list-item">
-              WORK
-            </li></a
-          >
-          <a href="contact">
-            <li value="contact" class="navigation-list-item">
-              CONTACT
-            </li></a
-          >
-        </ul>
-      </nav>
-      <h6>© Bruno Kawka, 2021. All rights reserved.</h6>
-    </footer>
   </body>
 </html>
