@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color__foreground: #86868b;
+  --color__foreground--highlighted: #f5f5f7;
+  --color__background: #101010;
+  --color__accent: #ff5151;
+}
+
+body {
+  color: var(--color__foreground);
+  background: var(--color__background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
