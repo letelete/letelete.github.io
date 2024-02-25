@@ -20,7 +20,7 @@ const NavbarPrimitive = forwardRef<HTMLDivElement, NavbarProps>(
     return (
       <motion.nav
         className={cn(
-          'flex items-center gap-x-2 rounded-full bg-white/10 p-1 backdrop-blur-md',
+          'shadow-inner-glass flex items-center gap-x-2 rounded-full bg-white/10 p-1 backdrop-blur-md',
           className
         )}
         ref={ref}

@@ -23,7 +23,11 @@ const config: Config = {
         DEFAULT: '#ff5151',
       },
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        'inner-glass': 'inset 0 1px 1px 1px rgba(255, 255, 255, 0.1)',
+      },
+    },
   },
   plugins: [],
 };
