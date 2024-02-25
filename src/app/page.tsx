@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 
+import { AboutSection } from '~features/home/sections/about';
 import { HeroSection } from '~features/home/sections/hero';
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
@@ -29,13 +30,14 @@ export default function Home() {
   return (
     <main className='flex min-h-screen flex-col'>
       <Navbar
-        className='fixed left-0 right-0 top-4 mx-auto w-fit'
+        className='fixed left-0 right-0 top-4 z-50 mx-auto w-fit'
         items={navigationItems}
         selectedItemId={currentNavigationSectionId}
         onSelect={handleSelectSection}
       />
 
       <Navigatable
+        className='z-10'
         onSectionInView={handleSectionInView}
         ref={navigatableHandler}
       >
@@ -43,11 +45,8 @@ export default function Home() {
           <HeroSection />
         </Navigatable.Section>
 
-        <Navigatable.Section
-          sectionId='about'
-          className='flex min-h-screen w-full justify-center'
-        >
-          test
+        <Navigatable.Section sectionId='about'>
+          <AboutSection />
         </Navigatable.Section>
 
         <Navigatable.Section

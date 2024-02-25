@@ -20,6 +20,10 @@ const config = {
           highlighted: '#101010',
         },
       },
+      card: {
+        intense: '#000000',
+        light: '#000000',
+      },
       background: '#101010',
       white: '#fff',
       black: '#000',

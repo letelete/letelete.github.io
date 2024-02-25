@@ -57,7 +57,7 @@ export const Typography = ({
   children,
   ...rest
 }: TypographyProps) => {
-  const PolymorphicComponent = asChild ? Slot : 'div';
+  const PolymorphicComponent = asChild ? Slot : 'p';
 
   const renderAsChild = useCallback(() => {
     if (!children || !isValidElement(children)) {
