@@ -24,12 +24,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": "src/",
+    "baseUrl": ".",
     /* Paths */
     "paths": {
-      "~ui/*": ["components/ui/*"],
-      "~features/*": ["components/features/*"],
-      "~utils/*": ["utils/*"]
+      "~ui/*": ["src/components/ui/*"],
+      "~features/*": ["src/components/features/*"],
+      "~utils/*": ["src/utils/*"],
+      "~constants/*": ["src/constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

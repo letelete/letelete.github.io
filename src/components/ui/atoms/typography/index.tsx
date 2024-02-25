@@ -15,7 +15,7 @@ const typographyVariants = cva('tracking-normal', {
     variant: {
       heading: 'font-primary text-lg leading-7',
       body: 'font-primary text-base leading-6',
-      'body-sm': 'font-primary text-sm leading-5',
+      'body-sm': 'font-primary text-sm leading-6',
       sm: 'font-primary text-xs leading-4',
     },
     weight: {
@@ -26,11 +26,16 @@ const typographyVariants = cva('tracking-normal', {
       highlight: 'text-gray-100',
       default: 'text-gray-400',
     },
+    prose: {
+      true: 'max-w-prose',
+      false: '',
+    },
   },
   defaultVariants: {
     variant: 'body',
     color: 'default',
     weight: 'medium',
+    prose: true,
   },
 });
 
@@ -47,6 +52,7 @@ export const Typography = ({
   color,
   weight,
   variant,
+  prose,
   className,
   children,
   ...rest
@@ -65,7 +71,7 @@ export const Typography = ({
   return (
     <PolymorphicComponent
       className={cn(
-        typographyVariants({ color, weight, variant }),
+        typographyVariants({ color, weight, variant, prose }),
         balance && 'text-balance',
         className
       )}

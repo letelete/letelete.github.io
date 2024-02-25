@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 
+import { HeroSection } from '~features/home/sections/hero';
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
 
@@ -38,11 +39,8 @@ export default function Home() {
         onSectionInView={handleSectionInView}
         ref={navigatableHandler}
       >
-        <Navigatable.Section
-          sectionId='hello'
-          className='flex h-[95vh] w-full items-center justify-center'
-        >
-          home
+        <Navigatable.Section sectionId='hello'>
+          <HeroSection />
         </Navigatable.Section>
 
         <Navigatable.Section

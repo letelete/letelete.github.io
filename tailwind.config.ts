@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
-const config: Config = {
+const config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,6 +12,15 @@ const config: Config = {
       primary: ['Inter', ...defaultTheme.fontFamily.sans],
     },
     colors: {
+      primary: {
+        DEFAULT: '#86868b',
+        highlighted: '#f5f5f7',
+        foreground: {
+          DEFAULT: '#f5f5f7',
+          highlighted: '#101010',
+        },
+      },
+      background: '#101010',
       white: '#fff',
       black: '#000',
       gray: {
@@ -30,5 +39,5 @@ const config: Config = {
     },
   },
   plugins: [],
-};
+} as const satisfies Config;
 export default config;
