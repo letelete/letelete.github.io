@@ -16,8 +16,12 @@ const config = {
       white: '#fff',
       black: '#000',
       primary: {
-        DEFAULT: '#86868b',
+        DEFAULT: '#9e9ea3',
         highlighted: '#f5f5f7',
+        hint: {
+          DEFAULT: '#9E9EA3',
+          100: '#666666',
+        },
         foreground: {
           DEFAULT: '#f5f5f7',
           highlighted: '#101010',
