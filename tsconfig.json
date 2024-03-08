@@ -30,7 +30,8 @@
       "~ui/*": ["src/components/ui/*"],
       "~features/*": ["src/components/features/*"],
       "~utils/*": ["src/utils/*"],
-      "~constants/*": ["src/constants/*"]
+      "~constants/*": ["src/constants/*"],
+      "~hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,35 +1,40 @@
-import { useThrottle } from '@react-hook/throttle';
+'use client';
+
+import { ElementRef, useMemo, useRef, useState } from 'react';
+import Image, { ImageProps } from 'next/image';
 import {
   MotionValue,
+  motion,
   useAnimationFrame,
   useInView,
   useMotionValue,
-  useMotionValueEvent,
   useScroll,
   useSpring,
   useTransform,
   useVelocity,
   wrap,
 } from 'framer-motion';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import Image, { ImageProps } from 'next/image';
-import { ElementRef, useMemo, useRef, useState } from 'react';
 
 import { Icon } from '~ui/atoms/icon';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 export interface GalleryItem {
   src: string | StaticImport;
   alt: string;
 }
 
+export const clearClipPath = 'inset(0% 0% 0% 0% round 10px)';
+
+export const clipPathToBottom = 'inset(90% 0% 10% 0% round 10px)';
+
 export interface ParallaxGalleryProps extends Partial<ImageProps> {
   items: GalleryItem[];
 }
 
 export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
-  const [page, setPage] = useThrottle(0, 1, true);
-  const ref = useRef<ElementRef<typeof Image>>(null);
-  const isInView = useInView(ref, { once: false });
+  const [page, setPage] = useState(0);
+  const containerRef = useRef<ElementRef<typeof Image>>(null);
+  const isInView = useInView(containerRef);
 
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -37,7 +42,7 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
     damping: 50,
     stiffness: 400,
   }) as MotionValue<number>;
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+  const velocityFactor = useTransform(smoothVelocity, [-1000, 1000], [-5, 5], {
     clamp: false,
   });
 
@@ -46,53 +51,73 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
     setPage((page) => page + newDirection);
   };
 
+  const baseTime = useMotionValue(0);
+  const progress = useTransform(baseTime, [0, 1], [100, 0]);
+
+  const clipPath = useTransform(
+    progress,
+    (v) => `inset(0% 0% ${wrap(0, 100, v)}% 0% round 10px)`
+  );
+
   const directionFactor = useRef<number>(1);
-  useMotionValueEvent(velocityFactor, 'change', (latest) => {
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1;
-    } else {
-      directionFactor.current = 1;
+
+  useAnimationFrame((_t, delta) => {
+    if (!isInView) {
+      return;
     }
 
-    console.log(latest);
-    // if (isInView) {
-    // console.log('Page scroll: ', latest);
-    paginate(directionFactor.current);
-    // }
+    directionFactor.current = velocityFactor.get() < 0 ? -1 : 1;
+    baseTime.set(
+      baseTime.get() +
+        (delta / 1000) * velocityFactor.get() * directionFactor.current
+    );
+
+    if (baseTime.get() > 1) {
+      paginate(directionFactor.current);
+      baseTime.set(0);
+    }
   });
 
-  // const baseX = useMotionValue(0);
-  // useAnimationFrame((_t, delta) => {
-  //   if (velocityFactor.get() < 0) {
-  //     directionFactor.current = -1;
-  //   } else {
-  //     directionFactor.current = 1;
-  //   }
-
-  //   // const moveBy = Math.abs(100 * (delta / 1000) * velocityFactor.get());
-  //   // const nextX = (baseX.get() + moveBy) % 100;
-  //   // console.log(nextX);
-  //   // if (nextX === 0) {
-  //   //   paginate(directionFactor.current);
-  //   // }
-  //   // baseX.set(nextX);
-  // });
-
   const currentItem = useMemo(() => items[itemIndex], [itemIndex, items]);
+  const nextItem = useMemo(
+    () => items[(itemIndex + 1) % items.length],
+    [itemIndex, items]
+  );
 
-  if (!currentItem) {
-    return <Icon name='image' />;
+  if (!currentItem || !nextItem) {
+    return (
+      <div className='flex h-full w-full items-center justify-center'>
+        <Icon name='image' />{' '}
+      </div>
+    );
   }
 
   return (
-    <Image
-      key={page}
-      ref={ref}
-      src={currentItem.src}
-      alt={currentItem.alt}
-      priority
-      fill
-      {...rest}
-    />
+    <div className='relative h-full w-full overflow-hidden' ref={containerRef}>
+      <Image
+        key={page}
+        src={currentItem.src}
+        alt={currentItem.alt}
+        priority
+        fill
+        {...rest}
+      />
+
+      <motion.div
+        className='absolute left-0 top-0 z-10 h-full w-full overflow-hidden'
+        style={{
+          clipPath: clipPath,
+        }}
+      >
+        <Image
+          key={page}
+          src={nextItem.src}
+          alt={nextItem.alt}
+          priority
+          fill
+          {...rest}
+        />
+      </motion.div>
+    </div>
   );
 };

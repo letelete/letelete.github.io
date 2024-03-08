@@ -5,16 +5,16 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 import { cn } from '~utils/style';
 
 const buttonVariants = cva(
-  'ring-offset-primary-highlighted focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md font-primary text-sm font-medium leading-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md font-primary text-sm font-medium leading-6 ring-offset-primary-highlighted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         outline:
-          'border-input bg-transparent hover:text-primary-foreground hover:bg-primary border',
+          'border-input bg-transparent border hover:bg-primary hover:text-primary-foreground',
         ghost:
-          'hover:text-primary-foreground-highlighted hover:bg-primary-highlighted',
-        link: 'text-primary-highlighted underline-offset-4 hover:underline',
+          'hover:bg-primary-highlighted hover:text-primary-foreground-highlighted',
+        link: 'text-primary-highlighted underline underline-offset-4',
       },
       size: {
         default: 'h-10 px-4 py-2',
@@ -23,6 +23,7 @@ const buttonVariants = cva(
         icon: 'h-10 w-10',
       },
     },
+    compoundVariants: [{ variant: 'link', className: 'px-0' }],
     defaultVariants: {
       variant: 'default',
       size: 'default',

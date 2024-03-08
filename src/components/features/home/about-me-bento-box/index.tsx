@@ -1,7 +1,12 @@
-import { ComponentPropsWithoutRef } from 'react';
-
 import { BrunoParallaxGallery } from '~features/home/bruno-parallax-gallery';
+import { Button } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
+import { ComponentPropsWithoutRef } from 'react';
+import { FadeOverlay } from '~ui/atoms/fade-overlay';
+import { FallingEntities } from '~ui/atoms/falling-entities';
+import { GOOGLE_CODE_IN_ARTICLE } from '~constants/index';
+import Link from 'next/link';
+import { TrophyEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
 import { cn } from '~utils/style';
 
@@ -19,18 +24,33 @@ export const AboutMeBentoBox = ({
       )}
       {...rest}
     >
-      <Card className='col-span-3 flex min-h-60 items-center justify-center p-4'>
-        <Typography variant='body-sm'>
-          I started to program when I was 14. I found out I can use Lua, and C++
-          for an advantage in video games. At the age of 17{' '}
-          <span className='text-primary-highlighted'>
-            I won the international programming contest organized by Google.
-          </span>
-        </Typography>
+      <Card className='relative col-span-3 flex min-h-60 flex-col items-center justify-center overflow-hidden sm:flex-row'>
+        <FadeOverlay
+          className='absolute left-[1px] top-[1px] z-0 h-1/2 w-[calc(100%-1px)] flex-1 p-1 sm:relative sm:h-[calc(100%-1px)]'
+          overlayClassName='from-card-intense sm:to-card-intense/30 to-card-intense/70 bg-gradient-to-t sm:bg-gradient-to-l'
+        >
+          <FallingEntities>
+            <TrophyEmoji width={24} height={24} className='-rotate-45' />
+          </FallingEntities>
+        </FadeOverlay>
+
+        <div className='relative z-10 p-8 sm:flex-1'>
+          <Typography variant='body-sm'>
+            I started to program when I was 14. I found out I can use Lua, and
+            C++ for an advantage in video games. At the age of 17{' '}
+            <span className='text-primary-highlighted'>
+              I won the international programming contest organized by Google.
+            </span>
+          </Typography>
+
+          <Button className='mt-4' variant='link' size='sm' asChild>
+            <Link href={GOOGLE_CODE_IN_ARTICLE}>Read my contest story</Link>
+          </Button>
+        </div>
       </Card>
 
-      <Card className='order-last col-span-3 flex min-h-60 items-center justify-center p-4 sm:order-[unset] sm:col-span-1'>
-        <Typography className='px-10' variant='body-sm'>
+      <Card className='order-last col-span-3 flex min-h-60 items-center justify-center p-8 sm:order-[unset] sm:col-span-1'>
+        <Typography variant='body-sm'>
           I’m passionate about software engineering, and UI/UX design.{' '}
           <span className='text-primary-highlighted'>
             Frontend development allows me to experience the best of both
@@ -45,7 +65,7 @@ export const AboutMeBentoBox = ({
         </div>
       </Card>
 
-      <Card className='flex min-h-60 items-center justify-center p-4'>
+      <Card className='flex min-h-60 items-center justify-center p-8'>
         <Typography className='whitespace-nowrap' variant='body-sm'>
           📍 Cracow, <span className='text-primary-highlighted'>Poland</span>
         </Typography>

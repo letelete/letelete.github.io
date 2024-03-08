@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { Icon, IconProps } from '~ui/atoms/icon';
 import Link, { LinkProps } from 'next/link';
 
-import { Icon, IconProps } from '~ui/atoms/icon';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 export interface IconLinkProps extends LinkProps {
   iconProps: IconProps;

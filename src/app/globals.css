@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-700 text-gray-400;
+  @apply bg-background text-primary-foreground;
 }
 
 @layer utilities {
@@ -12,7 +12,7 @@ body {
   }
 
   .layout-padding {
-    @apply px-[10vw] lg:px-[unset];
+    @apply px-4 sm:px-[10vw] lg:px-[unset];
   }
 
   .layout-width-limiter {

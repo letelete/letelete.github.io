@@ -1,11 +1,11 @@
 'use client';
 
+import { Navbar, NavbarItem } from '~ui/atoms/navbar';
+import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
 import { useCallback, useRef, useState } from 'react';
 
 import { AboutSection } from '~features/home/sections/about';
 import { HeroSection } from '~features/home/sections/hero';
-import { Navbar, NavbarItem } from '~ui/atoms/navbar';
-import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
 
 const navigationItems = [
   { id: 'hello', label: 'Hello' },

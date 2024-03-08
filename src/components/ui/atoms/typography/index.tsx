@@ -23,8 +23,8 @@ const typographyVariants = cva('tracking-normal', {
       regular: 'font-normal',
     },
     color: {
-      highlight: 'text-gray-100',
-      default: 'text-gray-400',
+      highlight: 'text-primary-highlighted',
+      default: 'text-primary',
     },
     prose: {
       true: 'max-w-prose',

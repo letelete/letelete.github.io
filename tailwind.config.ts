@@ -12,6 +12,9 @@ const config = {
       primary: ['Inter', ...defaultTheme.fontFamily.sans],
     },
     colors: {
+      background: '#101010',
+      white: '#fff',
+      black: '#000',
       primary: {
         DEFAULT: '#86868b',
         highlighted: '#f5f5f7',
@@ -20,20 +23,12 @@ const config = {
           highlighted: '#101010',
         },
       },
+      accent: {
+        DEFAULT: '#ff5151',
+      },
       card: {
         intense: '#000000',
         light: '#000000',
-      },
-      background: '#101010',
-      white: '#fff',
-      black: '#000',
-      gray: {
-        100: '#f5f5f7',
-        400: '#86868b',
-        700: '#101010',
-      },
-      accent: {
-        DEFAULT: '#ff5151',
       },
     },
     extend: {
