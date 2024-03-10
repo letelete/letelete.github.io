@@ -1,11 +1,11 @@
-import dayjs from 'dayjs';
-import Link from 'next/link';
+import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 
-import useTailwind from '~hooks/use-tailwind';
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
-import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
+import Link from 'next/link';
 import { Typography } from '~ui/atoms/typography';
+import { shortDate } from '~utils/string';
+import useTailwind from '~hooks/use-tailwind';
 
 export interface ArticleSegmentProps extends Partial<LineSegmentProps> {
   href: string;
@@ -25,14 +25,14 @@ export const ArticleSegment = ({
       leading={
         <div className='flex items-start gap-x-3'>
           <Icon
-            className='aspect-square h-8 w-8'
-            size={32}
+            className='aspect-square h-6 w-6 flex-shrink-0 flex-grow'
+            size={24}
             name='arrow-up-right'
             color={tw.theme.colors.primary.highlighted}
           />
 
           <Button
-            className='max-w-prose whitespace-break-spaces text-sm text-primary'
+            className='flex-shrink-1 line-clamp-3 h-fit max-w-prose whitespace-break-spaces p-0 text-sm text-primary'
             variant='link'
             asChild
           >
@@ -41,8 +41,8 @@ export const ArticleSegment = ({
         </div>
       }
       trailing={
-        <Typography className='text-primary-hint-100 text-sm' weight='regular'>
-          {dayjs(createdAt).format('YYYY-MM-DD')}
+        <Typography className='text-sm text-primary-hint' weight='regular'>
+          {shortDate(createdAt)}
         </Typography>
       }
       {...rest}

@@ -1,25 +1,24 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-
+import { ComponentPropsWithoutRef } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { cn } from '~utils/style';
 
-export interface CardProps extends ComponentPropsWithoutRef<'div'> {}
+export interface CardProps extends ComponentPropsWithoutRef<'div'> {
+  asChild?: boolean;
+}
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, children, ...rest }, ref) => {
-    return (
-      <figure
-        ref={ref}
-        className={cn(
-          'from-card-intense to-card-light/30 rounded-xl bg-gradient-to-br shadow-inner-glass backdrop-blur-md',
-          className
-        )}
-        {...rest}
-      >
-        {children}
-      </figure>
-    );
-  }
-);
+const Card = ({ asChild, className, ...rest }: CardProps) => {
+  const Comp = asChild ? Slot : 'div';
+
+  return (
+    <Comp
+      className={cn(
+        'overflow-hidden rounded-xl bg-gradient-to-br from-card-intense to-card-light/30 shadow-inner-glass backdrop-blur-md',
+        className
+      )}
+      {...rest}
+    />
+  );
+};
 
 Card.displayName = 'Card';
 

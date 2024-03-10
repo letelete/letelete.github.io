@@ -19,8 +19,7 @@ const config = {
         DEFAULT: '#9e9ea3',
         highlighted: '#f5f5f7',
         hint: {
-          DEFAULT: '#9E9EA3',
-          100: '#666666',
+          DEFAULT: '#666666',
         },
         foreground: {
           DEFAULT: '#f5f5f7',
@@ -33,6 +32,7 @@ const config = {
       card: {
         intense: '#000000',
         light: '#000000',
+        hovered: '#ffffff',
       },
     },
     extend: {

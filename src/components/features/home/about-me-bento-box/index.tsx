@@ -1,3 +1,5 @@
+import { RoundPushpinEmoji, TrophyEmoji } from '~ui/atoms/emojis';
+
 import { BrunoParallaxGallery } from '~features/home/bruno-parallax-gallery';
 import { Button } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
@@ -6,7 +8,6 @@ import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import { FallingEntities } from '~ui/atoms/falling-entities';
 import { GOOGLE_CODE_IN_ARTICLE } from '~constants/index';
 import Link from 'next/link';
-import { TrophyEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
 import { cn } from '~utils/style';
 
@@ -30,7 +31,7 @@ export const AboutMeBentoBox = ({
           overlayClassName='from-card-intense sm:to-card-intense/30 to-card-intense/70 bg-gradient-to-t sm:bg-gradient-to-l'
         >
           <FallingEntities>
-            <TrophyEmoji width={24} height={24} className='-rotate-45' />
+            <TrophyEmoji className='h-6 w-6 -rotate-45' />
           </FallingEntities>
         </FadeOverlay>
 
@@ -67,7 +68,9 @@ export const AboutMeBentoBox = ({
 
       <Card className='flex min-h-60 items-center justify-center p-8'>
         <Typography className='whitespace-nowrap' variant='body-sm'>
-          📍 Cracow, <span className='text-primary-highlighted'>Poland</span>
+          <RoundPushpinEmoji className='mr-2' />
+          {'Cracow, '}
+          <span className='text-primary-highlighted'>{'Poland'}</span>
         </Typography>
       </Card>
     </div>
