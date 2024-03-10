@@ -5,6 +5,7 @@ import {
   HorizontalScrollContentContainer,
 } from '~ui/molecules/horizontal-scroll-carousel';
 import { MicrophoneEmoji, PencilEmoji } from '~ui/atoms/emojis';
+import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 import { ArticleSegment } from '~ui/molecules/article-segment';
@@ -14,7 +15,6 @@ import { Icon } from '~ui/atoms/icon';
 import Link from 'next/link';
 import { TextUnderline } from '~ui/atoms/text-underline';
 import { Typography } from '~ui/atoms/typography';
-import { motion } from 'framer-motion';
 import talkDevJs2023 from '/public/galleries/talks/devjs-2023.webp';
 import talkSFI2023 from '/public/galleries/talks/sfi-2023.webp';
 import useTailwind from '~hooks/use-tailwind';
@@ -252,7 +252,7 @@ export const ExperienceSection = () => {
             <HorizontalScrollButtonContainer
               ref={speakScrollRef}
               href={TALKS_BASE_URL}
-              label='Check my talks'
+              label='Check all of my talks'
               leading={<MicrophoneEmoji className='mr-2' />}
               reversed
             />
