@@ -16,6 +16,10 @@ export const shortDate = (date: Date) => {
   return dayjs(date).format('YYYY-MM-DD');
 };
 
+export const monthNameAndYearDate = (date: Date) => {
+  return dayjs(date).format('MMM, YY');
+};
+
 export const compactNumber = (num: number) => {
   return largeNumbersFormatter.format(num);
 };
