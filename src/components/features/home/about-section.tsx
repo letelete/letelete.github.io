@@ -1,4 +1,4 @@
-import { AboutMeBentoBox } from '~features/home/about-me-bento-box';
+import { AboutMeBentoBox } from '~features/about/about-me-bento-box';
 
 import { Typography } from '~ui/atoms/typography';
 

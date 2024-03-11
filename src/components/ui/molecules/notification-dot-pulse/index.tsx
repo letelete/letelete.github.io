@@ -1,12 +1,13 @@
 'use client';
 
+import { motion } from 'framer-motion';
+
 import {
   NotificationDot,
   NotificationDotProps,
 } from '~ui/atoms/notification-dot';
 
 import { cn } from '~utils/style';
-import { motion } from 'framer-motion';
 
 export interface NotificationDotPulseProps extends NotificationDotProps {}
 

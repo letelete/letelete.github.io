@@ -2,9 +2,9 @@
 
 import { useCallback, useRef, useState } from 'react';
 
-import { AboutSection } from '~features/home/sections/about-section';
-import { ExperienceSection } from '~features/home/sections/experience-section';
-import { HeroSection } from '~features/home/sections/hero-section';
+import { AboutSection } from '~features/home/about-section';
+import { ExperienceSection } from '~features/home/experience-section';
+import { HeroSection } from '~features/home/hero-section';
 
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';

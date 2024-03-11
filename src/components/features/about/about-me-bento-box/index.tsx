@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { GOOGLE_CODE_IN_ARTICLE } from '~constants/index';
 
-import { BrunoParallaxGallery } from '~features/home/bruno-parallax-gallery';
+import { BrunoParallaxGallery } from '~features/about/bruno-parallax-gallery';
 
 import { Button } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
