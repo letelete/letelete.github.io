@@ -1,5 +1,6 @@
 'use client';
 
+import { useAnimationFrame, useInView } from 'framer-motion';
 import {
   Children,
   ComponentPropsWithoutRef,
@@ -7,10 +8,10 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import { useAnimationFrame, useInView } from 'framer-motion';
+
+import { useElementGeometry } from '~hooks/use-element-geometry';
 
 import { cn } from '~utils/style';
-import { useElementGeometry } from '~hooks/use-element-geometry';
 
 export interface FallingEntitiesProps extends ComponentPropsWithoutRef<'div'> {
   velocity?: number;

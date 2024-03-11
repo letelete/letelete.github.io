@@ -1,5 +1,7 @@
 'use client';
 
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
 import {
   ComponentPropsWithoutRef,
   ReactNode,
@@ -8,12 +10,12 @@ import {
   useImperativeHandle,
   useRef,
 } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+
+import { useElementGeometry } from '~hooks/use-element-geometry';
 
 import { Button } from '~ui/atoms/button';
-import Link from 'next/link';
+
 import { cn } from '~utils/style';
-import { useElementGeometry } from '~hooks/use-element-geometry';
 
 export interface HorizontalScrollCarouselProps
   extends ComponentPropsWithoutRef<'div'> {

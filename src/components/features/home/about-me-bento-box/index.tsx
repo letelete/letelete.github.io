@@ -1,14 +1,17 @@
-import { RoundPushpinEmoji, TrophyEmoji } from '~ui/atoms/emojis';
+import Link from 'next/link';
+import { ComponentPropsWithoutRef } from 'react';
+
+import { GOOGLE_CODE_IN_ARTICLE } from '~constants/index';
 
 import { BrunoParallaxGallery } from '~features/home/bruno-parallax-gallery';
+
 import { Button } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
-import { ComponentPropsWithoutRef } from 'react';
+import { RoundPushpinEmoji, TrophyEmoji } from '~ui/atoms/emojis';
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import { FallingEntities } from '~ui/atoms/falling-entities';
-import { GOOGLE_CODE_IN_ARTICLE } from '~constants/index';
-import Link from 'next/link';
 import { Typography } from '~ui/atoms/typography';
+
 import { cn } from '~utils/style';
 
 export interface AboutMeBentoBoxProps extends ComponentPropsWithoutRef<'div'> {}

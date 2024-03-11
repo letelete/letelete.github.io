@@ -1,14 +1,16 @@
 'use client';
 
-import { Card, CardProps } from '~ui/atoms/card';
-import { compactNumber, relativeTime } from '~utils/string';
-
-import { Icon } from '~ui/atoms/icon';
-import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import { Typography } from '~ui/atoms/typography';
-import { cn } from '~utils/style';
+import Image from 'next/image';
+
 import useTailwind from '~hooks/use-tailwind';
+
+import { Card, CardProps } from '~ui/atoms/card';
+import { Icon } from '~ui/atoms/icon';
+import { Typography } from '~ui/atoms/typography';
+
+import { compactNumber, relativeTime } from '~utils/string';
+import { cn } from '~utils/style';
 
 export interface ExternalContentCardProps extends CardProps {
   href: string;

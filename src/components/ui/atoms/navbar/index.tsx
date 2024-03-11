@@ -2,6 +2,7 @@ import { HTMLMotionProps, motion } from 'framer-motion';
 import { forwardRef, useCallback } from 'react';
 
 import { Typography } from '~ui/atoms/typography';
+
 import { cn } from '~utils/style';
 
 export interface NavbarItem {
@@ -20,7 +21,7 @@ const NavbarPrimitive = forwardRef<HTMLDivElement, NavbarProps>(
     return (
       <motion.nav
         className={cn(
-          'shadow-inner-glass flex items-center gap-x-2 rounded-full bg-white/10 p-1 backdrop-blur-md',
+          'flex items-center gap-x-2 rounded-full bg-white/10 p-1 shadow-inner-glass backdrop-blur-md',
           className
         )}
         ref={ref}

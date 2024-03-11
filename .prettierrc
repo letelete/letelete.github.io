@@ -13,7 +13,15 @@
     "prettier-plugin-tailwindcss"
   ],
   "tailwindFunctions": ["clsx", "cn", "cva"],
-  "importOrder": ["<THIRD_PARTY_MODULES>", "^~(.*)$", "^[./]"],
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^~constants/(.*)$",
+    "^~features/(.*)$",
+    "^~hooks/(.*)$",
+    "^~ui/(.*)$",
+    "^~utils/(.*)$",
+    "^[./]"
+  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

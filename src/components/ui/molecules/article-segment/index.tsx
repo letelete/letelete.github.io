@@ -1,11 +1,13 @@
-import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
+import Link from 'next/link';
+
+import useTailwind from '~hooks/use-tailwind';
 
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
-import Link from 'next/link';
+import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 import { Typography } from '~ui/atoms/typography';
+
 import { shortDate } from '~utils/string';
-import useTailwind from '~hooks/use-tailwind';
 
 export interface ArticleSegmentProps extends Partial<LineSegmentProps> {
   href: string;

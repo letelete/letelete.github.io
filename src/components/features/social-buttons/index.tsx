@@ -1,9 +1,11 @@
 import { ComponentPropsWithoutRef } from 'react';
 
 import { SOCIALS_URLS } from '~constants/index';
+
 import { Button } from '~ui/atoms/button';
 import { IconProps } from '~ui/atoms/icon';
 import { IconLink } from '~ui/atoms/icon-link';
+
 import { cn } from '~utils/style';
 
 interface SocialEntry {

@@ -1,9 +1,12 @@
+import { motion, useInView } from 'framer-motion';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+
 import { BLOG_BASE_URL, SOCIALS_URLS, TALKS_BASE_URL } from '~constants/index';
-import {
-  HorizontalScrollButtonContainer,
-  HorizontalScrollCarousel,
-  HorizontalScrollContentContainer,
-} from '~ui/molecules/horizontal-scroll-carousel';
+
+import useTailwind from '~hooks/use-tailwind';
+
+import { Button } from '~ui/atoms/button';
 import {
   LaptopEmoji,
   MicrophoneEmoji,
@@ -12,20 +15,20 @@ import {
   VideoCameraEmoji,
   WhiteQuestionMarkEmoji,
 } from '~ui/atoms/emojis';
-import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-
-import { ArticleSegment } from '~ui/molecules/article-segment';
-import { Button } from '~ui/atoms/button';
-import { ExperienceSegment } from '~ui/molecules/experience-segment';
-import { ExternalContentCard } from '~ui/molecules/youtube-card';
 import { Icon } from '~ui/atoms/icon';
-import Link from 'next/link';
 import { TextUnderline } from '~ui/atoms/text-underline';
 import { Typography } from '~ui/atoms/typography';
+import { ArticleSegment } from '~ui/molecules/article-segment';
+import { ExperienceSegment } from '~ui/molecules/experience-segment';
+import {
+  HorizontalScrollButtonContainer,
+  HorizontalScrollCarousel,
+  HorizontalScrollContentContainer,
+} from '~ui/molecules/horizontal-scroll-carousel';
+import { ExternalContentCard } from '~ui/molecules/youtube-card';
+
 import talkDevJs2023 from '/public/galleries/talks/devjs-2023.webp';
 import talkSFI2023 from '/public/galleries/talks/sfi-2023.webp';
-import useTailwind from '~hooks/use-tailwind';
 import youtubeImg10 from '/public/galleries/youtube/img-10.png';
 
 type Segment = 'write' | 'record' | 'speak';

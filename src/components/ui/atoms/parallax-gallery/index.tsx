@@ -1,7 +1,5 @@
 'use client';
 
-import { ElementRef, useMemo, useRef, useState } from 'react';
-import Image, { ImageProps } from 'next/image';
 import {
   MotionValue,
   motion,
@@ -14,9 +12,11 @@ import {
   useVelocity,
   wrap,
 } from 'framer-motion';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import Image, { ImageProps } from 'next/image';
+import { ElementRef, useMemo, useRef, useState } from 'react';
 
 import { Icon } from '~ui/atoms/icon';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 export interface GalleryItem {
   src: string | StaticImport;

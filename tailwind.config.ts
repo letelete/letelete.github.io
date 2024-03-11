@@ -35,8 +35,8 @@ const config = {
         hovered: '#ffffff',
       },
       destructive: {
-        DEFAULT: '#FF5151'
-      }
+        DEFAULT: '#FF5151',
+      },
     },
     extend: {
       boxShadow: {

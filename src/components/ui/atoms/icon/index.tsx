@@ -1,6 +1,6 @@
 import { LucideProps } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
+import dynamic from 'next/dynamic';
 import useTailwind from 'src/hooks/use-tailwind';
 
 export interface IconProps extends LucideProps {

@@ -1,5 +1,6 @@
-import { ComponentPropsWithoutRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import { ComponentPropsWithoutRef } from 'react';
+
 import { cn } from '~utils/style';
 
 export interface CardProps extends ComponentPropsWithoutRef<'div'> {

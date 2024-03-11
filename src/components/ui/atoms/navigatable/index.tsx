@@ -1,6 +1,12 @@
 'use client';
 
 import {
+  HTMLMotionProps,
+  UseInViewOptions,
+  motion,
+  useInView,
+} from 'framer-motion';
+import {
   Children,
   ComponentPropsWithoutRef,
   ReactElement,
@@ -15,12 +21,6 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import {
-  HTMLMotionProps,
-  UseInViewOptions,
-  motion,
-  useInView,
-} from 'framer-motion';
 
 export interface NavigatableProps extends ComponentPropsWithoutRef<'div'> {
   onSectionInView: (sectionId: string) => void;

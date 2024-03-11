@@ -20,7 +20,7 @@ export const LineSegment = ({
     >
       {leading}
 
-      <div className='bg-primary-hint h-[1px] w-full' />
+      <div className='h-[1px] w-full bg-primary-hint' />
 
       {trailing}
     </div>

@@ -53,12 +53,12 @@ export const ExperienceSegment = ({
               {typeof endDate === 'string' ? (
                 <span className='relative'>
                   Now
-                  <NotificationDotPulse className='absolute left-[90%] top-0' />
+                  <NotificationDotPulse className='absolute -right-4 top-1/2 -translate-y-1/2' />
                 </span>
               ) : (
                 monthNameAndYearDate(endDate)
               )}
-            </>
+            </
           )}
         </Typography>
       }
