@@ -7,6 +7,7 @@ import { cn } from '~utils/style';
 import laptop from '/public/emojis/laptop.png';
 import microphone from '/public/emojis/microphone.png';
 import pencil from '/public/emojis/pencil.png';
+import pixelArtHeart from '/public/emojis/pixel-art-heart.webp';
 import roundPushpin from '/public/emojis/round-pushpin.png';
 import trophy from '/public/emojis/trophy.png';
 import videoCamera from '/public/emojis/video-camera.png';
@@ -53,4 +54,8 @@ export const WhiteQuestionMarkEmoji = ({ ...rest }: EmojiProps) => {
   return (
     <BaseEmoji alt='White question mark' src={whiteQuestionMark} {...rest} />
   );
+};
+
+export const PixelArtHeartEmoji = ({ ...rest }: EmojiProps) => {
+  return <BaseEmoji alt='Pixel art heart' src={pixelArtHeart} {...rest} />;
 };

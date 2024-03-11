@@ -7,6 +7,8 @@ import {
   VideoCameraEmoji,
   WhiteQuestionMarkEmoji,
 } from '~ui/atoms/emojis';
+import { StickyHeaderSection } from '~ui/atoms/sticky-header-section';
+import { Typography } from '~ui/atoms/typography';
 import { ExperienceSegment } from '~ui/molecules/experience-segment';
 
 import { cn } from '~utils/style';
@@ -14,29 +16,47 @@ import { cn } from '~utils/style';
 export interface HistorySectionProps extends ComponentPropsWithoutRef<'div'> {}
 
 export const HistorySection = ({ className, ...rest }: HistorySectionProps) => (
-  <figure
-    className={cn(
-      'flex w-full flex-col items-center justify-center gap-y-4',
-      className
-    )}
-    {...rest}
-  >
-    {experience.map(
-      ({ id, leading, title, subtitle, startDate, endDate }, index) => (
-        <ExperienceSegment
-          key={id}
-          style={{
-            opacity: index === experience.length - 1 ? 0.34 : undefined,
-          }}
-          leading={leading}
-          title={title}
-          subtitle={subtitle}
-          startDate={startDate}
-          endDate={endDate}
-        />
-      )
-    )}
-  </figure>
+  <StickyHeaderSection
+    header={
+      <Typography className='layout-width-limiter layout-padding' asChild>
+        <h2>
+          {
+            'I was working on some awesome projects, collaborating with amazing people, and creating my own things. '
+          }
+          <span className='text-primary-highlighted'>
+            I gathered the most valuable experiences and listed them
+            chronologically.
+          </span>
+        </h2>
+      </Typography>
+    }
+    body={
+      <figure
+        className={cn(
+          'layout-width-limiter layout-padding flex w-full flex-col items-center justify-center gap-y-4',
+          className
+        )}
+        {...rest}
+      >
+        {experience.map(
+          ({ id, leading, title, subtitle, startDate, endDate }, index) => (
+            <ExperienceSegment
+              key={id}
+              style={{
+                opacity: index === experience.length - 1 ? 0.34 : undefined,
+              }}
+              leading={leading}
+              title={title}
+              subtitle={subtitle}
+              startDate={startDate}
+              endDate={endDate}
+            />
+          )
+        )}
+      </figure>
+    }
+    bodyClassName='mt-28'
+  />
 );
 
 const experience = [

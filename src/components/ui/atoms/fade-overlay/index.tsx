@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react';
 import { cn } from '~utils/style';
 
 export interface FadeOverlayProps extends ComponentPropsWithoutRef<'div'> {
-  overlayClassName: string;
+  overlayClassName?: string;
 }
 
 export const FadeOverlay = ({
