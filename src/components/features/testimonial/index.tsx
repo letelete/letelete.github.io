@@ -35,15 +35,15 @@ export const Testimonial = ({ className, ...rest }: TestimonialProps) => {
         {'Thanks to '}
 
         {artists.map(({ name, href }, index) => (
-          <>
+          <span key={href}>
             {index === artists.length - 1 && ' and '}
 
-            <Button key={href} className='inline' variant='link' asChild>
+            <Button className='inline' variant='link' asChild>
               <Link href={href}>{name}</Link>
             </Button>
 
             {index < artists.length - 1 && ', '}
-          </>
+          </span>
         ))}
 
         {' for keeping my headphones busy while working on it.'}

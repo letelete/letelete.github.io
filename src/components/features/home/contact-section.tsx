@@ -12,7 +12,7 @@ export const ContactSection = () => {
   return (
     <div className='layout-width-limiter layout-padding flex min-h-screen w-full flex-col items-center justify-center'>
       <figure className='flex flex-col justify-center'>
-        <Typography>
+        <Typography asChild>
           <h2>
             {'Get in touch. Follow me. '}
             <span className='text-primary-highlighted'>Let’s talk!</span>
