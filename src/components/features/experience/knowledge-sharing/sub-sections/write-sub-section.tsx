@@ -20,20 +20,22 @@ export const WriteSubSection = ({
   return (
     <div
       className={cn(
-        'flex h-full min-h-screen w-full flex-col items-center justify-center gap-y-4',
+        'flex h-full min-h-screen w-full flex-col items-center justify-center gap-y-12',
         className
       )}
       {...rest}
     >
-      {articles.map(({ href, title, createdAt }, index) => (
-        <ArticleSegment
-          key={href}
-          style={{ opacity: 1 - index / articles.length }}
-          href={href}
-          title={title}
-          createdAt={createdAt}
-        />
-      ))}
+      <div className='flex w-full flex-col items-center justify-center gap-y-4'>
+        {articles.map(({ href, title, createdAt }, index) => (
+          <ArticleSegment
+            key={href}
+            style={{ opacity: 1 - index / articles.length }}
+            href={href}
+            title={title}
+            createdAt={createdAt}
+          />
+        ))}
+      </div>
 
       <Button variant='link' asChild>
         <Link href={BLOG_BASE_URL}>

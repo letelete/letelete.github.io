@@ -7,7 +7,7 @@ import { Icon } from '~ui/atoms/icon';
 import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 import { Typography } from '~ui/atoms/typography';
 
-import { shortDate } from '~utils/string';
+import { monthNameAndYearDate } from '~utils/string';
 
 export interface ArticleSegmentProps extends Partial<LineSegmentProps> {
   href: string;
@@ -27,8 +27,8 @@ export const ArticleSegment = ({
       leading={
         <div className='flex items-start gap-x-3'>
           <Icon
-            className='aspect-square h-6 w-6 flex-shrink-0 flex-grow'
-            size={24}
+            className='aspect-square h-4 w-4 flex-shrink-0 flex-grow'
+            size={16}
             name='arrow-up-right'
             color={tw.theme.colors.primary.highlighted}
           />
@@ -44,8 +44,11 @@ export const ArticleSegment = ({
         </div>
       }
       trailing={
-        <Typography className='text-sm text-primary-hint' weight='regular'>
-          {shortDate(createdAt)}
+        <Typography
+          className='whitespace-nowrap text-sm text-primary-hint'
+          weight='regular'
+        >
+          {monthNameAndYearDate(createdAt)}
         </Typography>
       }
       {...rest}
