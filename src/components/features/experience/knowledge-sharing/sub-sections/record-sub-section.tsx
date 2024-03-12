@@ -1,11 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef } from 'react';
 
 import { SOCIALS_URLS } from '~constants/index';
 
 import useTailwind from '~hooks/use-tailwind';
 
+import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 import {
   HorizontalScrollButtonContainer,
@@ -25,18 +27,18 @@ export const RecordSubSection = ({
 
   return (
     <HorizontalScrollCarousel ref={recordScrollRef} {...rest}>
-      <HorizontalScrollButtonContainer
-        ref={recordScrollRef}
-        href={SOCIALS_URLS.youtube}
-        label='Watch my YouTube channel'
-        leading={
-          <Icon
-            className='mr-2'
-            name='youtube'
-            color={tw.theme.colors.accent.DEFAULT}
-          />
-        }
-      />
+      <HorizontalScrollButtonContainer ref={recordScrollRef}>
+        <Button variant='link' size='inline' asChild>
+          <Link href={SOCIALS_URLS.youtube}>
+            <Icon
+              className='mr-2'
+              name='youtube'
+              color={tw.theme.colors.accent.DEFAULT}
+            />
+            Watch my YouTube channel
+          </Link>
+        </Button>
+      </HorizontalScrollButtonContainer>
 
       {youtubeVideos.map((video) => (
         <HorizontalScrollContentContainer key={video.id}>

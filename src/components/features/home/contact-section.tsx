@@ -41,7 +41,7 @@ export const ContactSection = () => {
                             : 'text-primary'
                         )}
                         variant='link'
-                        size='default'
+                        size='inline'
                         asChild
                       >
                         <Link href={social.link.href}>{text}</Link>
@@ -62,7 +62,7 @@ export const ContactSection = () => {
               <Button
                 className='font-normal text-primary'
                 variant='link'
-                size='default'
+                size='inline'
                 asChild
               >
                 <Link href={social.link.href}>{social.link.label}</Link>

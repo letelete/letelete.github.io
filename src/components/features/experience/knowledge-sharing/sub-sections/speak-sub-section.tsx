@@ -1,9 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef } from 'react';
 
 import { TALKS_BASE_URL } from '~constants/index';
 
+import { Button } from '~ui/atoms/button';
 import { MicrophoneEmoji } from '~ui/atoms/emojis';
 import {
   HorizontalScrollButtonContainer,
@@ -32,13 +34,14 @@ export const SpeakSubSection = ({ ...rest }: HorizontalScrollCarouselProps) => {
         </HorizontalScrollContentContainer>
       ))}
 
-      <HorizontalScrollButtonContainer
-        ref={speakScrollRef}
-        href={TALKS_BASE_URL}
-        label='Check all of my talks'
-        leading={<MicrophoneEmoji className='mr-2' />}
-        reversed
-      />
+      <HorizontalScrollButtonContainer ref={speakScrollRef} reversed>
+        <Button variant='link' size='inline' asChild>
+          <Link href={TALKS_BASE_URL}>
+            <MicrophoneEmoji className='mr-2' />
+            Check all of my talks
+          </Link>
+        </Button>
+      </HorizontalScrollButtonContainer>
     </HorizontalScrollCarousel>
   );
 };

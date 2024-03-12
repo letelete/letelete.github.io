@@ -47,7 +47,7 @@ export const AboutMeBentoBox = ({
             </span>
           </Typography>
 
-          <Button className='mt-4' variant='link' size='sm' asChild>
+          <Button className='mt-4' variant='link' size='inline' asChild>
             <Link href={GOOGLE_CODE_IN_ARTICLE}>Read my contest story</Link>
           </Button>
         </div>

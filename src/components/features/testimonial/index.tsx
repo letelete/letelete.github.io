@@ -24,7 +24,12 @@ export const Testimonial = ({ className, ...rest }: TestimonialProps) => {
           'Next.js, using React, Typescript, Shadcn/UI, Framer-Motion, and more - '
         }
 
-        <Button className='inline' variant='link' asChild>
+        <Button
+          className='inline text-base'
+          variant='link'
+          size='inline'
+          asChild
+        >
           <Link href={PORTFOLIO_GITHUB_REPOSITORY_URL}>
             check the source-code on GitHub!
           </Link>
@@ -38,7 +43,12 @@ export const Testimonial = ({ className, ...rest }: TestimonialProps) => {
           <span key={href}>
             {index === artists.length - 1 && ' and '}
 
-            <Button className='inline' variant='link' asChild>
+            <Button
+              className='inline text-base'
+              variant='link'
+              size='inline'
+              asChild
+            >
               <Link href={href}>{name}</Link>
             </Button>
 

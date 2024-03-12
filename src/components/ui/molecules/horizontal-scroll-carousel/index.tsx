@@ -1,8 +1,11 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
+import {
+  HTMLMotionProps,
+  motion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 import {
   ComponentPropsWithoutRef,
-  ReactNode,
   RefObject,
   forwardRef,
   useImperativeHandle,
@@ -10,8 +13,6 @@ import {
 } from 'react';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
-
-import { Button } from '~ui/atoms/button';
 
 import { cn } from '~utils/style';
 
@@ -112,17 +113,15 @@ const HorizontalScrollContentContainer = ({
   );
 };
 
-export interface HorizontalScrollButtonContainerProps {
-  href: string;
-  label: string;
-  leading?: ReactNode;
+export interface HorizontalScrollButtonContainerProps
+  extends HTMLMotionProps<'div'> {
   reversed?: boolean;
 }
 
 const HorizontalScrollButtonContainer = forwardRef<
   HTMLDivElement,
   HorizontalScrollButtonContainerProps
->(({ href, label, leading, reversed }, horizontalScrollCarouselRef) => {
+>(({ reversed, children, ...rest }, horizontalScrollCarouselRef) => {
   if (!horizontalScrollCarouselRef) {
     throw new Error(
       'Required forwarded ref of "horizontalScrollCarouselRef" is missing.'
@@ -131,7 +130,7 @@ const HorizontalScrollButtonContainer = forwardRef<
 
   return (
     <motion.div
-      className='relative z-0 my-auto p-8'
+      className='relative z-0 my-auto'
       whileInView={{ opacity: 1, x: 0 }}
       initial={{ opacity: 0, x: reversed ? -16 : 16 }}
       transition={{ type: 'spring', bounce: 0 }}
@@ -140,14 +139,9 @@ const HorizontalScrollButtonContainer = forwardRef<
         amount: 0.8,
         once: true,
       }}
+      {...rest}
     >
-      <Button className='flex items-center' variant='link' asChild>
-        <Link href={href}>
-          {leading}
-
-          {label}
-        </Link>
-      </Button>
+      {children}
     </motion.div>
   );
 });
