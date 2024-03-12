@@ -19,7 +19,7 @@ export const ContactSection = () => {
           </h2>
         </Typography>
 
-        <div className='mt-6 flex flex-col gap-y-2'>
+        <div className='mt-8 flex flex-col gap-y-4'>
           {socials.map((social) => (
             <div key={social.id} className='flex gap-x-1'>
               <Typography variant='body-sm'>
@@ -28,7 +28,6 @@ export const ContactSection = () => {
                   name={social.icon.name}
                   color={social.icon.color}
                 />
-
                 {social.content.map(({ text, highlighted, cta }) => {
                   if (cta) {
                     return (
@@ -56,17 +55,16 @@ export const ContactSection = () => {
                     );
                   }
                   return text;
-                })}
+                })}{' '}
+                <Button
+                  className='font-normal text-primary'
+                  variant='link'
+                  size='inline'
+                  asChild
+                >
+                  <Link href={social.link.href}>{social.link.label}</Link>
+                </Button>
               </Typography>
-
-              <Button
-                className='font-normal text-primary'
-                variant='link'
-                size='inline'
-                asChild
-              >
-                <Link href={social.link.href}>{social.link.label}</Link>
-              </Button>
             </div>
           ))}
         </div>

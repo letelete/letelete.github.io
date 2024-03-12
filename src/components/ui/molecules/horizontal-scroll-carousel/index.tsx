@@ -130,7 +130,7 @@ const HorizontalScrollButtonContainer = forwardRef<
 
   return (
     <motion.div
-      className='relative z-0 my-auto'
+      className='relative z-0 my-auto p-8'
       whileInView={{ opacity: 1, x: 0 }}
       initial={{ opacity: 0, x: reversed ? -16 : 16 }}
       transition={{ type: 'spring', bounce: 0 }}
