@@ -39,11 +39,11 @@ export const ConferencesHeadline = ({
       <span className='text-[1em] text-primary-highlighted'>
         Recently I’ve been to{' '}
         {conferences.map(({ name, place, href }, index) => (
-          <>
-            <LocationTag key={name} name={name} place={place} href={href} />
+          <span key={href}>
+            <LocationTag name={name} place={place} href={href} />
 
             {index < conferences.length - 1 && ', '}
-          </>
+          </span>
         ))}
       </span>
 

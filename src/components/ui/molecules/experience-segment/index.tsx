@@ -46,21 +46,25 @@ export const ExperienceSegment = ({
           variant='body-sm'
           weight='regular'
           color='hint'
+          asChild
         >
-          {monthNameAndYearDate(startDate)}
-          {endDate && (
-            <>
-              {' - '}
-              {typeof endDate === 'string' ? (
-                <span className='relative'>
-                  Now
-                  <NotificationDotPulse className='absolute -right-4 top-1/2 -translate-y-1/2' />
-                </span>
-              ) : (
-                monthNameAndYearDate(endDate)
-              )}
-            </>
-          )}
+          <span>
+            {monthNameAndYearDate(startDate)}
+            {endDate && (
+              <>
+                {' - '}
+
+                {typeof endDate === 'string' ? (
+                  <span className='relative'>
+                    Now
+                    <NotificationDotPulse className='absolute -right-4 top-1/2 -translate-y-1/2' />
+                  </span>
+                ) : (
+                  monthNameAndYearDate(endDate)
+                )}
+              </>
+            )}
+          </span>
         </Typography>
       }
       {...rest}
