@@ -5,9 +5,9 @@ import { useCallback, useRef, useState } from 'react';
 import { AboutSection } from '~features/home/about-section';
 import { ContactSection } from '~features/home/contact-section';
 import { ExperienceSection } from '~features/home/experience-section';
+import { FooterSection } from '~features/home/footer-section';
 import { HeroSection } from '~features/home/hero-section';
 import { TestimonialSection } from '~features/home/testimonial-section';
-import { Testimonial } from '~features/testimonial';
 
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
@@ -64,6 +64,8 @@ export default function Home() {
           <TestimonialSection />
         </Navigatable.Section>
       </Navigatable>
+
+      <FooterSection className='mt-24' />
     </main>
   );
 }
