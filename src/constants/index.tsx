@@ -13,3 +13,6 @@ export const GOOGLE_CODE_IN_ARTICLE =
 export const BLOG_BASE_URL = 'kawka.me';
 
 export const TALKS_BASE_URL = 'kawka.me';
+
+export const PORTFOLIO_GITHUB_REPOSITORY_URL =
+  'https://github.com/letelete/letelete.github.io';

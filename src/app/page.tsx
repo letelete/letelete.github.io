@@ -6,6 +6,8 @@ import { AboutSection } from '~features/home/about-section';
 import { ContactSection } from '~features/home/contact-section';
 import { ExperienceSection } from '~features/home/experience-section';
 import { HeroSection } from '~features/home/hero-section';
+import { TestimonialSection } from '~features/home/testimonial-section';
+import { Testimonial } from '~features/testimonial';
 
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
@@ -52,18 +54,14 @@ export default function Home() {
           <AboutSection />
         </Navigatable.Section>
 
-        <Navigatable.Section
-          sectionId='experience'
-          className='flex min-h-screen w-full items-center justify-center'
-        >
+        <Navigatable.Section sectionId='experience'>
           <ExperienceSection />
         </Navigatable.Section>
 
-        <Navigatable.Section
-          sectionId='contact'
-          className='flex min-h-screen w-full items-center justify-center'
-        >
+        <Navigatable.Section sectionId='contact'>
           <ContactSection />
+
+          <TestimonialSection />
         </Navigatable.Section>
       </Navigatable>
     </main>

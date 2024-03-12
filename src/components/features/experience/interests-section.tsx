@@ -67,7 +67,7 @@ export const InterestsSection = ({
 const professional = [
   'React',
   'Next.js',
-  'Shadcn',
+  'shadcn/ui',
   'Atomic Design',
   'Typescript',
   'Tailwind',
