@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from 'react';
 
 import { AboutSection } from '~features/home/about-section';
+import { ContactSection } from '~features/home/contact-section';
 import { ExperienceSection } from '~features/home/experience-section';
 import { HeroSection } from '~features/home/hero-section';
 
@@ -62,7 +63,7 @@ export default function Home() {
           sectionId='contact'
           className='flex min-h-screen w-full items-center justify-center'
         >
-          about
+          <ContactSection />
         </Navigatable.Section>
       </Navigatable>
     </main>
