@@ -240,12 +240,11 @@ const articles = [
 
 const youtubeVideos = [
   {
-    id: 'youtube-a',
+    id: 'youtube-c',
     href: 'https://www.youtube.com/',
-    title:
-      'Why you should stop "Learning" design, and start doing it instead (this is a long title).',
-    views: 95123,
-    createdAt: new Date(Date.parse('2024-03-10')),
+    title: 'Stop "Learning" Design.',
+    views: 508000,
+    createdAt: new Date(Date.parse('2023-08-12')),
     thumbnail: youtubeImg10,
   },
   {
@@ -257,30 +256,32 @@ const youtubeVideos = [
     thumbnail: youtubeImg10,
   },
   {
-    id: 'youtube-c',
+    id: 'youtube-a',
     href: 'https://www.youtube.com/',
-    title: 'Stop "Learning" Design.',
-    views: 508000,
-    createdAt: new Date(Date.parse('2023-08-12')),
+    title:
+      'Why you should stop "Learning" design, and start doing it instead (this is a long title).',
+    views: 95123,
+    createdAt: new Date(Date.parse('2024-03-10')),
     thumbnail: youtubeImg10,
   },
 ] as const;
 
 const talks = [
   {
-    id: 'b0OtzS2b0u0',
-    href: 'https://www.youtube.com/watch?v=b0OtzS2b0u0',
-    title: 'Animating the web @ SFI',
-    views: undefined,
-    createdAt: new Date(Date.parse('2023-03-04')),
-    thumbnail: talkDevJs2023,
-  },
-  {
     id: 'j29Uacx_nEs',
     href: 'https://www.youtube.com/watch?v=j29Uacx_nEs',
     title:
       'Animating the UI with performance in mind using React @ dev.js summit',
     createdAt: new Date(Date.parse('2023-10-12')),
+
+    thumbnail: talkDevJs2023,
+  },
+  {
+    id: 'b0OtzS2b0u0',
+    href: 'https://www.youtube.com/watch?v=b0OtzS2b0u0',
+    title: 'Animating the web @ SFI',
+    views: undefined,
+    createdAt: new Date(Date.parse('2023-03-04')),
     thumbnail: talkSFI2023,
   },
 ] as const;
