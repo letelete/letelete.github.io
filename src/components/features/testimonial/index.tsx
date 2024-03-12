@@ -21,7 +21,7 @@ export const Testimonial = ({ className, ...rest }: TestimonialProps) => {
           {'This site is built on top of '}
         </span>
         {
-          'next.js, using react, typescript, shadcn/ui, framer-motion, and more - '
+          'Next.js, using React, Typescript, Shadcn/UI, Framer-Motion, and more - '
         }
 
         <Button className='inline' variant='link' asChild>
