@@ -13,23 +13,22 @@ export interface NavbarItem {
 export interface NavbarProps extends Omit<HTMLMotionProps<'nav'>, 'onSelect'> {
   items: NavbarItem[];
   selectedItemId: NavbarItem['id'];
+  scopeId: string;
   onSelect?: (itemId: NavbarItem['id']) => void;
 }
 
 const NavbarPrimitive = forwardRef<HTMLDivElement, NavbarProps>(
-  ({ items, selectedItemId, className, onSelect, ...rest }, ref) => {
+  ({ items, selectedItemId, scopeId, className, onSelect, ...rest }, ref) => {
     return (
       <motion.nav
-        className={cn(
-          'flex items-center gap-x-2 rounded-full bg-white/10 p-1 shadow-inner-glass backdrop-blur-md',
-          className
-        )}
+        className={cn('nav-card flex items-center gap-x-2', className)}
         ref={ref}
         {...rest}
       >
         {items.map((item) => (
           <NavbarItem
             key={item.id}
+            scopeId={scopeId}
             item={item}
             selected={selectedItemId === item.id}
             onClick={onSelect}
@@ -46,6 +45,7 @@ export interface NavbarItemProps
   extends Omit<HTMLMotionProps<'button'>, 'onClick'> {
   item: NavbarItem;
   selected?: boolean;
+  scopeId: string;
   onClick?: (itemId: NavbarItem['id']) => void;
 }
 
@@ -55,7 +55,7 @@ const navbarItemMotionVariants = {
 };
 
 const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
-  ({ item, selected, className, onClick, ...rest }, ref) => {
+  ({ item, selected, scopeId, className, onClick, ...rest }, ref) => {
     const handleClick = useCallback(
       () => onClick?.(item.id),
       [item.id, onClick]
@@ -65,7 +65,10 @@ const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
       <motion.button
         variants={navbarItemMotionVariants}
         initial='idle'
-        className={cn('relative rounded-full px-3 py-1', className)}
+        className={cn(
+          'relative flex items-center justify-center rounded-full px-3 py-2',
+          className
+        )}
         whileHover='hovered'
         whileTap={{ scale: 0.8 }}
         onClick={handleClick}
@@ -74,7 +77,7 @@ const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
       >
         {selected && (
           <motion.div
-            layoutId='navbar-item__highlight'
+            layoutId={`navbar-item__highlight:${scopeId}`}
             className='absolute left-0 top-0 z-0 h-full w-full rounded-full bg-black'
           />
         )}
@@ -102,4 +105,15 @@ const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
 
 NavbarItem.displayName = 'NavbarItem';
 
-export const Navbar = Object.assign(NavbarPrimitive, { Item: NavbarItem });
+const NavbarItemInline = forwardRef<HTMLButtonElement, NavbarItemProps>(
+  ({ className, ...rest }, ref) => (
+    <NavbarItem className={cn('px-2 py-1', className)} ref={ref} {...rest} />
+  )
+);
+
+NavbarItemInline.displayName = 'NavbarItemInline';
+
+export const Navbar = Object.assign(NavbarPrimitive, {
+  Item: NavbarItem,
+  ItemInline: NavbarItemInline,
+});

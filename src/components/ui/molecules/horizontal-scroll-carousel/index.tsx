@@ -36,7 +36,7 @@ const HorizontalScrollCarousel = forwardRef<
       className,
       reversed,
       childrenContainerClass,
-      scrollHeightFactor = 3,
+      scrollHeightFactor = 2.25,
       ...rest
     },
     handleRef

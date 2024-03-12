@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        default: 'text-accent-foreground bg-accent hover:bg-accent/50',
         outline:
           'border-input bg-transparent border hover:bg-primary hover:text-primary-foreground',
         ghost:
@@ -21,11 +21,9 @@ const buttonVariants = cva(
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
+        inline: '',
       },
     },
-    compoundVariants: [
-      { variant: 'link', className: 'h-auto px-0 py-0 text-[1em]' },
-    ],
     defaultVariants: {
       variant: 'default',
       size: 'default',

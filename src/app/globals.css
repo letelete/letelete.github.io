@@ -19,4 +19,8 @@ body {
     max-width: 1024px;
     margin: 0 auto;
   }
+
+  .nav-card {
+    @apply rounded-full bg-white/10 p-1 shadow-inner-glass backdrop-blur-md;
+  }
 }

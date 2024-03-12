@@ -36,6 +36,7 @@ export const ArticleSegment = ({
           <Button
             className='flex-shrink-1 line-clamp-3 h-fit max-w-prose whitespace-break-spaces text-sm text-primary'
             variant='link'
+            size='inline'
             asChild
           >
             <Link href={href}>{title}</Link>

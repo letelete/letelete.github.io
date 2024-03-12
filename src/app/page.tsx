@@ -35,6 +35,7 @@ export default function Home() {
   return (
     <main className='flex min-h-screen flex-col'>
       <Navbar
+        scopeId='home-main-navigation'
         className='fixed left-0 right-0 top-4 z-50 mx-auto w-fit'
         items={navigationItems}
         selectedItemId={currentNavigationSectionId}
