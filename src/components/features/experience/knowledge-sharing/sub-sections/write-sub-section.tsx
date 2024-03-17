@@ -49,19 +49,18 @@ export const WriteSubSection = ({
 
 const articles = [
   {
-    title:
-      'Optimizing your React application for the upcoming “Interaction to Next Paint"',
-    href: `${BLOG_BASE_URL}/articles/optimizing-your-react-application-for-the-upcoming-inp`,
-    createdAt: new Date(Date.parse('2024-02-20')),
+    title: 'Soon...',
+    href: ``,
+    createdAt: new Date(Date.now()),
   },
   {
-    title: 'Why your animation fails to run in 60 fps',
-    href: `${BLOG_BASE_URL}/articles/why-your-animation-fails-to-run-in-60-fps`,
-    createdAt: new Date(Date.parse('2024-01-16')),
+    title: 'Soon...',
+    href: ``,
+    createdAt: new Date(Date.now()),
   },
   {
-    title: 'How zero-days killed my procrastination',
-    href: `${BLOG_BASE_URL}/articles/how-zero-days-killed-my-procrastination`,
-    createdAt: new Date(Date.parse('2023-08-12')),
+    title: 'Soon...',
+    href: ``,
+    createdAt: new Date(Date.now()),
   },
 ] as const;

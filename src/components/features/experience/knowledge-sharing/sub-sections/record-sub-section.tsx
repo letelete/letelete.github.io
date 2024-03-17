@@ -17,7 +17,7 @@ import {
 } from '~ui/molecules/horizontal-scroll-carousel';
 import { ExternalContentCard } from '~ui/molecules/youtube-card';
 
-import youtubeImg10 from '/public/galleries/youtube/img-10.png';
+import youtubeSoonThumbnail from '/public/galleries/youtube/soon.webp';
 
 export const RecordSubSection = ({
   ...rest
@@ -57,28 +57,27 @@ export const RecordSubSection = ({
 
 const youtubeVideos = [
   {
-    id: 'youtube-c',
-    href: 'https://www.youtube.com/',
-    title: 'Stop "Learning" Design.',
-    views: 508000,
-    createdAt: new Date(Date.parse('2023-08-12')),
-    thumbnail: youtubeImg10,
+    id: 'soon-10',
+    href: '#',
+    title: 'Coming soon',
+    views: 0,
+    createdAt: new Date(Date.now()),
+    thumbnail: youtubeSoonThumbnail,
   },
   {
-    id: 'youtube-b',
-    href: 'https://www.youtube.com/',
-    title: 'Stop "Learning" Design.',
-    views: 12300,
-    createdAt: new Date(Date.parse('2023-08-12')),
-    thumbnail: youtubeImg10,
+    id: 'soon-20',
+    href: '#',
+    title: 'Coming soon',
+    views: 0,
+    createdAt: new Date(Date.now()),
+    thumbnail: youtubeSoonThumbnail,
   },
   {
-    id: 'youtube-a',
-    href: 'https://www.youtube.com/',
-    title:
-      'Why you should stop "Learning" design, and start doing it instead (this is a long title).',
-    views: 95123,
-    createdAt: new Date(Date.parse('2024-03-10')),
-    thumbnail: youtubeImg10,
+    id: 'soon-30',
+    href: '#',
+    title: 'Coming soon',
+    views: 0,
+    createdAt: new Date(Date.now()),
+    thumbnail: youtubeSoonThumbnail,
   },
 ] as const;

@@ -17,6 +17,7 @@ import { ExternalContentCard } from '~ui/molecules/youtube-card';
 
 import talkDevJs2023 from '/public/galleries/talks/devjs-2023.webp';
 import talkSFI2023 from '/public/galleries/talks/sfi-2023.webp';
+import talkSoon from '/public/galleries/talks/soon.webp';
 
 export const SpeakSubSection = ({ ...rest }: HorizontalScrollCarouselProps) => {
   const speakScrollRef = useRef<HTMLDivElement>(null);
@@ -48,12 +49,19 @@ export const SpeakSubSection = ({ ...rest }: HorizontalScrollCarouselProps) => {
 
 const talks = [
   {
+    id: 'b0OtzS2b0u0',
+    href: '#',
+    title: 'Rethinking UI building strategies @ SFI',
+    views: undefined,
+    createdAt: new Date(Date.parse('2024-04-06')),
+    thumbnail: talkSoon,
+  },
+  {
     id: 'j29Uacx_nEs',
     href: 'https://www.youtube.com/watch?v=j29Uacx_nEs',
     title:
       'Animating the UI with performance in mind using React @ dev.js summit',
     createdAt: new Date(Date.parse('2023-10-12')),
-
     thumbnail: talkDevJs2023,
   },
   {
