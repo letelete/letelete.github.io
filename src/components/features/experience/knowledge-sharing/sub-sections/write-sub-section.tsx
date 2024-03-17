@@ -26,9 +26,9 @@ export const WriteSubSection = ({
       {...rest}
     >
       <div className='flex w-full flex-col items-center justify-center gap-y-4'>
-        {articles.map(({ href, title, createdAt }, index) => (
+        {articles.map(({ id, href, title, createdAt }, index) => (
           <ArticleSegment
-            key={href}
+            key={id}
             style={{ opacity: 1 - index / articles.length }}
             href={href}
             title={title}
@@ -49,16 +49,19 @@ export const WriteSubSection = ({
 
 const articles = [
   {
+    id: 'soon-10',
     title: 'Soon...',
     href: ``,
     createdAt: new Date(Date.now()),
   },
   {
+    id: 'soon-20',
     title: 'Soon...',
     href: ``,
     createdAt: new Date(Date.now()),
   },
   {
+    id: 'soon-30',
     title: 'Soon...',
     href: ``,
     createdAt: new Date(Date.now()),

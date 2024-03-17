@@ -49,7 +49,7 @@ export const SpeakSubSection = ({ ...rest }: HorizontalScrollCarouselProps) => {
 
 const talks = [
   {
-    id: 'b0OtzS2b0u0',
+    id: 'soon-10',
     href: '#',
     title: 'Rethinking UI building strategies @ SFI',
     views: undefined,

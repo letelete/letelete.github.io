@@ -1,14 +1,8 @@
 'use client';
 
-import { useAnimationFrame, useInView } from 'framer-motion';
-import {
-  Children,
-  ComponentPropsWithoutRef,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { Children, ComponentPropsWithoutRef, useMemo, useRef } from 'react';
 
+import { useAnimationFrameInView } from '~hooks/use-animation-frame-in-view';
 import { useElementGeometry } from '~hooks/use-element-geometry';
 
 import { cn } from '~utils/style';
@@ -38,7 +32,6 @@ const FallingEntities = ({
 }: FallingEntitiesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const containerGeometry = useElementGeometry(containerRef);
-  const isInView = useInView(containerRef);
 
   const containerWidth = containerGeometry?.width ?? 0;
   const containerHeight = containerGeometry?.height ?? 0;
@@ -55,17 +48,9 @@ const FallingEntities = ({
       .map(() => getNewRandomEntity(containerWidth, containerHeight, size));
   }, [containerWidth, containerHeight, density, size]);
 
-  useEffect(() => {
-    elements.current = elements.current?.slice(0, entities.length);
-  }, [entities]);
-
   const child = Children.only(children);
 
-  useAnimationFrame((_time, delta) => {
-    if (!isInView) {
-      return;
-    }
-
+  useAnimationFrameInView(containerRef, (_time, delta) => {
     elements.current?.forEach((e, idx) => {
       const entity = entities[idx];
       if (entity && e) {

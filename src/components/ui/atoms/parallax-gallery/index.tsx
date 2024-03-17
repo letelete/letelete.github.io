@@ -3,8 +3,6 @@
 import {
   MotionValue,
   motion,
-  useAnimationFrame,
-  useInView,
   useMotionValue,
   useScroll,
   useSpring,
@@ -15,6 +13,9 @@ import {
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image, { ImageProps } from 'next/image';
 import { ElementRef, useMemo, useRef, useState } from 'react';
+
+import { useAnimationFrameInView } from '~hooks/use-animation-frame-in-view';
+import { useElementGeometry } from '~hooks/use-element-geometry';
 
 import { Icon } from '~ui/atoms/icon';
 
@@ -34,7 +35,11 @@ export interface ParallaxGalleryProps extends Partial<ImageProps> {
 export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
   const [page, setPage] = useState(0);
   const containerRef = useRef<ElementRef<typeof Image>>(null);
-  const isInView = useInView(containerRef);
+  const containerGeometry = useElementGeometry(containerRef);
+
+  const imageSizes = containerGeometry
+    ? `${containerGeometry.width}px`
+    : undefined;
 
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -42,9 +47,14 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
     damping: 50,
     stiffness: 400,
   }) as MotionValue<number>;
-  const velocityFactor = useTransform(smoothVelocity, [-1000, 1000], [-5, 5], {
-    clamp: false,
-  });
+  const velocityFactor = useTransform(
+    smoothVelocity,
+    [-1000, 1000],
+    [-10, 10],
+    {
+      clamp: false,
+    }
+  );
 
   const itemIndex = wrap(0, items.length, page);
   const paginate = (newDirection: number) => {
@@ -61,11 +71,7 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
 
   const directionFactor = useRef<number>(1);
 
-  useAnimationFrame((_t, delta) => {
-    if (!isInView) {
-      return;
-    }
-
+  useAnimationFrameInView(containerRef, (_t, delta) => {
     directionFactor.current = velocityFactor.get() < 0 ? -1 : 1;
     baseTime.set(
       baseTime.get() +
@@ -73,7 +79,7 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
     );
 
     if (baseTime.get() > 1) {
-      paginate(directionFactor.current);
+      paginate(1);
       baseTime.set(0);
     }
   });
@@ -100,6 +106,7 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
         alt={currentItem.alt}
         priority
         fill
+        sizes={imageSizes}
         {...rest}
       />
 
@@ -115,6 +122,7 @@ export const ParallaxGallery = ({ items, ...rest }: ParallaxGalleryProps) => {
           alt={nextItem.alt}
           priority
           fill
+          sizes={imageSizes}
           {...rest}
         />
       </motion.div>
