@@ -27,7 +27,9 @@ const config = {
         },
       },
       accent: {
-        DEFAULT: '#ff5151',
+        DEFAULT: '#eddd5d',
+        from: '#f0991a',
+        to: '#eddd5d'
       },
       card: {
         intense: '#000000',
@@ -35,8 +37,11 @@ const config = {
         hovered: '#ffffff',
       },
       destructive: {
-        DEFAULT: '#FF5151',
+        DEFAULT: '#ff5151',
       },
+      socials: {
+        youtube: '#ff0000'
+      }
     },
     extend: {
       boxShadow: {

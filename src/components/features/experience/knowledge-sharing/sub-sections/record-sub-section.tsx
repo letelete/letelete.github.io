@@ -33,7 +33,7 @@ export const RecordSubSection = ({
             <Icon
               className='mr-2'
               name='youtube'
-              color={tw.theme.colors.accent.DEFAULT}
+              color={tw.theme.colors.socials.youtube}
             />
             Watch my YouTube channel
           </Link>

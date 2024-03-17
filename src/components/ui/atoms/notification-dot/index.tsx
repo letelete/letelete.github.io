@@ -4,7 +4,7 @@ import { type HTMLMotionProps, motion } from 'framer-motion';
 import { cn } from '~utils/style';
 
 const notificationDotVariants = cva(
-  'aspect-square rounded-full bg-destructive',
+  'aspect-square rounded-full bg-accent',
   {
     variants: {
       size: {
