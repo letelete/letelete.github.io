@@ -44,8 +44,8 @@ NavbarPrimitive.displayName = 'Navbar';
 export interface NavbarItemProps
   extends Omit<HTMLMotionProps<'button'>, 'onClick'> {
   item: NavbarItem;
-  selected?: boolean;
   scopeId: string;
+  selected?: boolean;
   onClick?: (itemId: NavbarItem['id']) => void;
 }
 

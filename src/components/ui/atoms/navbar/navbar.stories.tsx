@@ -26,5 +26,6 @@ export const Default: Story = {
   args: {
     items,
     selectedItemId: 'hello',
+    scopeId: 'storybook-default',
   },
 };

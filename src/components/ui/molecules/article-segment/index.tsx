@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { LAYOUT_PADDING } from 'src/app/globals';
 
 import useTailwind from '~hooks/use-tailwind';
 
