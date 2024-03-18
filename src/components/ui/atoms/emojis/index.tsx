@@ -18,7 +18,7 @@ export type EmojiProps = Partial<BaseEmojiProps>;
 const BaseEmoji = ({ className, ...rest }: BaseEmojiProps) => {
   return (
     <Image
-      className={cn('inline aspect-square h-[1rem] w-[1em]', className)}
+      className={cn('inline aspect-square h-4 min-h-4 w-4 min-w-4', className)}
       {...rest}
       priority
     />

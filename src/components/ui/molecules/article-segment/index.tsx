@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { LAYOUT_PADDING } from 'src/app/globals';
 
 import useTailwind from '~hooks/use-tailwind';
 
@@ -28,7 +29,6 @@ export const ArticleSegment = ({
         <div className='flex items-start gap-x-3'>
           <Icon
             className='aspect-square h-4 w-4 flex-shrink-0 flex-grow'
-            size={16}
             name='arrow-up-right'
             color={tw.theme.colors.primary.highlighted}
           />

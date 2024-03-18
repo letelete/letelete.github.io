@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useCallback } from 'react';
 
 import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 import { Typography } from '~ui/atoms/typography';
@@ -22,49 +22,65 @@ export const ExperienceSegment = ({
   endDate,
   ...rest
 }: ExperienceSegmentProps) => {
+  const checkExperienceEndDate = useCallback(
+    (endDate: unknown): endDate is 'Now' =>
+      typeof endDate === 'string' && endDate === 'Now',
+    []
+  );
+
+  const isExperienceActive = checkExperienceEndDate(endDate);
+
   return (
     <LineSegment
       leading={
-        <div className='flex flex-nowrap items-center gap-x-2 whitespace-nowrap'>
-          {leading}
+        <div className='flex max-w-full flex-nowrap items-start gap-x-2'>
+          <div className='relative inline'>{leading}</div>
 
-          <Typography variant='body-sm' color='highlight' prose={false}>
-            {title}
-          </Typography>
-
-          {subtitle && (
-            <Typography prose={false} variant='body-sm'>
-              {subtitle}
+          <div className='flex w-full flex-1 flex-col flex-wrap gap-x-2 sm:flex-row'>
+            <Typography
+              variant='body-sm'
+              color='highlight'
+              prose={false}
+              balance={false}
+            >
+              {title}
             </Typography>
-          )}
+
+            {subtitle && (
+              <Typography prose={false} balance={false} variant='body-sm'>
+                {subtitle}
+              </Typography>
+            )}
+          </div>
         </div>
       }
       trailing={
         <Typography
-          className='whitespace-nowrap'
+          className='flex flex-nowrap items-center gap-x-1 whitespace-nowrap'
           prose={false}
+          balance={false}
           variant='body-sm'
           weight='regular'
           color='hint'
           asChild
         >
-          <span>
+          <div>
             {monthNameAndYearDate(startDate)}
             {endDate && (
               <>
-                {' - '}
+                <span>&#8212;</span>
 
-                {typeof endDate === 'string' ? (
-                  <span className='relative'>
-                    Now
-                    <NotificationDotPulse className='absolute -right-4 top-1/2 -translate-y-1/2' />
-                  </span>
+                {isExperienceActive ? (
+                  <>
+                    <span className='text-accent'>Now</span>
+                    <NotificationDotPulse />
+                  </>
                 ) : (
                   monthNameAndYearDate(endDate)
                 )}
               </>
             )}
-          </span>
+          </div>
         </Typography>
       }
       {...rest}

@@ -21,13 +21,14 @@ export const ContactSection = () => {
 
         <div className='mt-8 flex flex-col gap-y-4'>
           {socials.map((social) => (
-            <div key={social.id} className='flex gap-x-1'>
+            <div key={social.id} className='flex gap-x-2'>
+              <Icon
+                className='relative mt-1'
+                name={social.icon.name}
+                color={social.icon.color}
+              />
+
               <Typography variant='body-sm'>
-                <Icon
-                  className='mr-2 inline'
-                  name={social.icon.name}
-                  color={social.icon.color}
-                />
                 {social.content.map(({ text, highlighted, cta }) => {
                   if (cta) {
                     return (

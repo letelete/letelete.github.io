@@ -13,7 +13,10 @@ export interface TestimonialProps extends ComponentPropsWithoutRef<'div'> {}
 export const Testimonial = ({ className, ...rest }: TestimonialProps) => {
   return (
     <div
-      className={cn('flex flex-col justify-center gap-y-24', className)}
+      className={cn(
+        'flex w-full flex-col items-center justify-center gap-y-24',
+        className
+      )}
       {...rest}
     >
       <Typography variant='body' className='text-center'>
@@ -25,7 +28,7 @@ export const Testimonial = ({ className, ...rest }: TestimonialProps) => {
         }
 
         <Button
-          className='inline text-base'
+          className='inline whitespace-break-spaces text-base'
           variant='link'
           size='inline'
           asChild

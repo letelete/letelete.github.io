@@ -70,7 +70,7 @@ export const AboutMeBentoBox = ({
       </Card>
 
       <Card className='flex min-h-60 items-center justify-center p-8'>
-        <Typography className='whitespace-nowrap' variant='body-sm'>
+        <Typography className='text-center' variant='body-sm'>
           <RoundPushpinEmoji className='mr-2' />
           {'Cracow, '}
           <span className='text-primary-highlighted'>{'Poland'}</span>
