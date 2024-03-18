@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background text-primary-foreground;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .layout-padding {
+    @apply px-4 sm:px-[10vw] lg:px-[unset];
+  }
+
+  .layout-width-limiter {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+
+  .nav-card {
+    @apply rounded-full bg-white/10 p-1 shadow-inner-glass backdrop-blur-md;
+  }
+}
