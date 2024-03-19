@@ -3,7 +3,7 @@ export const SOCIALS_URLS = {
   mail: 'brunokawka@gmail.com',
   linkedin: 'https://www.linkedin.com/in/brunokawka/',
   github: 'https://github.com/letelete',
-  twitter: 'https://twitter.com/bruno_kawka',
+  twitter: 'https://twitter.com/BrunoKawka',
   youtube: 'https://www.youtube.com/@brunokawka',
 };
 
