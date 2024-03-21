@@ -13,6 +13,7 @@ import { cn } from '~utils/style';
 const typographyVariants = cva('tracking-normal', {
   variants: {
     variant: {
+      hero: 'font-primary text-2xl sm:text-4xl',
       heading: 'font-primary text-lg leading-7',
       body: 'font-primary text-base leading-6',
       'body-sm': 'font-primary text-sm leading-6',
