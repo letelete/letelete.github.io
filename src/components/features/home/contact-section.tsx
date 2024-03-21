@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { SOCIALS_URLS } from '~constants/index';
+import { SOCIALS } from '~constants/index';
 
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
@@ -101,8 +101,8 @@ const socials: Social[] = [
       { text: ' for a dose of Frontend Engineering knowledge:' },
     ],
     link: {
-      href: SOCIALS_URLS.youtube,
-      label: '@brunokawka',
+      href: SOCIALS.youtube.url,
+      label: SOCIALS.youtube.handle,
     },
   },
   {
@@ -117,8 +117,8 @@ const socials: Social[] = [
       { text: 'X (Twitter):', highlighted: true },
     ],
     link: {
-      href: SOCIALS_URLS.twitter,
-      label: '@bruno_kawka',
+      href: SOCIALS.twitter.url,
+      label: SOCIALS.twitter.handle,
     },
   },
   {
@@ -133,8 +133,8 @@ const socials: Social[] = [
       { text: 'GitHub:', highlighted: true },
     ],
     link: {
-      href: SOCIALS_URLS.github,
-      label: '@letelete',
+      href: SOCIALS.github.url,
+      label: SOCIALS.github.handle,
     },
   },
   {
@@ -149,8 +149,8 @@ const socials: Social[] = [
       { text: 'LinkedIn:', highlighted: true },
     ],
     link: {
-      href: SOCIALS_URLS.linkedin,
-      label: 'in/brunokawka',
+      href: SOCIALS.linkedin.url,
+      label: SOCIALS.linkedin.handle,
     },
   },
   {
@@ -165,8 +165,8 @@ const socials: Social[] = [
       { text: 'Email:', highlighted: true },
     ],
     link: {
-      href: `mailto:${SOCIALS_URLS.mail}`,
-      label: 'brunokawka@gmail.com',
+      href: `mailto:${SOCIALS.mail.url}`,
+      label: SOCIALS.mail.handle,
     },
   },
   {
@@ -181,8 +181,8 @@ const socials: Social[] = [
       { text: 'Telegram:', highlighted: true },
     ],
     link: {
-      href: SOCIALS_URLS.telegram,
-      label: 'me/letelete',
+      href: SOCIALS.telegram.url,
+      label: SOCIALS.telegram.handle,
     },
   },
 ];

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { SOCIALS_URLS } from '~constants/index';
+import { SOCIALS } from '~constants/index';
 
 import useTailwind from '~hooks/use-tailwind';
 
@@ -29,7 +29,7 @@ export const RecordSubSection = ({
     <HorizontalScrollCarousel ref={recordScrollRef} {...rest}>
       <HorizontalScrollButtonContainer ref={recordScrollRef}>
         <Button variant='link' size='inline' asChild>
-          <Link href={SOCIALS_URLS.youtube}>
+          <Link href={SOCIALS.youtube.url}>
             <Icon
               className='mr-2'
               name='youtube'

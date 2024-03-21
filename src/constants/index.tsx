@@ -1,10 +1,28 @@
-export const SOCIALS_URLS = {
-  telegram: 'https://t.me/letelete',
-  mail: 'brunokawka@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/brunokawka/',
-  github: 'https://github.com/letelete',
-  twitter: 'https://twitter.com/BrunoKawka',
-  youtube: 'https://www.youtube.com/@brunokawka',
+export const SOCIALS = {
+  telegram: {
+    url: 'https://t.me/letelete',
+    handle: 'me/letelete',
+  },
+  mail: {
+    url: 'brunokawka@gmail.com',
+    handle: 'brunokawka@gmail.com',
+  },
+  linkedin: {
+    url: 'https://www.linkedin.com/in/brunokawka/',
+    handle: 'in/brunokawka',
+  },
+  github: {
+    url: 'https://github.com/letelete',
+    handle: '@letelete',
+  },
+  twitter: {
+    url: 'https://twitter.com/BrunoKawka',
+    handle: '@BrunoKawka',
+  },
+  youtube: {
+    url: 'https://www.youtube.com/@brunokawka',
+    handle: '@brunokawka',
+  },
 };
 
 export const GOOGLE_CODE_IN_ARTICLE =
