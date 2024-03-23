@@ -1,13 +1,20 @@
+'use client';
+
 import Link from 'next/link';
-import { memo } from 'react';
+import { forwardRef } from 'react';
 
 import { UnicornEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
-import { AppHeader } from '~ui/molecules/app-header';
+import { AppHeader, AppHeaderProps } from '~ui/molecules/app-header';
 
-const BlogHeader = memo(() => {
+const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
   return (
-    <AppHeader className='justify-between'>
+    <AppHeader
+      className='fixed'
+      innerClassName='justify-between'
+      {...props}
+      ref={ref}
+    >
       <Link href='/blog'>
         <Typography variant='body' color='highlight'>
           <span className='font-bold'> blog</span>

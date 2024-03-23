@@ -1,20 +1,11 @@
-import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
+import { getAllContent } from 'src/lib/content/provider';
 
-import { Typography } from '~ui/atoms/typography';
+import { Blog } from '~features/blog';
 
-export default function Blog() {
-  const content = <div>content</div>;
+export const NAVBAR_SCOPE_ID = 'blog-navigation';
 
-  return (
-    <BlogTwoPaneContainer
-      leading={
-        <Typography variant='hero'>
-          I believe knowledge sharing is a fundamental method to pursue
-          expertise in a given field. I write, record, and speak about
-          programming.
-        </Typography>
-      }
-      trailing={content}
-    />
-  );
+export default async function BlogPage() {
+  const content = await getAllContent();
+
+  return <Blog content={content} />;
 }
