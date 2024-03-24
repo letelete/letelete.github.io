@@ -1,12 +1,6 @@
-import {
-  ComponentPropsWithRef,
-  ReactElement,
-  cloneElement,
-  useRef,
-} from 'react';
+import { ReactElement, cloneElement } from 'react';
 
-import { useElementGeometry } from '~hooks/use-element-geometry';
-
+import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import {
   TwoPaneContainer,
   TwoPaneContainerProps,
@@ -15,41 +9,35 @@ import {
 import { cn } from '~utils/style';
 
 export interface BlogTwoPaneContainer extends TwoPaneContainerProps {
-  trailing: ReactElement<ComponentPropsWithRef<'div'>>;
-  leading: ReactElement<ComponentPropsWithRef<'div'>>;
+  trailing: ReactElement<HTMLDivElement>;
 }
 
 export const BlogTwoPaneContainer = ({
   className,
   leadingClassName,
-  trailingClassName,
-  leading,
   trailing,
   ...rest
 }: BlogTwoPaneContainer) => {
-  const leadingRef = useRef<HTMLDivElement>(null);
-  const leadingGeometry = useElementGeometry(leadingRef);
-
   return (
     <TwoPaneContainer
       {...rest}
-      className={cn(
-        'layout-padding layout-width-limiter flex gap-x-12',
-        className
-      )}
+      className={cn('layout-padding layout-width-limiter gap-x-12', className)}
       leadingClassName={cn('flex flex-col justify-center', leadingClassName)}
-      trailingClassName={cn(trailingClassName)}
-      leading={cloneElement(leading, {
-        ...leading.props,
-        ref: leadingRef,
-      })}
-      trailing={cloneElement(trailing, {
-        ...trailing.props,
-        style: {
-          ...trailing.props.style,
-          paddingTop: `${leadingGeometry?.top}px`,
-        },
-      })}
+      trailing={
+        <FadeOverlay
+          className='h-full w-full overflow-auto pr-2'
+          overlayClassName='fixed bg-gradient-to-t h-[20vh] bottom-0 top-[unset]'
+        >
+          {cloneElement(trailing, {
+            ...trailing.props,
+            style: {
+              ...trailing.props.style,
+              paddingTop: '30vh',
+              paddingBottom: '20vh',
+            },
+          })}
+        </FadeOverlay>
+      }
     />
   );
 };

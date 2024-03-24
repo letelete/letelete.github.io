@@ -20,11 +20,11 @@ export const TwoPaneContainer = ({
 }: TwoPaneContainerProps) => {
   return (
     <section className={cn('flex h-full w-full', className)} {...rest}>
-      <div className={cn('h-full w-full grow basis-0', leadingClassName)}>
+      <div className={cn('flex h-full w-0 flex-1', leadingClassName)}>
         {leading}
       </div>
 
-      <div className={cn('h-full w-full grow basis-0', trailingClassName)}>
+      <div className={cn('flex h-full w-0 flex-1', trailingClassName)}>
         {trailing}
       </div>
     </section>

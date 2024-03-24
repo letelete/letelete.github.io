@@ -20,13 +20,15 @@ const typographyVariants = cva('tracking-normal', {
       sm: 'font-primary text-xs leading-4',
     },
     weight: {
+      bold: 'font-bold',
       medium: 'font-medium',
-      regular: 'font-normal',
+      normal: 'font-normal',
     },
     color: {
       highlight: 'text-primary-highlighted',
       default: 'text-primary',
       hint: 'text-primary-hint',
+      accent: 'text-accent',
     },
     prose: {
       true: 'max-w-prose',

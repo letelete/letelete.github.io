@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
+import getReadingTime from 'reading-time'
 
 dayjs.extend(dayjsRelativeTime);
 
@@ -20,6 +21,14 @@ export const monthNameAndYearDate = (date: Date) => {
   return dayjs(date).format('MMM, YY');
 };
 
+export const dayMonthNameAndYearDate = (date: Date) => {
+  return dayjs(date).format('DD MMM, YY');
+};
+
 export const compactNumber = (num: number) => {
   return largeNumbersFormatter.format(num);
+};
+
+export const readingTime = (text: string) => {
+  return getReadingTime(text).text;
 };

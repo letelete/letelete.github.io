@@ -1,12 +1,343 @@
 ---
-title: My first blog post!
-description: Read my first post on my blog built with Nextjs
-date: Jan 6, 2024
+title: Optimizing your React application for the Interaction to Next Paint (INP) Web Vitals metric.
+date: Mar 24, 2024
 tags:
   - react
   - performance
 ---
 
-### Title!
+In March, Google released a new Core Web Vital called Interaction to Next Paint (INP). It measures the speed of interactions with the website. In this article, you’ll learn more about INP from the developer’s perspective. I’ll guide you through testing for INP, verifying potential causes of low INP scores, and how you can leverage new React tools to optimize your website for recent changes.
 
-Hello world!
+## **What is the “Interaction to Next Paint” (INP) metric?**
+
+It’s a scoring mechanism that analyzes latency from the time the user begins the interaction to the moment the next frame is presented with visual feedback. We’ll take a closer look at what mechanisms in modern applications cause low INP score later.
+
+INP measures for one of the following interactions.
+
+- Clicking with a mouse
+- Tapping on a device with a touchscreen
+- Pressing a key on either a physical or onscreen keyboard
+
+For example, when the user types a character into the search input that filters a list of cats’ breeds, the INP value will be a duration from the moment of triggering a group of keyboard events (keydown, …, keyup) to the moment of re-rendering the updated list.
+
+![SImplified visualization behind calculating the INP score for an individual action](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/06927b47-ed75-49c1-b9ee-49d801b9d338/inp.png)
+
+Simplified visualization behind calculating the INP score for an individual action
+
+The main goal of INP is to minimize this duration, ensuring swift visual feedback for user interactions and optimizing overall responsiveness on the page.
+
+## What INP isn’t?
+
+There is already a well-known metric called “First Input Delay” (FID) which measures the time from when a user **first** interacts with a page to the time when the main thread is next idle. It offered developers a new way to measure responsiveness as real users experience it.
+
+Read more: https://web.dev/articles/fid
+
+## **FID vs INP - What’s the difference?**
+
+Comparing these two mechanisms reveals similar measurement goal - a page responsiveness. One of the essential differences is that the FID measures only initial interaction, while the INP takes the worst latency recorded during the entire session.
+
+<aside>
+  💡 There's a little nuance to how the INP is calculated depending on the total
+  interactions per website. For websites with more than 50 interactions per
+  session, it takes the 75th percentile of the slowest latency recorded. This
+  eliminates potential hiccups for pages with large numbers of interactions.
+</aside>
+
+Even though first impressions are important, the first interaction is not necessarily representative of _all_ interactions throughout the life of a page. This is one of the reasons why INP replaces the FID.
+
+## **Should you care about INP?**
+
+Yes, if you care about SEO. The INP will be another metric that results will directly influence your website's ranking on Google search results.
+
+If you don’t take SEO into account, consider leveraging INP mechanisms to track the responsiveness of your website. Receiving poor results from the INP might be a sign to profile your application for performance.
+
+## Measuring INP
+
+For a released product, that runs on the production environment, accumulates user traffic, and qualifies for inclusion in the Chrome User Experience Report (_CrUX_) you can quickly measure the new INP metric using **[PageSpeed insights](https://pagespeed.web.dev)**. It gives a snapshot of your page and origin's performance over the previous 28 days.
+
+### Manually diagnose slow interactions
+
+Ideally, you should rely on the field data from the _CrUX_ report, that suggests your website struggles with slow interactions. Sometimes, however, it’s not possible, and we need another way.
+
+The main goal is to identify the problem with lowest amount of effort at first. For manual investigation, we’ll use the **[Web Vitals addon](https://chromewebstore.google.com/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma?pli=1).** Then, dive deeper into what causes the issue. For that, we can leverage the _Profiler_ available in the browser’s _DevTools_ tab.
+
+**Using Web Vitals addon (Chrome)**
+
+Requirements:
+
+- [Chrome](https://www.google.com/chrome/) browser
+- [Web Vitals](https://chromewebstore.google.com/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma?pli=1) addon
+- [React Developer Tools](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) addon (Useful for highlighting component updates)
+
+Let’s start with a simple configuration of the Web Vitals addon. This will display HUD overlay as well as log information about each interaction with the page in the console.
+
+![Screenshot 2024-03-19 at 22.05.43.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/77c2e7a8-2b68-4096-84ea-2289cecc9397/Screenshot_2024-03-19_at_22.05.43.png)
+
+We’ll use React Developer Tools to highlight component updates. This will help us with identifying what’s happening in our application.
+
+<aside>
+💡 Once React Developer Tools is installed, open Chrome developer tools, then “Profiler” section. Enable “Highlight updates when components render”.
+
+</aside>
+
+![Group 309.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/ca98b0ee-25be-4bcd-9ded-d1e5c0556942/Group_309.png)
+
+Let’s go back to previously introduced app which allows us to filter cats by their breeds. First issue we can observe is that the list itself is long. We’re displaying over 1900 results at once. That’s already something we could optimize, but let’s leave it for later. Let’s try to interact with the page by typing “B” into the input, and then clearing it.
+
+[first-issue.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/6b520aa2-951a-4265-8786-dcb1c7638e53/first-issue.mp4)
+
+Few things are happening here:
+
+1. A controlled Input component updates immediately on each character we type.
+2. A list updates on each input change.
+
+The moment of “freeze” shown on the video is the main issue that causes INP score to suffer. We can verify that by observing the INP delta times logged in the console on the right. This translates into general poor result of the INP score for our website (344 ms).
+
+## What exactly causes poor INP results?
+
+Figuring out what's causing poor INP is the most important, and the most difficult step on the road of enhancing the User Experience (UX).
+
+As Google Chrome’s team suggest, interactions can be broken down into three phases:
+
+### 1. The input delay
+
+It starts when the user initiates an interaction with the page, and ends when the event callbacks for the interaction begin to run.
+
+### 2. The processing time
+
+It consists of the time it takes for event callbacks to run to completion.
+
+### 3. The presentation delay
+
+It’s the time it takes for the browser
+to present the next frame which contains the visual result of the
+interaction.
+
+## I found a bottleneck - now what? Optimizing your React app for performance.
+
+As a React developer you’re probably aware of core concepts used to optimize the app.
+
+I’d distinguish following:
+
+- Memoization `memo`, `useMemo`, `useCallback`
+- Debouncing/Throttling (using a hook or a higher-order-function that triggers the callback)
+- List virtualization
+- List pagination
+
+Let’s go back to our simple app about cats. Take a look at the component that provides browsing functionality:
+
+```tsx
+export function CatsBreedsBrowserTemplate() {
+  // 1. Fetching a list of all cats from the API (no limitting the response).
+  const { data, isLoading } = useCatsData();
+
+  // 2. Storing a `SearchBar` value.
+  const [filterByBreed, setFilterByBreed] = useState("");
+
+  // 3. Filtering the `data` array based on the `filterByBreed`.
+  const searchResults = useMemo(() => {
+    const catsData = data ?? [];
+
+    if (!filterByBreed || !catsData.length) {
+      return catsData;
+    }
+
+    return catsData.filter((cat) => cat.breed.includes(filterByBreed));
+  }, [data, filterByBreed]);
+
+  // 4. Rendering the list of cats
+  const renderCatsSearchResult = useCallback(() => {
+    if (isLoading) {
+      // 5. Early-return: show loading indicator
+      return <CircularProgress />
+      );
+    }
+    if (!searchResults.length) {
+      // 6. Early-return: show empty placeholder
+      return <p>No cats found :(</p>
+    }
+    // 7. Return actual list component.
+    return <CatsList cats={searchResults} />
+  }, [isLoading, searchResults]);
+
+  return (
+    <div>
+      <SearchBar
+        label="Filter by cat's breed"
+				// 8. On each search input change, set `filterByBreed` state.
+        onChange={(e) => setFilterByBreed(e.target.value)}
+      />
+
+      {renderCatsSearchResult()}
+    </div>
+  );
+}
+```
+
+_(Fig. 1)_
+
+Let’s see how can we utilize already known concepts to optimize the INP time.
+
+**Issue #1 - List of cats re-renders on each change of the SearchBar component.**
+
+As we know from the React’s **[Reconciliation model](https://legacy.reactjs.org/docs/reconciliation.html)**, when state changes, React re-renders the components and all its descendants. By calling `setFilterByBreed` on each SearchBar change, we perform unnecessary re-renders of the expensive `CatsList` component.
+
+[issue-1.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/3d6a4ed4-b918-4c13-bb96-74dbddf20ac1/issue-1.mp4)
+
+Instead of triggering onChange immediately, let’s apply debouncing on the SearchBar component.
+
+You can use a library, or implement a simple debounce utility by yourself. Here’s a simple higher-order-function that triggers `callback` on timeout:
+
+```tsx
+const DEFAULT_DEBOUNCE_DELAY = 500;
+
+export const debounce = <T,>(
+  callback: (value: T) => void,
+  delay = DEFAULT_DEBOUNCE_DELAY
+) => {
+  let timer: number;
+  return (value: T) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => callback(value), delay);
+  };
+};
+```
+
+_(Fig. 2)_
+
+A `SearchBar` component is a simple wrapper around [mui’s](https://mui.com/material-ui) `TextField` component:
+
+```tsx
+export interface SearchBarProps extends Partial<TextFieldProps<'standard'>> {}
+
+function SearchBar({ onChange, ...rest }: SearchBarProps) {
+  return <TextField onChange={onChange} {...rest} />;
+}
+```
+
+_(Fig. 3)_
+
+Using debounced`onChange`:
+
+```tsx
+export interface SearchBarProps extends Partial<TextFieldProps<'standard'>> {}
+
+function SearchBar({ onChange, ...rest }: SearchBarProps) {
+  // Re-initializing debounced onChange on `onChange` change (no pun's intented).
+  const debouncedOnChange = useMemo(
+    () => onChange && debounce(onChange),
+    [onChange]
+  );
+
+  return <TextField onChange={debouncedOnChange} {...rest} />;
+}
+```
+
+_(Fig. 4)_
+
+This improves the INP, because we no longer try to re-render expensive component on each user interaction.
+
+[issue-1-fixed.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/e84f06fc-892a-4bd9-97c0-aedf060e6000/issue-1-fixed.mp4)
+
+We still however, render a long list of elements in the DOM, synchronously.
+
+**Issue #2- List renders all elements at once causing low INP score by freezing the layout**
+
+[issue-2.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/f11061b5-efde-4023-8602-57747bde8b0b/issue-2.mp4)
+
+This time we could:
+
+a) Virtualize the list (by limitting amount of elements attached to the DOM tree, and displaying only such that are visible in the viewport + some offset).
+
+b) Paginate the data (combine intersection-observer with appending next elements to the DOM on user scroll).
+
+Both solutions allow us to keep initial list lightweight, and get rid of the layout “freeze” that blocks us from interacting with the website. There’s a plenty of resources for implementing both [Virtualization](https://www.patterns.dev/vanilla/virtual-lists/), and [Pagination](https://tanstack.com/query/latest/docs/framework/react/guides/paginated-queries) in React. You can check one of them.
+
+[issue-2-fixed.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/328ac764-67da-4959-b403-5f720a6ebeb2/issue-2-fixed.mp4)
+
+## React ≥18, concurrency, and the new mental model of reactivity
+
+Apart from what I already mentioned, there’s a relatively new approach to reactivity in React using its latest features. By introducing concurrency, we’re now able to _transition_ (no pun intended) from well-known optimization techniques, take the responsibility from the developer, and introduce less intrusive optimizations managed by the tool itself (with a bit of our help).
+
+**Non-urgent updates**
+
+With React < 18, every update is urgent. From React 18, every update is urgent by default, but now we’re able to set a low priority on updates that could potentially block the UI.
+
+Instead of thinking about re-renders, we should start thinking about the urgency of updates we perform.
+
+Let’s once again go back to our unoptimized cats browser (Fig. 1).
+
+```tsx
+export function CatsBreedsBrowserTemplate() {
+  ...
+
+  return (
+      ...
+
+      <SearchBar
+        ...
+				// 1. On each search input change, set `filterByBreed` state.
+        onChange={(e) => setFilterByBreed(e.target.value)}
+      />
+
+      ...
+  );
+}
+```
+
+_(Fig. 5)_
+
+Remember the part (Fig. 1 [8], Fig. 5 [1]) where, we update the state of the `filterByBreed` on each SearchBar change? We’ll utilize the `useTransition` hook to mark this as non-urgent update.
+
+```tsx
+// 1. Import the `useTransition` hook.
+import { useTransition } from "react";
+
+export function CatsBreedsBrowserTemplate() {
+  // 2. Declare `useTransition` fields.
+  const [isPending, startTransition] = useTransition();
+
+  ...
+
+  return (
+      ...
+
+      <SearchBar
+        ...
+        onChange={(e) =>
+          // 3. Mark state update as non-urgent,
+          //    by wrapping it with the `startTransition` function.
+          startTransition(() => {
+            setFilterByBreed(e.target.value);
+          })
+        }
+      />
+
+      ...
+  );
+}
+```
+
+_(Fig. 6)_
+
+As simple as that, we were able to eliminate the “freezing” UI issue.
+
+[issue-4-fixed.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/c7056bd6-2301-440f-b575-cd6ef68a8d82/issue-4-fixed.mp4)
+
+**Why this works?**
+
+Under the hood, react maintains a _queue of updates_ ready to be performed. Before React 18, all updates were performed sequentially until there were no more updates left. When we update the component’s state, React will queue this update, and perform it until it completes. This however, due to the JavaScript event loop’s “[Run-to-completion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop#run-to-completion)” strategy, blocks processing of other tasks (that’s why we can see the UI “freeze” with non-optimized example).
+
+With the release of React 18, a significant change introduced a new mechanism of processing the updates queue. Instead of forcefully processing an update, React now schedules a unit of update’s work, checks if the browser allows to perform it, and then completes it. Otherwise, it gives the control back to the browser. This way, long-running non-urgent updates no longer blocks the browser’s work that needs to be performed due to the higher priority.
+
+Transition is only one of the concurrent scheduling mechanisms. Make sure to check all already-existing, and incoming hooks such as [useDeferredValue](https://react.dev/reference/react/useDeferredValue), or [use](https://react.dev/reference/react/use).
+
+## Is concurrent scheduling a solution to all problems?
+
+While the new concurrency model effectively addresses common challenges, it's not a silver bullet applicable to every aspect of your code.
+
+Since `useTransition` splits the work in chunks, for expensive-to-render components, splitting the work is impossible. That’s where we need to combine the new concurrent scheduling with already known optimization strategies.
+
+## Avoid premature optimization
+
+Understanding the optimization techniques mentioned and comprehending how the INP calculates the Web Vitals score is crucial for delivering a seamless and responsive user experience for your product. While optimization enhances performance, it often comes with associated costs. While it's tempting to immediately implement efficiency improvements, **many enhancements result in higher memory consumption and maintenance challenges**. It is essential to prioritize simplicity in our solutions. I advise vigilant monitoring of your application to identify areas causing issues and optimizing those selectively, rather than prematurely optimizing, which can introduce unnecessary complexity to your project.

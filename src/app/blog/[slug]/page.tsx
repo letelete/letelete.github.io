@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { getAllContent, getContentEntry } from 'src/lib/content/provider';
 
 import { BlogContent } from '~features/blog/blog-content';
@@ -20,5 +21,15 @@ export default async function ContentPage({
     return notFound();
   }
 
-  return <BlogContent content={content} />;
+  return (
+    <Suspense
+      fallback={
+        <div className='flex h-full w-full items-center justify-center'>
+          Loading...
+        </div>
+      }
+    >
+      <BlogContent content={content} />
+    </Suspense>
+  );
 }

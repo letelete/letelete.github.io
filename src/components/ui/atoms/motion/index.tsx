@@ -21,3 +21,18 @@ export const HeartBeatMotion = ({
     </motion.div>
   );
 };
+
+export interface FadeInMotionProps extends HTMLMotionProps<'div'> {}
+
+export const FadeInMotion = ({ children, ...rest }: FadeInMotionProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      {...rest}
+    >
+      {children}
+    </motion.div>
+  );
+};
