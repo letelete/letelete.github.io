@@ -83,17 +83,19 @@ export const KnowledgeSharingSection = ({
           ref={navigatableHandler}
         >
           <Navigatable.Section
-            sectionId='write'
+            sectionId={'article' satisfies ContentType}
             className='layout-width-limiter layout-padding'
           >
             <WriteSubSection />
           </Navigatable.Section>
 
-          <Navigatable.Section sectionId='record'>
+          <Navigatable.Section
+            sectionId={'youtube-video' satisfies ContentType}
+          >
             <RecordSubSection />
           </Navigatable.Section>
 
-          <Navigatable.Section sectionId='speak'>
+          <Navigatable.Section sectionId={'talk' satisfies ContentType}>
             <SpeakSubSection />
           </Navigatable.Section>
         </Navigatable>
