@@ -45,7 +45,7 @@ export const ArticleSegment = ({
       trailing={
         <Typography
           className='whitespace-nowrap text-sm text-primary-hint'
-          weight='regular'
+          weight='normal'
         >
           {monthNameAndYearDate(createdAt)}
         </Typography>

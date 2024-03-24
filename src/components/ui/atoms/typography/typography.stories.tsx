@@ -28,7 +28,7 @@ export const AsChild: Story = {
   args: {
     asChild: true,
     variant: 'body',
-    weight: 'regular',
+    weight: 'normal',
     color: 'highlight',
     children: <h1>{text}</h1>,
   },

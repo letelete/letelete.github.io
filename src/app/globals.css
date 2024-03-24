@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './reset.css';
+
+html {
+  @apply h-full;
+}
+
 body {
-  @apply bg-background text-primary-foreground;
+  @apply h-full bg-background text-primary-foreground;
 }
 
 @layer utilities {

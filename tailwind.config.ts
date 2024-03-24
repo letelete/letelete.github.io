@@ -29,7 +29,8 @@ const config = {
       accent: {
         DEFAULT: '#eddd5d',
         from: '#f0991a',
-        to: '#eddd5d'
+        to: '#eddd5d',
+        foreground: '#111',
       },
       card: {
         intense: '#000000',
@@ -40,8 +41,8 @@ const config = {
         DEFAULT: '#ff5151',
       },
       socials: {
-        youtube: '#ff0000'
-      }
+        youtube: '#ff0000',
+      },
     },
     extend: {
       boxShadow: {

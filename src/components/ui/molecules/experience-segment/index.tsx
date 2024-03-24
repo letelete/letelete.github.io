@@ -60,7 +60,7 @@ export const ExperienceSegment = ({
           prose={false}
           balance={false}
           variant='body-sm'
-          weight='regular'
+          weight='normal'
           color='hint'
           asChild
         >

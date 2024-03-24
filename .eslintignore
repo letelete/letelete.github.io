@@ -2,3 +2,5 @@ postcss.config.js
 tailwind.config.js
 prettier.config.js
 .next
+.eslintrc.js
+next.config.mjs
