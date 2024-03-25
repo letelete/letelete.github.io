@@ -19,7 +19,7 @@ const getContent = async <T extends Content>(
   dirPath: string,
   type: ContentType
 ): Promise<T[]> => {
-  const contentPath = path.join(process.cwd(), dirPath);
+  const contentPath = path.resolve(process.cwd(), dirPath);
   const content = await fs.readdir(contentPath);
 
   return Promise.all(
@@ -36,10 +36,11 @@ const getContent = async <T extends Content>(
   );
 };
 
+const CONTENT_DIR_PATH = 'src/lib/content';
 const contentPaths: Record<ContentType, string> = {
-  article: 'src/lib/content/articles',
-  'youtube-video': 'src/lib/content/youtube-videos',
-  talk: 'src/lib/content/talks',
+  article: `${CONTENT_DIR_PATH}/articles`,
+  'youtube-video': `${CONTENT_DIR_PATH}/youtube-videos`,
+  talk: `${CONTENT_DIR_PATH}/talks`,
 };
 
 export class NonUniqueSlugsError extends Error {
