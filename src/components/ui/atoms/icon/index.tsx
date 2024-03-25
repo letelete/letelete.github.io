@@ -1,17 +1,30 @@
-import { LucideProps } from 'lucide-react';
-import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import dynamic from 'next/dynamic';
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Github,
+  Image,
+  Linkedin,
+  LucideProps,
+  Mail,
+  Send,
+  Twitter,
+  Youtube,
+} from 'lucide-react';
 import useTailwind from 'src/hooks/use-tailwind';
 
 import { cn } from '~utils/style';
 
 export interface IconProps extends LucideProps {
-  name: keyof typeof dynamicIconImports;
+  name: keyof typeof icons;
 }
 
 export const Icon = ({ name, className, ...props }: IconProps) => {
-  const LucideIcon = dynamic(dynamicIconImports[name]);
   const tw = useTailwind();
+  const LucideIcon = icons[name];
+
+  if (!LucideIcon) {
+    throw new Error(`Icon with name "${name}" not found.`);
+  }
 
   return (
     <LucideIcon
@@ -24,3 +37,15 @@ export const Icon = ({ name, className, ...props }: IconProps) => {
     />
   );
 };
+
+const icons = {
+  'arrow-left': ArrowLeft,
+  'arrow-up-right': ArrowUpRight,
+  github: Github,
+  image: Image,
+  linkedin: Linkedin,
+  mail: Mail,
+  send: Send,
+  twitter: Twitter,
+  youtube: Youtube,
+} as const;
