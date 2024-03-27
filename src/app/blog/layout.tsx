@@ -7,8 +7,6 @@ import { BlogHeader } from '~features/blog/blog-header';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
 
-import { Footer } from '~ui/molecules/footer';
-
 export default function BlogLayout({
   children,
 }: {
