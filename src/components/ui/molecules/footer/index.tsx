@@ -15,7 +15,7 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
       )}
       {...rest}
     >
-      <div className='flex w-full justify-center border-t border-background-contrast py-4'>
+      <div className='flex w-full justify-center py-4'>
         <Copyrights />
       </div>
     </footer>
