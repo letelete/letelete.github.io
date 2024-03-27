@@ -22,7 +22,7 @@ export const BlogTwoPaneContainer = ({
     <TwoPaneContainer
       {...rest}
       className={cn(
-        'layout-padding layout-width-limiter relative gap-x-12',
+        'layout-padding layout-width-limiter relative h-[unset] min-h-screen gap-x-12',
         className
       )}
       leadingClassName={cn(

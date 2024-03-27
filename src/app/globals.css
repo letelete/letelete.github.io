@@ -5,11 +5,11 @@
 @import './reset.css';
 
 html {
-  @apply h-full;
+  @apply min-h-screen;
 }
 
 body {
-  @apply h-full bg-background text-primary-foreground;
+  @apply min-h-screen bg-background text-primary-foreground;
 }
 
 @layer utilities {
