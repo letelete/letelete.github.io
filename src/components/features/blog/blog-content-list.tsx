@@ -32,8 +32,6 @@ export const BlogContentList = ({ content }: BlogContentListProps) => {
   }, [allTags, content, selectedTags]);
 
   const filteredContent = useMemo(() => {
-    console.log({ selectedTags, tags: content.map((content) => content.tags) });
-
     if (selectedTags.length) {
       return content.filter((content) =>
         content.tags.some((tag) => selectedTags.includes(tag))

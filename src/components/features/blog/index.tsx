@@ -72,11 +72,7 @@ export const Blog = ({ content }: BlogProps) => {
           </Typography>
         </div>
       }
-      trailing={
-        <div className='overflow-auto'>
-          <BlogContentList content={currentContent} />
-        </div>
-      }
+      trailing={<BlogContentList content={currentContent} />}
     />
   );
 };

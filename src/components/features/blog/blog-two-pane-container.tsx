@@ -26,23 +26,17 @@ export const BlogTwoPaneContainer = ({
         className
       )}
       leadingClassName={cn(
-        'sticky top-1/2 flex h-fit -translate-y-1/2 flex-col justify-center',
+        'flex flex-none flex-col justify-center pt-28 sm:sticky sm:top-1/2 sm:h-fit sm:flex-1 sm:-translate-y-1/2 sm:pt-[unset]',
         leadingClassName
       )}
+      trailingClassName='pb-[20vh] pt-12 sm:pt-[30vh]'
       trailing={
         <FadeOverlay
           className='overflow-[unset] h-[unset] w-full pr-2'
           overlayClassName='fixed bg-gradient-to-t h-[10vh] bottom-0 top-[unset] to-transparent'
           overflow
         >
-          {cloneElement(trailing, {
-            ...trailing.props,
-            style: {
-              ...trailing.props.style,
-              paddingTop: '30vh',
-              paddingBottom: '20vh',
-            },
-          })}
+          {trailing}
         </FadeOverlay>
       }
     />

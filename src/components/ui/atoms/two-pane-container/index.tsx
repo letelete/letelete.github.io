@@ -19,12 +19,19 @@ export const TwoPaneContainer = ({
   ...rest
 }: TwoPaneContainerProps) => {
   return (
-    <section className={cn('flex w-full', className)} {...rest}>
-      <div className={cn('flex h-full w-0 flex-1', leadingClassName)}>
+    <section
+      className={cn('flex w-full flex-col sm:flex-row', className)}
+      {...rest}
+    >
+      <div
+        className={cn('flex w-full flex-1 sm:h-full sm:w-0', leadingClassName)}
+      >
         {leading}
       </div>
 
-      <div className={cn('flex h-full w-0 flex-1', trailingClassName)}>
+      <div
+        className={cn('flex w-full flex-1 sm:h-full sm:w-0', trailingClassName)}
+      >
         {trailing}
       </div>
     </section>

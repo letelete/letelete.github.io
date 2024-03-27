@@ -34,21 +34,16 @@ export function BlogContent({ content }: BlogContentProps) {
 
   return (
     <BlogTwoPaneContainer
-      leadingClassName='max-w-[35%]'
+      leadingClassName='sm:max-w-[35%]'
       leading={
-        <div>
+        <div className='w-full'>
           <Typography
             className='flex items-center gap-x-1'
             variant='body-sm'
             color='hint'
             weight='bold'
           >
-            <Button
-              className='relative mt-0.5'
-              size='inline'
-              variant='link'
-              asChild
-            >
+            <Button className='relative' size='inline' variant='link' asChild>
               <Link href={BLOG_BASE_URL}>
                 <Icon
                   name='arrow-left'
@@ -65,9 +60,9 @@ export function BlogContent({ content }: BlogContentProps) {
             <h1>{content.title}</h1>
           </Typography>
 
-          <div className='mt-8'>
+          <div className='mt-4 sm:mt-8'>
             <Typography
-              className='mt-2 space-x-2'
+              className='space-x-2'
               variant='body-sm'
               color='hint'
               weight='normal'
@@ -77,12 +72,12 @@ export function BlogContent({ content }: BlogContentProps) {
               <span>{readingTime(content.body)}</span>
             </Typography>
 
-            <TagsList className='mt-2' tags={content.tags} />
+            <TagsList className='sm:mt-2' tags={content.tags} />
           </div>
         </div>
       }
       trailing={
-        <article>
+        <article className='*:first:mt-0'>
           <MDXRemote
             source={content.body}
             components={BlogMarkdown}
