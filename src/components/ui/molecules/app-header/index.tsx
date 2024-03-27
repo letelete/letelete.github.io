@@ -12,7 +12,7 @@ const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
       <header
         ref={ref}
         className={cn(
-          'sticky top-0 z-50 flex w-full bg-gradient-to-b from-background to-background/10 py-10 backdrop-blur-sm',
+          'to-transparent sticky top-0 z-50 flex w-full bg-gradient-to-b from-background py-10 backdrop-blur-sm',
           className
         )}
         {...rest}

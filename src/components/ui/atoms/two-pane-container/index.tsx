@@ -19,7 +19,7 @@ export const TwoPaneContainer = ({
   ...rest
 }: TwoPaneContainerProps) => {
   return (
-    <section className={cn('flex h-full w-full', className)} {...rest}>
+    <section className={cn('flex w-full', className)} {...rest}>
       <div className={cn('flex h-full w-0 flex-1', leadingClassName)}>
         {leading}
       </div>

@@ -1,4 +1,4 @@
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ComponentPropsWithoutRef, useCallback, useState } from 'react';
 
 import { Button } from '~ui/atoms/button';
@@ -27,45 +27,38 @@ export const TagsList = ({
   const [selectedTags, setSelectedTags] = useState(new Set<string>());
 
   const handleClearAll = useCallback(() => {
-    setSelectedTags(new Set());
-  }, []);
+    const emptyTags = new Set<string>();
+    setSelectedTags(emptyTags);
+    onChange?.([...emptyTags]);
+  }, [onChange]);
 
   const toggleSelected = useCallback(
     (tag: string) => {
       setSelectedTags((currentlySelectedTags) => {
-        if (currentlySelectedTags.has(tag)) {
-          currentlySelectedTags.delete(tag);
+        const newSelectedTags = new Set(currentlySelectedTags);
+
+        if (newSelectedTags.has(tag)) {
+          newSelectedTags.delete(tag);
         } else {
-          currentlySelectedTags.add(tag);
+          newSelectedTags.add(tag);
         }
 
-        onChange?.([...currentlySelectedTags]);
+        onChange?.([...newSelectedTags]);
 
-        return new Set(currentlySelectedTags);
+        return newSelectedTags;
       });
     },
     [onChange]
   );
 
   return (
-    <div className={cn('relative', selectable && 'pb-8')}>
-      <ul className={cn('flex flex-wrap gap-2', className)} {...rest}>
-        {tags.map((tag) => (
-          <li key={tag}>
-            <Tag
-              selectable={selectable}
-              label={tag}
-              onClick={() => toggleSelected(tag)}
-              selected={selectable && selectedTags.has(tag)}
-              {...tagProps}
-            />
-          </li>
-        ))}
-      </ul>
-
-      <AnimatePresence>
+    <div className={cn('relative', className)}>
+      <AnimatePresence mode='popLayout'>
         {selectedTags.size && (
-          <FadeInMotion className='absolute bottom-0 left-0'>
+          <FadeInMotion
+            layout
+            className='absolute bottom-[calc(100%+0.5rem)] left-0'
+          >
             <Button
               className='text-xs text-accent'
               size='inline'
@@ -77,6 +70,28 @@ export const TagsList = ({
           </FadeInMotion>
         )}
       </AnimatePresence>
+
+      <ul className='flex flex-wrap gap-2' {...rest}>
+        <AnimatePresence mode='popLayout' initial={false}>
+          {tags.map((tag) => (
+            <motion.li
+              layout={selectable}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              key={tag}
+            >
+              <Tag
+                selectable={selectable}
+                label={tag}
+                onClick={() => toggleSelected(tag)}
+                selected={selectable && selectedTags.has(tag)}
+                {...tagProps}
+              />
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </ul>
     </div>
   );
 };

@@ -12,7 +12,10 @@ const config = {
       primary: ['Inter', ...defaultTheme.fontFamily.sans],
     },
     colors: {
-      background: '#101010',
+      background: {
+        DEFAULT: '#101010',
+        contrast: '#282828',
+      },
       white: '#fff',
       black: '#000',
       primary: {

@@ -1,0 +1,117 @@
+---
+title: My Google Code-in 2018 adventure with Mifos Initiative as a Grand Prize Winner
+date: Dec 12, 2018
+tags:
+  - personal
+  - self-development
+---
+
+## Over 3000 students from 77 countries completed 15323 tasks with 27 open source organizations. The 54 Grand Prize Winners from 19 countries won a trip to a Google HQ in San Francisco.
+
+<MdxAside>
+  You can also read this article on
+  [Medium](https://medium.com/@brunokawka/my-google-code-in-2018-adventure-with-mifos-initiative-3a65848b0025)
+</MdxAside>
+
+It’s been an amazing 50 days spent participating in the Google Code-in contest, during which I've had the opportunity to enhance my skills in Android development and UI/UX design. Additionally, I've honed my automation skills by building Python tools, significantly improving code review performance and gaining valuable new experiences.
+
+Overall, it's been a rewarding journey filled with fun and learning!
+
+## But… What is Google Code-in?
+
+To be brief, It’s an **international contest** focused on Software Development, Research, Design and principally, Open-Source!
+
+<MdxImage
+  width={600}
+  height={196}
+  caption='Google Code-in logo'
+  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/google-code-in/google-code-in-logo-JuVhrzv1ydYx7TmhMIFj5IhPZF6jbu.png'
+  alt='Google Code-in Logo'
+/>
+
+## Organization
+
+Google Code-in brings together a variety of organizations, all keen on connecting people, with power of Open-Source. Since the beginning, I wanted to dive into the Android field, so I’ve done some research before participating and found organizations that maintain projects in this technology.
+
+Finally, I chose the [Mifos Initiative](https://mifos.org) which is a sub-organization of [Digital Impact Alliance](https://codein.withgoogle.com/archive/2018/organization/5735553819475968).
+
+<MdxImage
+  width={600}
+  height={196}
+  caption='Mifos Initiative Logo'
+  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/google-code-in/mifos-logo-8QrVpzMTKRpfyKtcnuydILHbbP6jX1.png'
+  alt='Mifos Initiative Logo'
+/>
+
+## What GCI gave me?
+
+So much new experience.
+
+I’ve been involved in 2 Android projects: [MifosPay](https://github.com/openMF/mobile-wallet) & [Self-Service-App](https://github.com/openMF/mifos-mobile). I had to work in a much larger code-base than ever before.
+
+The first few days were hard for me since I have been trying to make myself familiar with the project structure and overall contributions standards. After some time I felt much more confident, and started to contribute on my own, by finding unapparent ways to improve the [MifosPay](https://github.com/openMF/mobile-wallet) app.
+
+## Climbing to the top
+
+Instead of contributing to actual tasks, I tried to think outside the box of ways that could bring a significant improvement over the product. It bothered me, how obscure and unintuitive the app is, so I’ve suggested changing the actual layout, to improve user interest and the overall quality of the app.
+
+I’ve created a completely new UI/UX proposal according to the newest Material Design 2.0 standards. Since the mentors’ review of my proposal, I’ve been responsible for the redesign implementation, where I and other contributors were successfully changing the app appearance and some of the Frontend functionalities (Check out the redesign branch!).
+
+I found the process challenging, but rewarding at the same time. I learned a lot, and had an opportunity, to carry out some code reviews.
+
+<MdxImage
+  width={720}
+  height={2429}
+  caption='My design proposal, reviewed & accepted by GCI mentors'
+  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/google-code-in/mifos-pay-design-ix92bW7VCqP3p5C9Ct9NaRAfBVp4KQ.webp'
+  alt='UI/UX design of the financial platform'
+/>
+
+## Automatization
+
+Mifos mentors did a great job of creating a variety of tasks. I’ve done 38 of them. Surprisingly, the easiest and most mundane ones, turned out to be the most interesting.
+
+Why? They were open for creativity, and finding some non-trivial solutions.
+
+One of them was:
+
+> Organize issues and pull requests of the organization’s GitHub repository, by labeling them depending on their state.
+
+Knowing, that PRs may take one of the following states:
+
+- Ready to be merged — It has been reviewed, and no changes requested by the reviewer / Requested changes were accepted
+- Changes Needed — If it’s been reviewed, and some changes were requested by the reviewer
+- Need Review — It hasn’t been reviewed yet
+
+…and Issues may take one of the following states:
+
+- Open —There are no pull request references to this issue. It’s open so its ready to claim, or someone’s just already claimed it, but didn’t send a solution yet. It might also happened when someone send an issue’s solution but its got closed and not merged
+- In Progress —That someone already send a solution for the issue and its waiting for merge
+- Multiple PRS— There are many unique pull request for single issue and these are all open
+- Closed — A PR referencing to the issue, got merged, so the issue itself can be closed
+
+I’ve decided to learn a little bit of Python, and do some magic with GitHub, and Google Sheets API, by fully automatizing the documentation process.
+
+<MdxImage
+  width={800}
+  height={450}
+  caption='Easy pulls documentation'
+  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/google-code-in/easy-pulls-documentation-YPOKByQQdqKmewNt4cSsT8TXWRuCIV.gif'
+  alt='A visualization of a script running in the terminal'
+/>
+
+Instead of wasting a couple of hours on manually labeling those issues, you run the script, that documents the whole repository in less than 2 minutes. For more info, you might want to visit the [project repository](https://github.com/letelete/easy-documentation).
+
+<MdxImage
+  width={1400}
+  height={1018}
+  caption='Demo of the Issue Documentation script running on Heroku, updating every 5 minutes'
+  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/google-code-in/issues-docs-j2jSAyypeMqMxsz5o422h6AaLhBfn9.webp'
+  alt='A Google Sheet document storing documentation of github issues with 4 columns: url, title, status, update-date.'
+/>
+
+## Overall summary of the GCI 2018
+
+As I mentioned before, it’s been a great experience to participate in the Google Code-In contest. I’ve gained so much new knowledge and have had the opportunity to participate in such a great open-source community.
+
+I would love to thank all mentors and people engaged in the contest for doing such a great job, being so active and supportive. Unfortunately, it was the last time I could take part in the contest, but I’ll participate in such similar events in the future for sure.

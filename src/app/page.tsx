@@ -5,12 +5,12 @@ import { useCallback, useRef, useState } from 'react';
 import { AboutSection } from '~features/home/about-section';
 import { ContactSection } from '~features/home/contact-section';
 import { ExperienceSection } from '~features/home/experience-section';
-import { FooterSection } from '~features/home/footer-section';
 import { HeroSection } from '~features/home/hero-section';
 import { TestimonialSection } from '~features/home/testimonial-section';
 
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
+import { Footer } from '~ui/molecules/footer';
 
 const navigationItems = [
   { id: 'hello', label: 'Hello' },
@@ -66,7 +66,7 @@ export default function Home() {
         </Navigatable.Section>
       </Navigatable>
 
-      <FooterSection className='mt-24' />
+      <Footer className='mt-14' />
     </main>
   );
 }

@@ -10,6 +10,16 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'vsupu83zlkfucch6.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/content/**',
+      },
+    ],
+  },
 };
 
 const withMDX = createMDX();

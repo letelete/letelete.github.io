@@ -32,7 +32,8 @@
       "~features/*": ["src/components/features/*"],
       "~utils/*": ["src/utils/*"],
       "~constants/*": ["src/constants/*"],
-      "~hooks/*": ["src/hooks/*"]
+      "~hooks/*": ["src/hooks/*"],
+      "~blog-elements/*": ["src/components/ui/atoms/mdx"]
     }
   },
   "include": [

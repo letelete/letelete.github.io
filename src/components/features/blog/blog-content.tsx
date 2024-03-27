@@ -6,14 +6,15 @@ import { Content, ContentType } from 'src/lib/content/provider';
 
 import { BLOG_BASE_URL } from '~constants/index';
 
+import { BlogMarkdown } from '~features/blog/blog-markdown';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
 
 import useTailwind from '~hooks/use-tailwind';
 
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
-import { Markdown } from '~ui/atoms/markdown';
 import { Typography } from '~ui/atoms/typography';
+import { Footer } from '~ui/molecules/footer';
 import { TagsList } from '~ui/organisms/tags-list';
 
 import { dayMonthNameAndYearDate, readingTime } from '~utils/string';
@@ -60,25 +61,23 @@ export function BlogContent({ content }: BlogContentProps) {
             {`/ ${contentTypeToHeader[content.type]}`}
           </Typography>
 
-          <Typography className='mt-2' variant='hero' color='highlight' asChild>
+          <Typography className='mt-4' variant='hero' color='highlight' asChild>
             <h1>{content.title}</h1>
           </Typography>
 
           <div className='mt-8'>
             <Typography
-              className='mt-2'
+              className='mt-2 space-x-2'
               variant='body-sm'
               color='hint'
               weight='normal'
             >
-              {dayMonthNameAndYearDate(new Date(content.date))}
+              <span>{dayMonthNameAndYearDate(new Date(content.date))}</span>
+              <span>&bull;</span>
+              <span>{readingTime(content.body)}</span>
             </Typography>
 
-            <Typography variant='sm' color='hint' weight='normal'>
-              {readingTime(content.date)}
-            </Typography>
-
-            <TagsList className='mt-4' tags={content.tags} />
+            <TagsList className='mt-2' tags={content.tags} />
           </div>
         </div>
       }
@@ -86,7 +85,7 @@ export function BlogContent({ content }: BlogContentProps) {
         <article>
           <MDXRemote
             source={content.body}
-            components={Markdown}
+            components={BlogMarkdown}
             options={{
               mdxOptions: {
                 remarkPlugins: [],
@@ -95,6 +94,8 @@ export function BlogContent({ content }: BlogContentProps) {
               },
             }}
           />
+
+          <Footer className='mt-24' />
         </article>
       }
     />

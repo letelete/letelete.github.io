@@ -21,12 +21,19 @@ export const BlogTwoPaneContainer = ({
   return (
     <TwoPaneContainer
       {...rest}
-      className={cn('layout-padding layout-width-limiter gap-x-12', className)}
-      leadingClassName={cn('flex flex-col justify-center', leadingClassName)}
+      className={cn(
+        'layout-padding layout-width-limiter relative gap-x-12',
+        className
+      )}
+      leadingClassName={cn(
+        'sticky top-1/2 flex h-fit -translate-y-1/2 flex-col justify-center',
+        leadingClassName
+      )}
       trailing={
         <FadeOverlay
-          className='h-full w-full overflow-auto pr-2'
-          overlayClassName='fixed bg-gradient-to-t h-[20vh] bottom-0 top-[unset]'
+          className='overflow-[unset] h-[unset] w-full pr-2'
+          overlayClassName='fixed bg-gradient-to-t h-[10vh] bottom-0 top-[unset] to-transparent'
+          overflow
         >
           {cloneElement(trailing, {
             ...trailing.props,

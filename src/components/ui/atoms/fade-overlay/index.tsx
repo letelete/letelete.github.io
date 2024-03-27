@@ -4,17 +4,23 @@ import { cn } from '~utils/style';
 
 export interface FadeOverlayProps extends ComponentPropsWithoutRef<'div'> {
   overlayClassName?: string;
+  overflow?: boolean;
 }
 
 export const FadeOverlay = ({
   className,
   overlayClassName,
   children,
+  overflow,
   ...rest
 }: FadeOverlayProps) => {
   return (
     <div
-      className={cn('relative h-full w-full overflow-hidden', className)}
+      className={cn(
+        'relative h-full w-full',
+        !overflow && 'overflow-hidden',
+        className
+      )}
       {...rest}
     >
       {children}

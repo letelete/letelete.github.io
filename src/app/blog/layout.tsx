@@ -7,6 +7,8 @@ import { BlogHeader } from '~features/blog/blog-header';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
 
+import { Footer } from '~ui/molecules/footer';
+
 export default function BlogLayout({
   children,
 }: {
@@ -28,7 +30,7 @@ export default function BlogLayout({
       <BlogHeader />
 
       <BlogContext.Provider value={context}>
-        <main className='flex h-full w-full flex-col'>{children}</main>
+        <main className='flex h-full  w-full flex-col'>{children}</main>
       </BlogContext.Provider>
     </>
   );
