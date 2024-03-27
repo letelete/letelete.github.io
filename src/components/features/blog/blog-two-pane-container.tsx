@@ -1,4 +1,4 @@
-import { ReactElement, cloneElement } from 'react';
+import { ReactElement } from 'react';
 
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import {
