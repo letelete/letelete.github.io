@@ -6,7 +6,7 @@ import { cn } from '~utils/style';
 
 export interface FooterProps extends ComponentPropsWithoutRef<'footer'> {}
 
-export const Footer = ({ className, ...rest }: FooterProps) => {
+export const Footer = ({ className, children, ...rest }: FooterProps) => {
   return (
     <footer
       className={cn(
@@ -15,6 +15,8 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
       )}
       {...rest}
     >
+      {children}
+
       <div className='flex w-full justify-center py-4'>
         <Copyrights />
       </div>

@@ -31,7 +31,10 @@ export const AboutMeBentoBox = ({
       <Card className='relative col-span-3 flex min-h-60 flex-col items-center justify-center overflow-hidden sm:flex-row'>
         <FadeOverlay
           className='absolute left-[1px] top-[1px] z-0 h-1/2 w-[calc(100%-1px)] flex-1 p-1 sm:relative sm:h-[calc(100%-1px)]'
-          overlayClassName='from-card-intense sm:to-card-intense/30 to-card-intense/70 bg-gradient-to-t sm:bg-gradient-to-l'
+          overlayProps={{
+            className:
+              'from-card-intense sm:to-card-intense/30 to-card-intense/70 bg-gradient-to-t sm:bg-gradient-to-l',
+          }}
         >
           <FallingEntities>
             <TrophyEmoji className='h-6 w-6 -rotate-45' />

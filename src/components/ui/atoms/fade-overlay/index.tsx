@@ -1,36 +1,39 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { HTMLMotionProps, motion } from 'framer-motion';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
 
 export interface FadeOverlayProps extends ComponentPropsWithoutRef<'div'> {
-  overlayClassName?: string;
+  overlayProps?: HTMLMotionProps<'div'>;
   overflow?: boolean;
 }
 
-export const FadeOverlay = ({
-  className,
-  overlayClassName,
-  children,
-  overflow,
-  ...rest
-}: FadeOverlayProps) => {
-  return (
-    <div
-      className={cn(
-        'relative h-full w-full',
-        !overflow && 'overflow-hidden',
-        className
-      )}
-      {...rest}
-    >
-      {children}
-
+const FadeOverlay = forwardRef<HTMLDivElement, FadeOverlayProps>(
+  ({ className, overlayProps, children, overflow, ...rest }, ref) => {
+    return (
       <div
+        ref={ref}
         className={cn(
-          'absolute left-0 top-0 z-10 h-full w-full bg-gradient-to-r from-background to-background/10',
-          overlayClassName
+          'relative h-full w-full',
+          !overflow && 'overflow-hidden',
+          className
         )}
-      />
-    </div>
-  );
-};
+        {...rest}
+      >
+        {children}
+
+        <motion.div
+          {...overlayProps}
+          className={cn(
+            'to-transparent absolute left-0 top-0 z-10 h-full w-full bg-gradient-to-r from-background',
+            overlayProps?.className
+          )}
+        />
+      </div>
+    );
+  }
+);
+
+FadeOverlay.displayName = 'FadeOverlay';
+
+export { FadeOverlay };

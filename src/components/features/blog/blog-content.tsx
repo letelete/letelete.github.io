@@ -1,20 +1,16 @@
 'use client';
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import Link from 'next/link';
 import { Content, ContentType } from 'src/lib/content/provider';
 
 import { BLOG_PATH } from '~constants/index';
 
+import { BlogContentFooter } from '~features/blog/blog-content-footer';
 import { BlogMarkdown } from '~features/blog/blog-markdown';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
 
-import useTailwind from '~hooks/use-tailwind';
-
-import { Button } from '~ui/atoms/button';
-import { Icon } from '~ui/atoms/icon';
 import { Typography } from '~ui/atoms/typography';
-import { Footer } from '~ui/molecules/footer';
+import { GoBackButton } from '~ui/molecules/go-back-button';
 import { TagsList } from '~ui/organisms/tags-list';
 
 import { dayMonthNameAndYearDate, readingTime } from '~utils/string';
@@ -30,8 +26,6 @@ const contentTypeToHeader: Record<ContentType, string> = {
 };
 
 export function BlogContent({ content }: BlogContentProps) {
-  const tw = useTailwind();
-
   return (
     <BlogTwoPaneContainer
       leadingClassName='sm:max-w-[35%]'
@@ -43,15 +37,7 @@ export function BlogContent({ content }: BlogContentProps) {
             color='hint'
             weight='bold'
           >
-            <Button className='relative' size='inline' variant='link' asChild>
-              <Link href={BLOG_PATH}>
-                <Icon
-                  name='arrow-left'
-                  color={tw.theme.colors.primary.highlighted}
-                />
-                Go back
-              </Link>
-            </Button>
+            <GoBackButton href={BLOG_PATH} />
 
             {`/ ${contentTypeToHeader[content.type]}`}
           </Typography>
@@ -77,21 +63,23 @@ export function BlogContent({ content }: BlogContentProps) {
         </div>
       }
       trailing={
-        <article className='*:first:mt-0'>
-          <MDXRemote
-            source={content.body}
-            components={BlogMarkdown}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [],
-                rehypePlugins: [],
-                development: process.env.NODE_ENV === 'development',
-              },
-            }}
-          />
+        <>
+          <article>
+            <MDXRemote
+              source={content.body}
+              components={BlogMarkdown}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [],
+                  rehypePlugins: [],
+                  development: process.env.NODE_ENV === 'development',
+                },
+              }}
+            />
+          </article>
 
-          <Footer className='mt-24' />
-        </article>
+          <BlogContentFooter className='relative z-50 mt-16 sm:mt-24' />
+        </>
       }
     />
   );

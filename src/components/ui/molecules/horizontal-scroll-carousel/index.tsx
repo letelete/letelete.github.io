@@ -77,7 +77,7 @@ const HorizontalScrollCarousel = forwardRef<
     return (
       <section
         ref={targetRef}
-        className={cn('relative', className)}
+        className={cn('relative w-full', className)}
         style={{
           height: `${targetHeight}px`,
         }}

@@ -12,16 +12,21 @@ export const MdxAside = ({ children, className, ...rest }: MdxAsideProps) => {
   const tw = useTailwind();
 
   return (
-    <aside
-      className={cn(
-        'my-10 flex gap-x-4 rounded-md bg-background-contrast p-8 *:m-0',
-        className
-      )}
-      {...rest}
-    >
-      <Icon name='lightbulb' color={tw.theme.colors.accent.DEFAULT} />
+    <aside className={cn('flex w-full py-6', className)} {...rest}>
+      <div
+        className={cn(
+          'flex w-full  gap-x-4 rounded-md bg-background-contrast p-8 *:p-0',
+          className
+        )}
+      >
+        <Icon
+          className='translate-y-[0.125rem]'
+          name='lightbulb'
+          color={tw.theme.colors.accent.DEFAULT}
+        />
 
-      {children}
+        {children}
+      </div>
     </aside>
   );
 };

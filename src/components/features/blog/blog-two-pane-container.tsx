@@ -1,3 +1,4 @@
+import { useScroll, useTransform } from 'framer-motion';
 import { ReactElement } from 'react';
 
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
@@ -18,6 +19,9 @@ export const BlogTwoPaneContainer = ({
   trailing,
   ...rest
 }: BlogTwoPaneContainer) => {
+  const { scrollYProgress } = useScroll();
+  const fadeOverlayOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]);
+
   return (
     <TwoPaneContainer
       {...rest}
@@ -29,11 +33,17 @@ export const BlogTwoPaneContainer = ({
         'flex flex-none flex-col justify-center pt-28 sm:sticky sm:top-1/2 sm:h-fit sm:flex-1 sm:-translate-y-1/2 sm:pt-[unset]',
         leadingClassName
       )}
-      trailingClassName='pb-[20vh] pt-12 sm:pt-[30vh]'
+      trailingClassName='pt-12 sm:pt-[30vh]'
       trailing={
         <FadeOverlay
-          className='overflow-[unset] h-[unset] w-full pr-2'
-          overlayClassName='fixed bg-gradient-to-t h-[10vh] bottom-0 top-[unset] to-transparent'
+          className='overflow-[unset] h-[unset] w-full sm:pr-2'
+          overlayProps={{
+            className:
+              'fixed bg-gradient-to-t h-[10vh] bottom-0 top-[unset] to-transparent',
+            style: {
+              opacity: fadeOverlayOpacity,
+            },
+          }}
           overflow
         >
           {trailing}

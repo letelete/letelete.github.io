@@ -23,7 +23,7 @@ export const ConferencesHeadline = ({
 }: ConferencesHeadlineProps) => (
   <Typography
     variant='body'
-    className={cn('leading-7', className)}
+    className={cn('text-center leading-7', className)}
     asChild
     {...rest}
   >

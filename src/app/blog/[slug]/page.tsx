@@ -4,6 +4,7 @@ import { getAllContent, getContentEntry } from 'src/lib/content/provider';
 
 import { BlogContent } from '~features/blog/blog-content';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const generateStaticParams = async () => {
   const content = await getAllContent();
 

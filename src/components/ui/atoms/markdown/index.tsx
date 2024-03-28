@@ -16,10 +16,23 @@ export const Markdown: MDXComponents = {
       </a>
     );
   },
+  h1: ({ children, className, ...props }) => {
+    return (
+      <Typography
+        className={cn('pb-6', className)}
+        variant='heading'
+        weight='bold'
+        color='highlight'
+        asChild
+      >
+        <h2 {...props}>{children}</h2>
+      </Typography>
+    );
+  },
   h2: ({ children, className, ...props }) => {
     return (
       <Typography
-        className={cn('mb-6 mt-10', className)}
+        className={cn('pb-2 pt-8', className)}
         variant='heading'
         color='highlight'
         asChild
@@ -30,14 +43,14 @@ export const Markdown: MDXComponents = {
   },
   h3: ({ children, className, ...props }) => {
     return (
-      <Typography className={cn('my-6', className)} color='highlight' asChild>
+      <Typography className={cn('py-6', className)} color='highlight' asChild>
         <h3 {...props}>{children}</h3>
       </Typography>
     );
   },
   p: ({ children, className, ...props }) => {
     return (
-      <Typography weight='normal' className={cn('mb-4', className)} asChild>
+      <Typography weight='normal' className={cn('py-4', className)} asChild>
         <p {...props}>{children}</p>
       </Typography>
     );
@@ -46,7 +59,7 @@ export const Markdown: MDXComponents = {
     return (
       <blockquote
         className={cn(
-          'relative mb-6 py-2 italic *:my-0 *:pl-6 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-2 before:rounded-full before:bg-accent',
+          'relative mb-6 py-2 italic *:py-0 *:pl-6 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-2 before:rounded-full before:bg-accent',
           className
         )}
         {...props}
@@ -59,7 +72,7 @@ export const Markdown: MDXComponents = {
     return (
       <ul
         className={cn(
-          'mb-10 mt-10 list-disc space-y-4 text-primary marker:text-primary-hint',
+          'my-8 list-disc space-y-4 text-primary marker:text-primary-hint',
           className
         )}
         {...props}

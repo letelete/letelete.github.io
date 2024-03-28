@@ -36,8 +36,14 @@ export const InterestsSection = ({
       </HeartBeatMotion>
 
       <div className='relative'>
-        <FadeOverlay overlayClassName='bg-gradient-to-r left-0 w-[40vw]'>
-          <FadeOverlay overlayClassName='bg-gradient-to-l w-[40vw] left-[unset] right-0'>
+        <FadeOverlay
+          overlayProps={{ className: 'bg-gradient-to-r left-0 w-[40vw]' }}
+        >
+          <FadeOverlay
+            overlayProps={{
+              className: 'bg-gradient-to-l w-[40vw] left-[unset] right-0',
+            }}
+          >
             <ParallaxMarquee baseVelocity={1}>
               {professional.map(renderOuterItem)}
             </ParallaxMarquee>
