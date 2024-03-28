@@ -1,5 +1,16 @@
 import { ContentType } from 'src/lib/content/provider';
 
+export const BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'https://kawka.me';
+
+export const BLOG_PATH = '/blog';
+
+export const TALKS_PATH = BLOG_PATH;
+
+export const GOOGLE_CODE_IN_ARTICLE_PATH = `${BLOG_PATH}/winning-google-code-in-2018`;
+
 export const SOCIALS = {
   telegram: {
     url: 'https://t.me/letelete',
@@ -26,12 +37,6 @@ export const SOCIALS = {
     handle: '@brunokawka',
   },
 };
-
-export const GOOGLE_CODE_IN_ARTICLE = '/blog/winning-google-code-in-2018';
-
-export const BLOG_BASE_URL = '/blog';
-
-export const TALKS_BASE_URL = BLOG_BASE_URL;
 
 export const PORTFOLIO_GITHUB_REPOSITORY_URL =
   'https://github.com/letelete/letelete.github.io';

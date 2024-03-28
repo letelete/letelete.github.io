@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ComponentPropsWithoutRef } from 'react';
 
-import { GOOGLE_CODE_IN_ARTICLE } from '~constants/index';
+import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~constants/index';
 
 import { BrunoParallaxGallery } from '~features/about/bruno-parallax-gallery';
 
@@ -48,7 +48,9 @@ export const AboutMeBentoBox = ({
           </Typography>
 
           <Button className='mt-4' variant='link' size='inline' asChild>
-            <Link href={GOOGLE_CODE_IN_ARTICLE}>Read my contest story</Link>
+            <Link href={GOOGLE_CODE_IN_ARTICLE_PATH}>
+              Read my contest story
+            </Link>
           </Button>
         </div>
       </Card>

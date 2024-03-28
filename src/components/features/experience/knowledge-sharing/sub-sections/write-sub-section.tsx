@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ComponentPropsWithoutRef } from 'react';
 
-import { BLOG_BASE_URL } from '~constants/index';
+import { BLOG_PATH } from '~constants/index';
 
 import { Button } from '~ui/atoms/button';
 import { PencilEmoji } from '~ui/atoms/emojis';
@@ -38,7 +38,7 @@ export const WriteSubSection = ({
       </div>
 
       <Button variant='link' asChild>
-        <Link href={BLOG_BASE_URL}>
+        <Link href={BLOG_PATH}>
           <PencilEmoji className='mr-2' />
           Read my blog
         </Link>

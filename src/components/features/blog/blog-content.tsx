@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import { Content, ContentType } from 'src/lib/content/provider';
 
-import { BLOG_BASE_URL } from '~constants/index';
+import { BLOG_PATH } from '~constants/index';
 
 import { BlogMarkdown } from '~features/blog/blog-markdown';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
@@ -44,7 +44,7 @@ export function BlogContent({ content }: BlogContentProps) {
             weight='bold'
           >
             <Button className='relative' size='inline' variant='link' asChild>
-              <Link href={BLOG_BASE_URL}>
+              <Link href={BLOG_PATH}>
                 <Icon
                   name='arrow-left'
                   color={tw.theme.colors.primary.highlighted}

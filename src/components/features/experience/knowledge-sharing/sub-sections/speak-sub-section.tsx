@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { TALKS_BASE_URL } from '~constants/index';
+import { TALKS_PATH } from '~constants/index';
 
 import { Button } from '~ui/atoms/button';
 import { MicrophoneEmoji } from '~ui/atoms/emojis';
@@ -37,7 +37,7 @@ export const SpeakSubSection = ({ ...rest }: HorizontalScrollCarouselProps) => {
 
       <HorizontalScrollButtonContainer ref={speakScrollRef} reversed>
         <Button variant='link' size='inline' asChild>
-          <Link href={TALKS_BASE_URL}>
+          <Link href={TALKS_PATH}>
             <MicrophoneEmoji className='mr-2' />
             Check all of my talks
           </Link>

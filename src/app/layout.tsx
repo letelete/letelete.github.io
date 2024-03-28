@@ -3,16 +3,13 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
+import { BASE_URL } from '~constants/index';
+
 import { cn } from '~utils/style';
 
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000'
-    : 'https://kawka.me';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const viewport: Viewport = {
@@ -22,22 +19,32 @@ export const viewport: Viewport = {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  manifest: `${baseUrl}/manifest.json`,
+  metadataBase: new URL(BASE_URL),
   title: {
     template: '%s | Bruno Kawka',
     default: 'Bruno Kawka',
   },
   description:
     "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
+  manifest: `${BASE_URL}/manifest.webmanifest`,
   keywords: [
     'Bruno Kawka',
-    'Frontend',
+    'Frontend Engineer',
+    'Frontend Development',
     'Tutorials',
     'Blog',
     'React',
     'Javascript',
     'Typescript',
+    'Next.js',
+    'React developer',
+    'Web Performance',
+    'UI/UX Design',
+    'Full-stack Developer',
+    'React Query',
+    'Portfolio',
+    'Blog Writer',
+    'Tech Enthusiast',
   ],
   authors: [{ name: 'Bruno Kawka' }],
   creator: 'Bruno Kawka',
