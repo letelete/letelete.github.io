@@ -30,7 +30,6 @@ export const MdxImage = ({
         alt={alt}
         height={height}
         width={width}
-        layout='responsive'
         quality={100}
         loading='lazy'
         {...rest}
