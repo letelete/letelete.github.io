@@ -1,12 +1,14 @@
 ---
 title: Optimizing your React application for the Interaction to Next Paint (INP) Web Vitals metric.
 date: Mar 24, 2024
+description: In March, Google released a new Core Web Vital called Interaction to Next Paint (INP). It measures the speed of interactions with the website. In this article, you’ll learn more about INP from the developer’s perspective. I’ll guide you through testing for INP, verifying potential causes of low INP scores, and how you can leverage new React tools to optimize your website for recent changes.
+thumbnail: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/thumbnail.webp'
 tags:
   - react
   - performance
 ---
 
-<MdxAside>
+<MdxAside type='error'>
   This article is in construction. Missing code highlighter, proper formatting,
   images, and more.
 </MdxAside>
@@ -29,7 +31,7 @@ INP measures for one of the following interactions.
 
 For example, when the user types a character into the search input that filters a list of cats’ breeds, the INP value will be a duration from the moment of triggering a group of keyboard events (keydown, …, keyup) to the moment of re-rendering the updated list.
 
-![SImplified visualization behind calculating the INP score for an individual action](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/06927b47-ed75-49c1-b9ee-49d801b9d338/inp.png)
+![Simplified visualization behind calculating the INP score for an individual action](https://prod-files-secure.s3.us-west-2.amazonaws.com/a7d4eee3-988d-417f-8068-ad3719ae42de/06927b47-ed75-49c1-b9ee-49d801b9d338/inp.png)
 
 Simplified visualization behind calculating the INP score for an individual action
 

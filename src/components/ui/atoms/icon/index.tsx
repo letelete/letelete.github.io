@@ -1,4 +1,5 @@
 import {
+  AlertOctagon,
   ArrowLeft,
   ArrowUpRight,
   Github,
@@ -11,24 +12,27 @@ import {
   Twitter,
   Youtube,
 } from 'lucide-react';
+import { FC } from 'react';
 import useTailwind from 'src/hooks/use-tailwind';
 
 import { cn } from '~utils/style';
 
 export interface IconProps extends LucideProps {
-  name: keyof typeof icons;
+  name: IconName;
 }
+
+export type IconName = Parameters<(typeof icons)['get']>[0];
 
 export const Icon = ({ name, className, ...props }: IconProps) => {
   const tw = useTailwind();
-  const LucideIcon = icons[name];
+  const IconElement = icons.has(name) ? icons.get(name) : undefined;
 
-  if (!LucideIcon) {
-    throw new Error(`Icon with name "${name}" not found.`);
+  if (!IconElement) {
+    throw new Error(`No icon with name "${name}" found`);
   }
 
   return (
-    <LucideIcon
+    <IconElement
       className={cn('aspect-square h-4 min-h-4 w-4 min-w-4', className)}
       color={tw.theme.colors.primary.DEFAULT}
       strokeWidth={1.5}
@@ -39,15 +43,17 @@ export const Icon = ({ name, className, ...props }: IconProps) => {
   );
 };
 
-const icons = {
-  'arrow-left': ArrowLeft,
-  'arrow-up-right': ArrowUpRight,
-  github: Github,
-  image: Image,
-  lightbulb: Lightbulb,
-  linkedin: Linkedin,
-  mail: Mail,
-  send: Send,
-  twitter: Twitter,
-  youtube: Youtube,
-} as const;
+// eslint-disable-next-line react-refresh/only-export-components
+export const icons = new Map([
+  ['alert-octagon', AlertOctagon],
+  ['arrow-left', ArrowLeft],
+  ['arrow-up-right', ArrowUpRight],
+  ['github', Github],
+  ['image', Image],
+  ['lightbulb', Lightbulb],
+  ['linkedin', Linkedin],
+  ['mail', Mail],
+  ['send', Send],
+  ['twitter', Twitter],
+  ['youtube', Youtube],
+] as const satisfies readonly (readonly [string, FC<LucideProps>])[]);

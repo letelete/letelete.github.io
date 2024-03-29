@@ -1,35 +1,24 @@
-'use client';
-
-import { useMemo, useRef } from 'react';
-import { BlogContext } from 'src/app/blog/blog-context';
+import { Metadata } from 'next';
 
 import { BlogHeader } from '~features/blog/blog-header';
 
-import { useElementGeometry } from '~hooks/use-element-geometry';
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    "I'm a Frontend Engineer sharing my experience with Web Development, and UI/UX design. I write, record, and talk about programming.",
+};
 
 export default function BlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const blogHeaderRef = useRef<HTMLDivElement>(null);
-  const blogHeaderGeometry = useElementGeometry(blogHeaderRef);
-  const blogHeaderHeight = blogHeaderGeometry?.height;
-
-  const context = useMemo(
-    () => ({
-      headerHeight: blogHeaderHeight,
-    }),
-    [blogHeaderHeight]
-  );
-
   return (
     <>
       <BlogHeader />
 
-      <BlogContext.Provider value={context}>
-        <main className='flex h-full  w-full flex-col'>{children}</main>
-      </BlogContext.Provider>
+      <main className='flex h-full  w-full flex-col'>{children}</main>
     </>
   );
 }

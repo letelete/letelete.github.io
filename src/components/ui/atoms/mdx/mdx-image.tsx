@@ -18,7 +18,12 @@ export const MdxImage = ({
   ...rest
 }: MdxImageProps) => {
   return (
-    <figure className={cn('my-10 flex flex-col justify-center', className)}>
+    <figure
+      className={cn(
+        'my-10 flex flex-col items-center justify-center',
+        className
+      )}
+    >
       <ImagePrimitive
         className='transition'
         src={src}

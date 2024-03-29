@@ -9,6 +9,8 @@ export type ContentType = 'article' | 'youtube-video' | 'talk';
 export interface Content {
   type: ContentType;
   title: string;
+  description: string;
+  thumbnail: string;
   slug: string;
   date: string;
   tags: string[];
