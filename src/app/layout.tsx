@@ -65,6 +65,8 @@ export const metadata: Metadata = {
       "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
     url: 'https://kawka.me',
     siteName: 'Bruno Kawka',
+    locale: 'en_US',
+    type: 'website',
     images: [
       {
         url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/800x600.jpg',
@@ -79,8 +81,6 @@ export const metadata: Metadata = {
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
