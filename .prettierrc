@@ -15,10 +15,10 @@
   "tailwindFunctions": ["clsx", "cn", "cva"],
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^~blog-elements/(.*)$",
     "^~constants/(.*)$",
     "^~features/(.*)$",
     "^~hooks/(.*)$",
+    "^~lib/(.*)$",
     "^~ui/(.*)$",
     "^~utils/(.*)$",
     "^[./]"

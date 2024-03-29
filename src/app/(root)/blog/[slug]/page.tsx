@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import { getAllContent, getContentEntry } from 'src/lib/content/provider';
 
 import { BlogContent } from '~features/blog/blog-content';
+
+import { getAllContent, getContentEntry } from '~lib/content/provider';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const generateStaticParams = async () => {

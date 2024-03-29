@@ -1,13 +1,14 @@
 'use client';
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { Content, ContentType } from 'src/lib/content/provider';
 
 import { BLOG_PATH } from '~constants/index';
 
 import { BlogContentFooter } from '~features/blog/blog-content-footer';
 import { BlogMarkdown } from '~features/blog/blog-markdown';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
+
+import { Content, ContentType } from '~lib/content/provider';
 
 import { Typography } from '~ui/atoms/typography';
 import { GoBackButton } from '~ui/molecules/go-back-button';

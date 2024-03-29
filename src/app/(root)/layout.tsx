@@ -7,7 +7,7 @@ import { BASE_URL } from '~constants/index';
 
 import { cn } from '~utils/style';
 
-import './globals.css';
+import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

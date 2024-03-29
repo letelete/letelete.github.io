@@ -1,4 +1,4 @@
-import { ContentType } from 'src/lib/content/provider';
+import { ContentType } from '~lib/content/provider';
 
 export const BASE_URL =
   process.env.NODE_ENV === 'development'

@@ -1,5 +1,6 @@
 import Link, { LinkProps } from 'next/link';
-import { Content } from 'src/lib/content/provider';
+
+import { Content } from '~lib/content/provider';
 
 import { Typography } from '~ui/atoms/typography';
 import { TagsList } from '~ui/organisms/tags-list';

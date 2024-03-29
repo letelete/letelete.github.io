@@ -1,7 +1,8 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import { getAllContent } from 'src/lib/content/provider';
 
 import { BASE_URL, BLOG_PATH } from '~constants/index';
+
+import { getAllContent } from '~lib/content/provider';
 
 interface MetadataProps {
   params: { slug: string };

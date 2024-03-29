@@ -1,8 +1,6 @@
-import { getAllContent } from 'src/lib/content/provider';
-
 import { Blog } from '~features/blog';
 
-export const NAVBAR_SCOPE_ID = 'blog-navigation';
+import { getAllContent } from '~lib/content/provider';
 
 export default async function BlogPage() {
   const content = await getAllContent();

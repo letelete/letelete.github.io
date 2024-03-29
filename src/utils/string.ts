@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
-import getReadingTime from 'reading-time'
+import getReadingTime from 'reading-time';
 
 dayjs.extend(dayjsRelativeTime);
 

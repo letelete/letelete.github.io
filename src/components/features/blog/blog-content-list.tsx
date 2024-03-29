@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useMemo, useState } from 'react';
-import { Content } from 'src/lib/content/provider';
+
+import { Content } from '~lib/content/provider';
 
 import { Typography } from '~ui/atoms/typography';
 import { ContentCard } from '~ui/molecules/content-card';

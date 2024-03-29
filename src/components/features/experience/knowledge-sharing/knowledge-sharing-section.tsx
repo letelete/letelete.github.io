@@ -1,11 +1,12 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
-import { ContentType } from 'src/lib/content/provider';
 
 import { KNOWLEDGE_SHARING_HEADER } from '~constants/index';
 
 import { WriteSubSection } from '~features/experience/knowledge-sharing/sub-sections/write-sub-section';
+
+import { ContentType } from '~lib/content/provider';
 
 import { Navbar } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';

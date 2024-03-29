@@ -28,12 +28,12 @@
     "baseUrl": ".",
     /* Paths */
     "paths": {
-      "~ui/*": ["src/components/ui/*"],
-      "~features/*": ["src/components/features/*"],
-      "~utils/*": ["src/utils/*"],
       "~constants/*": ["src/constants/*"],
+      "~features/*": ["src/components/features/*"],
       "~hooks/*": ["src/hooks/*"],
-      "~blog-elements/*": ["src/components/ui/atoms/mdx"]
+      "~lib/*": ["src/lib/*"],
+      "~ui/*": ["src/components/ui/*"],
+      "~utils/*": ["src/utils/*"]
     }
   },
   "include": [
