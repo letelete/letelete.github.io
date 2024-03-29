@@ -37,7 +37,7 @@ const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
 
     useMotionValueEvent(scrollY, 'change', (latest) => {
       const MIN_SCROLL_OFFSET_COMPACT_VIEW = 0;
-      const MIN_SCROLL_OFFSET_NORMAL_VIEW = 512;
+      const MIN_SCROLL_OFFSET_NORMAL_VIEW = 256;
 
       const previous = scrollY.getPrevious() ?? 0;
       const delta = latest - previous;
