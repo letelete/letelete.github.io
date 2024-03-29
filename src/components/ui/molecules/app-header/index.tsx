@@ -8,9 +8,7 @@ import {
 } from 'framer-motion';
 import { ReactNode, forwardRef, useState } from 'react';
 
-import useTailwind from '~hooks/use-tailwind';
-
-import { cn, vhToPx } from '~utils/style';
+import { cn, tw, vhToPx } from '~utils/style';
 
 export interface AppHeaderProps extends HTMLMotionProps<'header'> {
   innerClassName?: string;
@@ -19,8 +17,6 @@ export interface AppHeaderProps extends HTMLMotionProps<'header'> {
 
 const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
   ({ className, innerClassName, children, ...rest }, ref) => {
-    const tw = useTailwind();
-
     const [compact, setCompact] = useState(false);
 
     const { scrollY } = useScroll();

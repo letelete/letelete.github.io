@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import useTailwind from '~hooks/use-tailwind';
-
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 
-import { cn } from '~utils/style';
+import { cn, tw } from '~utils/style';
 
 export interface GoBackButtonProps {
   href: string;
@@ -22,8 +20,6 @@ const motionVariants = {
 };
 
 export const GoBackButton = ({ href, className }: GoBackButtonProps) => {
-  const tw = useTailwind();
-
   return (
     <MotionButton
       className={cn(className)}

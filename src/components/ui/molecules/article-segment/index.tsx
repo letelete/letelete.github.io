@@ -1,13 +1,12 @@
 import Link from 'next/link';
 
-import useTailwind from '~hooks/use-tailwind';
-
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 import { Typography } from '~ui/atoms/typography';
 
 import { monthNameAndYearDate } from '~utils/string';
+import { tw } from '~utils/style';
 
 export interface ArticleSegmentProps extends Partial<LineSegmentProps> {
   href: string;
@@ -21,7 +20,6 @@ export const ArticleSegment = ({
   createdAt,
   ...rest
 }: ArticleSegmentProps) => {
-  const tw = useTailwind();
   return (
     <LineSegment
       leading={

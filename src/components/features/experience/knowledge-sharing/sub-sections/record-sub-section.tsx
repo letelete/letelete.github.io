@@ -5,8 +5,6 @@ import { useRef } from 'react';
 
 import { SOCIALS } from '~constants/index';
 
-import useTailwind from '~hooks/use-tailwind';
-
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 import {
@@ -17,12 +15,13 @@ import {
 } from '~ui/molecules/horizontal-scroll-carousel';
 import { ExternalContentCard } from '~ui/molecules/youtube-card';
 
+import { tw } from '~utils/style';
+
 import youtubeSoonThumbnail from '/public/galleries/youtube/soon.webp';
 
 export const RecordSubSection = ({
   ...rest
 }: HorizontalScrollCarouselProps) => {
-  const tw = useTailwind();
   const recordScrollRef = useRef<HTMLDivElement>(null);
 
   return (

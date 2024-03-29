@@ -13,9 +13,8 @@ import {
   Youtube,
 } from 'lucide-react';
 import { FC } from 'react';
-import useTailwind from 'src/hooks/use-tailwind';
 
-import { cn } from '~utils/style';
+import { cn, tw } from '~utils/style';
 
 export interface IconProps extends LucideProps {
   name: IconName;
@@ -24,7 +23,6 @@ export interface IconProps extends LucideProps {
 export type IconName = Parameters<(typeof icons)['get']>[0];
 
 export const Icon = ({ name, className, ...props }: IconProps) => {
-  const tw = useTailwind();
   const IconElement = icons.has(name) ? icons.get(name) : undefined;
 
   if (!IconElement) {

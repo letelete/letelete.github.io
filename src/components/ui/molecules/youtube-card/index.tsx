@@ -1,14 +1,12 @@
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 
-import useTailwind from '~hooks/use-tailwind';
-
 import { Card, CardProps } from '~ui/atoms/card';
 import { Icon } from '~ui/atoms/icon';
 import { Typography } from '~ui/atoms/typography';
 
 import { compactNumber, relativeTime } from '~utils/string';
-import { cn } from '~utils/style';
+import { cn, tw } from '~utils/style';
 
 export interface ExternalContentCardProps extends CardProps {
   href: string;
@@ -27,7 +25,6 @@ export const ExternalContentCard = ({
   className,
   ...rest
 }: ExternalContentCardProps) => {
-  const tw = useTailwind();
   const formattedViews = views ? `${compactNumber(views)} views` : null;
   const formattedCreatedAt = relativeTime(createdAt);
 
