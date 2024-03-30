@@ -2,24 +2,28 @@
 
 import { useCallback, useRef, useState } from 'react';
 
-import { KNOWLEDGE_SHARING_HEADER } from '~constants/index';
-
 import { WriteSubSection } from '~features/experience/knowledge-sharing/sub-sections/write-sub-section';
 
 import { ContentType } from '~lib/content/provider';
 
-import { Navbar } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
 import { StickyHeaderSectionProps } from '~ui/atoms/sticky-header-section';
 import { StickyHeaderSection } from '~ui/atoms/sticky-header-section';
 import { Typography } from '~ui/atoms/typography';
+import {
+  KnowledgeSharingNavigation,
+  SelectableSegment,
+} from '~ui/organisms/knowledge-sharing-navigation';
+import {
+  getKnowledgeSharingSelectableSections,
+  getSelectedSegment,
+  updateSegmentsWithSelected,
+} from '~ui/organisms/knowledge-sharing-navigation/utils';
 
 import { cn } from '~utils/style';
 
 import { RecordSubSection } from './sub-sections/record-sub-section';
 import { SpeakSubSection } from './sub-sections/speak-sub-section';
-
-export const NAVBAR_SCOPE_ID = 'knowledge-sharing-section-navigation';
 
 export interface KnowledgeSharingSectionProps
   extends Partial<StickyHeaderSectionProps> {}
@@ -28,17 +32,22 @@ export const KnowledgeSharingSection = ({
   className,
   ...rest
 }: KnowledgeSharingSectionProps) => {
-  const [highlightedSegment, setHighlightedSegment] =
-    useState<ContentType | null>(null);
+  const [segments, setSegments] = useState(
+    getKnowledgeSharingSelectableSections()
+  );
 
   const navigatableHandler = useRef<NavigatableHandler>(null);
 
   const handleSectionInView = useCallback((sectionId: string) => {
-    setHighlightedSegment(sectionId as ContentType);
+    setSegments((segments) =>
+      updateSegmentsWithSelected(segments, sectionId as ContentType)
+    );
   }, []);
 
-  const handleSelectSection = useCallback((sectionId: string) => {
-    navigatableHandler.current?.scrollTo?.(sectionId);
+  const handleSegmentsChange = useCallback((segments: SelectableSegment[]) => {
+    const currentSegment = getSelectedSegment(segments)?.type ?? 'article';
+
+    navigatableHandler.current?.scrollTo?.(currentSegment);
   }, []);
 
   return (
@@ -49,32 +58,11 @@ export const KnowledgeSharingSection = ({
           <h2>
             I believe knowledge sharing is a fundamental method to pursue
             expertise in a given field.
-            <br />
-            <span className='text-primary-highlighted'>
-              {KNOWLEDGE_SHARING_HEADER.map(({ content, type, className }) => {
-                if (!type) {
-                  return (
-                    <span key={content} className={className}>
-                      {content}
-                    </span>
-                  );
-                }
-
-                return (
-                  <nav
-                    key={type}
-                    className={cn('nav-card inline-flex', className)}
-                  >
-                    <Navbar.ItemInline
-                      scopeId={NAVBAR_SCOPE_ID}
-                      item={{ label: content, id: type }}
-                      selected={highlightedSegment === type}
-                      onClick={() => handleSelectSection(type)}
-                    />
-                  </nav>
-                );
-              })}
-            </span>
+            <KnowledgeSharingNavigation
+              segments={segments}
+              scopeId='knowledge-sharing-section-navigation'
+              onChange={handleSegmentsChange}
+            />
           </h2>
         </Typography>
       }

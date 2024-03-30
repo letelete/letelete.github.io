@@ -1,5 +1,3 @@
-import { ContentType } from '~lib/content/provider';
-
 export const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
@@ -40,17 +38,3 @@ export const SOCIALS = {
 
 export const PORTFOLIO_GITHUB_REPOSITORY_URL =
   'https://github.com/letelete/letelete.github.io';
-
-export const KNOWLEDGE_SHARING_HEADER: {
-  content: string;
-  type?: ContentType;
-  className?: string;
-}[] = [
-  { content: 'I' },
-  { content: 'write', type: 'article', className: 'ml-2' },
-  { content: ',' },
-  { content: 'record', type: 'youtube-video', className: 'ml-2' },
-  { content: ', and' },
-  { content: 'speak', type: 'talk', className: 'mx-2' },
-  { content: 'about programming.' },
-];

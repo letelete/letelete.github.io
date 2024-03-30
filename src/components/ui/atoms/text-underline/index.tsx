@@ -20,6 +20,8 @@ export const TextUnderline = ({
 }: TextUnderlineProps) => {
   return (
     <span className={cn('relative', className)} {...rest}>
+      <div className='absolute left-0 top-full z-0 h-0.5 w-full rounded-sm bg-primary-hint' />
+
       {active && (
         <motion.div
           layoutId={`text-underline__highlight#${scopeId}`}

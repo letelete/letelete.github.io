@@ -1,6 +1,7 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
-import { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 
+import { asHoverableButton } from '~ui/atoms/button/decorators';
 import { Typography } from '~ui/atoms/typography';
 
 import { cn } from '~utils/style';
@@ -21,7 +22,7 @@ const NavbarPrimitive = forwardRef<HTMLDivElement, NavbarProps>(
   ({ items, selectedItemId, scopeId, className, onSelect, ...rest }, ref) => {
     return (
       <motion.nav
-        className={cn('nav-card flex items-center gap-x-2', className)}
+        className={cn('nav-card flex items-center', className)}
         ref={ref}
         {...rest}
       >
@@ -49,13 +50,11 @@ export interface NavbarItemProps
   onClick?: (itemId: NavbarItem['id']) => void;
 }
 
-const navbarItemMotionVariants = {
-  idle: {},
-  hovered: {},
-};
+const [, hoverableProps] = asHoverableButton('button');
 
 const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
   ({ item, selected, scopeId, className, onClick, ...rest }, ref) => {
+    const [hovered, setHovered] = useState(false);
     const handleClick = useCallback(
       () => onClick?.(item.id),
       [item.id, onClick]
@@ -63,32 +62,34 @@ const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
 
     return (
       <motion.button
-        variants={navbarItemMotionVariants}
-        initial='idle'
+        {...hoverableProps}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
         className={cn(
           'relative flex items-center justify-center rounded-full px-3 py-2',
           className
         )}
-        whileHover='hovered'
-        whileTap={{ scale: 0.8 }}
         onClick={handleClick}
         ref={ref}
         {...rest}
       >
         {selected && (
           <motion.div
+            transition={{ type: 'spring', duration: 0.5 }}
             layoutId={`navbar-item__highlight:${scopeId}`}
             className='absolute left-0 top-0 z-0 h-full w-full rounded-full bg-black'
           />
         )}
 
-        <motion.div
-          variants={{
-            idle: { opacity: 0 },
-            hovered: { opacity: 1 },
-          }}
-          className='absolute left-0 top-0 z-10 h-full w-full rounded-full bg-white/20'
-        />
+        {hovered && (
+          <motion.div
+            transition={{ type: 'spring', duration: 0.4 }}
+            layoutId={`navbar-item__hover:${scopeId}`}
+            className='absolute left-0 top-0 z-10 h-full w-full rounded-full bg-white/20'
+          />
+        )}
 
         <Typography
           className='relative z-20'

@@ -4,7 +4,8 @@ import path from 'path';
 
 import { findRepeatingElements } from '~utils/array';
 
-export type ContentType = 'article' | 'youtube-video' | 'talk';
+export const contentTypes = ['article', 'youtube-video', 'talk'] as const;
+export type ContentType = (typeof contentTypes)[number];
 
 export interface Content {
   type: ContentType;

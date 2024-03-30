@@ -1,18 +1,14 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
-
-import { KNOWLEDGE_SHARING_HEADER } from '~constants/index';
+import { useMemo, useState } from 'react';
 
 import { BlogContentList } from '~features/blog/blog-content-list';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
 
 import { Content, ContentType } from '~lib/content/provider';
 
-import { Navbar } from '~ui/atoms/navbar';
 import { Typography } from '~ui/atoms/typography';
-
-import { cn } from '~utils/style';
+import { KnowledgeSharingNavigation } from '~ui/organisms/knowledge-sharing-navigation';
 
 export const NAVBAR_SCOPE_ID = 'blog-navigation';
 
@@ -29,10 +25,6 @@ export const Blog = ({ content }: BlogProps) => {
     [content, currentSegment]
   );
 
-  const handleSelectSegment = useCallback((segment: ContentType) => {
-    setCurrentSegment(segment);
-  }, []);
-
   return (
     <BlogTwoPaneContainer
       leading={
@@ -42,33 +34,24 @@ export const Blog = ({ content }: BlogProps) => {
               {
                 'I believe knowledge sharing is a fundamental method to pursue expertise in a given field. '
               }
-              <span className='text-primary-highlighted'>
-                {KNOWLEDGE_SHARING_HEADER.map(
-                  ({ content, type, className }) => {
-                    if (!type) {
-                      return (
-                        <span key={content} className={className}>
-                          {content}
-                        </span>
-                      );
-                    }
-
-                    return (
-                      <nav
-                        key={type}
-                        className={cn('nav-card inline-flex', className)}
-                      >
-                        <Navbar.ItemInline
-                          scopeId={NAVBAR_SCOPE_ID}
-                          item={{ label: content, id: type }}
-                          selected={currentSegment === type}
-                          onClick={() => handleSelectSegment(type)}
-                        />
-                      </nav>
-                    );
-                  }
+              <KnowledgeSharingNavigation
+                className='mt-4 transition-colors'
+                scopeId='blog-home-navigation'
+                renderNavItemContent={(item) => (
+                  <Typography
+                    variant='hero'
+                    color={item.selected ? 'accent' : 'hint'}
+                  >
+                    {item.content}
+                  </Typography>
                 )}
-              </span>
+                onChange={(segments) =>
+                  setCurrentSegment(
+                    segments.find((segment) => segment.selected)?.type ??
+                      'article'
+                  )
+                }
+              />
             </h1>
           </Typography>
         </div>
