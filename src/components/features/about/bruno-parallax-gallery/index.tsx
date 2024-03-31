@@ -1,4 +1,4 @@
-import { GalleryItem, ParallaxGallery } from '~ui/atoms/parallax-gallery';
+import { GalleryItem, ParallaxGallery } from '~ui/organisms/parallax-gallery';
 
 import img0 from '/public/galleries/about-me/img-0.webp';
 import img10 from '/public/galleries/about-me/img-10.webp';

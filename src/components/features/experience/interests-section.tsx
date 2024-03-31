@@ -3,8 +3,8 @@ import { ComponentPropsWithoutRef, useCallback } from 'react';
 import { PixelArtHeartEmoji } from '~ui/atoms/emojis';
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import { HeartBeatMotion } from '~ui/atoms/motion';
-import { ParallaxMarquee } from '~ui/atoms/parallax-marquee';
 import { Typography } from '~ui/atoms/typography';
+import { ParallaxMarquee } from '~ui/organisms/parallax-marquee';
 
 import { cn } from '~utils/style';
 

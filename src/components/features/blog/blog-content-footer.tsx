@@ -1,7 +1,7 @@
 import { BLOG_PATH } from '~constants/index';
 
+import { GoBackButton } from '~ui/molecules/buttons/go-back-button';
 import { Footer, FooterProps } from '~ui/molecules/footer';
-import { GoBackButton } from '~ui/molecules/go-back-button';
 
 export interface BlogContentFooterProps extends FooterProps {}
 

@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import defaultColors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config = {
@@ -12,6 +13,7 @@ const config = {
       primary: ['Inter', ...defaultTheme.fontFamily.sans],
     },
     colors: {
+      transparent: defaultColors.transparent,
       background: {
         DEFAULT: '#101010',
         contrast: '#282828',

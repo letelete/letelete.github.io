@@ -29,4 +29,8 @@ body {
   .nav-card {
     @apply rounded-full bg-white/10 p-1 shadow-inner-glass backdrop-blur-md;
   }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
 }

@@ -11,7 +11,7 @@ import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
 import { Content, ContentType } from '~lib/content/provider';
 
 import { Typography } from '~ui/atoms/typography';
-import { GoBackButton } from '~ui/molecules/go-back-button';
+import { GoBackButton } from '~ui/molecules/buttons/go-back-button';
 import { TagsList } from '~ui/organisms/tags-list';
 
 import { dayMonthNameAndYearDate, readingTime } from '~utils/string';
