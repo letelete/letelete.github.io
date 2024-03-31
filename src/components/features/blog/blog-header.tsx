@@ -1,8 +1,9 @@
 'use client';
 
+import { Player } from '@lottiefiles/react-lottie-player';
 import { Variants, motion } from 'framer-motion';
 import Link from 'next/link';
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
 
 import { UnicornEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
@@ -19,8 +20,15 @@ const itemWithColorsMotionVariants: Variants = {
 } as const;
 
 const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
+  const playerRef = useRef<Player>(null);
+
   return (
     <AppHeader
+      onAnimationComplete={(event) => {
+        if (event === 'normal') {
+          playerRef.current?.play();
+        }
+      }}
       className='fixed'
       innerClassName='justify-between'
       {...props}
@@ -35,8 +43,21 @@ const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
         </Typography>
       </Link>
 
-      <Link href='/'>
-        <Typography variant='body' color='highlight' asChild>
+      <Link href='/' className='relative'>
+        <div className='absolute left-0 top-0 z-10 -translate-x-[1rem] -translate-y-[1.25rem]'>
+          <Player
+            ref={playerRef}
+            speed={1.75}
+            src='https://lottie.host/b873f2ac-a29c-405c-a67a-c4d6eec58068/dgMwBjRg72.json'
+            style={{ height: '3rem', width: '3rem' }}
+          />
+        </div>
+        <Typography
+          className='relative z-20'
+          variant='body'
+          color='highlight'
+          asChild
+        >
           <motion.p variants={itemWithColorsMotionVariants}>
             <UnicornEmoji className='mr-2' />
             about me
