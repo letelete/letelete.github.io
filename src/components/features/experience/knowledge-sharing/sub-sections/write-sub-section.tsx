@@ -5,15 +5,20 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import { BLOG_PATH } from '~constants/index';
 
+import { Content } from '~lib/content/provider';
+
 import { Button } from '~ui/atoms/button';
 import { PencilEmoji } from '~ui/atoms/emojis';
 import { ArticleSegment } from '~ui/molecules/article-segment';
 
 import { cn } from '~utils/style';
 
-export interface WriteSubSectionProps extends ComponentPropsWithoutRef<'div'> {}
+export interface WriteSubSectionProps extends ComponentPropsWithoutRef<'div'> {
+  data: Content[];
+}
 
 export const WriteSubSection = ({
+  data,
   className,
   ...rest
 }: WriteSubSectionProps) => {
@@ -26,13 +31,13 @@ export const WriteSubSection = ({
       {...rest}
     >
       <div className='flex w-full flex-col items-center justify-center gap-y-4'>
-        {articles.map(({ id, href, title, createdAt }, index) => (
+        {data.map(({ title, slug, date }, index) => (
           <ArticleSegment
-            key={id}
+            key={slug}
             style={{ opacity: 1 - index / articles.length }}
-            href={href}
+            href={`${BLOG_PATH}/${slug}`}
             title={title}
-            createdAt={createdAt}
+            createdAt={new Date(date)}
           />
         ))}
       </div>

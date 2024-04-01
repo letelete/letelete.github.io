@@ -38,6 +38,8 @@ export const ExternalContentCard = ({
         <Image
           className='h-auto w-full rounded-lg object-cover'
           src={thumbnail}
+          width={720}
+          height={404}
           alt=''
         />
 

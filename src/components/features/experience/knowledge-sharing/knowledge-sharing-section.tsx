@@ -1,10 +1,10 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { WriteSubSection } from '~features/experience/knowledge-sharing/sub-sections/write-sub-section';
 
-import { ContentType } from '~lib/content/provider';
+import { Content, ContentType } from '~lib/content/provider';
 
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
 import { StickyHeaderSectionProps } from '~ui/atoms/sticky-header-section';
@@ -26,12 +26,28 @@ import { RecordSubSection } from './sub-sections/record-sub-section';
 import { SpeakSubSection } from './sub-sections/speak-sub-section';
 
 export interface KnowledgeSharingSectionProps
-  extends Partial<StickyHeaderSectionProps> {}
+  extends Partial<StickyHeaderSectionProps> {
+  data: Content[];
+}
 
 export const KnowledgeSharingSection = ({
+  data,
   className,
   ...rest
 }: KnowledgeSharingSectionProps) => {
+  const articles = useMemo(
+    () => data.filter((content) => content.type === 'article'),
+    [data]
+  );
+  const youtubeVideos = useMemo(
+    () => data.filter((content) => content.type === 'youtube-video'),
+    [data]
+  );
+  const talks = useMemo(
+    () => data.filter((content) => content.type === 'talk'),
+    [data]
+  );
+
   const [segments, setSegments] = useState(
     getKnowledgeSharingSelectableSections()
   );
@@ -75,17 +91,17 @@ export const KnowledgeSharingSection = ({
             sectionId={'article' satisfies ContentType}
             className='layout-width-limiter layout-padding'
           >
-            <WriteSubSection />
+            <WriteSubSection data={articles} />
           </Navigatable.Section>
 
           <Navigatable.Section
             sectionId={'youtube-video' satisfies ContentType}
           >
-            <RecordSubSection />
+            <RecordSubSection data={youtubeVideos} />
           </Navigatable.Section>
 
           <Navigatable.Section sectionId={'talk' satisfies ContentType}>
-            <SpeakSubSection />
+            <SpeakSubSection data={talks} />
           </Navigatable.Section>
         </Navigatable>
       }

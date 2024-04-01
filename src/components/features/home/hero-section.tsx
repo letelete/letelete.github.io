@@ -1,3 +1,5 @@
+'use client';
+
 import { SocialButtons } from '~features/social-buttons';
 
 import { Typography } from '~ui/atoms/typography';

@@ -5,8 +5,6 @@ export const BASE_URL =
 
 export const BLOG_PATH = '/blog';
 
-export const TALKS_PATH = BLOG_PATH;
-
 export const GOOGLE_CODE_IN_ARTICLE_PATH = `${BLOG_PATH}/winning-google-code-in-2018`;
 
 export const SOCIALS = {

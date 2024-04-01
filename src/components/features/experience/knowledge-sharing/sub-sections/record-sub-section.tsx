@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { SOCIALS } from '~constants/index';
+import { BLOG_PATH, SOCIALS } from '~constants/index';
+
+import { Content } from '~lib/content/provider';
 
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
@@ -17,11 +19,11 @@ import { ExternalContentCard } from '~ui/molecules/youtube-card';
 
 import { tw } from '~utils/style';
 
-import youtubeSoonThumbnail from '/public/galleries/youtube/soon.webp';
+export interface RecordSubSectionProps extends HorizontalScrollCarouselProps {
+  data: Content[];
+}
 
-export const RecordSubSection = ({
-  ...rest
-}: HorizontalScrollCarouselProps) => {
+export const RecordSubSection = ({ data, ...rest }: RecordSubSectionProps) => {
   const recordScrollRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -39,13 +41,12 @@ export const RecordSubSection = ({
         </Button>
       </HorizontalScrollButtonContainer>
 
-      {youtubeVideos.map((video) => (
-        <HorizontalScrollContentContainer key={video.id}>
+      {data.map((video) => (
+        <HorizontalScrollContentContainer key={video.slug}>
           <ExternalContentCard
-            href={video.href}
+            href={`${BLOG_PATH}/${video.slug}`}
             title={video.title}
-            views={video.views}
-            createdAt={video.createdAt}
+            createdAt={new Date(video.date)}
             thumbnail={video.thumbnail}
           />
         </HorizontalScrollContentContainer>
@@ -53,30 +54,3 @@ export const RecordSubSection = ({
     </HorizontalScrollCarousel>
   );
 };
-
-const youtubeVideos = [
-  {
-    id: 'soon-10',
-    href: '#',
-    title: 'Coming soon',
-    views: 0,
-    createdAt: new Date(Date.now()),
-    thumbnail: youtubeSoonThumbnail,
-  },
-  {
-    id: 'soon-20',
-    href: '#',
-    title: 'Coming soon',
-    views: 0,
-    createdAt: new Date(Date.now()),
-    thumbnail: youtubeSoonThumbnail,
-  },
-  {
-    id: 'soon-30',
-    href: '#',
-    title: 'Coming soon',
-    views: 0,
-    createdAt: new Date(Date.now()),
-    thumbnail: youtubeSoonThumbnail,
-  },
-] as const;
