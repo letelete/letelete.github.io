@@ -2,14 +2,25 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
 
 import { BASE_URL } from '~constants/index';
 
+import '~styles/globals.css';
+
 import { cn } from '~utils/style';
 
-import '../globals.css';
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
-const inter = Inter({ subsets: ['latin'] });
+const jetbrains_mono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
+});
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const viewport: Viewport = {
@@ -108,7 +119,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={cn(inter.className, 'flex flex-col')}>
+      <body
+        className={cn(
+          `${inter.variable} ${jetbrains_mono.variable}`,
+          'flex flex-col'
+        )}
+      >
         {children}
         <SpeedInsights />
         <Analytics />

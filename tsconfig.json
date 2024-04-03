@@ -32,6 +32,7 @@
       "~features/*": ["src/components/features/*"],
       "~hooks/*": ["src/hooks/*"],
       "~lib/*": ["src/lib/*"],
+      "~styles/*": ["src/styles/*"],
       "~ui/*": ["src/components/ui/*"],
       "~utils/*": ["src/utils/*"]
     }

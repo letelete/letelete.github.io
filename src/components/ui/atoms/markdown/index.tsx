@@ -43,7 +43,12 @@ export const Markdown: MDXComponents = {
   },
   h3: ({ children, className, ...props }) => {
     return (
-      <Typography className={cn('py-6', className)} color='highlight' asChild>
+      <Typography
+        variant='subheading'
+        className={cn('pb-1 pt-6', className)}
+        color='highlight'
+        asChild
+      >
         <h3 {...props}>{children}</h3>
       </Typography>
     );
@@ -83,9 +88,11 @@ export const Markdown: MDXComponents = {
   },
   li: ({ children, className, ...props }) => {
     return (
-      <li className={cn('ml-12', className)} {...props}>
-        {children}
-      </li>
+      <Typography weight='normal' asChild>
+        <li className={cn('ml-12', className)} {...props}>
+          {children}
+        </li>
+      </Typography>
     );
   },
 };

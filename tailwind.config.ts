@@ -9,9 +9,6 @@ const config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    fontFamily: {
-      primary: ['Inter', ...defaultTheme.fontFamily.sans],
-    },
     colors: {
       transparent: defaultColors.transparent,
       background: {
@@ -50,6 +47,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-roboto-mono)', ...defaultTheme.fontFamily.mono],
+      },
       boxShadow: {
         'inner-glass': 'inset 0 1px 1px 1px rgba(255, 255, 255, 0.1)',
       },

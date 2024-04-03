@@ -2,14 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './reset.css';
+@import '~styles/reset.css';
 
-html {
-  @apply min-h-screen;
-}
+@layer base {
+  html {
+    @apply min-h-screen scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-body {
-  @apply min-h-screen bg-background text-primary-foreground;
+  body {
+    @apply min-h-screen bg-background text-primary-foreground;
+  }
+
+  button {
+    @apply select-none outline-offset-4 focus:[&:not(:focus-visible)]:outline-none;
+  }
+
+  pre:has(.hljs),
+  .hljs {
+    @apply bg-background text-primary-highlighted;
+  }
 }
 
 @layer utilities {

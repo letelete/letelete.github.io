@@ -1,6 +1,7 @@
 'use client';
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import rehypeHighlight from 'rehype-highlight';
 
 import { BLOG_PATH } from '~constants/index';
 
@@ -72,7 +73,8 @@ export function BlogContent({ content }: BlogContentProps) {
               options={{
                 mdxOptions: {
                   remarkPlugins: [],
-                  rehypePlugins: [],
+                  //@ts-expect-error https://github.com/hashicorp/next-mdx-remote/issues/86
+                  rehypePlugins: [[rehypeHighlight, {}]],
                   development: process.env.NODE_ENV === 'development',
                 },
               }}
