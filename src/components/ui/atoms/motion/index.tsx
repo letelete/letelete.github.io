@@ -8,11 +8,11 @@ export const HeartBeatMotion = ({
 }: HeartBeatMotionProps) => {
   return (
     <motion.div
-      initial={{ scale: 0.8 }}
-      animate={{ scale: 1.2 }}
+      initial={{ scale: 0 }}
+      animate={{ scale: [0.75, 1.25] }}
       transition={{
         repeat: Infinity,
-        repatType: 'reverse',
+        repeatType: 'reverse',
         type: 'spring',
       }}
       {...rest}
