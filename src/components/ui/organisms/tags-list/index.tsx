@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { ComponentPropsWithoutRef, useCallback, useState } from 'react';
+import { ComponentPropsWithoutRef, useCallback } from 'react';
 
 import { Button } from '~ui/atoms/button';
 import { FadeInMotion } from '~ui/atoms/motion';
@@ -10,6 +10,7 @@ import { cn } from '~utils/style';
 export interface TagsListProps
   extends Omit<ComponentPropsWithoutRef<'ul'>, 'onChange'> {
   tags: string[];
+  selectedTags?: string[];
   selectable?: boolean;
   className?: string;
   tagProps?: Partial<TagProps>;
@@ -19,42 +20,35 @@ export interface TagsListProps
 export const TagsList = ({
   tags,
   selectable,
+  selectedTags = [],
   className,
   tagProps,
   onChange,
   ...rest
 }: TagsListProps) => {
-  const [selectedTags, setSelectedTags] = useState(new Set<string>());
-
   const handleClearAll = useCallback(() => {
-    const emptyTags = new Set<string>();
-    setSelectedTags(emptyTags);
-    onChange?.([...emptyTags]);
+    onChange?.([]);
   }, [onChange]);
 
   const toggleSelected = useCallback(
     (tag: string) => {
-      setSelectedTags((currentlySelectedTags) => {
-        const newSelectedTags = new Set(currentlySelectedTags);
+      const newSelectedTags = new Set(selectedTags);
 
-        if (newSelectedTags.has(tag)) {
-          newSelectedTags.delete(tag);
-        } else {
-          newSelectedTags.add(tag);
-        }
+      if (newSelectedTags.has(tag)) {
+        newSelectedTags.delete(tag);
+      } else {
+        newSelectedTags.add(tag);
+      }
 
-        onChange?.([...newSelectedTags]);
-
-        return newSelectedTags;
-      });
+      onChange?.([...newSelectedTags]);
     },
-    [onChange]
+    [onChange, selectedTags]
   );
 
   return (
     <div className={cn('relative', className)}>
       <AnimatePresence mode='popLayout'>
-        {selectedTags.size && (
+        {selectedTags.length && (
           <FadeInMotion
             layout
             className='absolute bottom-[calc(100%+0.5rem)] left-0'
@@ -65,7 +59,7 @@ export const TagsList = ({
               variant='link'
               onClick={handleClearAll}
             >
-              clear selection ({selectedTags.size})
+              clear selection ({selectedTags.length})
             </Button>
           </FadeInMotion>
         )}
@@ -85,7 +79,7 @@ export const TagsList = ({
                 selectable={selectable}
                 label={tag}
                 onClick={() => toggleSelected(tag)}
-                selected={selectable && selectedTags.has(tag)}
+                selected={selectable && selectedTags.includes(tag)}
                 {...tagProps}
               />
             </motion.li>

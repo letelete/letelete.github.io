@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Content } from '~lib/content/provider';
 
@@ -16,7 +16,10 @@ export const BlogContentList = ({ content }: BlogContentListProps) => {
     () => [...new Set(content.map((content) => content.tags).flat())].sort(),
     [content]
   );
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  useEffect(() => setSelectedTags([]), [allTags]);
+
   const tagsMatchingSelected = useMemo(() => {
     if (!selectedTags.length) {
       return [...allTags];
@@ -55,6 +58,7 @@ export const BlogContentList = ({ content }: BlogContentListProps) => {
       <TagsList
         tagProps={{ className: 'text-base leading-6' }}
         tags={tagsMatchingSelected}
+        selectedTags={selectedTags}
         onChange={handleSelectedTagsChange}
         selectable
       />
