@@ -15,10 +15,12 @@
   "tailwindFunctions": ["clsx", "cn", "cva"],
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
+    "^~api/(.*)$",
     "^~constants/(.*)$",
     "^~features/(.*)$",
     "^~hooks/(.*)$",
     "^~lib/(.*)$",
+    "^~services/(.*)$",
     "^~styles/(.*)$",
     "^~ui/(.*)$",
     "^~utils/(.*)$",

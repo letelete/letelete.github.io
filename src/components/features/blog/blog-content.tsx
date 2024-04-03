@@ -1,6 +1,7 @@
 'use client';
 
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { useEffect } from 'react';
 import rehypeHighlight from 'rehype-highlight';
 
 import { BLOG_PATH } from '~constants/index';
@@ -10,6 +11,8 @@ import { BlogMarkdown } from '~features/blog/blog-markdown';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
 
 import { Content, ContentType } from '~lib/content/provider';
+
+import { useUpdateContentViews } from '~services/content/use-update-content-views';
 
 import { Typography } from '~ui/atoms/typography';
 import { GoBackButton } from '~ui/molecules/buttons/go-back-button';
@@ -28,6 +31,13 @@ const contentTypeToHeader: Record<ContentType, string> = {
 };
 
 export function BlogContent({ content }: BlogContentProps) {
+  const { mutate: markContentSeen } = useUpdateContentViews();
+
+  useEffect(() => {
+    console.log('seen');
+    markContentSeen({ slug: content.slug });
+  }, [content.slug, markContentSeen]);
+
   return (
     <BlogTwoPaneContainer
       leadingClassName='sm:max-w-[35%]'
@@ -81,7 +91,10 @@ export function BlogContent({ content }: BlogContentProps) {
             />
           </article>
 
-          <BlogContentFooter className='relative z-50 mt-16 sm:mt-24' />
+          <BlogContentFooter
+            className='relative z-50 mt-16 sm:mt-24'
+            slug={content.slug}
+          />
         </>
       }
     />
