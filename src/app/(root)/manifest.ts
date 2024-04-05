@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
     start_url: '/',
     background_color: '#101010',
-    theme_color: '#000',
+    theme_color: '#101010',
     display: 'standalone',
     icons: [
       {

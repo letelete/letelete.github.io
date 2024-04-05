@@ -8,7 +8,7 @@ import { BASE_URL } from '~constants/index';
 
 import '~styles/globals.css';
 
-import { cn } from '~utils/style';
+import { cn, tw } from '~utils/style';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,7 +24,7 @@ const jetbrains_mono = JetBrains_Mono({
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const viewport: Viewport = {
-  themeColor: 'black',
+  themeColor: tw.theme.colors.background.DEFAULT,
   initialScale: 1.0,
 };
 

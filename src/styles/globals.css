@@ -6,12 +6,13 @@
 
 @layer base {
   html {
-    @apply min-h-screen scroll-smooth;
+    @apply min-h-screen scroll-smooth bg-background text-primary;
     -webkit-tap-highlight-color: transparent;
+    color-scheme: dark;
   }
 
   body {
-    @apply min-h-screen bg-background text-primary-foreground;
+    @apply min-h-screen;
   }
 
   button {
