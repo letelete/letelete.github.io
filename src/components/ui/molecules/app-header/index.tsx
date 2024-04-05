@@ -13,10 +13,11 @@ import { cn, tw, vhToPx } from '~utils/style';
 export interface AppHeaderProps extends HTMLMotionProps<'header'> {
   innerClassName?: string;
   children?: ReactNode;
+  mode?: 'compact' | 'normal' | 'dynamic';
 }
 
 const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
-  ({ className, innerClassName, children, ...rest }, ref) => {
+  ({ className, innerClassName, children, mode = 'dynamic', ...rest }, ref) => {
     const [compact, setCompact] = useState(false);
 
     const { scrollY } = useScroll();
@@ -32,6 +33,15 @@ const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
     });
 
     useMotionValueEvent(scrollY, 'change', (latest) => {
+      if (mode === 'compact') {
+        setCompact(true);
+        return;
+      }
+      if (mode === 'normal') {
+        setCompact(false);
+        return;
+      }
+
       const MIN_SCROLL_OFFSET_COMPACT_VIEW = 0;
       const MIN_SCROLL_OFFSET_NORMAL_VIEW = 256;
 
