@@ -64,10 +64,10 @@ export const metadata: Metadata = {
   icons: {
     icon: '/icon.png',
     shortcut: '/shortcut-icon.png',
-    apple: ['/apple-touch-icon.png'],
+    apple: ['/apple-icon.png'],
     other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
+      rel: 'apple-icon-precomposed',
+      url: '/apple-icon-precomposed.png',
     },
   },
   openGraph: {
