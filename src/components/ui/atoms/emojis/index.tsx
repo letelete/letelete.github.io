@@ -21,7 +21,6 @@ const BaseEmoji = ({ className, ...rest }: BaseEmojiProps) => {
     <Image
       className={cn('inline aspect-square h-4 min-h-4 w-4 min-w-4', className)}
       {...rest}
-      priority
     />
   );
 };
