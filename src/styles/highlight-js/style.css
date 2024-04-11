@@ -19,7 +19,9 @@
 
 pre {
   padding: var(--editor-padding);
-  white-space: pre-wrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-size: 0.875rem;
 }
 
 code {
