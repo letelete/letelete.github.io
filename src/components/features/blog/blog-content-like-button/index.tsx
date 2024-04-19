@@ -3,11 +3,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useState } from 'react';
 
-import { useContentLike } from '~features/blog/like-content-button/use-content-like';
+import { useContentLike } from '~features/blog/blog-content-like-button/use-content-like';
 
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 
-import { Card } from '~ui/atoms/card';
 import { Typography } from '~ui/atoms/typography';
 import { HeartButton } from '~ui/molecules/buttons/heart-button';
 
@@ -19,14 +18,14 @@ export interface LikeContentButtonProps {
   className?: string;
 }
 
-export const LikeContentButton = ({
+export const BlogContentLikeButton = ({
   contentSlug,
   className,
 }: LikeContentButtonProps) => {
   const { data, isLoading, isError } = useGetContentStatistics({
     slug: contentSlug,
   });
-  const { likes, userTotalLikes } = data;
+  const { likes: contentTotalLikes, userTotalLikes } = data;
 
   const [heartPhase, setHeartPhase] = useState(0);
 
@@ -40,6 +39,8 @@ export const LikeContentButton = ({
     slug: contentSlug,
     userTotalLikes,
   });
+
+  const isProcessingLikes = likesDraft > 0;
 
   const handleLikeClick = useCallback(
     (phase: number, phasesLength: number) => {
@@ -62,13 +63,13 @@ export const LikeContentButton = ({
         className
       )}
     >
-      {likeFeedback && (
+      {isProcessingLikes && likeFeedback && (
         <AnimatePresence>
           <motion.div
             className='absolute bottom-full mb-4 w-full text-center'
             initial={{ opacity: 1, scale: 1 }}
             animate={{ opacity: 0, y: 30, scale: 0.5 }}
-            transition={{ type: 'spring', delay: 3 }}
+            transition={{ type: 'spring', delay: 4 }}
             key={likeFeedback}
           >
             <Typography asChild>
@@ -78,40 +79,42 @@ export const LikeContentButton = ({
         </AnimatePresence>
       )}
 
-      <Card className='flex flex-col items-center justify-center gap-y-4 p-6'>
-        <HeartButton
-          disabled={reachedLikesLimit}
-          phase={reachedLikesLimit ? 'last' : heartPhase}
-          onClick={handleLikeClick}
-        />
+      <HeartButton
+        disabled={reachedLikesLimit}
+        phase={reachedLikesLimit ? 'last' : heartPhase}
+        onClick={handleLikeClick}
+      />
 
-        <Typography
-          color={reachedLikesLimit ? 'accent' : 'highlight'}
-          className='relative'
-        >
-          {compactNumber(likes)}
-          <AnimatePresence mode='popLayout'>
-            {likesDraft && (
-              <Typography
-                variant='body-sm'
-                color={reachedLikesLimit ? 'accent' : 'default'}
-                asChild
+      <Typography
+        className='relative transition-colors'
+        color={reachedLikesLimit ? 'accent' : 'highlight'}
+      >
+        {contentTotalLikes === 0 && !isProcessingLikes
+          ? 'Be the first person to like this!'
+          : compactNumber(contentTotalLikes)}
+
+        <AnimatePresence mode='popLayout'>
+          {isProcessingLikes && likesTotal > 0 && (
+            <Typography
+              variant='body-sm'
+              className='transition-colors'
+              color={reachedLikesLimit ? 'accent' : 'default'}
+              asChild
+            >
+              <motion.span
+                className='absolute -top-2 left-full ml-1'
+                initial={{ scale: 0.5, opacity: 0, y: 10 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ opacity: 0, x: -20, y: -30, scale: 0.5 }}
+                transition={{ type: 'spring' }}
+                key={likesTotal}
               >
-                <motion.span
-                  className='absolute -top-2 left-full ml-1'
-                  initial={{ scale: 0.5, opacity: 0, y: 10 }}
-                  animate={{ scale: 1, opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: -20, y: -30, scale: 0.5 }}
-                  transition={{ type: 'spring' }}
-                  key={likesTotal}
-                >
-                  {`+${likesTotal}`}
-                </motion.span>
-              </Typography>
-            )}
-          </AnimatePresence>
-        </Typography>
-      </Card>
+                {`+${likesTotal}`}
+              </motion.span>
+            </Typography>
+          )}
+        </AnimatePresence>
+      </Typography>
     </div>
   );
 };

@@ -9,19 +9,20 @@ export interface ContentViewsCounter {
   className?: string;
 }
 
-export const ContentViewsCounter = ({
+export const BlogContentViewsCounter = ({
   contentSlug,
   className,
 }: ContentViewsCounter) => {
   const { data, isLoading, isError } = useGetContentStatistics({
     slug: contentSlug,
   });
-  const views = data.views;
-  const label = views === 1 ? 'view' : 'views';
 
   if (isLoading || isError) {
     return null;
   }
+
+  const views = data.views;
+  const label = views === 1 ? 'view' : 'views';
 
   return (
     <Typography className={cn(className)}>

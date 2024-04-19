@@ -77,7 +77,7 @@ export const HeartButton = ({
         src='https://lottie.host/5178775a-a4b7-49ce-90c3-0ca4587cabe1/cRpTOWZqP7.json'
         style={{ height: '8rem', width: '8rem' }}
       />
-      <AnimatePresence mode='wait'>
+      <AnimatePresence mode='wait' initial={false}>
         <StaggeredGrid
           className='relative z-10'
           key={`phase=${phaseIndex}:startFrom=${startFrom}:id=${id}`}

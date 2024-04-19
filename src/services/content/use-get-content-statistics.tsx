@@ -14,7 +14,7 @@ export const useGetContentStatistics = (props: GetContentStatisticsProps) => {
       likes: 0,
       views: 0,
       userTotalLikes: 0,
-      reachedLikesLimit: true,
+      reachedLikesLimit: false,
     },
     queryKey: contentKeys.statistic(props.slug),
     queryFn: () => getContentStatistics(props),

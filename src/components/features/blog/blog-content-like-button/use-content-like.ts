@@ -18,6 +18,23 @@ const checkLikesLimit = (userTotalLikes: number) => {
   return userTotalLikes >= LIKES_PER_USER_LIMIT;
 };
 
+const thankYouEmojis = [
+  '❤️',
+  '✨',
+  '🏆',
+  '🚀',
+  '😱',
+  '🙌',
+  '👀',
+  '🌝',
+  '🌞',
+  '🌟',
+  '💫',
+  '🌈',
+  '🤸‍♀️',
+  '🎈',
+];
+
 export const useContentLike = ({
   slug,
   userTotalLikes,
@@ -30,13 +47,16 @@ export const useContentLike = ({
   const likesTotal = userTotalLikes + likesDraft;
   const reachedLikesLimit = checkLikesLimit(likesTotal);
 
-  const submitLikes = useCallback(async () => {
-    try {
-      await likeContent({ likesAmount: likesTotal, slug });
-    } finally {
-      setLikesDraft(0);
-    }
-  }, [likeContent, likesTotal, slug]);
+  const submitLikes = useCallback(
+    async (likesAmount: number) => {
+      try {
+        await likeContent({ likesAmount, slug });
+      } finally {
+        setLikesDraft(0);
+      }
+    },
+    [likeContent, slug]
+  );
 
   const incrementLikes = useCallback(() => {
     clearTimeout(submitLikesTimeout.current);
@@ -46,33 +66,19 @@ export const useContentLike = ({
       : likesDraft + 1;
 
     submitLikesTimeout.current = setTimeout(() => {
-      void submitLikes();
+      const likesAmount = userTotalLikes + newLikesDraft;
+      void submitLikes(likesAmount);
     }, delayBeforeSubmit);
 
     setLikesDraft(newLikesDraft);
-  }, [likesTotal, delayBeforeSubmit, likesDraft, submitLikes]);
+  }, [delayBeforeSubmit, likesDraft, likesTotal, submitLikes, userTotalLikes]);
 
   const likeFeedback = useMemo(() => {
     if (likesTotal <= 0) {
       return null;
     }
     if (!reachedLikesLimit) {
-      const emoji = pickRandom([
-        '❤️',
-        '✨',
-        '🏆',
-        '🚀',
-        '😱',
-        '🙌',
-        '👀',
-        '🌝',
-        '🌞',
-        '🌟',
-        '💫',
-        '🌈',
-        '🤸‍♀️',
-        '🎈',
-      ]);
+      const emoji = pickRandom(thankYouEmojis);
       if (likesTotal === 1) {
         return `Thank you for the like, kind stranger ${emoji}`;
       }
@@ -89,8 +95,8 @@ export const useContentLike = ({
   return {
     likesDraft,
     likesTotal,
-    likeFeedback,
     reachedLikesLimit,
+    likeFeedback,
     incrementLikes,
   };
 };
