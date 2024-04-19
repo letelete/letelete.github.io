@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
