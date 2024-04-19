@@ -34,7 +34,6 @@ export function BlogContent({ content }: BlogContentProps) {
   const { mutate: markContentSeen } = useUpdateContentViews();
 
   useEffect(() => {
-    console.log('seen');
     markContentSeen({ slug: content.slug });
   }, [content.slug, markContentSeen]);
 

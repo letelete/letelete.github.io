@@ -14,6 +14,7 @@ export interface GlobalContentStatistics {
 
 export interface ContentStatistics extends GlobalContentStatistics {
   userTotalLikes: number;
+  reachedLikesLimit: boolean;
 }
 
 export const createContentController = (client: ModelClient) => ({
@@ -59,11 +60,14 @@ export const createContentController = (client: ModelClient) => ({
         (interaction) => interaction.userHash === userHash
       )?.likes ?? 0;
 
+    const reachedLikesLimit = userTotalLikes >= LIKES_PER_USER_LIMIT;
+
     return {
       slug: contentSlug,
       likes,
       views,
       userTotalLikes,
+      reachedLikesLimit,
     };
   },
 

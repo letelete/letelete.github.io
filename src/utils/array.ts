@@ -23,3 +23,9 @@ export const findRepeatingElements = <T>(
     .filter(([, count]) => count > 1)
     .map(([entry]) => entry);
 };
+
+export const pickRandom = <T>(source: T[]): T | null => {
+  const length = source.length;
+  const index = Math.floor(Math.random() * (length - 1));
+  return source[index] ?? null;
+};
