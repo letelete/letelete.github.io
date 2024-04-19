@@ -9,6 +9,7 @@
     @apply min-h-screen scroll-smooth bg-background text-primary;
     -webkit-tap-highlight-color: transparent;
     color-scheme: dark;
+    font-family: var(--font-inter);
   }
 
   body {

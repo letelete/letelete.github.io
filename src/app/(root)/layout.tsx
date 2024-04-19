@@ -3,6 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { JetBrains_Mono } from 'next/font/google';
+import { SSRQueryClientProvider } from 'src/app/api/shared/query-client/provider';
 
 import { BASE_URL } from '~constants/index';
 
@@ -125,7 +126,8 @@ export default function RootLayout({
           'flex flex-col'
         )}
       >
-        {children}
+        <SSRQueryClientProvider>{children}</SSRQueryClientProvider>
+
         <SpeedInsights />
         <Analytics />
       </body>

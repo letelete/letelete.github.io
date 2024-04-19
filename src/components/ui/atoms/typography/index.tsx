@@ -1,12 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import {
-  type HTMLAttributes,
-  type PropsWithChildren,
-  cloneElement,
-  isValidElement,
-  useCallback,
-} from 'react';
+import { type HTMLAttributes, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
 
@@ -51,38 +45,27 @@ export interface TypographyProps
   balance?: boolean;
 }
 
-export const Typography = ({
-  asChild,
-  balance,
-  color,
-  weight,
-  variant,
-  prose,
-  className,
-  children,
-  ...rest
-}: TypographyProps) => {
-  const PolymorphicComponent = asChild ? Slot : 'p';
+const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
+  (
+    { asChild, balance, color, weight, variant, prose, className, ...rest },
+    ref
+  ) => {
+    const PolymorphicComponent = asChild ? Slot : 'p';
 
-  const renderAsChild = useCallback(() => {
-    if (!children || !isValidElement(children)) {
-      return null;
-    }
+    return (
+      <PolymorphicComponent
+        ref={ref}
+        className={cn(
+          typographyVariants({ color, weight, variant, prose }),
+          balance && 'text-balance',
+          className
+        )}
+        {...rest}
+      />
+    );
+  }
+);
 
-    const element = (children.props as PropsWithChildren).children;
-    return cloneElement(children, undefined, element);
-  }, [children]);
+Typography.displayName = 'Typography';
 
-  return (
-    <PolymorphicComponent
-      className={cn(
-        typographyVariants({ color, weight, variant, prose }),
-        balance && 'text-balance',
-        className
-      )}
-      {...rest}
-    >
-      {asChild ? renderAsChild() : children}
-    </PolymorphicComponent>
-  );
-};
+export { Typography };

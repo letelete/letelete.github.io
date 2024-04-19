@@ -28,6 +28,8 @@
     "baseUrl": ".",
     /* Paths */
     "paths": {
+      "~api/*": ["src/app/api/*"],
+      "~services/*": ["src/services/*"],
       "~constants/*": ["src/constants/*"],
       "~features/*": ["src/components/features/*"],
       "~hooks/*": ["src/hooks/*"],
