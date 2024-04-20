@@ -17,7 +17,7 @@ export const BlogContentViewsCounter = ({
     slug: contentSlug,
   });
 
-  if (isLoading || isError) {
+  if (isLoading || isError || !data) {
     return null;
   }
 

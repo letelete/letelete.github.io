@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { BlogContent } from '~features/blog/blog-content';
-import { BlogContentReportView } from '~features/blog/blog-content-report-view';
+import { BlogContent } from '~features/blog/blog-content/blog-content';
+import { BlogContentReportView } from '~features/blog/blog-content/blog-content-report-view';
 
 import { getAllContent, getContentEntry } from '~lib/content/provider';
 

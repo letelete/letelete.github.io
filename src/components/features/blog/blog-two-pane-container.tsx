@@ -1,3 +1,5 @@
+'use client';
+
 import { useScroll, useTransform } from 'framer-motion';
 import { ReactElement } from 'react';
 

@@ -1,14 +1,15 @@
 'use client';
 
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useState } from 'react';
 
-import { useContentLike } from '~features/blog/blog-content-like-button/use-content-like';
+import { useContentLike } from '~features/blog/blog-content/blog-content-like-button/use-content-like';
 
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 
 import { Typography } from '~ui/atoms/typography';
-import { HeartButton } from '~ui/molecules/buttons/heart-button';
+import { HeartButton, HeartSize } from '~ui/molecules/buttons/heart-button';
 
 import { compactNumber } from '~utils/string';
 import { cn } from '~utils/style';
@@ -16,11 +17,13 @@ import { cn } from '~utils/style';
 export interface LikeContentButtonProps {
   contentSlug: string;
   className?: string;
+  size?: HeartSize;
 }
 
 export const BlogContentLikeButton = ({
   contentSlug,
   className,
+  size,
 }: LikeContentButtonProps) => {
   const { data, isLoading, isError } = useGetContentStatistics({
     slug: contentSlug,
@@ -80,40 +83,54 @@ export const BlogContentLikeButton = ({
       )}
 
       <HeartButton
+        aria-label='Like'
+        aria-describedby='heart-button-description'
         disabled={reachedLikesLimit}
         phase={reachedLikesLimit ? 'last' : heartPhase}
+        size={size}
         onClick={handleLikeClick}
       />
+
+      <VisuallyHidden id='heart-button-description' aria-live='polite'>
+        Your total likes: {likesTotal}.
+        {reachedLikesLimit && ' You reached likes limit.'}
+      </VisuallyHidden>
 
       <Typography
         className='relative transition-colors'
         color={reachedLikesLimit ? 'accent' : 'highlight'}
+        asChild
       >
-        {contentTotalLikes === 0 && !isProcessingLikes
-          ? 'Be the first person to like this!'
-          : compactNumber(contentTotalLikes)}
+        <div>
+          <p aria-label='Likes counter' role='status'>
+            {contentTotalLikes === 0 && !isProcessingLikes
+              ? 'Be the first person to like this!'
+              : `${compactNumber(contentTotalLikes)} likes`}
+          </p>
 
-        <AnimatePresence mode='popLayout'>
-          {isProcessingLikes && likesTotal > 0 && (
-            <Typography
-              variant='body-sm'
-              className='transition-colors'
-              color={reachedLikesLimit ? 'accent' : 'default'}
-              asChild
-            >
-              <motion.span
-                className='absolute -top-2 left-full ml-1'
-                initial={{ scale: 0.5, opacity: 0, y: 10 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ opacity: 0, x: -20, y: -30, scale: 0.5 }}
-                transition={{ type: 'spring' }}
-                key={likesTotal}
+          <AnimatePresence mode='popLayout'>
+            {isProcessingLikes && likesTotal > 0 && (
+              <Typography
+                variant='body-sm'
+                className='transition-colors'
+                color={reachedLikesLimit ? 'accent' : 'default'}
+                role='status'
+                asChild
               >
-                {`+${likesTotal}`}
-              </motion.span>
-            </Typography>
-          )}
-        </AnimatePresence>
+                <motion.p
+                  className='absolute -top-2 left-full ml-1'
+                  initial={{ scale: 0.5, opacity: 0, y: 10 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: -20, y: -30, scale: 0.5 }}
+                  transition={{ type: 'spring' }}
+                  key={likesTotal}
+                >
+                  <span aria-hidden>{`+${likesTotal}`}</span>
+                </motion.p>
+              </Typography>
+            )}
+          </AnimatePresence>
+        </div>
       </Typography>
     </div>
   );

@@ -6,6 +6,7 @@ import { AnimationItem } from 'lottie-web';
 import Link from 'next/link';
 import {
   ComponentProps,
+  ComponentPropsWithoutRef,
   ReactNode,
   useCallback,
   useRef,
@@ -14,11 +15,10 @@ import {
 
 import { BLOG_PATH } from '~constants/index';
 
-import { useIsMobile } from '~hooks/use-responsive';
-
 import { Button } from '~ui/atoms/button';
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
 import { Navigatable, NavigatableHandler } from '~ui/atoms/navigatable';
+import { ForMobile, ForNonMobile } from '~ui/atoms/responsive';
 import { Typography } from '~ui/atoms/typography';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Footer } from '~ui/molecules/footer';
@@ -57,8 +57,6 @@ export const Home = ({
   contact,
   testimonial,
 }: HomeProps) => {
-  const isMobile = useIsMobile();
-
   const navigatableHandler = useRef<NavigatableHandler>(null);
   const [currentNavigationSectionId, setCurrentNavigationSectionId] =
     useState<NavigationKey>('hello');
@@ -85,6 +83,23 @@ export const Home = ({
     blogIconPlayerRef.current?.setPlayerSpeed(2);
     blogIconPlayerRef.current?.play();
   }, []);
+
+  const renderBlogIconPlayer = useCallback(
+    ({
+      style,
+      ...rest
+    }: Partial<ComponentPropsWithoutRef<typeof Player>> = {}) => (
+      <Player
+        lottieRef={(ref) => (blogIconLottieRef.current = ref)}
+        ref={blogIconPlayerRef}
+        keepLastFrame
+        src='https://lottie.host/362ebfdf-672f-4f56-998c-53254b7df086/nelFXWU6JU.json'
+        style={{ height: '2.75em', width: '2.75em', ...style }}
+        {...rest}
+      />
+    ),
+    []
+  );
 
   return (
     <main className='flex min-h-screen flex-col'>
@@ -123,14 +138,10 @@ export const Home = ({
                 transition={{ type: 'spring' }}
                 className='absolute -top-5 right-3 opacity-80 sm:-top-[0.5em] sm:right-full sm:blur-none'
               >
-                <Player
-                  lottieRef={(ref) => (blogIconLottieRef.current = ref)}
-                  ref={blogIconPlayerRef}
-                  keepLastFrame
-                  autoplay={isMobile}
-                  src='https://lottie.host/362ebfdf-672f-4f56-998c-53254b7df086/nelFXWU6JU.json'
-                  style={{ height: '2.75em', width: '2.75em' }}
-                />
+                <ForMobile>
+                  {renderBlogIconPlayer({ autoplay: true })}
+                </ForMobile>
+                <ForNonMobile>{renderBlogIconPlayer()}</ForNonMobile>
               </motion.span>
               <Typography color='highlight'>blog</Typography>
             </Link>

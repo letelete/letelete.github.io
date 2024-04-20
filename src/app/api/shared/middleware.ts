@@ -13,7 +13,6 @@ export async function apiMiddleware(req: NextRequest) {
       { status: 400 }
     );
   }
-  headers.set(apiContextKeys.clientIp, clientIp);
 
   const userHash = await getUserHash(clientIp);
   headers.set(apiContextKeys.userHash, userHash);
@@ -26,7 +25,6 @@ export async function apiMiddleware(req: NextRequest) {
 }
 
 export const apiContextKeys = {
-  clientIp: 'api-context-client-ip',
   userHash: 'api-context-user-hash',
 } as const;
 

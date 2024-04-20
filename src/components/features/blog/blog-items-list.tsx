@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -7,14 +9,14 @@ import { Typography } from '~ui/atoms/typography';
 import { ContentCard } from '~ui/molecules/content-card';
 import { TagsList } from '~ui/organisms/tags-list';
 
-export interface BlogContentListProps {
-  content: Content[];
+export interface BlogItemsListProps {
+  items: Content[];
 }
 
-export const BlogContentList = ({ content }: BlogContentListProps) => {
+export const BlogItemsList = ({ items }: BlogItemsListProps) => {
   const allTags = useMemo(
-    () => [...new Set(content.map((content) => content.tags).flat())].sort(),
-    [content]
+    () => [...new Set(items.map((content) => content.tags).flat())].sort(),
+    [items]
   );
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -27,29 +29,29 @@ export const BlogContentList = ({ content }: BlogContentListProps) => {
 
     return [
       ...new Set(
-        content
+        items
           .map((content) => content.tags)
           .filter((group) => group.some((tag) => selectedTags.includes(tag)))
           .flat()
       ),
     ].sort();
-  }, [allTags, content, selectedTags]);
+  }, [allTags, items, selectedTags]);
 
   const filteredContent = useMemo(() => {
     if (selectedTags.length) {
-      return content.filter((content) =>
+      return items.filter((content) =>
         content.tags.some((tag) => selectedTags.includes(tag))
       );
     }
 
-    return [...content];
-  }, [content, selectedTags]);
+    return [...items];
+  }, [items, selectedTags]);
 
   const handleSelectedTagsChange = useCallback((tags: string[]) => {
     setSelectedTags(tags);
   }, []);
 
-  if (!content.length) {
+  if (!items.length) {
     return <Typography className='text-center'>Coming soon!</Typography>;
   }
 

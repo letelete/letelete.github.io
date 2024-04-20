@@ -87,8 +87,8 @@ export const useContentLike = ({
     return pickRandom([
       'Testing the limit 🙃?',
       'Are you bored yet? 🙄',
-      'Bingo bango bongo, bish bash bosh 🔫',
       "That's very generous of you...",
+      "You're the best 🏆",
     ]);
   }, [likesTotal, reachedLikesLimit]);
 

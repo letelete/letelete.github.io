@@ -169,7 +169,7 @@ const itemVariants = {
   }),
   exit: (delayRef: MutableRefObject<number>) => ({
     opacity: 0,
-    scale: 0.75,
+    scale: 0.25,
     transition: { delay: delayRef.current - 0.1 },
   }),
 };

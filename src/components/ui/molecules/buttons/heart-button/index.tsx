@@ -1,7 +1,14 @@
 import { Player } from '@lottiefiles/react-lottie-player';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-import { useMemo, useRef, useState } from 'react';
+import {
+  MouseEventHandler,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
+import { AsyncLottiePlayer } from '~ui/atoms/async-lottie-player';
 import { StaggeredGrid } from '~ui/atoms/staggered-grid';
 import {
   phasesLength,
@@ -10,18 +17,33 @@ import {
 
 import { cn } from '~utils/style';
 
-export interface HeartButtonProps {
+export type HeartSize = 'base' | 'sm';
+
+export interface HeartButtonProps
+  extends Omit<HTMLMotionProps<'button'>, 'onClick'> {
   phase: number | 'first' | 'last';
   onClick?: (phase: number, phasesLength: number) => void;
   className?: string;
   disabled?: boolean;
+  size?: HeartSize;
 }
+
+const getTileSize = (size: HeartSize) => {
+  const sizeMap: Record<HeartSize, number> = {
+    base: 6,
+    sm: 4,
+  };
+
+  return sizeMap[size];
+};
 
 export const HeartButton = ({
   phase,
   onClick,
   className,
   disabled,
+  size = 'base',
+  ...rest
 }: HeartButtonProps) => {
   const phaseIndex = useMemo(() => {
     if (phase === 'first') {
@@ -40,54 +62,67 @@ export const HeartButton = ({
   const [startFrom, setStartFrom] = useState<number>(0);
   const [id, setId] = useState<number>(0);
 
+  const tileSize = getTileSize(size);
+  const playerSize = tileSize * cols + 60;
+
   const containerRef = useRef<HTMLButtonElement>(null);
   const playerRef = useRef<Player>(null);
+
+  const handleButtonClick: MouseEventHandler = useCallback(
+    (event) => {
+      if (disabled) {
+        event.preventDefault();
+        return;
+      }
+
+      const target = event.target as HTMLDivElement;
+      const idx = target?.getAttribute('data-idx');
+      const newStartFrom = typeof idx === 'string' ? parseInt(idx) : null;
+
+      setStartFrom(newStartFrom ?? 0);
+      onClick?.(phaseIndex, phasesLength);
+      setId((id) => id + 1);
+
+      playerRef.current?.play();
+    },
+    [disabled, onClick, phaseIndex]
+  );
 
   return (
     <motion.button
       ref={containerRef}
-      className={cn('relative', className)}
+      className={cn('relative touch-manipulation', className)}
       whileHover={{ scale: disabled ? 1 : 1.1 }}
       whileFocus={{ scale: disabled ? 1 : 1.1 }}
       whileTap={{ scale: disabled ? 1 : 0.9 }}
       transition={{ type: 'spring' }}
       disabled={disabled}
-      onClick={(event) => {
-        if (disabled) {
-          event.preventDefault();
-          return;
-        }
-
-        const target = event.target as HTMLDivElement;
-        const tile = target.hasAttribute('data-idx')
-          ? target
-          : target.querySelector('[data-idx]');
-        const idx = tile?.getAttribute('data-idx');
-        const newStartFrom = typeof idx === 'string' ? parseInt(idx) : null;
-        setStartFrom(newStartFrom ?? 0);
-        onClick?.(phaseIndex, phasesLength);
-        setId((id) => id + 1);
-
-        playerRef.current?.play?.();
-      }}
+      aria-disabled={disabled}
+      onClick={handleButtonClick}
+      {...rest}
     >
-      <Player
+      <AsyncLottiePlayer
         className='absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2'
         ref={playerRef}
-        src='https://lottie.host/5178775a-a4b7-49ce-90c3-0ca4587cabe1/cRpTOWZqP7.json'
-        style={{ height: '8rem', width: '8rem' }}
+        src='https://lottie.host/5559ee29-f7d4-4e1e-9ef8-6e1a04c54bc2/EbvEOrkepQ.json'
+        style={{
+          height: playerSize,
+          width: playerSize,
+        }}
       />
-      <AnimatePresence mode='wait' initial={false}>
+
+      <AnimatePresence mode='popLayout' initial={false}>
         <StaggeredGrid
-          className='relative z-10'
+          className='relative z-50'
           key={`phase=${phaseIndex}:startFrom=${startFrom}:id=${id}`}
-          delayPerPixel={0.0025}
+          delayPerPixel={0.005}
           startFrom={startFrom}
           cols={cols}
           items={heartBitmapFlat.map((color, idx) => (
             <Tile
               key={`tile:color=${color}:idx=${idx}`}
               color={colorsMap[color]}
+              size={tileSize}
               data-idx={idx}
             />
           ))}
@@ -99,13 +134,14 @@ export const HeartButton = ({
 
 interface TileProps extends HTMLMotionProps<'div'> {
   color: string;
+  size: number;
 }
 
-const Tile = ({ color, className, ...rest }: TileProps) => {
+const Tile = ({ color, size, className, ...rest }: TileProps) => {
   return (
     <motion.div
-      className={cn('tile', 'h-2 w-2', className)}
-      style={{ background: color }}
+      className={cn('tile', 'aspect-square', className)}
+      style={{ background: color, width: size }}
       {...rest}
     />
   );

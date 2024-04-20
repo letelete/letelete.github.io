@@ -1,38 +1,69 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
+import { forwardRef } from 'react';
+
+import {
+  fadeInMotionVariants,
+  heartBeatMotionVariants,
+  revealInUpMotionVariants,
+} from '~ui/atoms/motion/lib';
 
 export interface HeartBeatMotionProps extends HTMLMotionProps<'div'> {}
-
-export const HeartBeatMotion = ({
-  children,
-  ...rest
-}: HeartBeatMotionProps) => {
-  return (
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ scale: [0.75, 1.25] }}
-      transition={{
-        repeat: Infinity,
-        repeatType: 'reverse',
-        type: 'spring',
-      }}
-      {...rest}
-    >
-      {children}
-    </motion.div>
-  );
-};
+const HeartBeatMotion = forwardRef<HTMLDivElement, HeartBeatMotionProps>(
+  ({ children, ...rest }, ref) => {
+    return (
+      <motion.div
+        ref={ref}
+        variants={heartBeatMotionVariants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        {...rest}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
+HeartBeatMotion.displayName = 'HeartBeatMotion';
+export { HeartBeatMotion };
 
 export interface FadeInMotionProps extends HTMLMotionProps<'div'> {}
+const FadeInMotion = forwardRef<HTMLDivElement, FadeInMotionProps>(
+  ({ children, ...rest }, ref) => {
+    return (
+      <motion.div
+        ref={ref}
+        variants={fadeInMotionVariants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        {...rest}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
+FadeInMotion.displayName = 'FadeInMotion';
+export { FadeInMotion };
 
-export const FadeInMotion = ({ children, ...rest }: FadeInMotionProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      {...rest}
-    >
-      {children}
-    </motion.div>
-  );
-};
+export interface RevealInUpMotionProps extends HTMLMotionProps<'div'> {}
+const RevealInUpMotion = forwardRef<HTMLDivElement, RevealInUpMotionProps>(
+  ({ children, transition, ...rest }, ref) => {
+    return (
+      <motion.div
+        ref={ref}
+        transition={{ type: 'spring', duration: 1, ...transition }}
+        variants={revealInUpMotionVariants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        {...rest}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
+RevealInUpMotion.displayName = 'RevealInUpMotion';
+export { RevealInUpMotion };
