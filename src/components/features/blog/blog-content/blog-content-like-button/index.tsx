@@ -1,14 +1,16 @@
 'use client';
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useCallback, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { ElementRef, forwardRef, useCallback, useId, useState } from 'react';
 
 import { useContentLike } from '~features/blog/blog-content/blog-content-like-button/use-content-like';
 
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 
-import { Typography } from '~ui/atoms/typography';
+import { PopInMotion } from '~ui/atoms/motion';
+import { popInMotionVariants } from '~ui/atoms/motion/lib';
+import { Typography, TypographyProps } from '~ui/atoms/typography';
 import { HeartButton, HeartSize } from '~ui/molecules/buttons/heart-button';
 
 import { compactNumber } from '~utils/string';
@@ -25,6 +27,8 @@ export const BlogContentLikeButton = ({
   className,
   size,
 }: BlogContentLikeButtonProps) => {
+  const buttonId = useId();
+
   const { data, isLoading, isError } = useGetContentStatistics({
     slug: contentSlug,
   });
@@ -60,78 +64,141 @@ export const BlogContentLikeButton = ({
   }
 
   return (
-    <div
+    <figure
       className={cn(
-        'relative flex w-full flex-col items-center justify-center gap-y-4',
+        'flex w-full flex-col items-center justify-center gap-y-4',
         className
       )}
     >
-      {isProcessingLikes && likeFeedback && (
-        <AnimatePresence>
-          <motion.div
-            className='absolute bottom-full mb-4 w-full text-center'
-            initial={{ opacity: 1, scale: 1 }}
-            animate={{ opacity: 0, y: 30, scale: 0.5 }}
-            transition={{ type: 'spring', delay: 4 }}
-            key={likeFeedback}
-          >
-            <Typography asChild>
-              <span>{likeFeedback}</span>
-            </Typography>
-          </motion.div>
-        </AnimatePresence>
-      )}
-
       <HeartButton
         aria-label='Like'
-        aria-describedby='heart-button-description'
+        aria-describedby={`${buttonId}:label`}
         disabled={reachedLikesLimit}
         phase={reachedLikesLimit ? 'last' : heartPhase}
         size={size}
         onClick={handleLikeClick}
       />
 
-      <VisuallyHidden id='heart-button-description' aria-live='polite'>
-        Your total likes: {likesTotal}.
-        {reachedLikesLimit && ' You reached likes limit.'}
-      </VisuallyHidden>
+      <label id={`${buttonId}:label`} className='relative'>
+        <LikesCounter
+          contentTotalLikes={contentTotalLikes}
+          allowPlaceholder={!isProcessingLikes}
+          highlight={reachedLikesLimit}
+        />
 
-      <Typography
-        className='relative transition-colors'
-        color={reachedLikesLimit ? 'accent' : 'highlight'}
-        asChild
-      >
-        <div>
-          <p aria-label='Likes counter' role='status'>
-            {contentTotalLikes === 0 && !isProcessingLikes
-              ? 'Be the first person to like this!'
-              : `${compactNumber(contentTotalLikes)} likes`}
-          </p>
+        <AnimatePresence mode='popLayout'>
+          {isProcessingLikes && (
+            <DraftLikesCounterProps
+              className='absolute left-full top-0 -mt-2 ml-1'
+              userTotalLikes={likesTotal}
+              reachedLikesLimit={reachedLikesLimit}
+            />
+          )}
+        </AnimatePresence>
 
-          <AnimatePresence mode='popLayout'>
-            {isProcessingLikes && likesTotal > 0 && (
-              <Typography
-                variant='body-sm'
-                className='transition-colors'
-                color={reachedLikesLimit ? 'accent' : 'default'}
-                role='status'
-                asChild
-              >
-                <motion.p
-                  className='absolute -top-2 left-full ml-1'
-                  initial={{ scale: 0.5, opacity: 0, y: 10 }}
-                  animate={{ scale: 1, opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: -20, y: -30, scale: 0.5 }}
-                  transition={{ type: 'spring' }}
-                  key={likesTotal}
-                >
-                  <span aria-hidden>{`+${likesTotal}`}</span>
-                </motion.p>
-              </Typography>
-            )}
-          </AnimatePresence>
-        </div>
-      </Typography>
-    </div>
+        <VisuallyHidden>
+          {reachedLikesLimit && 'You reached likes limit. '}
+          Your total likes: {isProcessingLikes ? likesTotal : userTotalLikes}.
+        </VisuallyHidden>
+      </label>
+
+      <AnimatePresence>
+        {isProcessingLikes && (
+          <DraftLikesFeedback
+            className='absolute left-0 top-full'
+            message={likeFeedback ?? undefined}
+          />
+        )}
+      </AnimatePresence>
+    </figure>
   );
 };
+
+export interface LikesCounterProps extends TypographyProps {
+  contentTotalLikes: number;
+  highlight: boolean;
+  allowPlaceholder: boolean;
+}
+const LikesCounter = forwardRef<
+  ElementRef<typeof Typography>,
+  LikesCounterProps
+>(
+  (
+    { contentTotalLikes, highlight, allowPlaceholder, className, ...rest },
+    ref
+  ) => {
+    const formattedLikes = compactNumber(contentTotalLikes);
+
+    return (
+      <Typography
+        className={cn('text-center', className)}
+        color={highlight ? 'accent' : 'highlight'}
+        aria-label='Likes counter'
+        role='status'
+        ref={ref}
+        {...rest}
+      >
+        {contentTotalLikes === 0 && allowPlaceholder
+          ? 'Be the first person to like this!'
+          : `${formattedLikes} likes`}
+      </Typography>
+    );
+  }
+);
+LikesCounter.displayName = 'LikesCounter';
+
+export interface DraftLikesCounterProps extends TypographyProps {
+  userTotalLikes: number;
+  reachedLikesLimit: boolean;
+}
+const DraftLikesCounterProps = forwardRef<
+  ElementRef<typeof Typography>,
+  DraftLikesCounterProps
+>(({ userTotalLikes, reachedLikesLimit, className, ...rest }, ref) => {
+  return (
+    <Typography
+      ref={ref}
+      className={cn('relative transition-colors', className)}
+      variant='body-sm'
+      color={reachedLikesLimit ? 'accent' : 'default'}
+      role='status'
+      asChild
+      {...rest}
+    >
+      <PopInMotion
+        variants={{
+          ...popInMotionVariants,
+          initial: { ...popInMotionVariants.initial, y: 10 },
+          animate: { ...popInMotionVariants.animate, y: 0 },
+          exit: { ...popInMotionVariants.exit, x: -30, scale: 0.25 },
+        }}
+        key={userTotalLikes}
+      >
+        +{userTotalLikes}
+      </PopInMotion>
+    </Typography>
+  );
+});
+DraftLikesCounterProps.displayName = 'DraftLikesCounterProps';
+
+export interface DraftLikesFeedbackProps extends TypographyProps {
+  message?: string;
+}
+const DraftLikesFeedback = forwardRef<
+  ElementRef<typeof Typography>,
+  DraftLikesFeedbackProps
+>(({ message, className, ...rest }, ref) => {
+  return (
+    <Typography
+      key={message}
+      className={cn('w-full text-center', className)}
+      asChild
+      variant='body-sm'
+      ref={ref}
+      {...rest}
+    >
+      <PopInMotion>{message}</PopInMotion>
+    </Typography>
+  );
+});
+DraftLikesFeedback.displayName = 'DraftLikesFeedback';

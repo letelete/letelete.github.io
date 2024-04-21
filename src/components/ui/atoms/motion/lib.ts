@@ -1,6 +1,3 @@
-export const clearClipPath = 'inset(0% 0% 0% 0% round 10px)';
-export const clipPathToBottom = 'inset(90% 0% 10% 0% round 10px)';
-
 export const heartBeatMotionVariants = {
   initial: { scale: 0 },
   animate: { scale: [0.75, 1.25] },
@@ -18,7 +15,13 @@ export const fadeInMotionVariants = {
 };
 
 export const revealInUpMotionVariants = {
-  initial: { scale: 0.5, y: 10, clipPath: clipPathToBottom },
-  animate: { scale: 1, y: 0, clipPath: clearClipPath },
-  exit: { clipPath: clipPathToBottom },
+  initial: { opacity: 0, scale: 0.5, y: 10 },
+  animate: { opacity: 1, scale: 1, y: 0 },
+  exit: { opacity: 0, scale: 0.5, y: 10 },
+};
+
+export const popInMotionVariants = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.5 },
 };

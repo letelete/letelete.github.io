@@ -20,3 +20,10 @@ export const map1DimTo2Dim = (index: number, columns: number): Point => {
 
   return { y, x };
 };
+
+export const isInRange = (
+  value: number,
+  ...ranges: [min: number, max: number][]
+) => {
+  return ranges.some(([min, max]) => min >= value && max <= value);
+};

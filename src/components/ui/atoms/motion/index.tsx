@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 import {
   fadeInMotionVariants,
   heartBeatMotionVariants,
+  popInMotionVariants,
   revealInUpMotionVariants,
 } from '~ui/atoms/motion/lib';
 
@@ -67,3 +68,24 @@ const RevealInUpMotion = forwardRef<HTMLDivElement, RevealInUpMotionProps>(
 );
 RevealInUpMotion.displayName = 'RevealInUpMotion';
 export { RevealInUpMotion };
+
+export interface PopInMotionProps extends HTMLMotionProps<'div'> {}
+const PopInMotion = forwardRef<HTMLDivElement, PopInMotionProps>(
+  ({ children, transition, ...rest }, ref) => {
+    return (
+      <motion.div
+        ref={ref}
+        transition={{ type: 'spring', ...transition }}
+        variants={popInMotionVariants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        {...rest}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
+PopInMotion.displayName = 'PopInMotion';
+export { PopInMotion };

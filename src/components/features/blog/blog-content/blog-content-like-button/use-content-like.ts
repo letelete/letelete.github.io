@@ -35,6 +35,34 @@ const thankYouEmojis = [
   '🎈',
 ];
 
+const halfTheLikeLimit = Math.ceil(LIKES_PER_USER_LIMIT / 2);
+const feedbackMessages: [
+  predicate: (likes: number) => boolean,
+  msg: string | null,
+][] = [
+  [(likes) => likes === 0, null],
+  [(likes) => likes === 1, 'Thank you for the like, ✨ kind stranger ✨'],
+  [
+    (likes) => likes === halfTheLikeLimit,
+    "Woahhhh, we're halfway there 🗣️🗣️🗣️",
+  ],
+  [
+    (likes) => likes === LIKES_PER_USER_LIMIT,
+    pickRandom([
+      'Testing the limit 🙃?',
+      'Are you bored yet? 🙄',
+      "You're the best 🏆",
+      "That's enough, go take some rest.",
+    ]),
+  ],
+];
+const getFeedbackMessageForLikes = (likes: number) => {
+  const [, msg] =
+    feedbackMessages.find(([predicate]) => predicate(likes)) ?? [];
+
+  return msg ?? `Thank you! ${pickRandom(thankYouEmojis)}`;
+};
+
 export const useContentLike = ({
   slug,
   userTotalLikes,
@@ -73,24 +101,10 @@ export const useContentLike = ({
     setLikesDraft(newLikesDraft);
   }, [delayBeforeSubmit, likesDraft, likesTotal, submitLikes, userTotalLikes]);
 
-  const likeFeedback = useMemo(() => {
-    if (likesTotal <= 0) {
-      return null;
-    }
-    if (!reachedLikesLimit) {
-      const emoji = pickRandom(thankYouEmojis);
-      if (likesTotal === 1) {
-        return `Thank you for the like, kind stranger ${emoji}`;
-      }
-      return `Thank you for ${likesTotal} likes ${emoji}`;
-    }
-    return pickRandom([
-      'Testing the limit 🙃?',
-      'Are you bored yet? 🙄',
-      "That's very generous of you...",
-      "You're the best 🏆",
-    ]);
-  }, [likesTotal, reachedLikesLimit]);
+  const likeFeedback = useMemo(
+    () => getFeedbackMessageForLikes(likesTotal),
+    [likesTotal]
+  );
 
   return {
     likesDraft,
