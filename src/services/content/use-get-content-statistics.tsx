@@ -9,13 +9,6 @@ import { ContentStatistics } from '~api/contents/shared/controllers';
 
 export const useGetContentStatistics = (props: GetContentStatisticsProps) => {
   const query = useQuery<ContentStatistics, Error>({
-    initialData: {
-      slug: props.slug,
-      likes: 0,
-      views: 0,
-      userTotalLikes: 0,
-      reachedLikesLimit: false,
-    },
     queryKey: contentKeys.statistic(props.slug),
     queryFn: () => getContentStatistics(props),
   });

@@ -10,6 +10,7 @@ import { useGetContentStatistics } from '~services/content/use-get-content-stati
 
 import { PopInMotion } from '~ui/atoms/motion';
 import { popInMotionVariants } from '~ui/atoms/motion/lib';
+import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography, TypographyProps } from '~ui/atoms/typography';
 import { HeartButton, HeartSize } from '~ui/molecules/buttons/heart-button';
 
@@ -30,10 +31,11 @@ export const BlogContentLikeButton = ({
 }: BlogContentLikeButtonProps) => {
   const buttonId = useId();
 
-  const { data, isLoading, isError } = useGetContentStatistics({
+  const { data, isLoading } = useGetContentStatistics({
     slug: contentSlug,
   });
-  const { likes: contentTotalLikes, userTotalLikes } = data;
+  const contentTotalLikes = data?.likes ?? 0;
+  const userTotalLikes = data?.userTotalLikes ?? 0;
 
   const [heartPhase, setHeartPhase] = useState(0);
 
@@ -60,10 +62,6 @@ export const BlogContentLikeButton = ({
     [incrementLikes, reachedLikesLimit]
   );
 
-  if (isLoading || isError) {
-    return null;
-  }
-
   return (
     <figure
       className={cn(
@@ -79,29 +77,32 @@ export const BlogContentLikeButton = ({
         size={size}
         onClick={handleLikeClick}
       />
+      {isLoading || !data ? (
+        <LikesCounterSkeleton />
+      ) : (
+        <label id={`${buttonId}:label`} className='relative'>
+          <LikesCounter
+            contentTotalLikes={contentTotalLikes}
+            allowPlaceholder={!isProcessingLikes}
+            highlight={reachedLikesLimit}
+          />
 
-      <label id={`${buttonId}:label`} className='relative'>
-        <LikesCounter
-          contentTotalLikes={contentTotalLikes}
-          allowPlaceholder={!isProcessingLikes}
-          highlight={reachedLikesLimit}
-        />
+          <AnimatePresence mode='popLayout'>
+            {isProcessingLikes && (
+              <DraftLikesCounterProps
+                className='absolute left-full top-0 -mt-2 ml-1'
+                userTotalLikes={likesTotal}
+                reachedLikesLimit={reachedLikesLimit}
+              />
+            )}
+          </AnimatePresence>
 
-        <AnimatePresence mode='popLayout'>
-          {isProcessingLikes && (
-            <DraftLikesCounterProps
-              className='absolute left-full top-0 -mt-2 ml-1'
-              userTotalLikes={likesTotal}
-              reachedLikesLimit={reachedLikesLimit}
-            />
-          )}
-        </AnimatePresence>
-
-        <VisuallyHidden>
-          {reachedLikesLimit && 'You reached likes limit. '}
-          Your total likes: {isProcessingLikes ? likesTotal : userTotalLikes}.
-        </VisuallyHidden>
-      </label>
+          <VisuallyHidden>
+            {reachedLikesLimit && 'You reached likes limit. '}
+            Your total likes: {isProcessingLikes ? likesTotal : userTotalLikes}.
+          </VisuallyHidden>
+        </label>
+      )}
 
       <AnimatePresence>
         {isProcessingLikes && (
@@ -115,7 +116,7 @@ export const BlogContentLikeButton = ({
   );
 };
 
-export interface LikesCounterProps extends TypographyProps {
+interface LikesCounterProps extends TypographyProps {
   contentTotalLikes: number;
   highlight: boolean;
   allowPlaceholder: boolean;
@@ -152,7 +153,11 @@ const LikesCounter = forwardRef<
 );
 LikesCounter.displayName = 'LikesCounter';
 
-export interface DraftLikesCounterProps extends TypographyProps {
+const LikesCounterSkeleton = () => {
+  return <TextSkeleton className='max-w-20' />;
+};
+
+interface DraftLikesCounterProps extends TypographyProps {
   userTotalLikes: number;
   reachedLikesLimit: boolean;
 }
@@ -186,7 +191,7 @@ const DraftLikesCounterProps = forwardRef<
 });
 DraftLikesCounterProps.displayName = 'DraftLikesCounterProps';
 
-export interface DraftLikesFeedbackProps extends TypographyProps {
+interface DraftLikesFeedbackProps extends TypographyProps {
   message?: string;
 }
 const DraftLikesFeedback = forwardRef<

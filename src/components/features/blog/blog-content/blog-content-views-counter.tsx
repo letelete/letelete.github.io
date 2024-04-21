@@ -1,7 +1,9 @@
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 
+import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
 
+import { pluralize } from '~utils/intl';
 import { cn } from '~utils/style';
 
 export interface ContentViewsCounter {
@@ -13,16 +15,16 @@ export const BlogContentViewsCounter = ({
   contentSlug,
   className,
 }: ContentViewsCounter) => {
-  const { data, isLoading, isError } = useGetContentStatistics({
+  const { data, isLoading } = useGetContentStatistics({
     slug: contentSlug,
   });
 
-  if (isLoading || isError || !data) {
-    return null;
-  }
+  const views = data?.views ?? 0;
+  const label = pluralize(views, 'view', 'views');
 
-  const views = data.views;
-  const label = views === 1 ? 'view' : 'views';
+  if (isLoading || !data) {
+    return <TextSkeleton />;
+  }
 
   return (
     <Typography className={cn(className)}>
