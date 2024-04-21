@@ -13,6 +13,7 @@ import { popInMotionVariants } from '~ui/atoms/motion/lib';
 import { Typography, TypographyProps } from '~ui/atoms/typography';
 import { HeartButton, HeartSize } from '~ui/molecules/buttons/heart-button';
 
+import { pluralize } from '~utils/intl';
 import { compactNumber } from '~utils/string';
 import { cn } from '~utils/style';
 
@@ -127,7 +128,11 @@ const LikesCounter = forwardRef<
     { contentTotalLikes, highlight, allowPlaceholder, className, ...rest },
     ref
   ) => {
-    const formattedLikes = compactNumber(contentTotalLikes);
+    const formattedLikes = `${compactNumber(contentTotalLikes)} ${pluralize(
+      contentTotalLikes,
+      'like',
+      'likes'
+    )}`;
 
     return (
       <Typography
@@ -140,7 +145,7 @@ const LikesCounter = forwardRef<
       >
         {contentTotalLikes === 0 && allowPlaceholder
           ? 'Be the first person to like this!'
-          : `${formattedLikes} likes`}
+          : formattedLikes}
       </Typography>
     );
   }
