@@ -196,7 +196,7 @@ const DraftLikesFeedback = forwardRef<
   return (
     <Typography
       key={message}
-      className={cn('w-full text-center', className)}
+      className={cn('w-full whitespace-nowrap text-center', className)}
       asChild
       variant='body-sm'
       ref={ref}
