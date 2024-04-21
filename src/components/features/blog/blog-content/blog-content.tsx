@@ -20,7 +20,7 @@ export function BlogContent({ content }: BlogContentProps) {
 
           <BlogContentFooter
             className='relative z-50 mt-16 sm:mt-24'
-            slug={content.slug}
+            content={content}
           />
         </>
       }

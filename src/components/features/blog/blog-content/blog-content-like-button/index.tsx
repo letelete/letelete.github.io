@@ -14,7 +14,7 @@ import { HeartButton, HeartSize } from '~ui/molecules/buttons/heart-button';
 import { compactNumber } from '~utils/string';
 import { cn } from '~utils/style';
 
-export interface LikeContentButtonProps {
+export interface BlogContentLikeButtonProps {
   contentSlug: string;
   className?: string;
   size?: HeartSize;
@@ -24,7 +24,7 @@ export const BlogContentLikeButton = ({
   contentSlug,
   className,
   size,
-}: LikeContentButtonProps) => {
+}: BlogContentLikeButtonProps) => {
   const { data, isLoading, isError } = useGetContentStatistics({
     slug: contentSlug,
   });

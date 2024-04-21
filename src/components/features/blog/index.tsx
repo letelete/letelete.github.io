@@ -1,12 +1,14 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { BlogItemsList } from '~features/blog/blog-items-list';
 import { BlogItemsListHeader } from '~features/blog/blog-items-list-header';
 import { BlogTwoPaneContainer } from '~features/blog/blog-two-pane-container';
 
-import { Content, ContentType } from '~lib/content/provider';
+import { useContentTypeQueryState } from '~hooks/use-query-state';
+
+import { Content } from '~lib/content/provider';
 
 export const NAVBAR_SCOPE_ID = 'blog-navigation';
 
@@ -15,7 +17,7 @@ export interface BlogProps {
 }
 
 export const Blog = ({ contents }: BlogProps) => {
-  const [currentSegment, setCurrentSegment] = useState<ContentType>('article');
+  const [currentSegment, setCurrentSegment] = useContentTypeQueryState();
   const currentContent = useMemo(
     () => contents.filter((content) => content.type === currentSegment),
     [contents, currentSegment]
@@ -27,7 +29,7 @@ export const Blog = ({ contents }: BlogProps) => {
         <BlogItemsListHeader
           contents={contents}
           currentSegment={currentSegment}
-          onSegmentChange={setCurrentSegment}
+          onSegmentChange={(value) => void setCurrentSegment(value)}
         />
       }
       trailing={<BlogItemsList items={currentContent} />}

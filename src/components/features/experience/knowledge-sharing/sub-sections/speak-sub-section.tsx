@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { BLOG_PATH } from '~constants/index';
+import { BLOG_PATH, BLOG_PATH_WITH_CATEGORY } from '~constants/index';
 
 import { Content } from '~lib/content/provider';
 
@@ -39,7 +39,7 @@ export const SpeakSubSection = ({ data, ...rest }: SpeakSubSectionProps) => {
 
       <HorizontalScrollButtonContainer ref={speakScrollRef} reversed>
         <Button variant='link' size='inline' asChild>
-          <Link href={BLOG_PATH}>
+          <Link href={BLOG_PATH_WITH_CATEGORY('talk')}>
             <MicrophoneEmoji className='mr-2' />
             Check all of my talks
           </Link>

@@ -2,8 +2,9 @@
 
 import { AnimatePresence } from 'framer-motion';
 
-import { BLOG_PATH } from '~constants/index';
+import { BLOG_PATH_WITH_CATEGORY } from '~constants/index';
 
+import { BlogContentGoBackButton } from '~features/blog/blog-content/blog-content-go-back-button';
 import { BlogContentLikeButton } from '~features/blog/blog-content/blog-content-like-button';
 
 import { Content, ContentType } from '~lib/content/provider';
@@ -11,7 +12,6 @@ import { Content, ContentType } from '~lib/content/provider';
 import { RevealInUpMotion } from '~ui/atoms/motion';
 import { ForNonMobile } from '~ui/atoms/responsive';
 import { Typography } from '~ui/atoms/typography';
-import { GoBackButton } from '~ui/molecules/buttons/go-back-button';
 import { TagsList } from '~ui/organisms/tags-list';
 
 import { dayMonthNameAndYearDate, readingTime } from '~utils/string';
@@ -29,7 +29,7 @@ export const BlogContentHeader = ({ content }: BlogContentHeader) => {
         color='hint'
         weight='bold'
       >
-        <GoBackButton href={BLOG_PATH} />
+        <BlogContentGoBackButton href={BLOG_PATH_WITH_CATEGORY(content.type)} />
 
         {`/ ${contentTypeToHeader[content.type]}`}
       </Typography>

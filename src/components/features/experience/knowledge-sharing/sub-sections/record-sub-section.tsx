@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { BLOG_PATH, SOCIALS } from '~constants/index';
+import { BLOG_PATH, BLOG_PATH_WITH_CATEGORY } from '~constants/index';
 
 import { Content } from '~lib/content/provider';
 
@@ -30,7 +30,7 @@ export const RecordSubSection = ({ data, ...rest }: RecordSubSectionProps) => {
     <HorizontalScrollCarousel ref={recordScrollRef} {...rest}>
       <HorizontalScrollButtonContainer ref={recordScrollRef}>
         <Button variant='link' size='inline' asChild>
-          <Link href={SOCIALS.youtube.url}>
+          <Link href={BLOG_PATH_WITH_CATEGORY('youtube-video')}>
             <Icon
               className='mr-2'
               name='youtube'

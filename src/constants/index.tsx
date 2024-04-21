@@ -1,9 +1,13 @@
+import { ContentType } from '~lib/content/provider';
+
 export const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : 'https://kawka.me';
 
 export const BLOG_PATH = '/blog';
+export const BLOG_PATH_WITH_CATEGORY = (category: ContentType) =>
+  `${BLOG_PATH}?c=${category}`;
 
 export const GOOGLE_CODE_IN_ARTICLE_PATH = `${BLOG_PATH}/winning-google-code-in-2018`;
 
