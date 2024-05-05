@@ -2,29 +2,26 @@
 
 import { Player } from '@lottiefiles/react-lottie-player';
 import { AnimatePresence, Variants, motion, wrap } from 'framer-motion';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image, { ImageProps } from 'next/image';
 import { ComponentType, ElementRef, useMemo, useRef, useState } from 'react';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
 
+import { ImageItem } from '~lib/images/provider';
+
 import { Icon } from '~ui/atoms/icon';
+import { ImagesPreloader } from '~ui/atoms/images-preloader';
 import { VisuallyHidden } from '~ui/atoms/visually-hidden';
 import { CarouselNavigationButton } from '~ui/molecules/buttons/carousel-navigation-button';
 
 import { cn } from '~utils/style';
-
-export interface GalleryItem {
-  src: string | StaticImport;
-  alt: string;
-}
 
 export const clearClipPath = 'inset(0% 0% 0% 0% round 10px)';
 
 export const clipPathToBottom = 'inset(90% 0% 10% 0% round 10px)';
 
 export interface ParallaxGalleryProps {
-  items: GalleryItem[];
+  items: ImageItem[];
   className?: string;
 }
 
@@ -102,6 +99,8 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
       className={cn('relative h-full w-full overflow-hidden', className)}
       ref={containerRef}
     >
+      <ImagesPreloader items={items} />
+
       <AnimatePresence mode='popLayout' initial={false} custom={direction}>
         <MotionImage
           key={pageId}

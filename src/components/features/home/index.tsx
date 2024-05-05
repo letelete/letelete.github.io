@@ -17,6 +17,7 @@ import {
 import { BLOG_PATH } from '~constants/index';
 
 import { Content } from '~lib/content/provider';
+import { ImageItem } from '~lib/images/provider';
 
 import { Button } from '~ui/atoms/button';
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
@@ -25,11 +26,10 @@ import { ForMobile, ForNonMobile } from '~ui/atoms/responsive';
 import { Typography } from '~ui/atoms/typography';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Footer } from '~ui/molecules/footer';
-import { GalleryItem } from '~ui/organisms/parallax-gallery';
 
 export const HomeContext = createContext<{
   content: Content[];
-  brunoImages: GalleryItem[];
+  brunoImages: ImageItem[];
 }>({
   content: [],
   brunoImages: [],
@@ -56,7 +56,7 @@ const headerModeForSection: Record<
 
 export interface HomeProps {
   content: Content[];
-  brunoImages: GalleryItem[];
+  brunoImages: ImageItem[];
   hero: ReactNode;
   about: ReactNode;
   experience: ReactNode;
