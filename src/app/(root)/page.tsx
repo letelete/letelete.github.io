@@ -8,9 +8,12 @@ import { HeroSection } from '~features/home/hero-section';
 import { TestimonialSection } from '~features/home/testimonial-section';
 
 import { getAllContent } from '~lib/content/provider';
+import { getAboutMeImages } from '~lib/images/provider';
 
 export default async function HomePage() {
   const content = await getAllContent();
+  const images = await getAboutMeImages();
+  const brunoImages = images.map((src) => ({ src, alt: 'Bruno Kawka' }));
 
   return (
     <Suspense
@@ -21,9 +24,11 @@ export default async function HomePage() {
       }
     >
       <Home
+        content={content}
+        brunoImages={brunoImages}
         hero={<HeroSection />}
         about={<AboutSection />}
-        experience={<ExperienceSection content={content} />}
+        experience={<ExperienceSection />}
         contact={<ContactSection />}
         testimonial={<TestimonialSection />}
       />

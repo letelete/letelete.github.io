@@ -1,13 +1,16 @@
 'use client';
 
+import { useContext } from 'react';
+
 import { ConferencesHeadline } from '~features/experience/conferences-headline';
 import { HistorySection } from '~features/experience/history-section';
 import { InterestsSection } from '~features/experience/interests-section';
 import { KnowledgeSharingSection } from '~features/experience/knowledge-sharing/knowledge-sharing-section';
+import { HomeContext } from '~features/home';
 
-import { Content } from '~lib/content/provider';
+export const ExperienceSection = () => {
+  const { content } = useContext(HomeContext);
 
-export const ExperienceSection = ({ content }: { content: Content[] }) => {
   return (
     <div className='relative flex min-h-screen w-full flex-col'>
       <KnowledgeSharingSection data={content} />

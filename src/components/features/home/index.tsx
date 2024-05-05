@@ -8,12 +8,15 @@ import {
   ComponentProps,
   ComponentPropsWithoutRef,
   ReactNode,
+  createContext,
   useCallback,
   useRef,
   useState,
 } from 'react';
 
 import { BLOG_PATH } from '~constants/index';
+
+import { Content } from '~lib/content/provider';
 
 import { Button } from '~ui/atoms/button';
 import { Navbar, NavbarItem } from '~ui/atoms/navbar';
@@ -22,6 +25,15 @@ import { ForMobile, ForNonMobile } from '~ui/atoms/responsive';
 import { Typography } from '~ui/atoms/typography';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Footer } from '~ui/molecules/footer';
+import { GalleryItem } from '~ui/organisms/parallax-gallery';
+
+export const HomeContext = createContext<{
+  content: Content[];
+  brunoImages: GalleryItem[];
+}>({
+  content: [],
+  brunoImages: [],
+});
 
 const navigationItems = [
   { id: 'hello', label: 'hello' },
@@ -43,6 +55,8 @@ const headerModeForSection: Record<
 };
 
 export interface HomeProps {
+  content: Content[];
+  brunoImages: GalleryItem[];
   hero: ReactNode;
   about: ReactNode;
   experience: ReactNode;
@@ -51,6 +65,8 @@ export interface HomeProps {
 }
 
 export const Home = ({
+  content,
+  brunoImages,
   hero,
   about,
   experience,
@@ -102,78 +118,80 @@ export const Home = ({
   );
 
   return (
-    <main className='flex min-h-screen flex-col'>
-      <AppHeader
-        className='fixed'
-        innerClassName='flex gap-x-2'
-        mode={headerModeForSection[currentNavigationSectionId]}
-      >
-        <div className='flex-1 shrink-0' />
+    <HomeContext.Provider value={{ content, brunoImages }}>
+      <main className='flex min-h-screen flex-col'>
+        <AppHeader
+          className='fixed'
+          innerClassName='flex gap-x-2'
+          mode={headerModeForSection[currentNavigationSectionId]}
+        >
+          <div className='flex-1 shrink-0' />
 
-        <Navbar
-          className='w-fit'
-          scopeId='home-main-navigation'
-          items={navigationItems}
-          selectedItemId={currentNavigationSectionId}
-          onSelect={handleSelectSection}
-        />
+          <Navbar
+            className='w-fit'
+            scopeId='home-main-navigation'
+            items={navigationItems}
+            selectedItemId={currentNavigationSectionId}
+            onSelect={handleSelectSection}
+          />
 
-        <div className='flex flex-1 justify-end'>
-          <Button
-            variant='ghost'
-            size='inline'
-            className='px-1 hover:bg-transparent'
-            asChild
-            onFocus={handleBlogHover}
-            onMouseEnter={handleBlogHover}
-            onMouseLeave={handleBlogBlur}
-            onBlur={handleBlogBlur}
-          >
-            <Link className='relative' href={BLOG_PATH}>
-              <motion.span
-                variants={{
-                  compact: { scale: 0.7, opacity: 0.9 },
-                  normal: { scale: 1, opacity: 1 },
-                }}
-                transition={{ type: 'spring' }}
-                className='absolute -top-5 right-3 opacity-80 sm:-top-[0.5em] sm:right-full sm:blur-none'
-              >
-                <ForMobile>
-                  {renderBlogIconPlayer({ autoplay: true })}
-                </ForMobile>
-                <ForNonMobile>{renderBlogIconPlayer()}</ForNonMobile>
-              </motion.span>
-              <Typography color='highlight'>blog</Typography>
-            </Link>
-          </Button>
-        </div>
-      </AppHeader>
+          <div className='flex flex-1 justify-end'>
+            <Button
+              variant='ghost'
+              size='inline'
+              className='px-1 hover:bg-transparent'
+              asChild
+              onFocus={handleBlogHover}
+              onMouseEnter={handleBlogHover}
+              onMouseLeave={handleBlogBlur}
+              onBlur={handleBlogBlur}
+            >
+              <Link className='relative' href={BLOG_PATH}>
+                <motion.span
+                  variants={{
+                    compact: { scale: 0.7, opacity: 0.9 },
+                    normal: { scale: 1, opacity: 1 },
+                  }}
+                  transition={{ type: 'spring' }}
+                  className='absolute -top-5 right-3 opacity-80 sm:-top-[0.5em] sm:right-full sm:blur-none'
+                >
+                  <ForMobile>
+                    {renderBlogIconPlayer({ autoplay: true })}
+                  </ForMobile>
+                  <ForNonMobile>{renderBlogIconPlayer()}</ForNonMobile>
+                </motion.span>
+                <Typography color='highlight'>blog</Typography>
+              </Link>
+            </Button>
+          </div>
+        </AppHeader>
 
-      <Navigatable
-        className='z-10'
-        onSectionInView={handleSectionInView}
-        ref={navigatableHandler}
-      >
-        <Navigatable.Section sectionId={'hello' satisfies NavigationKey}>
-          {hero}
-        </Navigatable.Section>
+        <Navigatable
+          className='z-10'
+          onSectionInView={handleSectionInView}
+          ref={navigatableHandler}
+        >
+          <Navigatable.Section sectionId={'hello' satisfies NavigationKey}>
+            {hero}
+          </Navigatable.Section>
 
-        <Navigatable.Section sectionId={'about' satisfies NavigationKey}>
-          {about}
-        </Navigatable.Section>
+          <Navigatable.Section sectionId={'about' satisfies NavigationKey}>
+            {about}
+          </Navigatable.Section>
 
-        <Navigatable.Section sectionId={'experience' satisfies NavigationKey}>
-          {experience}
-        </Navigatable.Section>
+          <Navigatable.Section sectionId={'experience' satisfies NavigationKey}>
+            {experience}
+          </Navigatable.Section>
 
-        <Navigatable.Section sectionId={'contact' satisfies NavigationKey}>
-          {contact}
+          <Navigatable.Section sectionId={'contact' satisfies NavigationKey}>
+            {contact}
 
-          {testimonial}
-        </Navigatable.Section>
-      </Navigatable>
+            {testimonial}
+          </Navigatable.Section>
+        </Navigatable>
 
-      <Footer className='mt-14' />
-    </main>
+        <Footer className='mt-14' />
+      </main>
+    </HomeContext.Provider>
   );
 };

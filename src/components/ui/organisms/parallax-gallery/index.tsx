@@ -40,7 +40,7 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
   const [showSwipeHint, setSwipeHint] = useState(true);
 
   const [[pageId, direction], setPage] = useState([0, 0]);
-  const currentItemIndex = wrap(0, items.length - 1, pageId);
+  const currentItemIndex = wrap(0, items.length, pageId);
   const currentItem = items[currentItemIndex];
 
   const containerRef = useRef<ElementRef<typeof Image>>(null);
