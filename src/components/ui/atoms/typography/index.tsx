@@ -18,6 +18,7 @@ const typographyVariants = cva('tracking-normal', {
       bold: 'font-bold',
       medium: 'font-medium',
       normal: 'font-normal',
+      light: 'font-light',
     },
     color: {
       primary: 'text-ctx-primary-fg-primary',
@@ -52,7 +53,17 @@ export interface TypographyProps
 
 const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
   (
-    { asChild, balance, color, weight, variant, prose, className, ...rest },
+    {
+      asChild,
+      balance,
+      color,
+      weight,
+      variant,
+      prose,
+      italic,
+      className,
+      ...rest
+    },
     ref
   ) => {
     const PolymorphicComponent = asChild ? Slot : 'p';
@@ -61,7 +72,7 @@ const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
       <PolymorphicComponent
         ref={ref}
         className={cn(
-          typographyVariants({ color, weight, variant, prose }),
+          typographyVariants({ color, weight, variant, prose, italic }),
           balance && 'text-balance',
           className
         )}

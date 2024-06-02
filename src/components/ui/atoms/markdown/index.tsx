@@ -22,7 +22,6 @@ export const Markdown: MDXComponents = {
         className={cn('pb-6', className)}
         variant='heading'
         weight='bold'
-        color='highlight'
         asChild
       >
         <h2 {...props}>{children}</h2>
@@ -34,7 +33,6 @@ export const Markdown: MDXComponents = {
       <Typography
         className={cn('pb-2 pt-8', className)}
         variant='heading'
-        color='highlight'
         asChild
       >
         <h2 {...props}>{children}</h2>
@@ -46,7 +44,6 @@ export const Markdown: MDXComponents = {
       <Typography
         variant='subheading'
         className={cn('pb-1 pt-6', className)}
-        color='highlight'
         asChild
       >
         <h3 {...props}>{children}</h3>

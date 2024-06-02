@@ -7,6 +7,7 @@ const baseForeground = {
   primary: 'rgba(0,0,0,0.87)',
   secondary: 'rgba(0,0,0,0.64)',
   hint: 'rgba(0,0,0,0.34)',
+  decorative: 'rgba(0,0,0,0.16)',
   destructive: '#ff5151',
 };
 
@@ -15,6 +16,7 @@ const baseForegroundInverse = {
   primary: 'rgba(255,255,255,0.87)',
   secondary: 'rgba(255,255,255,0.64)',
   hint: 'rgba(255,255,255,0.34)',
+  decorative: 'rgba(255,255,255,0.16)',
   destructive: '#ff5151',
 };
 

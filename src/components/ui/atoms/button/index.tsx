@@ -13,7 +13,7 @@ const buttonVariants = cva(
         default: '',
         outline: 'bg-transparent outline outline-1',
         ghost: 'bg-transparent',
-        link: 'bg-transparent tracking-normal underline underline-offset-4',
+        link: 'hover:underline-ctx-accent-secondary-fg-solid bg-transparent tracking-normal underline underline-offset-4',
       },
       size: {
         default: 'px-4 py-3',

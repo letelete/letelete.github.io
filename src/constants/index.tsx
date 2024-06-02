@@ -30,7 +30,7 @@ export const SOCIALS = {
   },
   twitter: {
     url: 'https://twitter.com/BrunoKawka',
-    handle: '@BrunoKawka',
+    handle: '@brunokawka',
   },
   youtube: {
     url: 'https://www.youtube.com/@brunokawka',

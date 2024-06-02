@@ -7,6 +7,7 @@ import {
   useSpring,
 } from 'framer-motion';
 import {
+  ComponentPropsWithoutRef,
   PropsWithChildren,
   MouseEvent as ReactMouseEvent,
   ReactNode,
@@ -102,17 +103,13 @@ const HighlightedWithPopup = ({
         }}
         {...rest}
       >
-        <AnimatePresence>
-          {!hovering && (
-            <motion.span
-              layoutId='popup'
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className='inset absolute z-0 block h-full w-full bg-ctx-accent-primary'
-            />
-          )}
-        </AnimatePresence>
+        <motion.span
+          animate={{
+            scale: 1,
+            height: hovering ? 2 : '100%',
+          }}
+          className='inset absolute bottom-0 left-0 z-0 block w-full bg-ctx-accent-primary'
+        />
 
         <span className='relative z-10'>{children}</span>
 
@@ -141,7 +138,58 @@ const HighlightedWithPopup = ({
 
 HighlightedWithPopup.displayName = 'HighlightedWithPopup';
 
+/* -------------------------------------------------------------------------------------------------
+ * PopupVideoContent
+ * -----------------------------------------------------------------------------------------------*/
+
+interface PopupVideoContentProps
+  extends Omit<ComponentPropsWithoutRef<'video'>, 'src'> {
+  fileName: string;
+}
+
+const PopupVideoContent = ({
+  fileName,
+  className,
+  width = '426',
+  height = '240',
+  controls = false,
+  preload = 'auto',
+  playsInline = true,
+  autoPlay = true,
+  loop = true,
+  muted = true,
+  ...rest
+}: PopupVideoContentProps) => (
+  <video
+    className={cn(
+      'absolute left-0 top-0 h-full w-full object-cover',
+      className
+    )}
+    width={width}
+    height={height}
+    controls={controls}
+    preload={preload}
+    playsInline={playsInline}
+    autoPlay={autoPlay}
+    loop={loop}
+    muted={muted}
+    {...rest}
+  >
+    <source src={`/videos/${fileName}.webm`} type='video/webm' />
+    <source src={`/videos/${fileName}.mp4`} type='video/mp4' />
+    <p>
+      Your browser doesn&apos;t support HTML video. Here is a
+      <a href={`/videos/${fileName}.mp4`} download={`${fileName}.mp4`}>
+        link to the video
+      </a>{' '}
+      instead.
+    </p>
+  </video>
+);
+
+PopupVideoContent.displayName = 'PopupVideoContent';
+
 /* -----------------------------------------------------------------------------------------------*/
 
-export { HighlightedWithPopup };
-export type { HighlightedWithPopupProps };
+export { HighlightedWithPopup, PopupVideoContent };
+export type { HighlightedWithPopupProps, PopupVideoContentProps };

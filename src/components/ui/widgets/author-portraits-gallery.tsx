@@ -1,11 +1,27 @@
-import { useContext } from 'react';
+'use client';
 
-import { HomeContext } from '~modules/home';
+import { ImageItem } from '~lib/images/provider';
 
 import { ParallaxGallery } from '~ui/organisms/parallax-gallery';
 
-export const AuthorPortraitsGallery = () => {
-  const { authorPortraits } = useContext(HomeContext);
+/* -------------------------------------------------------------------------------------------------
+ * AuthorPortraitsGallery
+ * -----------------------------------------------------------------------------------------------*/
 
-  return <ParallaxGallery className='object-cover' items={authorPortraits} />;
+interface AuthorPortraitsGalleryProps {
+  images: ImageItem[];
+}
+
+const AuthorPortraitsGallery = ({ images }: AuthorPortraitsGalleryProps) => {
+  return (
+    <ParallaxGallery
+      className='overflow-hidden rounded-xl object-cover'
+      items={images}
+    />
+  );
 };
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { AuthorPortraitsGallery };
+export type { AuthorPortraitsGalleryProps };

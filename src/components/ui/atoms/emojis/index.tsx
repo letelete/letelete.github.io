@@ -7,10 +7,10 @@ import microphone from '/public/emojis/microphone.webp';
 import pencil from '/public/emojis/pencil.webp';
 import pixelArtHeart from '/public/emojis/pixel-art-heart.svg';
 import roundPushpin from '/public/emojis/round-pushpin.webp';
+import thinkingFace from '/public/emojis/thinking-face.webp';
 import trophy from '/public/emojis/trophy.webp';
 import unicorn from '/public/emojis/unicorn.webp';
 import videoCamera from '/public/emojis/video-camera.webp';
-import whiteQuestionMark from '/public/emojis/white-question-mark.webp';
 
 export type BaseEmojiProps = ImageProps;
 
@@ -49,16 +49,14 @@ export const LaptopEmoji = ({ ...rest }: EmojiProps) => {
   return <BaseEmoji alt='Laptop' src={laptop} {...rest} />;
 };
 
-export const WhiteQuestionMarkEmoji = ({ ...rest }: EmojiProps) => {
-  return (
-    <BaseEmoji alt='White question mark' src={whiteQuestionMark} {...rest} />
-  );
-};
-
 export const PixelArtHeartEmoji = ({ ...rest }: EmojiProps) => {
   return <BaseEmoji alt='Pixel art heart' src={pixelArtHeart} {...rest} />;
 };
 
 export const UnicornEmoji = ({ ...rest }: EmojiProps) => {
   return <BaseEmoji alt='Unicorn' src={unicorn} {...rest} />;
+};
+
+export const ThinkingFaceEmoji = ({ ...rest }: EmojiProps) => {
+  return <BaseEmoji alt='Thinking face' src={thinkingFace} {...rest} />;
 };

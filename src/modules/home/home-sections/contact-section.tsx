@@ -7,72 +7,67 @@ import { SOCIALS } from '~constants/index';
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
 import { Typography } from '~ui/atoms/typography';
+import { SectionContainer } from '~ui/molecules/section/section-container';
+import { SectionHeader } from '~ui/molecules/section/section-header';
 
 import { cn } from '~utils/style';
 
 export const ContactSection = () => {
   return (
-    <section className='layout-width-limiter layout-padding flex w-full flex-col items-center justify-center'>
-      <figure className='flex flex-col justify-center'>
-        <Typography asChild>
-          <h2>
-            {'Get in touch. Follow me. '}
-            <span className='text-foreground-primary'>Let’s talk!</span>
-          </h2>
-        </Typography>
+    <SectionContainer>
+      <SectionHeader title='Contact' />
 
-        <div className='mt-8 flex flex-col gap-y-4'>
-          {socials.map((social) => (
-            <div key={social.id} className='flex gap-x-2'>
-              <Icon
-                className='relative mt-1'
-                name={social.icon.name}
-                color={social.icon.color}
-              />
+      <div className='mt-8 flex flex-col gap-y-4'>
+        {socials.map((social) => (
+          <div key={social.id} className='flex gap-x-2'>
+            <Icon
+              className='relative mt-1'
+              name={social.icon.name}
+              color={social.icon.color}
+            />
 
-              <Typography variant='body-sm'>
-                {social.content.map(({ text, highlighted, cta }) => {
-                  if (cta) {
-                    return (
-                      <Button
-                        key={text}
-                        className={cn(
-                          'font-normal',
-                          highlighted
-                            ? 'text-foreground-primary'
-                            : 'text-foreground-secondary'
-                        )}
-                        variant='link'
-                        size='inline'
-                        asChild
-                      >
-                        <Link href={social.link.href}>{text}</Link>
-                      </Button>
-                    );
-                  }
-                  if (highlighted) {
-                    return (
-                      <span key={text} className='text-foreground-primary'>
-                        {text}
-                      </span>
-                    );
-                  }
-                  return text;
-                })}{' '}
-                <Button
-                  className='text-foreground-secondary font-normal'
-                  variant='link'
-                  size='inline'
-                  asChild
-                >
-                  <Link href={social.link.href}>{social.link.label}</Link>
-                </Button>
-              </Typography>
-            </div>
-          ))}
-        </div>
-      </figure>
-    </section>
+            <Typography>
+              {social.content.map(({ text, highlighted, cta }) => {
+                if (cta) {
+                  return (
+                    <Button
+                      key={text}
+                      className={cn(
+                        'font-normal',
+                        highlighted
+                          ? 'text-foreground-primary'
+                          : 'text-foreground-secondary'
+                      )}
+                      variant='link'
+                      size='inline'
+                      asChild
+                    >
+                      <Link href={social.link.href}>{text}</Link>
+                    </Button>
+                  );
+                }
+                if (highlighted) {
+                  return (
+                    <span key={text} className='text-foreground-primary'>
+                      {text}
+                    </span>
+                  );
+                }
+                return text;
+              })}{' '}
+              <Button
+                className='text-foreground-secondary font-normal'
+                variant='link'
+                size='inline'
+                asChild
+              >
+                <Link href={social.link.href}>{social.link.label}</Link>
+              </Button>
+            </Typography>
+          </div>
+        ))}
+      </div>
+    </SectionContainer>
   );
 };
 

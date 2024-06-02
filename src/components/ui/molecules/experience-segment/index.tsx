@@ -37,17 +37,17 @@ export const ExperienceSegment = ({
           <div className='relative inline'>{leading}</div>
 
           <div className='flex w-full flex-1 flex-col flex-wrap gap-x-2 sm:flex-row'>
-            <Typography
-              variant='body-sm'
-              color='highlight'
-              prose={false}
-              balance={false}
-            >
+            <Typography variant='body-sm' prose={false} balance={false}>
               {title}
             </Typography>
 
             {subtitle && (
-              <Typography prose={false} balance={false} variant='body-sm'>
+              <Typography
+                color='secondary'
+                prose={false}
+                balance={false}
+                variant='body-sm'
+              >
                 {subtitle}
               </Typography>
             )}
@@ -60,8 +60,7 @@ export const ExperienceSegment = ({
           prose={false}
           balance={false}
           variant='body-sm'
-          weight='normal'
-          color='hint'
+          color='secondary'
           asChild
         >
           <div>

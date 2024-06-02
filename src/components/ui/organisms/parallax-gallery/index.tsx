@@ -1,6 +1,5 @@
 'use client';
 
-import { Player } from '@lottiefiles/react-lottie-player';
 import { AnimatePresence, Variants, motion, wrap } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 import { ComponentType, ElementRef, useMemo, useRef, useState } from 'react';
@@ -104,7 +103,7 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
       <AnimatePresence mode='popLayout' initial={false} custom={direction}>
         <MotionImage
           key={pageId}
-          className='h-full w-full overflow-hidden rounded-sm object-cover'
+          className='h-full w-full overflow-hidden rounded-xl object-cover'
           src={currentItem.src}
           alt={currentItem.alt}
           sizes={imageSizes}
@@ -148,7 +147,8 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
         />
       </div>
 
-      <AnimatePresence>
+      {/* TODO: investigate why Lottie does not work with next.js */}
+      {/* <AnimatePresence>
         {showSwipeHint && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -166,7 +166,7 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
             />
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   );
 };

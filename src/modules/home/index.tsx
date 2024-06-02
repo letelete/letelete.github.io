@@ -5,7 +5,13 @@ import { createContext, useMemo } from 'react';
 import { Content } from '~lib/content/provider';
 import { ImageItem } from '~lib/images/provider';
 
+import { HomeFooter } from '~modules/home/home-footer';
 import { HomeHeader } from '~modules/home/home-header';
+import { AboutSection } from '~modules/home/home-sections/about-section/about-section';
+import { ContactSection } from '~modules/home/home-sections/contact-section';
+import { DigitalContributionsKnowledgeSharing } from '~modules/home/home-sections/digital-contributions-knowledge-sharing-section';
+import { DigitalContributionsProjects } from '~modules/home/home-sections/digital-contributions-projects-section';
+import { ExperienceSection } from '~modules/home/home-sections/experience-section';
 import { HeroSection } from '~modules/home/home-sections/hero-section';
 
 /* -------------------------------------------------------------------------------------------------
@@ -43,7 +49,7 @@ const Home = ({ blogContent, authorPortraits }: HomeProps) => {
         <div className='w-full space-y-32'>
           <HeroSection />
 
-          {/* <DigitalContributionsKnowledgeSharing />
+          <DigitalContributionsKnowledgeSharing />
 
           <DigitalContributionsProjects />
 
@@ -53,7 +59,7 @@ const Home = ({ blogContent, authorPortraits }: HomeProps) => {
 
           <ContactSection />
 
-          <HomeFooter /> */}
+          <HomeFooter />
         </div>
       </main>
     </HomeContext.Provider>

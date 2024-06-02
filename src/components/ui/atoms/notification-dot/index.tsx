@@ -3,16 +3,19 @@ import { type HTMLMotionProps, motion } from 'framer-motion';
 
 import { cn } from '~utils/style';
 
-const notificationDotVariants = cva('bg-accent aspect-square rounded-full', {
-  variants: {
-    size: {
-      default: 'h-[0.625rem] w-[0.625rem]',
+const notificationDotVariants = cva(
+  'aspect-square rounded-full bg-ctx-accent-secondary',
+  {
+    variants: {
+      size: {
+        default: 'h-[0.625rem] w-[0.625rem]',
+      },
     },
-  },
-  defaultVariants: {
-    size: 'default',
-  },
-});
+    defaultVariants: {
+      size: 'default',
+    },
+  }
+);
 
 export interface NotificationDotProps
   extends HTMLMotionProps<'div'>,

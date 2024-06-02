@@ -5,7 +5,10 @@ import { useCallback } from 'react';
 import { useRelativeDayPart } from '~hooks/use-relative-day-part';
 
 import { Typography } from '~ui/atoms/typography';
-import { HighlightedWithPopup } from '~ui/organisms/highlighted-with-popup';
+import {
+  HighlightedWithPopup,
+  PopupVideoContent,
+} from '~ui/organisms/highlighted-with-popup';
 import { Listenable, ListenableHighlight } from '~ui/organisms/listenable';
 import { SocialButtons } from '~ui/widgets/social-buttons';
 
@@ -13,38 +16,7 @@ export const HeroSection = () => {
   const relativeDayPart = useRelativeDayPart();
 
   const renderNaturalPopup = useCallback(() => {
-    return (
-      <video
-        className='absolute left-0 top-0 h-full w-full object-cover'
-        width='426'
-        height='240'
-        controls={false}
-        preload='auto'
-        playsInline
-        autoPlay
-        loop
-        muted
-      >
-        <source
-          src={`/videos/nature-${relativeDayPart.part}.webm`}
-          type='video/webm'
-        />
-        <source
-          src={`/videos/nature-${relativeDayPart.part}.mp4`}
-          type='video/mp4'
-        />
-        <p>
-          Your browser doesn&apos;t support HTML video. Here is a
-          <a
-            href={`/videos/nature-${relativeDayPart.part}.mp4`}
-            download={`nature-${relativeDayPart.part}.mp4`}
-          >
-            link to the video
-          </a>{' '}
-          instead.
-        </p>
-      </video>
-    );
+    return <PopupVideoContent fileName={`nature-${relativeDayPart.part}`} />;
   }, [relativeDayPart.part]);
 
   return (

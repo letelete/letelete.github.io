@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     description:
       "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
     siteId: '1073997624527806473',
-    creator: '@BrunoKawka',
+    creator: '@brunokawka',
     creatorId: '1073997624527806473',
     images: [
       {

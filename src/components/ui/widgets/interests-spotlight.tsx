@@ -6,13 +6,16 @@ import { ParallaxMarquee } from '~ui/organisms/parallax-marquee';
 
 import { cn } from '~utils/style';
 
-export interface InterestsSectionProps
-  extends ComponentPropsWithoutRef<'div'> {}
+/* -------------------------------------------------------------------------------------------------
+ * InterestsSpotlight
+ * -----------------------------------------------------------------------------------------------*/
 
-export const InterestsSection = ({
+interface InterestsSpotlightProps extends ComponentPropsWithoutRef<'div'> {}
+
+const InterestsSpotlight = ({
   className,
   ...rest
-}: InterestsSectionProps) => {
+}: InterestsSpotlightProps) => {
   const renderOuterItem = useCallback(
     (label: string) => <Typography key={label}>{label}</Typography>,
     []
@@ -60,6 +63,8 @@ export const InterestsSection = ({
   );
 };
 
+/* -----------------------------------------------------------------------------------------------*/
+
 const professional = [
   'React',
   'Next.js',
@@ -96,3 +101,8 @@ const personal = [
   'Spotify wrapped',
   'Filmweb',
 ];
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { InterestsSpotlight };
+export type { InterestsSpotlightProps };
