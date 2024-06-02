@@ -60,7 +60,7 @@ export const ContactSection = () => {
                   return text;
                 })}{' '}
                 <Button
-                  className='font-normal text-foreground-secondary'
+                  className='text-foreground-secondary font-normal'
                   variant='link'
                   size='inline'
                   asChild

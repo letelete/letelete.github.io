@@ -1,12 +1,13 @@
 'use client';
 
 import { memo } from 'react';
-import { BlogContentGoBackButton } from 'src/modules/blog/blog-content/blog-content-go-back-button';
-import { BlogContentLikeButton } from 'src/modules/blog/blog-content/blog-content-like-button';
 
 import { BLOG_PATH_WITH_CATEGORY } from '~constants/index';
 
 import { Content } from '~lib/content/provider';
+
+import { BlogContentGoBackButton } from '~modules/blog/blog-content/blog-content-go-back-button';
+import { BlogContentLikeButton } from '~modules/blog/blog-content/blog-content-like-button';
 
 import { ForMobile } from '~ui/atoms/responsive';
 import { Footer, FooterProps } from '~ui/molecules/footer';

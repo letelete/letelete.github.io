@@ -1,9 +1,9 @@
-import { BlogContentArticle } from 'src/modules/blog/blog-content/blog-content-article';
-import { BlogContentFooter } from 'src/modules/blog/blog-content/blog-content-footer';
-import { BlogContentHeader } from 'src/modules/blog/blog-content/blog-content-header';
-import { BlogTwoPaneContainer } from 'src/modules/blog/blog-two-pane-container';
-
 import { Content } from '~lib/content/provider';
+
+import { BlogContentArticle } from '~modules/blog/blog-content/blog-content-article';
+import { BlogContentFooter } from '~modules/blog/blog-content/blog-content-footer';
+import { BlogContentHeader } from '~modules/blog/blog-content/blog-content-header';
+import { BlogTwoPaneContainer } from '~modules/blog/blog-two-pane-container';
 
 export interface BlogContentProps {
   content: Content;

@@ -63,7 +63,7 @@ export const ExternalContentCard = ({
               className='aspect-square h-6 w-6 flex-shrink-0'
               size={24}
               name='arrow-up-right'
-              color={tw.theme.colors.foreground.primary}
+              color={tw.theme.colors.ctx.primary.fg.solid}
             />
           </div>
         </div>

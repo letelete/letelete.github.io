@@ -1,8 +1,9 @@
 import { Suspense } from 'react';
-import { Home } from 'src/modules/home';
 
 import { getAllContent } from '~lib/content/provider';
 import { getBrunoImages } from '~lib/images/provider';
+
+import { Home } from '~modules/home';
 
 export default async function HomePage() {
   const content = await getAllContent();

@@ -27,7 +27,7 @@ export const ArticleSegment = ({
           <Icon
             className='aspect-square h-4 w-4 flex-shrink-0 flex-grow'
             name='arrow-up-right'
-            color={tw.theme.colors.foreground.primary}
+            color={tw.theme.colors.ctx.primary.fg.solid}
           />
 
           <Button

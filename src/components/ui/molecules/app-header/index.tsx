@@ -86,7 +86,7 @@ const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
         initial='normal'
         animate={compact ? 'compact' : 'normal'}
         className={cn(
-          'to-ctx-primary/25 from-ctx-primary sticky top-0 z-50 flex w-full bg-gradient-to-b backdrop-blur-sm',
+          'sticky top-0 z-50 flex w-full bg-gradient-to-b from-ctx-primary to-ctx-primary/25 backdrop-blur-sm',
           className
         )}
         {...rest}

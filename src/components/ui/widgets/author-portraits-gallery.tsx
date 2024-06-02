@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { HomeContext } from 'src/modules/home';
+
+import { HomeContext } from '~modules/home';
 
 import { ParallaxGallery } from '~ui/organisms/parallax-gallery';
 

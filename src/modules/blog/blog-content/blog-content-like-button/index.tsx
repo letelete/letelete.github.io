@@ -3,7 +3,8 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { AnimatePresence } from 'framer-motion';
 import { ElementRef, forwardRef, useCallback, useId, useState } from 'react';
-import { useContentLike } from 'src/modules/blog/blog-content/blog-content-like-button/use-content-like';
+
+import { useContentLike } from '~modules/blog/blog-content/blog-content-like-button/use-content-like';
 
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 

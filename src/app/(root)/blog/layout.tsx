@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { BlogHeader } from 'src/modules/blog/blog-header';
+
+import { BlogHeader } from '~modules/blog/blog-header';
 
 import '~styles/highlight-js/style.css';
 

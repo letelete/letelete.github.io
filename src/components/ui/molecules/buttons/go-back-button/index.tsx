@@ -32,7 +32,10 @@ export const GoBackButton = ({ href, className }: GoBackButtonProps) => {
     >
       <Link href={href}>
         <motion.span variants={motionVariants}>
-          <Icon name='arrow-left' color={tw.theme.colors.foreground.primary} />
+          <Icon
+            name='arrow-left'
+            color={tw.theme.colors.ctx.primary.fg.solid}
+          />
         </motion.span>
         Go back
       </Link>

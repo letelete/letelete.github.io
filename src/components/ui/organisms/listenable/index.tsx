@@ -2,7 +2,6 @@
 
 import {
   AnimatePresence,
-  MotionConfig,
   MotionValue,
   motion,
   useAnimationFrame,

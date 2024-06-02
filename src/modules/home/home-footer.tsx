@@ -8,7 +8,7 @@ import { Testimonial } from '~ui/widgets/testimonial';
 
 const HomeFooter = () => {
   return (
-    <footer className='layout-width-limiter layout-padding bg-ctx-accent-secondary flex min-h-screen w-full items-center justify-center'>
+    <footer className='layout-width-limiter layout-padding flex min-h-screen w-full items-center justify-center bg-ctx-accent-secondary'>
       <Testimonial />
     </footer>
   );

@@ -36,10 +36,7 @@ export const CarouselNavigationButton = ({
       {...hoverableProps}
       {...rest}
     >
-      <Icon
-        color={tw.theme.colors.background.primary.foreground.primary}
-        name={icon}
-      />
+      <Icon color={tw.theme.colors.ctx.primary.fg.solid} name={icon} />
 
       <VisuallyHidden>{accessibleText}</VisuallyHidden>
     </HoverableButton>

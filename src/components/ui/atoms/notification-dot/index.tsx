@@ -3,7 +3,7 @@ import { type HTMLMotionProps, motion } from 'framer-motion';
 
 import { cn } from '~utils/style';
 
-const notificationDotVariants = cva('aspect-square rounded-full bg-accent', {
+const notificationDotVariants = cva('bg-accent aspect-square rounded-full', {
   variants: {
     size: {
       default: 'h-[0.625rem] w-[0.625rem]',

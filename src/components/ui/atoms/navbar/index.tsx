@@ -79,7 +79,7 @@ const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
           <motion.div
             transition={{ type: 'spring', duration: 0.5 }}
             layoutId={`navbar-item__highlight:${scopeId}`}
-            className='absolute left-0 top-0 z-0 h-full w-full rounded-full bg-black'
+            className='bg-black absolute left-0 top-0 z-0 h-full w-full rounded-full'
           />
         )}
 
@@ -87,7 +87,7 @@ const NavbarItem = forwardRef<HTMLButtonElement, NavbarItemProps>(
           <motion.div
             transition={{ type: 'spring', duration: 0.4 }}
             layoutId={`navbar-item__hover:${scopeId}`}
-            className='absolute left-0 top-0 z-10 h-full w-full rounded-full bg-white/20'
+            className='bg-white/20 absolute left-0 top-0 z-10 h-full w-full rounded-full'
           />
         )}
 

@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import {
   UpdateContentViewsProps,
   updateContentViews,
-} from 'src/app/api/shared/repository';
+} from '~api/shared/repository';
 
 import { contentKeys } from '~services/content/_query-key-factory';
 

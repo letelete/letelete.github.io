@@ -3,7 +3,8 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { memo } from 'react';
 import rehypeHighlight from 'rehype-highlight';
-import { BlogMarkdown } from 'src/modules/blog/blog-markdown';
+
+import { BlogMarkdown } from '~modules/blog/blog-markdown';
 
 export interface BlogContentArticle {
   body: string;

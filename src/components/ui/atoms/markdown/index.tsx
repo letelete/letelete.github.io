@@ -64,7 +64,7 @@ export const Markdown: MDXComponents = {
     return (
       <blockquote
         className={cn(
-          'relative mb-6 py-2 italic *:py-0 *:pl-6 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-2 before:rounded-full before:bg-accent',
+          'before:bg-accent relative mb-6 py-2 italic *:py-0 *:pl-6 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-2 before:rounded-full',
           className
         )}
         {...props}

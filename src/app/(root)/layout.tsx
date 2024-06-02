@@ -3,7 +3,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { Nunito_Sans } from 'next/font/google';
-import { SSRQueryClientProvider } from 'src/app/api/shared/query-client/provider';
+
+import { SSRQueryClientProvider } from '~api/shared/query-client/provider';
 
 import { BASE_URL } from '~constants/index';
 

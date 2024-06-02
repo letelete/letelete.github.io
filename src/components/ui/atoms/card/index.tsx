@@ -13,7 +13,7 @@ const Card = ({ asChild, className, ...rest }: CardProps) => {
   return (
     <Comp
       className={cn(
-        'overflow-hidden rounded-xl bg-gradient-to-br from-card-intense to-card-light/30 backdrop-blur-md',
+        'from-card-intense to-card-light/30 overflow-hidden rounded-xl bg-gradient-to-br backdrop-blur-md',
         className
       )}
       {...rest}
