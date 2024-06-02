@@ -21,7 +21,7 @@ export const ContentCard = ({
   return (
     <Link
       className={cn(
-        'flex cursor-pointer overflow-hidden rounded-lg bg-transparent p-2 transition-colors hover:bg-background-contrast',
+        'hover:bg-background-secondary flex cursor-pointer overflow-hidden rounded-lg bg-transparent p-2 transition-colors',
         className
       )}
       key={content.slug}

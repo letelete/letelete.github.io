@@ -27,11 +27,11 @@ export const ArticleSegment = ({
           <Icon
             className='aspect-square h-4 w-4 flex-shrink-0 flex-grow'
             name='arrow-up-right'
-            color={tw.theme.colors.primary.highlighted}
+            color={tw.theme.colors.foreground.primary}
           />
 
           <Button
-            className='flex-shrink-1 line-clamp-3 h-fit max-w-prose whitespace-break-spaces text-sm text-primary'
+            className='flex-shrink-1 text-foreground-secondary line-clamp-3 h-fit max-w-prose whitespace-break-spaces text-sm'
             variant='link'
             size='inline'
             asChild
@@ -42,7 +42,7 @@ export const ArticleSegment = ({
       }
       trailing={
         <Typography
-          className='whitespace-nowrap text-sm text-primary-hint'
+          className='text-foreground-secondary whitespace-nowrap text-sm'
           weight='normal'
         >
           {monthNameAndYearDate(createdAt)}

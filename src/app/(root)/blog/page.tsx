@@ -1,4 +1,4 @@
-import { Blog } from '~features/blog';
+import { Blog } from 'src/modules/blog';
 
 import { getAllContent } from '~lib/content/provider';
 

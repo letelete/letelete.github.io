@@ -8,7 +8,7 @@ import {
 } from 'framer-motion';
 import { ReactNode, forwardRef, useState } from 'react';
 
-import { cn, tw, vhToPx } from '~utils/style';
+import { cn, vhToPx } from '~utils/style';
 
 export interface AppHeaderProps extends HTMLMotionProps<'header'> {
   innerClassName?: string;
@@ -73,21 +73,20 @@ const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
 
     return (
       <motion.header
+        layout
         ref={ref}
         variants={{
           compact: {
             padding: '0.5rem 0',
-            borderColor: tw.theme.colors.background.contrast,
           },
           normal: {
             padding: '2.5rem 0',
-            borderColor: 'transparent',
           },
         }}
         initial='normal'
         animate={compact ? 'compact' : 'normal'}
         className={cn(
-          'sticky top-0 z-50 flex w-full border-b bg-gradient-to-b from-background to-background/50 backdrop-blur-md',
+          'to-ctx-primary/25 from-ctx-primary sticky top-0 z-50 flex w-full bg-gradient-to-b backdrop-blur-sm',
           className
         )}
         {...rest}

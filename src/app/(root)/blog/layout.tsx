@@ -1,10 +1,8 @@
 import { Metadata } from 'next';
-
-import { BlogHeader } from '~features/blog/blog-header';
+import { BlogHeader } from 'src/modules/blog/blog-header';
 
 import '~styles/highlight-js/style.css';
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: 'Blog',
   description:

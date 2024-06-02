@@ -9,7 +9,7 @@ export const Markdown: MDXComponents = {
     return (
       <a
         {...props}
-        className='underline duration-100 hover:text-primary-highlighted'
+        className='hover:text-foreground-primary underline duration-100'
         target='_blank'
       >
         {children}
@@ -77,7 +77,7 @@ export const Markdown: MDXComponents = {
     return (
       <ul
         className={cn(
-          'my-8 list-disc space-y-4 text-primary marker:text-primary-hint',
+          'text-foreground-secondary marker:text-foreground-secondary my-8 list-disc space-y-4',
           className
         )}
         {...props}

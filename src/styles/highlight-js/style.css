@@ -30,7 +30,7 @@ code {
 
 pre,
 code {
-  font-family: var(--font-jetbrains-mono);
+  font-family: var(--font-mono);
   line-height: 1.6;
 }
 

@@ -27,7 +27,7 @@ export const Tag = ({
   return (
     <Button
       className={cn(
-        'font-normal text-primary-hint transition-colors',
+        'text-foreground-secondary font-normal transition-colors',
         selected && 'text-accent',
         className
       )}

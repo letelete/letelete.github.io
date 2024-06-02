@@ -31,7 +31,7 @@ export const MdxAside = ({
     <aside className={cn('flex w-full py-6', className)} {...rest}>
       <div
         className={cn(
-          'flex w-full  gap-x-4 rounded-md bg-background-contrast p-8 *:p-0'
+          'bg-background-secondary flex  w-full gap-x-4 rounded-md p-8 *:p-0'
         )}
       >
         <Icon className='translate-y-[0.125rem]' {...typeToIcon[type]} />

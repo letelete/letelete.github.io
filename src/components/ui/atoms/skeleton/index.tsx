@@ -19,7 +19,7 @@ const Skeleton = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
           repeatType: 'reverse',
           ease: 'easeOut',
         }}
-        className={cn('bg-background-contrast', className)}
+        className={cn('bg-background-secondary', className)}
         {...props}
       />
     );
