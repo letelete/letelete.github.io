@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import {
   LaptopEmoji,
+  ManClimbingEmoji,
   MicrophoneEmoji,
   ThinkingFaceEmoji,
   TrophyEmoji,
@@ -46,6 +47,14 @@ const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
 /* -----------------------------------------------------------------------------------------------*/
 
 const experience = [
+  {
+    id: 'exp-history__hello-world',
+    leading: <ManClimbingEmoji />,
+    title: 'The Beginning of the Journey',
+    subtitle: 'Wrote my first "Hello, World!"',
+    startDate: new Date(Date.parse('2015-05-01')),
+    endDate: undefined,
+  },
   {
     id: 'exp-history__android-developer-at-mifos-initiative',
     leading: <LaptopEmoji />,
@@ -106,7 +115,7 @@ const experience = [
   {
     id: 'exp-history__youtube-content-creator',
     leading: <VideoCameraEmoji />,
-    title: 'YouTube content creator',
+    title: 'YouTube Content Creator',
     subtitle: '@brunokawka',
     startDate: new Date(Date.parse('2024-03-01')),
     endDate: 'Now',

@@ -6,13 +6,16 @@ import { SOCIALS } from '~constants/index';
 
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
-import { Typography } from '~ui/atoms/typography';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
 
 import { cn } from '~utils/style';
 
-export const ContactSection = () => {
+/* -------------------------------------------------------------------------------------------------
+ * ContactSection
+ * -----------------------------------------------------------------------------------------------*/
+
+const ContactSection = () => {
   return (
     <SectionContainer>
       <SectionHeader title='Contact' />
@@ -26,17 +29,17 @@ export const ContactSection = () => {
               color={social.icon.color}
             />
 
-            <Typography>
+            <div>
               {social.content.map(({ text, highlighted, cta }) => {
                 if (cta) {
                   return (
                     <Button
                       key={text}
                       className={cn(
-                        'font-normal',
+                        'text-base',
                         highlighted
-                          ? 'text-foreground-primary'
-                          : 'text-foreground-secondary'
+                          ? 'text-ctx-primary-fg-primary'
+                          : 'text-ctx-primary-fg-secondary'
                       )}
                       variant='link'
                       size='inline'
@@ -48,7 +51,7 @@ export const ContactSection = () => {
                 }
                 if (highlighted) {
                   return (
-                    <span key={text} className='text-foreground-primary'>
+                    <span key={text} className='text-ctx-primary-fg-primary'>
                       {text}
                     </span>
                   );
@@ -56,20 +59,24 @@ export const ContactSection = () => {
                 return text;
               })}{' '}
               <Button
-                className='text-foreground-secondary font-normal'
+                className='text-base'
                 variant='link'
                 size='inline'
                 asChild
               >
                 <Link href={social.link.href}>{social.link.label}</Link>
               </Button>
-            </Typography>
+            </div>
           </div>
         ))}
       </div>
     </SectionContainer>
   );
 };
+
+ContactSection.displayName = 'ContactSection';
+
+/* -----------------------------------------------------------------------------------------------*/
 
 interface Social {
   id: string;
@@ -183,3 +190,7 @@ const socials: Social[] = [
     },
   },
 ];
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { ContactSection };

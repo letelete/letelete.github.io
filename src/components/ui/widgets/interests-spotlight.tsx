@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { ComponentPropsWithoutRef, useCallback } from 'react';
 
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
@@ -33,7 +34,12 @@ const InterestsSpotlight = ({
   return (
     <section className={cn('flex flex-col', className)} {...rest}>
       <div className='relative'>
+        <VisuallyHidden aria-label='Interests spotlight'>
+          {professional.map(renderInnerItem)}
+        </VisuallyHidden>
+
         <FadeOverlay
+          aria-hidden
           overlayProps={{ className: 'bg-gradient-to-r left-0 w-[40vw]' }}
         >
           <FadeOverlay

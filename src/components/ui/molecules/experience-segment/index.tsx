@@ -37,17 +37,12 @@ export const ExperienceSegment = ({
           <div className='relative inline'>{leading}</div>
 
           <div className='flex w-full flex-1 flex-col flex-wrap gap-x-2 sm:flex-row'>
-            <Typography variant='body-sm' prose={false} balance={false}>
+            <Typography prose={false} balance={false}>
               {title}
             </Typography>
 
             {subtitle && (
-              <Typography
-                color='secondary'
-                prose={false}
-                balance={false}
-                variant='body-sm'
-              >
+              <Typography color='secondary' prose={false} balance={false}>
                 {subtitle}
               </Typography>
             )}
@@ -59,7 +54,6 @@ export const ExperienceSegment = ({
           className='flex flex-nowrap items-center gap-x-1 whitespace-nowrap'
           prose={false}
           balance={false}
-          variant='body-sm'
           color='secondary'
           asChild
         >
@@ -72,7 +66,7 @@ export const ExperienceSegment = ({
                 {isExperienceActive ? (
                   <>
                     <span className='text-accent'>Now</span>
-                    <NotificationDotPulse />
+                    <NotificationDotPulse className='ml-1' />
                   </>
                 ) : (
                   monthNameAndYearDate(endDate)

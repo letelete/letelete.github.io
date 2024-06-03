@@ -39,7 +39,7 @@ export const ContentCard = ({
         </Typography>
 
         <div className='flex flex-1 flex-col'>
-          <Typography className='underline' color='highlight' asChild>
+          <Typography className='underline' asChild>
             <h3>{content.title}</h3>
           </Typography>
 

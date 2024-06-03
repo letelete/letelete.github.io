@@ -14,15 +14,15 @@ export const NotificationDotPulse = ({
   ...rest
 }: NotificationDotPulseProps) => {
   return (
-    <div className={cn('relative', className)}>
+    <div aria-hidden className={cn('relative', className)}>
       <PulsatingNotificationDot
         className='z-0 opacity-50'
-        scale={2.25}
+        scale={2.75}
         {...rest}
       />
       <PulsatingNotificationDot
         className='z-10 opacity-80'
-        scale={1.5}
+        scale={1.75}
         {...rest}
       />
       <NotificationDot className='relative z-20' {...rest} />
@@ -40,7 +40,7 @@ const PulsatingNotificationDot = ({
 }: PulsatingNotificationDot) => (
   <motion.div
     className={cn('absolute left-0 top-0 origin-center scale-0', className)}
-    animate={{ scale, opacity: 0 }}
+    animate={{ scale: [1, scale], opacity: 0 }}
     transition={{
       repeat: Infinity,
       repatType: 'mirror',

@@ -3,6 +3,7 @@ import Image, { ImageProps } from 'next/image';
 import { cn } from '~utils/style';
 
 import laptop from '/public/emojis/laptop.webp';
+import manClimbing from '/public/emojis/man-climbing.webp';
 import microphone from '/public/emojis/microphone.webp';
 import pencil from '/public/emojis/pencil.webp';
 import pixelArtHeart from '/public/emojis/pixel-art-heart.svg';
@@ -59,4 +60,8 @@ export const UnicornEmoji = ({ ...rest }: EmojiProps) => {
 
 export const ThinkingFaceEmoji = ({ ...rest }: EmojiProps) => {
   return <BaseEmoji alt='Thinking face' src={thinkingFace} {...rest} />;
+};
+
+export const ManClimbingEmoji = ({ ...rest }: EmojiProps) => {
+  return <BaseEmoji alt='Man climbing' src={manClimbing} {...rest} />;
 };
