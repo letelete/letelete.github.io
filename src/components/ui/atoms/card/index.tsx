@@ -15,7 +15,7 @@ const Card = ({ asChild, className, disablePadding, ...rest }: CardProps) => {
     <Comp
       className={cn(
         'overflow-hidden rounded-2xl border border-ctx-primary-fg-hint bg-ctx-primary',
-        !disablePadding && 'p-6',
+        !disablePadding && 'p-4 sm:p-6',
         className
       )}
       {...rest}

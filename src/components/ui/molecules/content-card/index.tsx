@@ -1,57 +1,150 @@
-import Link, { LinkProps } from 'next/link';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import {
+  Children,
+  ComponentPropsWithoutRef,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+  useCallback,
+} from 'react';
 
-import { Content } from '~lib/content/provider';
-
+import { Card, CardProps } from '~ui/atoms/card';
+import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-import { TagsList } from '~ui/organisms/tags-list';
+import { Logo } from '~ui/widgets/logo';
 
-import { dayMonthNameAndYearDate, readingTime } from '~utils/string';
 import { cn } from '~utils/style';
 
-export interface ContentCardProps extends Partial<LinkProps> {
-  content: Content;
-  className?: string;
+/* -------------------------------------------------------------------------------------------------
+ * ContentCard
+ * -----------------------------------------------------------------------------------------------*/
+
+const MotionLink = motion(Link);
+
+interface ContentCardProps extends CardProps {
+  label: string;
+  href: string;
+  title?: string;
+  display?: ReactNode;
+  displayPlaceholder?: ReactNode;
 }
 
-export const ContentCard = ({
-  content,
+const ContentCard = ({
+  label,
+  href,
+  title,
+  display,
+  displayPlaceholder,
   className,
   ...rest
 }: ContentCardProps) => {
+  const renderTitle = useCallback(() => {
+    if (!title) {
+      return (
+        <div className='mt-1 flex w-full flex-col gap-y-1.5'>
+          <TextSkeleton className='w-[75%]' />
+          <TextSkeleton className='w-[60%]' />
+        </div>
+      );
+    }
+
+    return (
+      <Typography
+        title={title}
+        className='mt-1 line-clamp-2 h-[calc(2em*1.5)] w-full text-left leading-[1.5]'
+        prose={false}
+        balance
+      >
+        {title}
+      </Typography>
+    );
+  }, [title]);
+
+  const renderDisplay = useCallback(
+    () => (
+      <div className='relative mt-8 flex aspect-[1.5] w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-ctx-secondary'>
+        {display ?? displayPlaceholder ?? (
+          <Typography
+            className='uppercase'
+            variant='sm'
+            color='secondary'
+            weight='bold'
+          >
+            Soon
+          </Typography>
+        )}
+
+        <Logo className='absolute bottom-2.5 right-3.5 z-10 w-[max(10%,2.5rem)]' />
+      </div>
+    ),
+    [display, displayPlaceholder]
+  );
+
   return (
-    <Link
-      className={cn(
-        'hover:bg-background-secondary flex cursor-pointer overflow-hidden rounded-lg bg-transparent p-2 transition-colors',
-        className
-      )}
-      key={content.slug}
-      href={`/blog/${content.slug}`}
-      {...rest}
-    >
-      <article className='flex justify-between gap-x-12' key={content.slug}>
+    <Card asChild className={cn('flex flex-col', className)} {...rest}>
+      <MotionLink
+        href={href}
+        whileTap={{ scale: 0.9, opacity: 0.5 }}
+        transition={{ type: 'spring', duration: 0.2, bounce: 0 }}
+      >
         <Typography
-          className='whitespace-nowrap'
-          variant='body-sm'
-          weight='normal'
-          color='hint'
+          className='line-clamp-1 w-full text-left uppercase'
+          variant='sm'
+          color='secondary'
+          weight='bold'
+          prose={false}
+          balance
         >
-          {dayMonthNameAndYearDate(new Date(content.date))}
+          {label}
         </Typography>
 
-        <div className='flex flex-1 flex-col'>
-          <Typography className='underline' asChild>
-            <h3>{content.title}</h3>
-          </Typography>
+        {renderTitle()}
 
-          <div className='mt-4'>
-            <Typography variant='sm' color='hint' weight='normal'>
-              {readingTime(content.body)}
-            </Typography>
-
-            <TagsList tags={content.tags} />
-          </div>
-        </div>
-      </article>
-    </Link>
+        {renderDisplay()}
+      </MotionLink>
+    </Card>
   );
 };
+
+ContentCard.displayName = 'ContentCard';
+
+/* -------------------------------------------------------------------------------------------------
+ * ContentCardContainer
+ * -----------------------------------------------------------------------------------------------*/
+
+interface ContentCardContainerProps extends ComponentPropsWithoutRef<'div'> {}
+
+const ContentCardContainer = ({
+  className,
+  children,
+  ...rest
+}: ContentCardContainerProps) => {
+  return (
+    <div
+      className={cn(
+        'grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6',
+        className
+      )}
+      {...rest}
+    >
+      {Children.map(children, (child) => {
+        if (isValidElement<{ className: string }>(child)) {
+          return cloneElement(child, {
+            className: cn(
+              'sm:nth-[3n-2]:-mt-24 sm:nth-[3n-1]:-mt-12 max-sm:nth-[2n-1]:-mt-12 relative h-fit'
+            ),
+          });
+        }
+        return null;
+      })}
+    </div>
+  );
+};
+
+ContentCardContainer.displayName = 'ContentCardContainer';
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { ContentCard, ContentCardContainer };
+export type { ContentCardProps, ContentCardContainerProps };

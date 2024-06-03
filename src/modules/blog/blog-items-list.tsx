@@ -5,8 +5,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Content } from '~lib/content/provider';
 
+import { BlogItem } from '~modules/blog/blog-item';
+
 import { Typography } from '~ui/atoms/typography';
-import { ContentCard } from '~ui/molecules/content-card';
 import { TagsList } from '~ui/organisms/tags-list';
 
 export interface BlogItemsListProps {
@@ -75,7 +76,7 @@ export const BlogItemsList = ({ items }: BlogItemsListProps) => {
               exit={{ opacity: 0, scale: 0.8 }}
               layout
             >
-              <ContentCard content={content} />
+              <BlogItem content={content} />
             </motion.div>
           ))}
         </AnimatePresence>

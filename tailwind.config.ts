@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 import defaultColors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 const baseForeground = {
   solid: 'black',
@@ -93,6 +94,22 @@ const config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchVariant }) {
+      matchVariant(
+        'nth',
+        (value) => {
+          return `&:nth-child(${value})`;
+        },
+        {
+          values: {
+            DEFAULT: 'n', // Default value for `nth:`
+            '2n': '2n', // `nth-2n:utility` will generate `:nth-child(2n)` CSS selector
+            '3n': '3n',
+          },
+        }
+      );
+    }),
+  ],
 } as const satisfies Config;
 export default config;
