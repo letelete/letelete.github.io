@@ -34,13 +34,43 @@ const typographyVariants = cva('tracking-normal', {
       true: 'italic',
       false: 'not-italic',
     },
+    inverse: {
+      true: '',
+      false: '',
+    },
   },
+  compoundVariants: [
+    {
+      inverse: true,
+      color: 'primary',
+      className: 'text-ctx-primary-inverse-fg-primary',
+    },
+
+    {
+      inverse: true,
+      color: 'secondary',
+      className: 'text-ctx-primary-inverse-fg-secondary',
+    },
+
+    {
+      inverse: true,
+      color: 'hint',
+      className: 'text-ctx-primary-inverse-fg-hint',
+    },
+
+    {
+      inverse: true,
+      color: 'destructive',
+      className: 'text-ctx-primary-inverse-fg-destructive',
+    },
+  ],
   defaultVariants: {
     variant: 'body',
     color: 'primary',
     weight: 'normal',
     prose: true,
     italic: false,
+    inverse: false,
   },
 });
 
@@ -61,6 +91,7 @@ const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
       variant,
       prose,
       italic,
+      inverse,
       className,
       ...rest
     },
@@ -72,7 +103,14 @@ const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
       <PolymorphicComponent
         ref={ref}
         className={cn(
-          typographyVariants({ color, weight, variant, prose, italic }),
+          typographyVariants({
+            color,
+            weight,
+            variant,
+            prose,
+            italic,
+            inverse,
+          }),
           balance && 'text-balance',
           className
         )}
