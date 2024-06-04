@@ -138,7 +138,7 @@ const LikesCounter = forwardRef<
     return (
       <Typography
         className={cn('text-center', className)}
-        color={highlight ? 'accent' : 'highlight'}
+        color={highlight ? 'primary' : 'secondary'}
         aria-label='Likes counter'
         role='status'
         ref={ref}

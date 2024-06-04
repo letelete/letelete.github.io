@@ -2,6 +2,7 @@ import Image, { ImageProps } from 'next/image';
 
 import { cn } from '~utils/style';
 
+import coffee from '/public/emojis/coffee.webp';
 import laptop from '/public/emojis/laptop.webp';
 import manClimbing from '/public/emojis/man-climbing.webp';
 import microphone from '/public/emojis/microphone.webp';
@@ -19,10 +20,7 @@ export type EmojiProps = Partial<BaseEmojiProps>;
 
 const BaseEmoji = ({ className, ...rest }: BaseEmojiProps) => {
   return (
-    <Image
-      className={cn('inline aspect-square h-4 min-h-4 w-4 min-w-4', className)}
-      {...rest}
-    />
+    <Image className={cn('inline aspect-square w-4', className)} {...rest} />
   );
 };
 
@@ -64,4 +62,8 @@ export const ThinkingFaceEmoji = ({ ...rest }: EmojiProps) => {
 
 export const ManClimbingEmoji = ({ ...rest }: EmojiProps) => {
   return <BaseEmoji alt='Man climbing' src={manClimbing} {...rest} />;
+};
+
+export const CoffeeEmoji = ({ ...rest }: EmojiProps) => {
+  return <BaseEmoji alt='Coffee' src={coffee} {...rest} />;
 };

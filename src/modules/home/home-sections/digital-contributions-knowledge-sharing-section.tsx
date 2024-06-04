@@ -65,7 +65,8 @@ const DigitalContributionsKnowledgeSharing = () => {
             display={
               <Image
                 fill
-                objectFit='contain'
+                priority
+                sizes='(max-width: 768px) 100vw, 33vw'
                 src={entry.content.thumbnail}
                 alt={entry.content.description}
               />

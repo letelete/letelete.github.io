@@ -80,11 +80,11 @@ const config = {
       heart: {
         0: 'transparent',
         1: 'black',
-        2: '#F5F0C9',
+        2: '#FFB3B3',
         3: 'white',
-        4: '#ECDF78',
-        5: '#F1CC4A',
-        6: '#F4BC38',
+        4: '#FF5151',
+        5: '#DC4444',
+        6: '#BA3333',
       },
     },
     extend: {
