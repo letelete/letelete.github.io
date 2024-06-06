@@ -17,7 +17,7 @@ import { cn } from '~utils/style';
 
 const ContactSection = () => {
   return (
-    <SectionContainer>
+    <SectionContainer id='contact'>
       <SectionHeader title='Contact' />
 
       <div className='mt-8 flex flex-col gap-y-4'>

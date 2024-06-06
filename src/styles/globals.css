@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply min-h-screen scroll-smooth bg-ctx-primary text-ctx-primary-fg-primary;
+    @apply min-h-screen scroll-py-24 scroll-smooth bg-ctx-primary text-ctx-primary-fg-primary;
     -webkit-tap-highlight-color: transparent;
     color-scheme: light;
   }
