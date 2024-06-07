@@ -63,7 +63,7 @@ const ContentCard = ({
 
   const renderDisplay = useCallback(
     () => (
-      <div className='relative mt-8 flex aspect-[1.5] w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-ctx-secondary'>
+      <div className='relative mt-8 flex aspect-video w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-ctx-secondary'>
         {display ?? displayPlaceholder ?? (
           <Typography
             className='uppercase'
@@ -75,7 +75,7 @@ const ContentCard = ({
           </Typography>
         )}
 
-        <Logo className='absolute bottom-2.5 right-3.5 z-10 w-[max(10%,2.5rem)]' />
+        {/* <Logo className='absolute bottom-2.5 right-3.5 z-10 w-[max(10%,2.5rem)]' /> */}
       </div>
     ),
     [display, displayPlaceholder]
@@ -132,7 +132,7 @@ const ContentCardContainer = ({
         if (isValidElement<{ className: string }>(child)) {
           return cloneElement(child, {
             className: cn(
-              'sm:nth-[3n-2]:-mt-24 sm:nth-[3n-1]:-mt-12 max-sm:nth-[2n-1]:-mt-12 relative h-fit'
+              'relative h-fit max-sm:nth-[2n-1]:-mt-12 sm:nth-[3n-1]:-mt-12 sm:nth-[3n-2]:-mt-24'
             ),
           });
         }

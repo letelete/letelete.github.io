@@ -76,13 +76,13 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/800x600.jpg',
+        url: '/content/800x600.jpg',
         width: 800,
         height: 600,
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',
       },
       {
-        url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/1800x1600.jpg',
+        url: '/content/1800x1600.jpg',
         width: 1800,
         height: 1600,
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',

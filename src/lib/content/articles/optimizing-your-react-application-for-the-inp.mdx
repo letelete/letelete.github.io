@@ -2,7 +2,7 @@
 title: Optimizing your React application for the Interaction to Next Paint (INP) Web Vitals metric.
 date: Mar 24, 2024
 description: In March, Google released a new Core Web Vital called Interaction to Next Paint (INP). It measures the speed of interactions with the website. In this article, you’ll learn more about INP from the developer’s perspective. I’ll guide you through testing for INP, verifying potential causes of low INP scores, and how you can leverage new React tools to optimize your website for recent changes.
-thumbnail: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/thumbnail.webp'
+thumbnail: '/content/articles/optimizing-react-app-for-inp/thumbnail.webp'
 tags:
   - react
   - performance
@@ -23,7 +23,7 @@ INP measures for one of the following interactions.
 For example, when the user types a character into the search input that filters a list of cats’ breeds, the INP value will be a duration from the moment of triggering a group of keyboard events (keydown, …, keyup) to the moment of re-rendering the updated list.
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/inp-visualization-675nGng3SukTatyqpdc5Y6pwjzsUhP.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/inp-visualization.mp4'
   title='Typing a character into the search input, and observing changes in the UI'
   caption='Simplified visualization of the INP'
 />
@@ -77,7 +77,7 @@ Let’s start with a simple configuration of the Web Vitals addon. This will dis
 <MdxImage
   width={1652}
   height={414}
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/web-vitals-addon-hud-overlay-Ny9fByjHCgWwtJ1v5DcVBsayk56Gmi.webp'
+  src='/content/articles/optimizing-react-app-for-inp/web-vitals-addon-hud-overlay.webp'
   alt='Allowing to display the HUD overlay in Web Vitals addon'
 />
 
@@ -91,14 +91,14 @@ We’ll use React Developer Tools to highlight component updates. This will help
 <MdxImage
   width={638}
   height={224}
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/react-developer-tools-highlight-updates-xS5VgpuWQUvjlOMp8MY8EfnXSfgdTU.webp'
+  src='/content/articles/optimizing-react-app-for-inp/react-developer-tools-highlight-updates.webp'
   alt='Enabling Highlight updates when components render option'
 />
 
 Let’s go back to previously introduced app which allows us to filter cats by their breeds. First issue we can observe is that the list itself is long. We’re displaying over 1900 results at once. That’s already something we could optimize, but let’s leave it for later. Let’s try to interact with the page by typing “B” into the input, and then clearing it.
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/unoptimized-typing-into-search-5POIico0Zuen8Pz1nWtFkkg6JubHzL.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/unoptimized-typing-into-search.mp4'
   title='Typing "B" into the input, then clearing it, and noticing UI freeze'
   caption='Typing "B" into the input, then clearing it, and noticing UI freeze'
 />
@@ -202,7 +202,7 @@ Let’s see how can we utilize already known concepts to optimize the INP time.
 As we know from the React’s [_Reconciliation model_](https://legacy.reactjs.org/docs/reconciliation.html), when state changes, React re-renders the components and all its descendants. By calling `setFilterByBreed` on each SearchBar change, we perform unnecessary re-renders of the expensive `CatsList` component.
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/searching-with-no-debouncing-3N9R8BMKvLngfGtswDJXg2FoUePAlV.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/searching-with-no-debouncing.mp4'
   title='Quickly typing characters into input, then immediately removing them, noticing UI freeze'
   caption='Quickly typing characters into input, then immediately removing them, noticing UI freeze'
 />
@@ -267,7 +267,7 @@ function SearchBar({ onChange, ...rest }: SearchBarProps) {
 This improves the INP, because we no longer try to re-render expensive component on each user interaction.
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/searching-with-debouncing-Bp5rs5mdYM9HJWpXwJAch3iyq9FmAT.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/searching-with-debouncing.mp4'
   title='Quickly typing characters into input, then immediately removing them, noticing no UI update until debounce triggers'
   caption='Quickly typing characters into input, then immediately removing them, noticing no UI update until debounce triggers'
 />
@@ -277,7 +277,7 @@ We still however, render a long list of elements in the DOM, synchronously.
 ### Issue #2- List renders all elements at once causing low INP score by freezing the layout
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/no-virtualized-4kcuXMmFCuNnBEOGmmZZKIqK2Innmw.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/no-virtualized.mp4'
   title='Searching for cats causes UI freeze when there a lot of results'
   caption='Searching for cats causes UI freeze when there a lot of results'
 />
@@ -291,7 +291,7 @@ b) Paginate the data (combine intersection-observer with appending next elements
 Both solutions allow us to keep initial list lightweight, and get rid of the layout “freeze” that blocks us from interacting with the website. There’s a plenty of resources for implementing both [Virtualization](https://www.patterns.dev/vanilla/virtual-lists/), and [Pagination](https://tanstack.com/query/latest/docs/framework/react/guides/paginated-queries) in React. You can check one of them.
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/virtualized-MiLhi86clUkIwZqWJ0s4heWVOXMw9O.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/virtualized.mp4'
   title='Searching for cats results in immediate response when results are virtualized'
   caption='Searching for cats results in immediate response when results are virtualized'
 />
@@ -368,7 +368,7 @@ export function CatsBreedsBrowserTemplate() {
 As simple as that, we were able to eliminate the “freezing” UI issue.
 
 <MdxVideoPlayer
-  src='https://vsupu83zlkfucch6.public.blob.vercel-storage.com/content/articles/optimizing-react-app-for-inp/optimized-M1Col3iKi86suTezgaWb2ukjEDAb1s.mp4'
+  src='/content/articles/optimizing-react-app-for-inp/optimized.mp4'
   title='Typing characters into input provides instant feedback'
   caption='Typing characters into input provides instant feedback'
 />

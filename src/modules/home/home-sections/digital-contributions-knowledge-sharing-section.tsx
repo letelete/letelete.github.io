@@ -63,13 +63,16 @@ const DigitalContributionsKnowledgeSharing = () => {
             label={entry.label}
             title={entry.content.title}
             display={
-              <Image
-                fill
-                priority
-                sizes='(max-width: 768px) 100vw, 33vw'
-                src={entry.content.thumbnail}
-                alt={entry.content.description}
-              />
+              entry.content.thumbnail ? (
+                <Image
+                  fill
+                  priority
+                  sizes='100%'
+                  className='object-contain'
+                  src={entry.content.thumbnail}
+                  alt={entry.content.description}
+                />
+              ) : null
             }
           />
         ))}

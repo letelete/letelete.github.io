@@ -27,7 +27,7 @@ export interface IconProps extends LucideProps {
 
 export type IconName = Parameters<(typeof icons)['get']>[0];
 
-export const Icon = ({ name, className, ...props }: IconProps) => {
+export const Icon = ({ size = 16, name, className, ...props }: IconProps) => {
   const IconElement = icons.has(name) ? icons.get(name) : undefined;
 
   if (!IconElement) {
@@ -37,9 +37,15 @@ export const Icon = ({ name, className, ...props }: IconProps) => {
   return (
     <IconElement
       className={cn('aspect-square', className)}
+      style={{
+        minWidth: size,
+        maxWidth: size,
+        minHeight: size,
+        maxHeight: size,
+      }}
       color={tw.theme.colors.ctx.primary.fg.solid}
       strokeWidth={1}
-      size={16}
+      size={size}
       absoluteStrokeWidth
       {...props}
     />

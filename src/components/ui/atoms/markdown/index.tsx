@@ -9,7 +9,7 @@ export const Markdown: MDXComponents = {
     return (
       <a
         {...props}
-        className='hover:text-foreground-primary underline duration-100'
+        className='text-ctx-primary-fg-secondary underline duration-100 hover:text-ctx-primary-fg-hint'
         target='_blank'
       >
         {children}
@@ -52,7 +52,12 @@ export const Markdown: MDXComponents = {
   },
   p: ({ children, className, ...props }) => {
     return (
-      <Typography weight='normal' className={cn('py-4', className)} asChild>
+      <Typography
+        color='secondary'
+        weight='normal'
+        className={cn('py-4', className)}
+        asChild
+      >
         <p {...props}>{children}</p>
       </Typography>
     );
@@ -61,7 +66,7 @@ export const Markdown: MDXComponents = {
     return (
       <blockquote
         className={cn(
-          'before:bg-accent relative mb-6 py-2 italic *:py-0 *:pl-6 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-2 before:rounded-full',
+          'relative mb-6 py-2 italic *:py-0 *:pl-6 before:absolute before:left-0 before:top-0 before:block before:h-full before:w-2 before:rounded-full before:bg-ctx-accent-secondary',
           className
         )}
         {...props}
@@ -74,7 +79,7 @@ export const Markdown: MDXComponents = {
     return (
       <ul
         className={cn(
-          'text-foreground-secondary marker:text-foreground-secondary my-8 list-disc space-y-4',
+          'my-8 list-disc space-y-4 text-ctx-primary-fg-secondary marker:text-ctx-primary-fg-secondary',
           className
         )}
         {...props}
@@ -85,7 +90,7 @@ export const Markdown: MDXComponents = {
   },
   li: ({ children, className, ...props }) => {
     return (
-      <Typography weight='normal' asChild>
+      <Typography color='secondary' weight='normal' asChild>
         <li className={cn('ml-12', className)} {...props}>
           {children}
         </li>
