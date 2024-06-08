@@ -3,6 +3,7 @@
 import {
   MotionValue,
   motion,
+  useMotionValueEvent,
   useScroll,
   useSpring,
   useTransform,
@@ -17,7 +18,7 @@ import { useElementGeometry } from '~hooks/use-element-geometry';
 import { Button } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
 import { Copyrights } from '~ui/atoms/copyrights';
-import { CoffeeEmoji, PixelArtHeartEmoji } from '~ui/atoms/emojis';
+import { CoffeeEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
 import { HeartButton } from '~ui/molecules/buttons/heart-button';
 import { SectionContainer } from '~ui/molecules/section/section-container';
@@ -55,17 +56,29 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
     target: cardContainerRef,
     offset: ['start 0.5', `${MIN_FOOTER_CONTENT_HEIGHT_VH / 2}vh 60vh`],
   });
-  const scrollYProgressSpring = useSpring(scrollYProgress, {
+
+  // Do not animate track anymore once the animation completes
+  const userSeenCompleteAnimation = useRef<boolean>(false);
+  useMotionValueEvent(scrollYProgress, 'change', (value) => {
+    if (value === 1.0) {
+      userSeenCompleteAnimation.current = true;
+    }
+  });
+
+  const animationProgress = useTransform(() =>
+    userSeenCompleteAnimation.current ? 1 : scrollYProgress.get()
+  );
+  const animationProgressSpring = useSpring(animationProgress, {
     bounce: 0,
   }) as MotionValue<number>;
 
   const scale = useTransform(
-    scrollYProgressSpring,
+    animationProgressSpring,
     [0, 0.5, 1],
     [0.2, 1, finalScaleToFillCard]
   );
   const y = useTransform(
-    scrollYProgressSpring,
+    animationProgressSpring,
     [0, 1],
     [-halfOfBackgroundHeight + INITIAL_BACKGROUND_SIZE, 0]
   );
