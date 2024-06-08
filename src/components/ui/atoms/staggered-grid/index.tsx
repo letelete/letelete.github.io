@@ -159,18 +159,22 @@ const GridItem = ({
 
 const itemVariants = {
   hidden: {
-    opacity: 0,
+    opacity: 0.5,
     scale: 0.5,
   },
   visible: (delayRef: MutableRefObject<number>) => ({
     opacity: 1,
     scale: 1,
-    transition: { delay: delayRef.current },
+    transition: {
+      delay: delayRef.current,
+      type: 'spring',
+      duration: 0.3,
+      bounce: 0,
+    },
   }),
-  exit: (delayRef: MutableRefObject<number>) => ({
+  exit: () => ({
     opacity: 0,
-    scale: 0.25,
-    transition: { delay: delayRef.current - 0.1 },
+    scale: 0.5,
   }),
 };
 

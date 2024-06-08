@@ -36,6 +36,16 @@ const getTileSize = (size: HeartSize) => {
   return sizeMap[size];
 };
 
+const getDelayPerPixel = (size: HeartSize) => {
+  const delayMap: Record<HeartSize, number> = {
+    base: 0.01,
+    sm: 0.025,
+    xs: 0.05,
+  };
+
+  return delayMap[size];
+};
+
 export const HeartButton = ({
   phase,
   onClick,
@@ -58,7 +68,7 @@ export const HeartButton = ({
   const heartBitmapFlat = useMemo(() => heartBitmap.flat(), [heartBitmap]);
 
   const cols = heartBitmap.length;
-  const [id, setId] = useState<number>(0);
+  const [id, setId] = useState(0);
 
   const tileSize = getTileSize(size);
 
@@ -84,7 +94,7 @@ export const HeartButton = ({
       whileHover={{ scale: disabled ? 1 : 1.1 }}
       whileFocus={{ scale: disabled ? 1 : 1.1 }}
       whileTap={{ scale: disabled ? 1 : 0.9 }}
-      transition={{ type: 'spring' }}
+      transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
       disabled={disabled}
       aria-disabled={disabled}
       onClick={handleButtonClick}
@@ -94,7 +104,7 @@ export const HeartButton = ({
         <StaggeredGrid
           className='relative z-50'
           key={`phase=${phaseIndex}:id=${id}`}
-          delayPerPixel={0.05}
+          delayPerPixel={getDelayPerPixel(size)}
           cols={cols}
           items={heartBitmapFlat.map((color, idx) => (
             <Tile
