@@ -4,7 +4,12 @@ import { forwardRef, memo } from 'react';
 
 import { cn } from '~utils/style';
 
-export type SkeletonProps = HTMLMotionProps<'div'>;
+/* -------------------------------------------------------------------------------------------------
+ * Skeleton
+ * -----------------------------------------------------------------------------------------------*/
+
+type SkeletonProps = HTMLMotionProps<'div'>;
+
 const Skeleton = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
   ({ className, ...props }, ref) => {
     return (
@@ -19,14 +24,18 @@ const Skeleton = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
           repeatType: 'reverse',
           ease: 'easeOut',
         }}
-        className={cn('bg-background-contrast', className)}
+        className={cn('bg-background-secondary', className)}
         {...props}
       />
     );
   }
 );
+
 Skeleton.displayName = 'Skeleton';
-export { Skeleton };
+
+/* -------------------------------------------------------------------------------------------------
+ * TextSkeleton
+ * -----------------------------------------------------------------------------------------------*/
 
 const textSkeletonVariants = cva(cn('w-full rounded-full'), {
   variants: {
@@ -43,9 +52,10 @@ const textSkeletonVariants = cva(cn('w-full rounded-full'), {
     variant: 'body',
   },
 });
-export interface TextSkeletonProps
+interface TextSkeletonProps
   extends SkeletonProps,
     VariantProps<typeof textSkeletonVariants> {}
+
 const TextSkeleton = memo(
   ({ variant, className, ...rest }: TextSkeletonProps) => {
     return (
@@ -56,5 +66,10 @@ const TextSkeleton = memo(
     );
   }
 );
+
 TextSkeleton.displayName = 'TextSkeleton';
-export { TextSkeleton };
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { Skeleton, TextSkeleton };
+export type { SkeletonProps, TextSkeletonProps };

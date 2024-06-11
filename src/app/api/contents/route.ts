@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { ResponseBodyError } from 'src/app/api/shared/types';
 
 import {
   GlobalContentStatistics,
   createContentController,
 } from '~api/contents/shared/controllers';
 import { getModelClient } from '~api/shared/model-client';
+import { ResponseBodyError } from '~api/shared/types';
 
 const client = getModelClient();
 

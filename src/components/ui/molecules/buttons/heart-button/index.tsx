@@ -1,4 +1,3 @@
-import { Player } from '@lottiefiles/react-lottie-player';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import {
   MouseEventHandler,
@@ -8,7 +7,6 @@ import {
   useState,
 } from 'react';
 
-import { AsyncLottiePlayer } from '~ui/atoms/async-lottie-player';
 import { StaggeredGrid } from '~ui/atoms/staggered-grid';
 import {
   phasesLength,
@@ -17,7 +15,7 @@ import {
 
 import { cn } from '~utils/style';
 
-export type HeartSize = 'base' | 'sm';
+export type HeartSize = 'base' | 'sm' | 'xs';
 
 export interface HeartButtonProps
   extends Omit<HTMLMotionProps<'button'>, 'onClick'> {
@@ -32,9 +30,20 @@ const getTileSize = (size: HeartSize) => {
   const sizeMap: Record<HeartSize, number> = {
     base: 6,
     sm: 4,
+    xs: 2,
   };
 
   return sizeMap[size];
+};
+
+const getDelayPerPixel = (size: HeartSize) => {
+  const delayMap: Record<HeartSize, number> = {
+    base: 0.01,
+    sm: 0.025,
+    xs: 0.05,
+  };
+
+  return delayMap[size];
 };
 
 export const HeartButton = ({
@@ -59,14 +68,11 @@ export const HeartButton = ({
   const heartBitmapFlat = useMemo(() => heartBitmap.flat(), [heartBitmap]);
 
   const cols = heartBitmap.length;
-  const [startFrom, setStartFrom] = useState<number>(0);
-  const [id, setId] = useState<number>(0);
+  const [id, setId] = useState(0);
 
   const tileSize = getTileSize(size);
-  const playerSize = tileSize * cols + 60;
 
   const containerRef = useRef<HTMLButtonElement>(null);
-  const playerRef = useRef<Player>(null);
 
   const handleButtonClick: MouseEventHandler = useCallback(
     (event) => {
@@ -75,15 +81,8 @@ export const HeartButton = ({
         return;
       }
 
-      const target = event.target as HTMLDivElement;
-      const idx = target?.getAttribute('data-idx');
-      const newStartFrom = typeof idx === 'string' ? parseInt(idx) : null;
-
-      setStartFrom(newStartFrom ?? 0);
       onClick?.(phaseIndex, phasesLength);
       setId((id) => id + 1);
-
-      playerRef.current?.play();
     },
     [disabled, onClick, phaseIndex]
   );
@@ -95,28 +94,17 @@ export const HeartButton = ({
       whileHover={{ scale: disabled ? 1 : 1.1 }}
       whileFocus={{ scale: disabled ? 1 : 1.1 }}
       whileTap={{ scale: disabled ? 1 : 0.9 }}
-      transition={{ type: 'spring' }}
+      transition={{ type: 'spring', bounce: 0, duration: 0.3 }}
       disabled={disabled}
       aria-disabled={disabled}
       onClick={handleButtonClick}
       {...rest}
     >
-      <AsyncLottiePlayer
-        className='absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2'
-        ref={playerRef}
-        src='https://lottie.host/5559ee29-f7d4-4e1e-9ef8-6e1a04c54bc2/EbvEOrkepQ.json'
-        style={{
-          height: playerSize,
-          width: playerSize,
-        }}
-      />
-
       <AnimatePresence mode='popLayout' initial={false}>
         <StaggeredGrid
           className='relative z-50'
-          key={`phase=${phaseIndex}:startFrom=${startFrom}:id=${id}`}
-          delayPerPixel={0.005}
-          startFrom={startFrom}
+          key={`phase=${phaseIndex}:id=${id}`}
+          delayPerPixel={getDelayPerPixel(size)}
           cols={cols}
           items={heartBitmapFlat.map((color, idx) => (
             <Tile

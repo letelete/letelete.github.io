@@ -1,9 +1,10 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import { JetBrains_Mono } from 'next/font/google';
-import { SSRQueryClientProvider } from 'src/app/api/shared/query-client/provider';
+import { Nunito_Sans } from 'next/font/google';
+
+import { SSRQueryClientProvider } from '~api/shared/query-client/provider';
 
 import { BASE_URL } from '~constants/index';
 
@@ -11,25 +12,23 @@ import '~styles/globals.css';
 
 import { cn, tw } from '~utils/style';
 
-const inter = Inter({
+const fontSans = Nunito_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-sans',
 });
 
-const jetbrains_mono = JetBrains_Mono({
+const fontMono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-jetbrains-mono',
+  variable: '--font-mono',
 });
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const viewport: Viewport = {
-  themeColor: tw.theme.colors.background.DEFAULT,
+  themeColor: tw.theme.colors.ctx.primary.DEFAULT,
   initialScale: 1.0,
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
@@ -57,19 +56,15 @@ export const metadata: Metadata = {
     'Portfolio',
     'Blog Writer',
     'Tech Enthusiast',
+    'Minimal Portfolio',
+    'Minimal Gallery',
   ],
   authors: [{ name: 'Bruno Kawka' }],
   creator: 'Bruno Kawka',
   publisher: 'Bruno Kawka',
   category: 'technology',
   icons: {
-    icon: '/icon.png',
-    shortcut: '/shortcut-icon.png',
-    apple: ['/apple-icon.png'],
-    other: {
-      rel: 'apple-icon-precomposed',
-      url: '/apple-icon-precomposed.png',
-    },
+    icon: '/icon.svg',
   },
   openGraph: {
     title: 'Bruno Kawka',
@@ -81,13 +76,13 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/800x600.jpg',
+        url: '/content/800x600.jpg',
         width: 800,
         height: 600,
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',
       },
       {
-        url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/1800x1600.jpg',
+        url: '/content/1800x1600.jpg',
         width: 1800,
         height: 1600,
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',
@@ -100,7 +95,7 @@ export const metadata: Metadata = {
     description:
       "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
     siteId: '1073997624527806473',
-    creator: '@BrunoKawka',
+    creator: '@brunokawka',
     creatorId: '1073997624527806473',
     images: [
       {
@@ -122,7 +117,7 @@ export default function RootLayout({
     <html lang='en'>
       <body
         className={cn(
-          `${inter.variable} ${jetbrains_mono.variable}`,
+          `${fontSans.variable} ${fontMono.variable}`,
           'flex flex-col'
         )}
       >

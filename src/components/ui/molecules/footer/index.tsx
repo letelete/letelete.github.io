@@ -10,7 +10,7 @@ export const Footer = ({ className, children, ...rest }: FooterProps) => {
   return (
     <footer
       className={cn(
-        'flex w-full flex-col items-center justify-center bg-background',
+        'bg-background-primary flex w-full flex-col items-center justify-center',
         className
       )}
       {...rest}

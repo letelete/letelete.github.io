@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
+
+import { ContentStatistics } from '~api/contents/shared/controllers';
 import {
   GetContentStatisticsProps,
   getContentStatistics,
-} from 'src/app/api/shared/repository';
-import { contentKeys } from 'src/services/content/_query-key-factory';
+} from '~api/shared/repository';
 
-import { ContentStatistics } from '~api/contents/shared/controllers';
+import { contentKeys } from '~services/content/_query-key-factory';
 
 export const useGetContentStatistics = (props: GetContentStatisticsProps) => {
   const query = useQuery<ContentStatistics, Error>({

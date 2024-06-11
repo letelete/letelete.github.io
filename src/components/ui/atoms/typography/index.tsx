@@ -7,7 +7,7 @@ import { cn } from '~utils/style';
 const typographyVariants = cva('tracking-normal', {
   variants: {
     variant: {
-      hero: 'font-sans text-2xl sm:text-4xl',
+      hero: 'font-sans text-xl leading-6 sm:text-4xl sm:leading-10',
       heading: 'font-sans text-lg leading-7',
       subheading: 'font-sans text-base leading-7',
       body: 'font-sans text-base leading-6',
@@ -18,23 +18,60 @@ const typographyVariants = cva('tracking-normal', {
       bold: 'font-bold',
       medium: 'font-medium',
       normal: 'font-normal',
+      light: 'font-light',
     },
     color: {
-      highlight: 'text-primary-highlighted',
-      default: 'text-primary',
-      hint: 'text-primary-hint',
-      accent: 'text-accent',
+      primary: 'text-ctx-primary-fg-primary',
+      secondary: 'text-ctx-primary-fg-secondary',
+      accent: 'text-ctx-accent-secondary',
+      hint: 'text-ctx-primary-fg-hint',
+      destructive: 'text-ctx-primary-fg-destructive',
     },
     prose: {
       true: 'max-w-prose',
       false: '',
     },
+    italic: {
+      true: 'italic',
+      false: 'not-italic',
+    },
+    inverse: {
+      true: '',
+      false: '',
+    },
   },
+  compoundVariants: [
+    {
+      inverse: true,
+      color: 'primary',
+      className: 'text-ctx-primary-inverse-fg-primary',
+    },
+
+    {
+      inverse: true,
+      color: 'secondary',
+      className: 'text-ctx-primary-inverse-fg-secondary',
+    },
+
+    {
+      inverse: true,
+      color: 'hint',
+      className: 'text-ctx-primary-inverse-fg-hint',
+    },
+
+    {
+      inverse: true,
+      color: 'destructive',
+      className: 'text-ctx-primary-inverse-fg-destructive',
+    },
+  ],
   defaultVariants: {
     variant: 'body',
-    color: 'default',
-    weight: 'medium',
+    color: 'primary',
+    weight: 'normal',
     prose: true,
+    italic: false,
+    inverse: false,
   },
 });
 
@@ -47,7 +84,18 @@ export interface TypographyProps
 
 const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
   (
-    { asChild, balance, color, weight, variant, prose, className, ...rest },
+    {
+      asChild,
+      balance,
+      color,
+      weight,
+      variant,
+      prose,
+      italic,
+      inverse,
+      className,
+      ...rest
+    },
     ref
   ) => {
     const PolymorphicComponent = asChild ? Slot : 'p';
@@ -56,7 +104,14 @@ const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
       <PolymorphicComponent
         ref={ref}
         className={cn(
-          typographyVariants({ color, weight, variant, prose }),
+          typographyVariants({
+            color,
+            weight,
+            variant,
+            prose,
+            italic,
+            inverse,
+          }),
           balance && 'text-balance',
           className
         )}

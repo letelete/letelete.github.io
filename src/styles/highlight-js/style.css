@@ -1,20 +1,20 @@
 :root {
   --editor-padding: 1rem 1rem 1.3rem 1rem;
-  --syntax-text: #ffffff;
-  --syntax-string: #f9d38c;
-  --syntax-comment: #878572;
-  --syntax-variable: #eddd5d;
+  --syntax-text: #000000;
+  --syntax-string: #41771f;
+  --syntax-comment: #556745;
+  --syntax-variable: #2e590d;
   --syntax-variable-2: #ffffff;
-  --syntax-variable-3: #e7b555;
-  --syntax-number: #e7cf55;
-  --syntax-atom: #e7cf55;
-  --syntax-keyword: #ffaf65;
-  --syntax-property: #e978a1;
-  --syntax-definition: #eddd5d;
-  --syntax-meta: #fffded;
-  --syntax-operator: #ffaf65;
-  --syntax-attribute: #eddd5d;
-  --syntax-tag: #ffaf65;
+  --syntax-variable-3: #7f8d35;
+  --syntax-number: #79823a;
+  --syntax-atom: #79823a;
+  --syntax-keyword: #46a100;
+  --syntax-property: #8d3d66;
+  --syntax-definition: #8a983d;
+  --syntax-meta: #e5e5bf;
+  --syntax-operator: #46a100;
+  --syntax-attribute: #8a983d;
+  --syntax-tag: #46a100;
 }
 
 pre {
@@ -22,6 +22,8 @@ pre {
   overflow-x: auto;
   overflow-y: hidden;
   font-size: 0.875rem;
+  border-radius: 13px;
+  color: var(--frame-background);
 }
 
 code {
@@ -30,7 +32,7 @@ code {
 
 pre,
 code {
-  font-family: var(--font-jetbrains-mono);
+  font-family: var(--font-mono);
   line-height: 1.6;
 }
 

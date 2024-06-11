@@ -26,7 +26,7 @@ export const CarouselNavigationButton = ({
   return (
     <HoverableButton
       className={cn(
-        'flex items-center justify-center rounded-full bg-background/50 backdrop-blur-sm',
+        'flex items-center justify-center rounded-full bg-ctx-button/50 backdrop-blur-sm',
         className
       )}
       title={title}
@@ -36,7 +36,7 @@ export const CarouselNavigationButton = ({
       {...hoverableProps}
       {...rest}
     >
-      <Icon color={tw.theme.colors.white} name={icon} />
+      <Icon color={tw.theme.colors.ctx.button.fg.solid} name={icon} />
 
       <VisuallyHidden>{accessibleText}</VisuallyHidden>
     </HoverableButton>

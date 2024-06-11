@@ -21,7 +21,7 @@ export const StickyHeaderSection = ({
   <div className={cn('relative', className)} {...rest}>
     <div
       className={cn(
-        'sticky top-0 z-10 w-full bg-background/50 pb-4 pt-20 backdrop-blur-md sm:pt-40',
+        'bg-background-primary/50 sticky top-0 z-10 w-full pb-4 pt-20 backdrop-blur-md sm:pt-40',
         headerClassName
       )}
     >

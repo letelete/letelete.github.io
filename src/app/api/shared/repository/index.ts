@@ -1,6 +1,5 @@
-import { apiFetch } from 'src/app/api/shared/repository/utils';
-
 import { ContentStatistics } from '~api/contents/shared/controllers';
+import { apiFetch } from '~api/shared/repository/utils';
 
 export interface GetContentStatisticsProps {
   slug: string;

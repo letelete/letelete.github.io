@@ -25,6 +25,6 @@ const getImages = async (
     }));
 };
 
-export const getBrunoImages = async () => {
+export const getAuthorPortraitImages = async () => {
   return await getImages(`/galleries/about-me`, ['.webp']);
 };

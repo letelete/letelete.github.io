@@ -8,7 +8,6 @@ interface MetadataProps {
   params: { slug: string };
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export async function generateMetadata(
   { params }: MetadataProps,
   parent: ResolvingMetadata

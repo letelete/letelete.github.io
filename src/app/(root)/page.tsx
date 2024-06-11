@@ -1,18 +1,13 @@
 import { Suspense } from 'react';
 
-import { Home } from '~features/home';
-import { AboutSection } from '~features/home/about-section';
-import { ContactSection } from '~features/home/contact-section';
-import { ExperienceSection } from '~features/home/experience-section';
-import { HeroSection } from '~features/home/hero-section';
-import { TestimonialSection } from '~features/home/testimonial-section';
-
 import { getAllContent } from '~lib/content/provider';
-import { getBrunoImages } from '~lib/images/provider';
+import { getAuthorPortraitImages } from '~lib/images/provider';
+
+import { Home } from '~modules/home';
 
 export default async function HomePage() {
   const content = await getAllContent();
-  const brunoImages = await getBrunoImages();
+  const authorPortraits = await getAuthorPortraitImages();
 
   return (
     <Suspense
@@ -22,15 +17,7 @@ export default async function HomePage() {
         </div>
       }
     >
-      <Home
-        content={content}
-        brunoImages={brunoImages}
-        hero={<HeroSection />}
-        about={<AboutSection />}
-        experience={<ExperienceSection />}
-        contact={<ContactSection />}
-        testimonial={<TestimonialSection />}
-      />
+      <Home blogContent={content} authorPortraits={authorPortraits} />
     </Suspense>
   );
 }

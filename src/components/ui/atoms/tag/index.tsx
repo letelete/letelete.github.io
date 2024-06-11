@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { Button, ButtonProps } from '~ui/atoms/button';
 import { Typography } from '~ui/atoms/typography';
 
@@ -27,15 +29,16 @@ export const Tag = ({
   return (
     <Button
       className={cn(
-        'font-normal text-primary-hint transition-colors',
+        'text-foreground-secondary font-normal transition-colors',
         selected && 'text-accent',
         className
       )}
       variant='link'
       size='inline'
       {...rest}
+      asChild
     >
-      #{label}
+      <motion.button>#{label}</motion.button>
     </Button>
   );
 };

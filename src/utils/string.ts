@@ -18,11 +18,11 @@ export const shortDate = (date: Date) => {
 };
 
 export const monthNameAndYearDate = (date: Date) => {
-  return dayjs(date).format('MMM, YY');
+  return dayjs(date).format("MMM 'YY");
 };
 
 export const dayMonthNameAndYearDate = (date: Date) => {
-  return dayjs(date).format('DD MMM, YY');
+  return dayjs(date).format("DD MMM 'YY");
 };
 
 export const compactNumber = (num: number) => {

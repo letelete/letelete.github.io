@@ -1,7 +1,12 @@
 'use client';
 
-import { Player } from '@lottiefiles/react-lottie-player';
-import { AnimatePresence, Variants, motion, wrap } from 'framer-motion';
+import {
+  AnimatePresence,
+  Variants,
+  motion,
+  useInView,
+  wrap,
+} from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 import { ComponentType, ElementRef, useMemo, useRef, useState } from 'react';
 
@@ -23,6 +28,7 @@ export const clipPathToBottom = 'inset(90% 0% 10% 0% round 10px)';
 export interface ParallaxGalleryProps {
   items: ImageItem[];
   className?: string;
+  visualHint?: boolean;
 }
 
 const MotionImage = motion(
@@ -33,9 +39,11 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
-  const [showSwipeHint, setSwipeHint] = useState(true);
-
+export const ParallaxGallery = ({
+  items,
+  className,
+  visualHint,
+}: ParallaxGalleryProps) => {
   const [[pageId, direction], setPage] = useState([0, 0]);
   const currentItemIndex = wrap(0, items.length, pageId);
   const currentItem = items[currentItemIndex];
@@ -46,13 +54,17 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
     ? `${containerGeometry.width}px`
     : undefined;
 
+  const isInView = useInView(containerRef);
+  const [userPaginatedGallery, setUserPaginatedGallery] = useState(false);
+  const isSwipeHintVisible = isInView && visualHint && !userPaginatedGallery;
+
   const swipeOffset = containerGeometry?.height ?? 100;
   const swipeConfidenceThreshold = swipeOffset / 4;
   const variants = useMemo(
     () =>
       ({
         'scroll-hint': {
-          y: [0, -swipeOffset / 8],
+          y: [0, -swipeOffset * 0.075],
           transition: {
             type: 'spring',
             mass: 5,
@@ -82,7 +94,7 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
 
   const paginateManually = (newDirection: number) => {
     paginate(newDirection);
-    setSwipeHint(false);
+    setUserPaginatedGallery(true);
   };
 
   if (!currentItem) {
@@ -99,21 +111,24 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
       className={cn('relative h-full w-full overflow-hidden', className)}
       ref={containerRef}
     >
-      <ImagesPreloader items={items} />
+      <ImagesPreloader
+        items={items}
+        width={containerGeometry?.width}
+        height={containerGeometry?.height}
+      />
 
       <AnimatePresence mode='popLayout' initial={false} custom={direction}>
         <MotionImage
           key={pageId}
-          className='h-full w-full overflow-hidden rounded-sm object-cover'
+          className='h-full w-full overflow-hidden rounded-xl object-cover'
           src={currentItem.src}
           alt={currentItem.alt}
           sizes={imageSizes}
           priority
           fill
           variants={variants}
-          whileInView={showSwipeHint ? 'scroll-hint' : undefined}
           initial='enter'
-          animate='center'
+          animate={['center', isSwipeHintVisible ? 'scroll-hint' : '']}
           exit='exit'
           custom={direction}
           whileDrag={{ scale: 0.8, opacity: 0.8 }}
@@ -148,8 +163,9 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
         />
       </div>
 
-      <AnimatePresence>
-        {showSwipeHint && (
+      {/* TODO: investigate why Lottie does not work with next.js */}
+      {/* <AnimatePresence>
+        {isSwipeHintVisible && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -166,7 +182,7 @@ export const ParallaxGallery = ({ items, className }: ParallaxGalleryProps) => {
             />
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   );
 };

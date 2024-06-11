@@ -54,12 +54,14 @@ export const TagsList = ({
             className='absolute bottom-[calc(100%+0.5rem)] left-0'
           >
             <Button
-              className='text-xs text-accent'
+              className='text-accent text-xs'
               size='inline'
               variant='link'
               onClick={handleClearAll}
             >
-              clear selection ({selectedTags.length})
+              <motion.button>
+                clear selection ({selectedTags.length})
+              </motion.button>
             </Button>
           </FadeInMotion>
         )}

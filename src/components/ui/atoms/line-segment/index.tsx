@@ -24,7 +24,7 @@ export const LineSegment = ({
       {leading}
 
       <div className='flex w-full flex-1 items-center gap-x-6 pl-6'>
-        <div className='h-[1px] w-full bg-primary-hint/30' />
+        <div className='h-[1px] w-full bg-ctx-primary-fg-decorative' />
 
         <div className='sm:self-[none] inline self-end'>{trailing}</div>
       </div>

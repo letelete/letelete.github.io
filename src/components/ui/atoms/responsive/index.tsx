@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Children,
   ForwardedRef,
@@ -9,7 +11,11 @@ import {
 
 import { cn } from '~utils/style';
 
-export interface ForMobileProps {
+/* -------------------------------------------------------------------------------------------------
+ * ForMobile
+ * -----------------------------------------------------------------------------------------------*/
+
+interface ForMobileProps {
   children: ReactNode;
 }
 /**
@@ -27,10 +33,14 @@ const ForMobile = forwardRef<unknown, ForMobileProps>(({ children }, ref) => {
     ref: ref,
   });
 });
-ForMobile.displayName = 'ForMobile';
-export { ForMobile };
 
-export interface ForNonMobileProps {
+ForMobile.displayName = 'ForMobile';
+
+/* -------------------------------------------------------------------------------------------------
+ * ForNonMobile
+ * -----------------------------------------------------------------------------------------------*/
+
+interface ForNonMobileProps {
   children: ReactNode;
 }
 /**
@@ -50,5 +60,10 @@ const ForNonMobile = forwardRef<unknown, ForNonMobileProps>(
     });
   }
 );
+
 ForNonMobile.displayName = 'ForNonMobile';
-export { ForNonMobile };
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { ForMobile, ForNonMobile };
+export type { ForMobileProps, ForNonMobileProps };

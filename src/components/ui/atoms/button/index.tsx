@@ -1,53 +1,121 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { HTMLMotionProps } from 'framer-motion';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
 
+/* -------------------------------------------------------------------------------------------------
+ * Button
+ * -----------------------------------------------------------------------------------------------*/
+
 const buttonVariants = cva(
-  'focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md font-sans text-sm font-medium leading-6 ring-offset-primary-highlighted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-full font-sans text-sm font-normal leading-none tracking-tighter transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-accent text-accent-foreground hover:bg-accent/50',
-        outline:
-          'border-input border bg-transparent hover:bg-primary hover:text-primary-foreground',
-        ghost: 'hover:bg-white/20 hover:text-primary-foreground-highlighted',
-        link: 'text-primary-highlighted underline underline-offset-4',
+        default: '',
+        outline: 'bg-transparent outline outline-1',
+        ghost: 'bg-transparent',
+        link: 'hover:underline-ctx-accent-secondary-fg-solid bg-transparent tracking-normal underline underline-offset-4',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        default: 'px-4 py-3',
+        icon: 'aspect-square p-2',
         inline: '',
       },
+      inverse: {
+        true: 'ring-offset-ctx-button-fg-primary',
+        false: 'ring-offset-ctx-button-inverse-fg-primary',
+      },
     },
+    compoundVariants: [
+      {
+        inverse: false,
+        variant: 'default',
+        className:
+          'border-ctx-button bg-ctx-button text-ctx-button-fg-solid hover:bg-ctx-button/50',
+      },
+      {
+        inverse: true,
+        variant: 'default',
+        className:
+          'border-ctx-button-inverse bg-ctx-button-inverse text-ctx-button-inverse-fg-solid hover:bg-ctx-button-inverse/50',
+      },
+
+      {
+        inverse: false,
+        variant: 'outline',
+        className: 'text-ctx-button outline-ctx-button hover:bg-ctx-button/10',
+      },
+      {
+        inverse: true,
+        variant: 'outline',
+        className:
+          'text-ctx-button-inverse outline-ctx-button-inverse hover:bg-ctx-button-inverse/10',
+      },
+
+      {
+        inverse: false,
+        variant: 'ghost',
+        className: 'text-ctx-button-inverse-fg-solid hover:bg-ctx-button/10',
+      },
+      {
+        inverse: true,
+        variant: 'ghost',
+        className: 'text-ctx-button-fg-solid hover:bg-ctx-button-inverse/10',
+      },
+
+      {
+        inverse: false,
+        variant: 'link',
+        className:
+          'text-ctx-button-inverse-fg-solid hover:text-ctx-button-inverse-fg-solid/50',
+      },
+      {
+        inverse: true,
+        variant: 'link',
+        className: 'text-ctx-button-fg-solid hover:text-ctx-button-fg-solid/50',
+      },
+    ],
     defaultVariants: {
       variant: 'default',
       size: 'default',
+      inverse: false,
     },
   }
 );
 
-export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+interface ButtonProps
+  extends ComponentPropsWithoutRef<'button'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, inverse, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, inverse, className }))}
         ref={ref}
+        {...buttonMotionProps}
         {...props}
       />
     );
   }
 );
+
 Button.displayName = 'Button';
 
-export { Button };
+/* -----------------------------------------------------------------------------------------------*/
+
+const buttonMotionProps = {
+  whileTap: { scale: 0.9 },
+} as const satisfies HTMLMotionProps<'button'>;
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { Button, buttonMotionProps };
+export type { ButtonProps };

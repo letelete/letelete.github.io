@@ -6,40 +6,31 @@
 
 @layer base {
   html {
-    @apply min-h-screen scroll-smooth bg-background text-primary;
+    @apply sm:scroll-py-section scroll-py-section-sm min-h-screen scroll-smooth bg-ctx-primary text-ctx-primary-fg-primary;
     -webkit-tap-highlight-color: transparent;
-    color-scheme: dark;
-    font-family: var(--font-inter);
+    color-scheme: light;
   }
 
   body {
+    font-family: var(--font-sans);
     @apply min-h-screen;
   }
 
   button {
     @apply select-none outline-offset-4 focus:[&:not(:focus-visible)]:outline-none;
   }
+
+  ::selection {
+    @apply bg-ctx-accent-secondary text-ctx-accent-secondary-fg-primary;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
   .layout-padding {
-    @apply px-4 sm:px-[10vw] lg:px-[unset];
+    @apply px-4 sm:px-[5vw] 2xl:px-0;
   }
 
   .layout-width-limiter {
-    max-width: 1024px;
-    margin: 0 auto;
-  }
-
-  .nav-card {
-    @apply rounded-full bg-white/10 p-1 shadow-inner-glass backdrop-blur-md;
-  }
-
-  .preserve-3d {
-    transform-style: preserve-3d;
+    @apply mx-auto my-0 max-w-screen-xl;
   }
 }

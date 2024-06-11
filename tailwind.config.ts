@@ -1,70 +1,121 @@
 import type { Config } from 'tailwindcss';
 import defaultColors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
+
+const baseForeground = {
+  solid: 'black',
+  primary: 'rgba(0,0,0,0.87)',
+  secondary: 'rgba(0,0,0,0.64)',
+  hint: 'rgba(0,0,0,0.34)',
+  decorative: 'rgba(0,0,0,0.16)',
+  destructive: '#ff5151',
+};
+
+const baseForegroundInverse = {
+  solid: 'white',
+  primary: 'rgba(255,255,255,0.87)',
+  secondary: 'rgba(255,255,255,0.64)',
+  hint: 'rgba(255,255,255,0.34)',
+  decorative: 'rgba(255,255,255,0.16)',
+  destructive: '#ff5151',
+};
+
+export type Foreground = keyof typeof baseForeground;
+
+export interface Background {
+  DEFAULT: string;
+  fg: Record<Foreground, string>;
+  inverse?: Omit<Background, 'inverse'>;
+}
 
 const config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     colors: {
       transparent: defaultColors.transparent,
-      background: {
-        DEFAULT: '#101010',
-        contrast: '#282828',
-      },
-      white: '#fff',
-      black: '#000',
-      primary: {
-        DEFAULT: '#9e9ea3',
-        highlighted: '#f5f5f7',
-        hint: {
-          DEFAULT: '#666666',
+      // Context-aware colors
+      ctx: {
+        primary: {
+          DEFAULT: '#fff',
+          fg: baseForeground,
+          inverse: {
+            DEFAULT: '#000',
+            fg: baseForegroundInverse,
+          },
         },
-        foreground: {
-          DEFAULT: '#f5f5f7',
-          highlighted: '#101010',
+        secondary: {
+          DEFAULT: '#f5f5f5',
+          fg: baseForeground,
         },
-      },
-      accent: {
-        DEFAULT: '#eddd5d',
-        from: '#f0991a',
-        to: '#eddd5d',
-        foreground: '#111',
-      },
-      card: {
-        intense: '#000000',
-        light: '#000000',
-        hovered: '#ffffff',
-      },
-      destructive: {
-        DEFAULT: '#ff5151',
-      },
+        'accent-primary': {
+          DEFAULT: '#ECFDDE',
+          fg: { ...baseForeground, primary: '#2E590D' },
+        },
+        'accent-secondary': {
+          DEFAULT: '#2E590D',
+          fg: {
+            ...baseForegroundInverse,
+            primary: '#fff',
+            secondary: 'rgba(0,0,0,0.87)',
+            hint: 'rgba(0,0,0,0.64)',
+          },
+        },
+        destructive: {
+          DEFAULT: '#ff5151',
+          fg: baseForeground,
+        },
+        button: {
+          DEFAULT: '#000',
+          fg: baseForegroundInverse,
+          inverse: {
+            DEFAULT: '#fff',
+            fg: baseForeground,
+          },
+        },
+      } as const satisfies Record<string, Background>,
       socials: {
         youtube: '#ff0000',
       },
       heart: {
         0: 'transparent',
         1: 'black',
-        2: '#F5F0C9',
+        2: '#FFB3B3',
         3: 'white',
-        4: '#ECDF78',
-        5: '#F1CC4A',
-        6: '#F4BC38',
+        4: '#FF5151',
+        5: '#DC4444',
+        6: '#BA3333',
       },
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(--font-roboto-mono)', ...defaultTheme.fontFamily.mono],
+        sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
       },
-      boxShadow: {
-        'inner-glass': 'inset 0 1px 1px 1px rgba(255, 255, 255, 0.1)',
+      spacing: {
+        section: '8rem',
+        'section-sm': '6rem',
+        content: '6rem',
+        'content-sm': '4rem',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchVariant }) {
+      matchVariant(
+        'nth',
+        (value) => {
+          return `&:nth-child(${value})`;
+        },
+        {
+          values: {
+            DEFAULT: 'n', // Default value for `nth:`
+            '2n': '2n', // `nth-2n:utility` will generate `:nth-child(2n)` CSS selector
+            '3n': '3n',
+          },
+        }
+      );
+    }),
+  ],
 } as const satisfies Config;
 export default config;

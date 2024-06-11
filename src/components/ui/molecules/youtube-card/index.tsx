@@ -44,7 +44,7 @@ export const ExternalContentCard = ({
         />
 
         <div className='w-full px-2 py-4'>
-          <Typography className='truncate' weight='medium' color='highlight'>
+          <Typography className='truncate' weight='medium'>
             {title}
           </Typography>
 
@@ -63,7 +63,7 @@ export const ExternalContentCard = ({
               className='aspect-square h-6 w-6 flex-shrink-0'
               size={24}
               name='arrow-up-right'
-              color={tw.theme.colors.primary.highlighted}
+              color={tw.theme.colors.ctx.primary.fg.solid}
             />
           </div>
         </div>

@@ -46,7 +46,7 @@ export const MdxVideoPlayer = ({
             controls
           />
         ) : (
-          <Skeleton className='flex aspect-video h-full w-full items-center justify-center rounded-md bg-background-contrast p-8'>
+          <Skeleton className='flex aspect-video h-full w-full items-center justify-center rounded-md bg-ctx-secondary p-8'>
             <Typography weight='normal'>Loading video</Typography>
           </Skeleton>
         )}

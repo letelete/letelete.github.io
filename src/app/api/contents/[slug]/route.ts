@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ResponseBodyError } from 'src/app/api/shared/types';
 
 import {
   ContentStatistics,
@@ -8,6 +7,7 @@ import {
 import { isSlugMatchingContent } from '~api/contents/shared/utils';
 import { getApiContextValue } from '~api/shared/middleware';
 import { getModelClient } from '~api/shared/model-client';
+import { ResponseBodyError } from '~api/shared/types';
 
 const client = getModelClient();
 
