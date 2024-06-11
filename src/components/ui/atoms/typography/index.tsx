@@ -23,6 +23,7 @@ const typographyVariants = cva('tracking-normal', {
     color: {
       primary: 'text-ctx-primary-fg-primary',
       secondary: 'text-ctx-primary-fg-secondary',
+      accent: 'text-ctx-accent-secondary',
       hint: 'text-ctx-primary-fg-hint',
       destructive: 'text-ctx-primary-fg-destructive',
     },

@@ -22,7 +22,7 @@ const SectionHeader = ({
   return (
     <div
       className={cn(
-        'pb-content-sm sm:pb-content flex w-full flex-col items-end',
+        'flex w-full flex-col items-end pb-content-sm sm:pb-content',
         className
       )}
       {...rest}

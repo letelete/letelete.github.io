@@ -112,7 +112,7 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
           style={{ opacity, minHeight: `${MIN_FOOTER_CONTENT_HEIGHT_VH}vh` }}
           className='relative z-10 flex w-full flex-col overflow-hidden rounded-xl p-12'
         >
-          <div className='gap-y-content-sm sm:gap-y-content flex flex-1 flex-col items-center justify-center'>
+          <div className='flex flex-1 flex-col items-center justify-center gap-y-content-sm sm:gap-y-content'>
             {children}
 
             <OpenSourceHeadline />

@@ -1,5 +1,5 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
-import { Children, PropsWithChildren, useId } from 'react';
+import { PropsWithChildren, useId } from 'react';
 
 /* -------------------------------------------------------------------------------------------------
  * DynamicWeightOnHoverText

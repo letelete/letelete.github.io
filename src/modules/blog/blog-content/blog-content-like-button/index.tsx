@@ -170,7 +170,7 @@ const DraftLikesCounterProps = forwardRef<
       ref={ref}
       className={cn('relative transition-colors', className)}
       variant='body-sm'
-      color={reachedLikesLimit ? 'accent' : 'default'}
+      color={reachedLikesLimit ? 'accent' : 'primary'}
       role='status'
       asChild
       {...rest}

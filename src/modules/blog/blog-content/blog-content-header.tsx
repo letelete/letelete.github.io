@@ -34,7 +34,7 @@ export const BlogContentHeader = ({ content }: BlogContentHeader) => {
         {`/ ${contentTypeToHeader[content.type]}`}
       </Typography>
 
-      <Typography className='mt-4' variant='hero' color='highlight' asChild>
+      <Typography className='mt-4' variant='hero' asChild>
         <h1>{content.title}</h1>
       </Typography>
 
