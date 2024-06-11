@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { SOCIALS } from '~constants/index';
@@ -14,6 +15,8 @@ import { cn } from '~utils/style';
 /* -------------------------------------------------------------------------------------------------
  * ContactSection
  * -----------------------------------------------------------------------------------------------*/
+
+const MotionLink = motion(Link);
 
 const ContactSection = () => {
   return (
@@ -45,7 +48,7 @@ const ContactSection = () => {
                       size='inline'
                       asChild
                     >
-                      <Link href={social.link.href}>{text}</Link>
+                      <MotionLink href={social.link.href}>{text}</MotionLink>
                     </Button>
                   );
                 }
@@ -64,7 +67,9 @@ const ContactSection = () => {
                 size='inline'
                 asChild
               >
-                <Link href={social.link.href}>{social.link.label}</Link>
+                <MotionLink href={social.link.href}>
+                  {social.link.label}
+                </MotionLink>
               </Button>
             </div>
           </div>

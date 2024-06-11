@@ -10,6 +10,8 @@ import { UnicornEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
 import { AppHeader, AppHeaderProps } from '~ui/molecules/app-header';
 
+const MotionLink = motion(Link);
+
 const itemWithColorsMotionVariants: Variants = {
   compact: { filter: 'grayscale(1)' },
   normal: { filter: 'grayscale(0)' },
@@ -43,7 +45,7 @@ const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
       ref={ref}
     >
       <Link href='/blog'>
-        <Typography variant='body' color='highlight'>
+        <Typography variant='body'>
           <span className='font-bold'> blog</span>
           .kawka.me
         </Typography>
@@ -53,13 +55,13 @@ const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
         variant='ghost'
         size='inline'
         className='px-1 hover:bg-transparent'
-        asChild
         onFocus={handleAboutHover}
         onMouseEnter={handleAboutHover}
         onMouseLeave={handleAboutBlur}
         onBlur={handleAboutBlur}
+        asChild
       >
-        <Link href='/' className='relative'>
+        <MotionLink href='/' className='relative'>
           <div className='absolute left-0 top-0 z-10 -translate-x-[1rem] -translate-y-[1.25rem]'>
             <Player
               ref={playerRef}
@@ -68,18 +70,13 @@ const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
               style={{ height: '3rem', width: '3rem' }}
             />
           </div>
-          <Typography
-            className='relative z-20'
-            variant='body'
-            color='highlight'
-            asChild
-          >
+          <Typography className='relative z-20' variant='body' asChild>
             <motion.p variants={itemWithColorsMotionVariants}>
               <UnicornEmoji className='mr-2' />
               about me
             </motion.p>
           </Typography>
-        </Link>
+        </MotionLink>
       </Button>
     </AppHeader>
   );

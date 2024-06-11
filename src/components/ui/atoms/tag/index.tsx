@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { Button, ButtonProps } from '~ui/atoms/button';
 import { Typography } from '~ui/atoms/typography';
 
@@ -34,8 +36,9 @@ export const Tag = ({
       variant='link'
       size='inline'
       {...rest}
+      asChild
     >
-      #{label}
+      <motion.button>#{label}</motion.button>
     </Button>
   );
 };

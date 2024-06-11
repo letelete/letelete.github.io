@@ -1,9 +1,13 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { MotionProps, motion } from 'framer-motion';
+import { HTMLMotionProps } from 'framer-motion';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
+
+/* -------------------------------------------------------------------------------------------------
+ * Button
+ * -----------------------------------------------------------------------------------------------*/
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-full font-sans text-sm font-normal leading-none tracking-tighter transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50',
@@ -82,7 +86,7 @@ const buttonVariants = cva(
   }
 );
 
-export interface ButtonProps
+interface ButtonProps
   extends ComponentPropsWithoutRef<'button'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
@@ -90,22 +94,14 @@ export interface ButtonProps
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, inverse, ...props }, ref) => {
-    if (asChild) {
-      return (
-        <Slot
-          className={cn(buttonVariants({ variant, size, inverse, className }))}
-          ref={ref}
-          {...props}
-        />
-      );
-    }
+    const Comp = asChild ? Slot : 'button';
 
     return (
-      <motion.button
-        whileTap={{ scale: 0.9 }}
+      <Comp
         className={cn(buttonVariants({ variant, size, inverse, className }))}
         ref={ref}
-        {...(props as MotionProps)}
+        {...buttonMotionProps}
+        {...props}
       />
     );
   }
@@ -113,4 +109,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
-export { Button };
+/* -----------------------------------------------------------------------------------------------*/
+
+const buttonMotionProps = {
+  whileTap: { scale: 0.9 },
+} as const satisfies HTMLMotionProps<'button'>;
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { Button, buttonMotionProps };
+export type { ButtonProps };

@@ -59,7 +59,9 @@ export const TagsList = ({
               variant='link'
               onClick={handleClearAll}
             >
-              clear selection ({selectedTags.length})
+              <motion.button>
+                clear selection ({selectedTags.length})
+              </motion.button>
             </Button>
           </FadeInMotion>
         )}

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ComponentPropsWithoutRef, ReactNode, memo } from 'react';
 
 import { Button } from '~ui/atoms/button';
@@ -52,9 +53,9 @@ export interface MdxFigLinkProps {
 const MdxFigLink = memo(({ id, children, className }: MdxFigLinkProps) => {
   return (
     <Button className={cn(className)} variant='link' size='inline' asChild>
-      <a href={`#${hashSource(id)}`} className='mt-2 text-center'>
+      <motion.a href={`#${hashSource(id)}`} className='mt-2 text-center'>
         {children ?? `Fig. ${id}.`}
-      </a>
+      </motion.a>
     </Button>
   );
 });

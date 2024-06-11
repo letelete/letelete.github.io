@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ComponentPropsWithoutRef } from 'react';
 
 import { SOCIALS } from '~constants/index';
@@ -41,6 +42,8 @@ const socials: SocialEntry[] = [
   },
 ];
 
+const MotionIconLink = motion(IconLink);
+
 export interface SocialButtonsProps extends ComponentPropsWithoutRef<'div'> {}
 
 export const SocialButtons = ({ className, ...rest }: SocialButtonsProps) => {
@@ -48,7 +51,7 @@ export const SocialButtons = ({ className, ...rest }: SocialButtonsProps) => {
     <div className={cn('flex gap-x-1', className)} {...rest}>
       {socials.map((entry) => (
         <Button key={entry.id} size='icon' variant='ghost' asChild>
-          <IconLink
+          <MotionIconLink
             iconProps={{ name: entry.name }}
             accessibleLabel={entry.title}
             href={entry.href}

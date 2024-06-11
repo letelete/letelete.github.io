@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~constants/index';
@@ -18,6 +19,8 @@ import { InterestsSpotlight } from '~ui/widgets/interests-spotlight';
 /* -------------------------------------------------------------------------------------------------
  * AboutSection
  * -----------------------------------------------------------------------------------------------*/
+
+const MotionLink = motion(Link);
 
 const AboutSection = () => {
   return (
@@ -39,7 +42,9 @@ const AboutSection = () => {
             </Typography>
 
             <Button className='mt-6' asChild>
-              <Link href={GOOGLE_CODE_IN_ARTICLE_PATH}>Read my story</Link>
+              <MotionLink href={GOOGLE_CODE_IN_ARTICLE_PATH}>
+                Read my story
+              </MotionLink>
             </Button>
           </div>
 

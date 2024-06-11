@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { Button } from '~ui/atoms/button';
@@ -7,6 +8,8 @@ import { Typography } from '~ui/atoms/typography';
 
 import { monthNameAndYearDate } from '~utils/string';
 import { tw } from '~utils/style';
+
+const MotionLink = motion(Link);
 
 export interface ArticleSegmentProps extends Partial<LineSegmentProps> {
   href: string;
@@ -36,7 +39,7 @@ export const ArticleSegment = ({
             size='inline'
             asChild
           >
-            <Link href={href}>{title}</Link>
+            <MotionLink href={href}>{title}</MotionLink>
           </Button>
         </div>
       }
