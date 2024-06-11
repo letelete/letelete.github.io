@@ -10,3 +10,11 @@ export const timeInMs = {
     return this.hour * 24;
   },
 };
+
+const fps = (time: number, fps: number) => {
+  return time % Math.floor(1000 / fps) === 0;
+};
+
+export const checkFps60 = (time: number) => {
+  return fps(time, 60);
+};

@@ -1,13 +1,13 @@
 import { Suspense } from 'react';
 
 import { getAllContent } from '~lib/content/provider';
-import { getBrunoImages } from '~lib/images/provider';
+import { getAuthorPortraitImages } from '~lib/images/provider';
 
 import { Home } from '~modules/home';
 
 export default async function HomePage() {
   const content = await getAllContent();
-  const brunoImages = await getBrunoImages();
+  const authorPortraits = await getAuthorPortraitImages();
 
   return (
     <Suspense
@@ -17,7 +17,7 @@ export default async function HomePage() {
         </div>
       }
     >
-      <Home blogContent={content} authorPortraits={brunoImages} />
+      <Home blogContent={content} authorPortraits={authorPortraits} />
     </Suspense>
   );
 }

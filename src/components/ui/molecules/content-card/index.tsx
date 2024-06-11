@@ -12,7 +12,6 @@ import {
 import { Card, CardProps } from '~ui/atoms/card';
 import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-import { Logo } from '~ui/widgets/logo';
 
 import { cn } from '~utils/style';
 
@@ -85,8 +84,9 @@ const ContentCard = ({
     <Card asChild className={cn('flex flex-col', className)} {...rest}>
       <MotionLink
         href={href}
+        whileHover={{ y: -10 }}
         whileTap={{ scale: 0.9, opacity: 0.5 }}
-        transition={{ type: 'spring', duration: 0.2, bounce: 0 }}
+        transition={{ type: 'spring', duration: 0.2 }}
       >
         <Typography
           className='line-clamp-1 w-full text-left uppercase'

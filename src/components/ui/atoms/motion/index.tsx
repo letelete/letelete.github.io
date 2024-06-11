@@ -1,5 +1,5 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
-import { forwardRef } from 'react';
+import { ReactElement, forwardRef, useCallback, useId, useMemo } from 'react';
 
 import {
   fadeInMotionVariants,
@@ -8,7 +8,12 @@ import {
   revealInUpMotionVariants,
 } from '~ui/atoms/motion/lib';
 
-export interface HeartBeatMotionProps extends HTMLMotionProps<'div'> {}
+/* -------------------------------------------------------------------------------------------------
+ * HeartBeatMotion
+ * -----------------------------------------------------------------------------------------------*/
+
+interface HeartBeatMotionProps extends HTMLMotionProps<'div'> {}
+
 const HeartBeatMotion = forwardRef<HTMLDivElement, HeartBeatMotionProps>(
   ({ children, ...rest }, ref) => {
     return (
@@ -25,10 +30,15 @@ const HeartBeatMotion = forwardRef<HTMLDivElement, HeartBeatMotionProps>(
     );
   }
 );
-HeartBeatMotion.displayName = 'HeartBeatMotion';
-export { HeartBeatMotion };
 
-export interface FadeInMotionProps extends HTMLMotionProps<'div'> {}
+HeartBeatMotion.displayName = 'HeartBeatMotion';
+
+/* -------------------------------------------------------------------------------------------------
+ * FadeInMotion
+ * -----------------------------------------------------------------------------------------------*/
+
+interface FadeInMotionProps extends HTMLMotionProps<'div'> {}
+
 const FadeInMotion = forwardRef<HTMLDivElement, FadeInMotionProps>(
   ({ children, ...rest }, ref) => {
     return (
@@ -45,10 +55,15 @@ const FadeInMotion = forwardRef<HTMLDivElement, FadeInMotionProps>(
     );
   }
 );
-FadeInMotion.displayName = 'FadeInMotion';
-export { FadeInMotion };
 
-export interface RevealInUpMotionProps extends HTMLMotionProps<'div'> {}
+FadeInMotion.displayName = 'FadeInMotion';
+
+/* -------------------------------------------------------------------------------------------------
+ * RevealInUpMotion
+ * -----------------------------------------------------------------------------------------------*/
+
+interface RevealInUpMotionProps extends HTMLMotionProps<'div'> {}
+
 const RevealInUpMotion = forwardRef<HTMLDivElement, RevealInUpMotionProps>(
   ({ children, transition, ...rest }, ref) => {
     return (
@@ -66,10 +81,15 @@ const RevealInUpMotion = forwardRef<HTMLDivElement, RevealInUpMotionProps>(
     );
   }
 );
-RevealInUpMotion.displayName = 'RevealInUpMotion';
-export { RevealInUpMotion };
 
-export interface PopInMotionProps extends HTMLMotionProps<'div'> {}
+RevealInUpMotion.displayName = 'RevealInUpMotion';
+
+/* -------------------------------------------------------------------------------------------------
+ * PopInMotion
+ * -----------------------------------------------------------------------------------------------*/
+
+interface PopInMotionProps extends HTMLMotionProps<'div'> {}
+
 const PopInMotion = forwardRef<HTMLDivElement, PopInMotionProps>(
   ({ children, transition, ...rest }, ref) => {
     return (
@@ -87,5 +107,85 @@ const PopInMotion = forwardRef<HTMLDivElement, PopInMotionProps>(
     );
   }
 );
+
 PopInMotion.displayName = 'PopInMotion';
-export { PopInMotion };
+
+/* -------------------------------------------------------------------------------------------------
+ * AnimationScopeAnchor
+ * -----------------------------------------------------------------------------------------------*/
+
+class HTMLAttributeSelector<TValue extends string | number | symbol> {
+  key: string;
+  value: TValue;
+
+  constructor(key: string, value: TValue) {
+    this.key = key;
+    this.value = value;
+  }
+
+  toString() {
+    return `[${this.key}="${this.value.toString()}"]`;
+  }
+}
+
+const ANCHOR_HTML_ATTRIBUTE = `data-animation-anchor` as const;
+
+const useAnimationAnchor = <TAnchorName extends string>(
+  names: TAnchorName[]
+) => {
+  const id = useId();
+
+  const getHTMLSelector = useCallback(
+    (name: TAnchorName) => {
+      const selector = new HTMLAttributeSelector(
+        ANCHOR_HTML_ATTRIBUTE,
+        `${id}${name}`
+      );
+      return selector;
+    },
+    [id]
+  );
+
+  const anchorsMap = useMemo(
+    () =>
+      Object.fromEntries(
+        names.map((name) => {
+          const selector = getHTMLSelector(name);
+
+          return [
+            name,
+            {
+              selector: selector.toString(),
+              props: { [ANCHOR_HTML_ATTRIBUTE]: selector.value },
+            },
+          ] as const;
+        })
+      ) as Record<
+        TAnchorName,
+        {
+          selector: string;
+          props: ReactElement['props'];
+        }
+      >,
+    [getHTMLSelector, names]
+  );
+
+  return anchorsMap;
+};
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export {
+  HeartBeatMotion,
+  FadeInMotion,
+  RevealInUpMotion,
+  PopInMotion,
+  useAnimationAnchor,
+};
+
+export type {
+  HeartBeatMotionProps,
+  FadeInMotionProps,
+  RevealInUpMotionProps,
+  PopInMotionProps,
+};
