@@ -92,6 +92,12 @@ const config = {
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
       },
+      spacing: {
+        section: '8rem',
+        'section-sm': '6rem',
+        content: '6rem',
+        'content-sm': '4rem',
+      },
     },
   },
   plugins: [

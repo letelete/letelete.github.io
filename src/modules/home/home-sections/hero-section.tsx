@@ -58,7 +58,7 @@ export const HeroSection = () => {
         <Listenable
           playAriaLabel='Listen to name pronunciation'
           src='/sfx/author-name-pronunciation.mp3'
-          className='mt-24'
+          className='mt-content-sm sm:mt-content'
         >
           <Typography>
             <ListenableHighlight segments={[[0, 400]]} text='Bruno' />{' '}

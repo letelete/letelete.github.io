@@ -16,7 +16,7 @@ const SectionHeadline = ({
   ...rest
 }: PropsWithChildren<SectionHeadlineProps>) => (
   <Typography
-    className={cn('mx-auto pb-24 text-center', className)}
+    className={cn('pb-content-sm sm:pb-content mx-auto text-center', className)}
     asChild
     {...rest}
   >

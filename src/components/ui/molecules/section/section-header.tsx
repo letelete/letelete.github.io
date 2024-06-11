@@ -21,7 +21,10 @@ const SectionHeader = ({
 }: SectionHeaderProps) => {
   return (
     <div
-      className={cn('flex w-full flex-col items-end pb-24', className)}
+      className={cn(
+        'pb-content-sm sm:pb-content flex w-full flex-col items-end',
+        className
+      )}
       {...rest}
     >
       <Typography variant='hero' weight='light' color='primary' italic asChild>

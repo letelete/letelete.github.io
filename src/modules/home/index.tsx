@@ -45,7 +45,7 @@ const Home = ({ blogContent, authorPortraits }: HomeProps) => {
       <main className='min-h-screen space-y-6'>
         <HomeHeader />
 
-        <div className='w-full space-y-32'>
+        <div className='space-y-section-sm sm:space-y-section w-full'>
           <HeroSection />
 
           <DigitalContributionsKnowledgeSharing />

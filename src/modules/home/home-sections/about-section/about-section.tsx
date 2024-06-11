@@ -64,11 +64,11 @@ const AboutSection = () => {
         </div>
 
         <ForMobile>
-          <AboutAuthorPortraitsGalleryCard className='mt-24' />
+          <AboutAuthorPortraitsGalleryCard className='sm:mt-content mt-content-sm' />
         </ForMobile>
       </SectionContainer>
 
-      <InterestsSpotlight className='mt-24' />
+      <InterestsSpotlight className='sm:mt-content mt-content-sm' />
     </div>
   );
 };

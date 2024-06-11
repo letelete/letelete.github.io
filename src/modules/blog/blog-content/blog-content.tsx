@@ -19,7 +19,7 @@ export function BlogContent({ content }: BlogContentProps) {
           <BlogContentArticle body={content.body} />
 
           <BlogContentFooter
-            className='relative z-50 mt-16 sm:mt-24'
+            className='mt-section-sm sm:mt-section relative z-50'
             content={content}
           />
         </>
