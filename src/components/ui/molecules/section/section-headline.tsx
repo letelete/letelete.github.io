@@ -8,15 +8,22 @@ import { cn } from '~utils/style';
  * SectionHeadline
  * -----------------------------------------------------------------------------------------------*/
 
-interface SectionHeadlineProps extends TypographyProps {}
+interface SectionHeadlineProps extends TypographyProps {
+  disablePadding?: boolean;
+}
 
 const SectionHeadline = ({
   className,
   children,
+  disablePadding,
   ...rest
 }: PropsWithChildren<SectionHeadlineProps>) => (
   <Typography
-    className={cn('mx-auto pb-content-sm text-center sm:pb-content', className)}
+    className={cn(
+      'mx-auto text-center',
+      disablePadding || 'pb-content-sm  sm:pb-content',
+      className
+    )}
     asChild
     {...rest}
   >

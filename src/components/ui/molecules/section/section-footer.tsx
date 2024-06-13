@@ -160,7 +160,7 @@ SectionFooter.displayName = 'SectionFooter';
  * -----------------------------------------------------------------------------------------------*/
 
 const OpenSourceHeadline = () => (
-  <SectionHeadline className='pb-0' inverse>
+  <SectionHeadline disablePadding inverse>
     <span className='text-foreground-primary'>
       This site is built on top of{' '}
     </span>
@@ -215,7 +215,7 @@ const artists = [
 /* -----------------------------------------------------------------------------------------------*/
 
 const ArtistsHeadline = () => (
-  <SectionHeadline className='pb-0' inverse>
+  <SectionHeadline disablePadding inverse>
     Thanks to{' '}
     {artists.map(({ name, href }, index) => (
       <span key={href}>
