@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply sm:scroll-py-section scroll-py-section-sm min-h-screen scroll-smooth bg-ctx-primary text-ctx-primary-fg-primary;
+    @apply min-h-screen scroll-py-section-sm scroll-smooth bg-ctx-primary text-ctx-primary-fg-primary sm:scroll-py-section;
     -webkit-tap-highlight-color: transparent;
     color-scheme: light;
   }
@@ -32,5 +32,9 @@
 
   .layout-width-limiter {
     @apply mx-auto my-0 max-w-screen-xl;
+  }
+
+  .lock-scroll {
+    @apply fixed w-full overflow-y-scroll;
   }
 }

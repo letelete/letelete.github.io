@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { HTMLMotionProps } from 'framer-motion';
+import { HTMLMotionProps, isMotionComponent } from 'framer-motion';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
@@ -100,7 +100,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, inverse, className }))}
         ref={ref}
-        {...buttonMotionProps}
+        {...(isMotionComponent(typeof Comp) ? buttonMotionProps : null)}
         {...props}
       />
     );

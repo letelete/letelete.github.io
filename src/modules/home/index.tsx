@@ -13,6 +13,8 @@ import { DigitalContributionsKnowledgeSharing } from '~modules/home/home-section
 import { ExperienceSection } from '~modules/home/home-sections/experience-section';
 import { HeroSection } from '~modules/home/home-sections/hero-section';
 
+import { cn } from '~utils/style';
+
 /* -------------------------------------------------------------------------------------------------
  * Home
  * -----------------------------------------------------------------------------------------------*/
@@ -32,9 +34,10 @@ const HomeContext = createContext<HomeContextProps>({
 interface HomeProps {
   blogContent: Content[];
   authorPortraits: ImageItem[];
+  className?: string;
 }
 
-const Home = ({ blogContent, authorPortraits }: HomeProps) => {
+const Home = ({ blogContent, authorPortraits, className }: HomeProps) => {
   const contextValue = useMemo(
     () => ({ blogContent, authorPortraits }),
     [authorPortraits, blogContent]
@@ -42,7 +45,7 @@ const Home = ({ blogContent, authorPortraits }: HomeProps) => {
 
   return (
     <HomeContext.Provider value={contextValue}>
-      <main className='min-h-screen space-y-6'>
+      <main className={cn('min-h-screen space-y-6', className)}>
         <HomeHeader />
 
         <div className='w-full space-y-section-sm sm:space-y-section'>

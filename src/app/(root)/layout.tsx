@@ -115,12 +115,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body
-        className={cn(
-          `${fontSans.variable} ${fontMono.variable}`,
-          'flex flex-col'
-        )}
-      >
+      <body className={cn(`${fontSans.variable} ${fontMono.variable}`)}>
         <SSRQueryClientProvider>{children}</SSRQueryClientProvider>
 
         <SpeedInsights />
