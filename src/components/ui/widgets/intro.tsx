@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
 import { useLockScroll } from '~hooks/use-lock-document-scroll';
 
@@ -18,10 +18,14 @@ import { HighlightPrompter } from '~ui/organisms/prompter/implementations';
 import { Logo } from '~ui/widgets/logo';
 
 import { cn } from '~utils/style';
+import { timeInMs } from '~utils/time';
 
 /* -------------------------------------------------------------------------------------------------
  * Intro
  * -----------------------------------------------------------------------------------------------*/
+
+const PREFERENCE_DO_NOT_SHOW_INTRO_KEY = 'intro:do-not-show:timestamp';
+const PREFERENCE_DO_NOT_SHOW_INTRO_TIME_IN_MS = timeInMs.hour * 2;
 
 const PROMPTER_DURATION_PER_PART = 0.075;
 const PROMPTER_PART_TRANSITION_DURATION = PROMPTER_DURATION_PER_PART * 5;
@@ -59,19 +63,60 @@ const Intro = ({ className, ...rest }: IntroProps) => {
   const [isCreditsVisible, setIsCreditsVisible] = useState(false);
   const prompterHandle = useRef<PrompterHandle>(null);
 
+  const [displayIntro, setDisplayIntro] = useState(true);
   const [introCompleted, setIntroCompleted] = useState(false);
   const [userRequestedToSkipIntro, setUserRequestedToSkipIntro] =
     useState(false);
 
-  const handleIntroComplete = useCallback(() => {
+  const saveUserPreferenceToSkipIntro = useCallback(() => {
+    const nowTimestamp = new Date().getTime();
+
+    localStorage.setItem(
+      PREFERENCE_DO_NOT_SHOW_INTRO_KEY,
+      nowTimestamp.toString()
+    );
+  }, []);
+
+  const checkUserPreferenceToSkipIntro = useCallback(() => {
+    const nowTimestamp = new Date().getTime();
+
+    const restoredTimestampValue = localStorage.getItem(
+      PREFERENCE_DO_NOT_SHOW_INTRO_KEY
+    );
+    const restoredTimestamp = restoredTimestampValue
+      ? parseInt(restoredTimestampValue, 10)
+      : null;
+
+    if (
+      restoredTimestamp === null ||
+      Number.isNaN(restoredTimestamp) ||
+      restoredTimestamp > nowTimestamp
+    ) {
+      localStorage.removeItem(PREFERENCE_DO_NOT_SHOW_INTRO_KEY);
+      return false;
+    }
+
+    return (
+      nowTimestamp - restoredTimestamp <=
+      PREFERENCE_DO_NOT_SHOW_INTRO_TIME_IN_MS
+    );
+  }, []);
+
+  const cleanup = useCallback(() => {
     unlockScroll();
-    setIntroCompleted(true);
   }, [unlockScroll]);
 
+  const handleIntroComplete = useCallback(() => {
+    setIntroCompleted(true);
+    saveUserPreferenceToSkipIntro();
+    cleanup();
+  }, [cleanup, saveUserPreferenceToSkipIntro]);
+
   const skipIntro = useCallback(() => {
-    unlockScroll();
     setUserRequestedToSkipIntro(true);
-  }, [unlockScroll]);
+    saveUserPreferenceToSkipIntro();
+    cleanup();
+  }, [cleanup, saveUserPreferenceToSkipIntro]);
 
   const partRenderer: PrompterRenderer = useCallback(
     (part) => (
@@ -81,6 +126,18 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     ),
     []
   );
+
+  useLayoutEffect(() => {
+    const userPrefersToSkipIntro = checkUserPreferenceToSkipIntro();
+    setDisplayIntro(!userPrefersToSkipIntro);
+    if (userPrefersToSkipIntro) {
+      cleanup();
+    }
+  }, [checkUserPreferenceToSkipIntro, cleanup, skipIntro, unlockScroll]);
+
+  if (!displayIntro) {
+    return null;
+  }
 
   return (
     <AnimatePresence mode='popLayout'>
@@ -143,29 +200,28 @@ const Intro = ({ className, ...rest }: IntroProps) => {
                 transitionDuration={PROMPTER_PART_TRANSITION_DURATION}
                 autoplay
               />
-            </motion.div>
 
-            <motion.div
-              className='mt-8 flex w-full justify-end sm:mt-2 sm:justify-center'
-              initial={{ opacity: 0, filter: 'blur(8px)', y: 0 }}
-              animate={
-                isCreditsVisible
-                  ? { opacity: 1, filter: 'blur(0px)', y: 1 }
-                  : undefined
-              }
-              transition={{
-                ease: 'easeIn',
-                duration: 0.5,
-                delay: 0.5,
-                bounce: 0,
-                y: {
-                  // Animate not relevant property to delay the animation completion.
-                  duration: 2,
-                },
-              }}
-              onAnimationComplete={handleIntroComplete}
-            >
-              <Typography color='secondary'>~@benjitaylor</Typography>
+              <motion.div
+                className='mt-8 flex w-full justify-end md:mt-2'
+                initial={{ opacity: 0, filter: 'blur(8px)', y: 0 }}
+                animate={
+                  isCreditsVisible
+                    ? { opacity: 1, filter: 'blur(0px)', y: 1 }
+                    : undefined
+                }
+                transition={{
+                  ease: 'easeIn',
+                  duration: 0.75,
+                  bounce: 0,
+                  y: {
+                    // Animate not relevant property to delay the animation completion.
+                    duration: 2,
+                  },
+                }}
+                onAnimationComplete={handleIntroComplete}
+              >
+                <Typography color='secondary'>~@benjitaylor</Typography>
+              </motion.div>
             </motion.div>
 
             <AnimatePresence>

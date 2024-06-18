@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect } from 'react';
+import { useCallback, useEffect, useLayoutEffect } from 'react';
 
 const CLASS_NAME = 'lock-scroll';
 
@@ -37,6 +37,10 @@ const useLockScroll = (options?: {
       lockScroll();
     }
   }, [lockScroll, options?.immediate]);
+
+  useEffect(() => {
+    return () => unlockScroll();
+  }, [unlockScroll]);
 
   return { lockScroll, unlockScroll };
 };
