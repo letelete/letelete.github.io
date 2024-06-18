@@ -1,23 +1,21 @@
 'use client';
 
-import {
-  AnimatePresence,
-  HTMLMotionProps,
-  MotionConfig,
-  motion,
-} from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import { useCallback, useRef, useState } from 'react';
 
 import { useLockScroll } from '~hooks/use-lock-document-scroll';
 
 import { Button, buttonMotionProps } from '~ui/atoms/button';
+import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';
 import { Typography } from '~ui/atoms/typography';
+import { AppHeader } from '~ui/molecules/app-header';
 import {
   PrompterHandle,
   PrompterRenderer,
   createPrompterParts,
 } from '~ui/organisms/prompter';
 import { HighlightPrompter } from '~ui/organisms/prompter/implementations';
+import { Logo } from '~ui/widgets/logo';
 
 import { cn } from '~utils/style';
 
@@ -25,7 +23,8 @@ import { cn } from '~utils/style';
  * Intro
  * -----------------------------------------------------------------------------------------------*/
 
-const PROMPTER_DURATION_PER_PART = 150;
+const PROMPTER_DURATION_PER_PART = 0.075;
+const PROMPTER_PART_TRANSITION_DURATION = PROMPTER_DURATION_PER_PART * 5;
 
 const PROMPTER_TEXT =
   'Taste is maybe the biggest deciding factor in whether a product ends up *feeling* good or not, regardless of how much skill is involved.' as const;
@@ -33,16 +32,19 @@ const PROMPTER_TEXT =
 const prompterParts = createPrompterParts(
   PROMPTER_TEXT,
   { duration: PROMPTER_DURATION_PER_PART },
-  { value: 'Taste', duration: 750 },
-  { value: 'not,', duration: 750 }
+  { value: 'Taste', duration: 0.75 },
+  { value: 'not,', duration: 0.4 }
 );
 
-const PROMPTER_TEXT_ANIMATION_DURATION =
-  prompterParts
-    .map((part) => part.duration ?? PROMPTER_DURATION_PER_PART)
-    .reduce((sum, duration) => sum + duration, 0) / 1000;
+const PROMPTER_TEXT_ANIMATION_DURATION = prompterParts
+  .map(
+    (part) =>
+      (part.duration ?? PROMPTER_DURATION_PER_PART) +
+      PROMPTER_PART_TRANSITION_DURATION
+  )
+  .reduce((sum, duration) => sum + duration, 0);
 
-const QUOTE_TRANSITION_DURATION = PROMPTER_TEXT_ANIMATION_DURATION * 0.95;
+const QUOTE_TRANSITION_DURATION = PROMPTER_TEXT_ANIMATION_DURATION * 0.25;
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -61,14 +63,14 @@ const Intro = ({ className, ...rest }: IntroProps) => {
   const [userRequestedToSkipIntro, setUserRequestedToSkipIntro] =
     useState(false);
 
-  const skipIntro = useCallback(() => {
-    prompterHandle.current?.jumpTo('end');
-    setUserRequestedToSkipIntro(true);
-  }, []);
-
   const handleIntroComplete = useCallback(() => {
     unlockScroll();
     setIntroCompleted(true);
+  }, [unlockScroll]);
+
+  const skipIntro = useCallback(() => {
+    unlockScroll();
+    setUserRequestedToSkipIntro(true);
   }, [unlockScroll]);
 
   const partRenderer: PrompterRenderer = useCallback(
@@ -82,107 +84,125 @@ const Intro = ({ className, ...rest }: IntroProps) => {
 
   return (
     <AnimatePresence mode='popLayout'>
-      {introCompleted ? null : (
+      {introCompleted || userRequestedToSkipIntro ? null : (
         <motion.div
           exit={{
             filter: 'blur(16px)',
             opacity: 0,
+            scale: 1.1,
             transition: {
               type: 'spring',
               bounce: 0,
               duration: 0.75,
-              delay: userRequestedToSkipIntro ? 0.2 : 1,
             },
           }}
           className={cn(
-            'fixed bottom-0 left-0 right-0 top-0 overflow-hidden bg-ctx-primary',
+            'fixed bottom-0 left-0 right-0 top-0 flex h-screen w-screen flex-col overflow-hidden bg-ctx-primary',
             className
           )}
           {...rest}
         >
-          <MotionConfig
-            reducedMotion={userRequestedToSkipIntro ? 'always' : 'user'}
+          <AppHeader
+            className='relative'
+            innerClassName='flex gap-x-2 justify-between'
           >
-            <div className='layout-width-limiter layout-padding relative flex h-full w-full flex-col items-center justify-center'>
-              <motion.div
-                className='flex flex-col items-center justify-center'
-                initial={{ clipPath: 'inset(0% 100% 0% 0%)', scale: 0.75 }}
-                animate={{ clipPath: 'inset(0% 0% 0% 0%)', scale: 1 }}
+            <div className='relative'>
+              <Logo className='opacity-30' />
+              <Logo
+                className='absolute inset-0'
+                initial={{ clipPath: 'inset(0% 100% 0% 0%)' }}
+                animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
                 transition={{
                   type: 'spring',
-                  duration: userRequestedToSkipIntro
-                    ? 0
-                    : QUOTE_TRANSITION_DURATION,
-                  bounce: 0,
+                  duration: PROMPTER_TEXT_ANIMATION_DURATION,
                 }}
-              >
-                <HighlightPrompter
-                  ref={prompterHandle}
-                  parts={prompterParts}
-                  partRenderer={partRenderer}
-                  onPlayComplete={(_part, at, length) => {
-                    const noPartsRemaining = at >= length - 1;
-                    setIsCreditsVisible(noPartsRemaining);
-                  }}
-                  autoplay
-                />
-              </motion.div>
-
-              <motion.div
-                className='mt-8 flex w-full justify-end sm:mt-2 sm:justify-center'
-                initial={{ opacity: 0, filter: 'blur(4px)' }}
-                animate={
-                  isCreditsVisible
-                    ? { opacity: 1, filter: 'blur(0px)' }
-                    : undefined
-                }
-                transition={{
-                  ease: 'easeIn',
-                  duration: 0.5,
-                  delay: 0.5,
-                  bounce: 0,
-                }}
-                onAnimationComplete={handleIntroComplete}
-              >
-                <Typography color='secondary'>~@benjitaylor</Typography>
-              </motion.div>
-
-              <AnimatePresence mode='popLayout'>
-                {userRequestedToSkipIntro || isCreditsVisible ? null : (
-                  <Button
-                    className='absolute bottom-[5%] z-20 mx-auto'
-                    onClick={skipIntro}
-                    asChild
-                    {...buttonMotionProps}
-                  >
-                    <motion.button
-                      variants={{
-                        hidden: {
-                          y: '100%',
-                          opacity: 0,
-                          transition: { ease: 'easeOut', duration: 0.3 },
-                        },
-                        animate: {
-                          y: 0,
-                          opacity: 1,
-                          transition: {
-                            ease: 'easeOut',
-                            duration: 0.5,
-                            delay: 1,
-                          },
-                        },
-                      }}
-                      initial='hidden'
-                      animate='animate'
-                      exit='hidden'
-                    >
-                      Skip intro
-                    </motion.button>
-                  </Button>
-                )}
-              </AnimatePresence>
+                layoutId={LAYOUT_ID_HOME_LOGO}
+              />
             </div>
-          </MotionConfig>
+          </AppHeader>
+
+          <div className='layout-width-limiter layout-padding relative flex w-full flex-1 flex-col items-center justify-center'>
+            <motion.div
+              className='flex flex-col items-center justify-center'
+              initial={{ clipPath: 'inset(0% 100% 0% 0%)', scale: 0.75 }}
+              animate={{ clipPath: 'inset(0% 0% 0% 0%)', scale: 1 }}
+              transition={{
+                type: 'spring',
+                duration: QUOTE_TRANSITION_DURATION,
+                bounce: 0,
+              }}
+            >
+              <HighlightPrompter
+                ref={prompterHandle}
+                parts={prompterParts}
+                partRenderer={partRenderer}
+                onPlayComplete={(_part, at, length) => {
+                  const noPartsRemaining = at >= length - 1;
+                  setIsCreditsVisible(noPartsRemaining);
+                }}
+                transitionDuration={PROMPTER_PART_TRANSITION_DURATION}
+                autoplay
+              />
+            </motion.div>
+
+            <motion.div
+              className='mt-8 flex w-full justify-end sm:mt-2 sm:justify-center'
+              initial={{ opacity: 0, filter: 'blur(8px)', y: 0 }}
+              animate={
+                isCreditsVisible
+                  ? { opacity: 1, filter: 'blur(0px)', y: 1 }
+                  : undefined
+              }
+              transition={{
+                ease: 'easeIn',
+                duration: 0.5,
+                delay: 0.5,
+                bounce: 0,
+                y: {
+                  // Animate not relevant property to delay the animation completion.
+                  duration: 2,
+                },
+              }}
+              onAnimationComplete={handleIntroComplete}
+            >
+              <Typography color='secondary'>~@benjitaylor</Typography>
+            </motion.div>
+
+            <AnimatePresence>
+              {userRequestedToSkipIntro || isCreditsVisible ? null : (
+                <Button
+                  className='absolute bottom-[5%] z-20 mx-auto'
+                  onClick={skipIntro}
+                  asChild
+                  {...buttonMotionProps}
+                >
+                  <motion.button
+                    variants={{
+                      hidden: {
+                        y: '100%',
+                        opacity: 0,
+                        transition: { ease: 'easeOut', duration: 0.3 },
+                      },
+                      animate: {
+                        y: 0,
+                        opacity: 1,
+                        transition: {
+                          ease: 'easeOut',
+                          duration: 0.5,
+                          delay: 1,
+                        },
+                      },
+                    }}
+                    initial='hidden'
+                    animate='animate'
+                    exit='hidden'
+                  >
+                    Skip intro
+                  </motion.button>
+                </Button>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

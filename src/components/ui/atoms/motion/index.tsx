@@ -8,6 +8,8 @@ import {
   revealInUpMotionVariants,
 } from '~ui/atoms/motion/lib';
 
+export const LAYOUT_ID_HOME_LOGO = 'home:logo';
+
 /* -------------------------------------------------------------------------------------------------
  * HeartBeatMotion
  * -----------------------------------------------------------------------------------------------*/

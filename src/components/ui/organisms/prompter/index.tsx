@@ -14,7 +14,7 @@ import {
  * Prompter
  * -----------------------------------------------------------------------------------------------*/
 
-const DEFAULT_PART_DURATION = 150;
+const DEFAULT_PART_DURATION = 0.015;
 
 type PrompterRenderer = (
   part: PrompterPart,
@@ -74,6 +74,12 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
     },
     ref
   ) => {
+    if (duration > 1 || duration < 0) {
+      throw new Error(
+        `Duration must be a decimal in range [0, 1]. Got "${duration}" instead.`
+      );
+    }
+
     const playerTimeoutRef = useRef<NodeJS.Timeout>();
 
     const [promptingState, setPromptingState] =
@@ -182,7 +188,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
 
       playerTimeoutRef.current = setTimeout(
         next,
-        currentPart?.duration ?? duration
+        (currentPart?.duration ?? duration) * 1000
       );
 
       return () => clearTimeout(playerTimeoutRef.current);
