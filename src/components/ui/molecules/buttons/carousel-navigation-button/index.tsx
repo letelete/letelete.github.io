@@ -1,16 +1,13 @@
 import { ComponentProps } from 'react';
 
 import { Button } from '~ui/atoms/button';
-import { asHoverableButton } from '~ui/atoms/button/decorators';
 import { Icon, IconName } from '~ui/atoms/icon';
 import { VisuallyHidden } from '~ui/atoms/visually-hidden';
 
 import { cn, tw } from '~utils/style';
 
-const [HoverableButton, hoverableProps] = asHoverableButton(Button);
-
 export interface CarouselNavigationButton
-  extends ComponentProps<typeof HoverableButton> {
+  extends ComponentProps<typeof Button> {
   title: string;
   icon: IconName;
   accessibleText: string;
@@ -24,7 +21,7 @@ export const CarouselNavigationButton = ({
   ...rest
 }: CarouselNavigationButton) => {
   return (
-    <HoverableButton
+    <Button
       className={cn(
         'flex items-center justify-center rounded-full bg-ctx-button/50 backdrop-blur-sm',
         className
@@ -33,12 +30,14 @@ export const CarouselNavigationButton = ({
       variant='ghost'
       size='icon'
       whileTap={{ scale: 0.8 }}
-      {...hoverableProps}
+      initial='idle'
+      whileHover='hovered'
+      whileFocus='hovered'
       {...rest}
     >
       <Icon color={tw.theme.colors.ctx.button.fg.solid} name={icon} />
 
       <VisuallyHidden>{accessibleText}</VisuallyHidden>
-    </HoverableButton>
+    </Button>
   );
 };

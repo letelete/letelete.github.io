@@ -5,7 +5,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
 import { useLockScroll } from '~hooks/use-lock-document-scroll';
 
-import { Button, buttonMotionProps } from '~ui/atoms/button';
+import { Button } from '~ui/atoms/button';
 import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';
 import { Typography } from '~ui/atoms/typography';
 import { AppHeader } from '~ui/molecules/app-header';
@@ -78,6 +78,10 @@ const Intro = ({ className, ...rest }: IntroProps) => {
   }, []);
 
   const checkUserPreferenceToSkipIntro = useCallback(() => {
+    if (process.env.NODE_ENV === 'development') {
+      return false;
+    }
+
     const nowTimestamp = new Date().getTime();
 
     const restoredTimestampValue = localStorage.getItem(
@@ -229,32 +233,27 @@ const Intro = ({ className, ...rest }: IntroProps) => {
                 <Button
                   className='absolute bottom-[5%] z-20 mx-auto'
                   onClick={skipIntro}
-                  asChild
-                  {...buttonMotionProps}
+                  variants={{
+                    hidden: {
+                      y: '100%',
+                      opacity: 0,
+                      transition: { ease: 'easeOut', duration: 0.3 },
+                    },
+                    animate: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        ease: 'easeOut',
+                        duration: 0.5,
+                        delay: 1,
+                      },
+                    },
+                  }}
+                  initial='hidden'
+                  animate='animate'
+                  exit='hidden'
                 >
-                  <motion.button
-                    variants={{
-                      hidden: {
-                        y: '100%',
-                        opacity: 0,
-                        transition: { ease: 'easeOut', duration: 0.3 },
-                      },
-                      animate: {
-                        y: 0,
-                        opacity: 1,
-                        transition: {
-                          ease: 'easeOut',
-                          duration: 0.5,
-                          delay: 1,
-                        },
-                      },
-                    }}
-                    initial='hidden'
-                    animate='animate'
-                    exit='hidden'
-                  >
-                    Skip intro
-                  </motion.button>
+                  Skip intro
                 </Button>
               )}
             </AnimatePresence>

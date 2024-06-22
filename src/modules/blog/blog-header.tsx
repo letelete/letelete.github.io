@@ -10,8 +10,6 @@ import { UnicornEmoji } from '~ui/atoms/emojis';
 import { Typography } from '~ui/atoms/typography';
 import { AppHeader, AppHeaderProps } from '~ui/molecules/app-header';
 
-const MotionLink = motion(Link);
-
 const itemWithColorsMotionVariants: Variants = {
   compact: { filter: 'grayscale(1)' },
   normal: { filter: 'grayscale(0)' },
@@ -61,7 +59,7 @@ const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
         onBlur={handleAboutBlur}
         asChild
       >
-        <MotionLink href='/' className='relative'>
+        <Link href='/' className='relative'>
           <div className='absolute left-0 top-0 z-10 -translate-x-[1rem] -translate-y-[1.25rem]'>
             <Player
               ref={playerRef}
@@ -76,7 +74,7 @@ const BlogHeader = forwardRef<HTMLDivElement, AppHeaderProps>((props, ref) => {
               about me
             </motion.p>
           </Typography>
-        </MotionLink>
+        </Link>
       </Button>
     </AppHeader>
   );

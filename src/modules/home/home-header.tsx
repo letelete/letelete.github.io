@@ -14,8 +14,6 @@ import { Logo } from '~ui/widgets/logo';
  * HomeHeader
  * -----------------------------------------------------------------------------------------------*/
 
-const MotionLink = motion(Link);
-
 const HomeHeader = () => {
   return (
     <AppHeader innerClassName='flex gap-x-2 justify-between'>
@@ -26,11 +24,11 @@ const HomeHeader = () => {
       <MotionConfig transition={{ type: 'spring', duration: 0.5, bounce: 0 }}>
         <motion.nav layout='position' className='flex items-center gap-x-2'>
           <Button variant='outline' asChild>
-            <MotionLink href={BLOG_PATH}>Blog</MotionLink>
+            <Link href={BLOG_PATH}>Blog</Link>
           </Button>
 
           <Button asChild>
-            <MotionLink href='#contact'>Get in touch</MotionLink>
+            <Link href='#contact'>Get in touch</Link>
           </Button>
         </motion.nav>
       </MotionConfig>

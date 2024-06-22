@@ -154,40 +154,34 @@ const Listenable = ({
         {children}
       </ListenableContextProvider>
 
-      <Button
-        aria-label={isAudioPlaying ? stopAriaLabel : playAriaLabel}
-        title={isAudioPlaying ? stopTitle : playTitle}
-        onClick={handleToggleAudio}
-        variant='ghost'
-        size='icon'
-        asChild
-      >
-        <motion.button>
-          <AnimatePresence initial={false} mode='popLayout'>
-            <motion.div
-              transition={{ type: 'spring', duration: 0.2, bounce: 0 }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              key={`playing:${isAudioPlaying}`}
-            >
-              {isAudioPlaying ? (
-                <Icon
-                  name='square'
-                  color={tw.theme.colors.ctx.primary.fg.secondary}
-                  {...iconProps}
-                />
-              ) : (
-                <Icon
-                  name='volume-2'
-                  color={tw.theme.colors.ctx.primary.fg.secondary}
-                  {...iconProps}
-                />
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </motion.button>
-      </Button>
+      <AnimatePresence initial={false} mode='popLayout'>
+        <Button
+          aria-label={isAudioPlaying ? stopAriaLabel : playAriaLabel}
+          title={isAudioPlaying ? stopTitle : playTitle}
+          onClick={handleToggleAudio}
+          variant='ghost'
+          size='icon'
+          transition={{ type: 'spring', duration: 0.2, bounce: 0 }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          key={`playing:${isAudioPlaying}`}
+        >
+          {isAudioPlaying ? (
+            <Icon
+              name='square'
+              color={tw.theme.colors.ctx.primary.fg.secondary}
+              {...iconProps}
+            />
+          ) : (
+            <Icon
+              name='volume-2'
+              color={tw.theme.colors.ctx.primary.fg.secondary}
+              {...iconProps}
+            />
+          )}
+        </Button>
+      </AnimatePresence>
     </div>
   );
 };

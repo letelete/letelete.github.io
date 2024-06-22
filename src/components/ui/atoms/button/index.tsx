@@ -1,7 +1,14 @@
+'use client';
+
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { HTMLMotionProps, isMotionComponent } from 'framer-motion';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import {
+  HTMLMotionProps,
+  TargetAndTransition,
+  VariantLabels,
+  motion,
+} from 'framer-motion';
+import { ComponentPropsWithoutRef, forwardRef, useMemo } from 'react';
 
 import { cn } from '~utils/style';
 
@@ -86,13 +93,13 @@ const buttonVariants = cva(
   }
 );
 
-interface ButtonProps
+interface PolymorphicButtonProps
   extends ComponentPropsWithoutRef<'button'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const PolymorphicButton = forwardRef<HTMLButtonElement, PolymorphicButtonProps>(
   ({ className, variant, size, asChild = false, inverse, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
 
@@ -100,22 +107,60 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, inverse, className }))}
         ref={ref}
-        {...(isMotionComponent(typeof Comp) ? buttonMotionProps : null)}
         {...props}
       />
     );
   }
 );
 
-Button.displayName = 'Button';
+PolymorphicButton.displayName = 'PolymorphicButton';
 
 /* -----------------------------------------------------------------------------------------------*/
+
+const MotionPolymorphicButton = motion(PolymorphicButton);
 
 const buttonMotionProps = {
   whileTap: { scale: 0.9 },
 } as const satisfies HTMLMotionProps<'button'>;
 
+const isTargetAndTransition = (
+  field: VariantLabels | TargetAndTransition
+): field is TargetAndTransition =>
+  typeof field !== 'string' && !Array.isArray(field);
+
+interface ButtonProps
+  extends ComponentPropsWithoutRef<typeof MotionPolymorphicButton> {
+  disableDefaultAnimations?: boolean;
+}
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const whileTapMerged = useMemo<
+    VariantLabels | TargetAndTransition | undefined
+  >(() => {
+    if (props.disableDefaultAnimations) {
+      return props.whileTap;
+    }
+    if (props.whileTap === undefined) {
+      return buttonMotionProps.whileTap;
+    }
+    return isTargetAndTransition(props.whileTap)
+      ? { ...buttonMotionProps.whileTap, ...props.whileTap }
+      : props.whileTap;
+  }, [props.disableDefaultAnimations, props.whileTap]);
+
+  return (
+    <MotionPolymorphicButton
+      {...buttonMotionProps}
+      {...props}
+      ref={ref}
+      whileTap={whileTapMerged}
+    />
+  );
+});
+
+Button.displayName = 'Button';
+
 /* -----------------------------------------------------------------------------------------------*/
 
-export { Button, buttonMotionProps };
+export { Button };
 export type { ButtonProps };

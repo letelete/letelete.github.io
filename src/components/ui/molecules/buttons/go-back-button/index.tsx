@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { Button } from '~ui/atoms/button';
-import { asHoverableButton } from '~ui/atoms/button/decorators';
 import { Icon } from '~ui/atoms/icon';
 
 import { cn, tw } from '~utils/style';
@@ -12,8 +11,6 @@ export interface GoBackButtonProps {
   className?: string;
 }
 
-const [MotionButton, hoverableProps] = asHoverableButton(Button);
-
 const motionVariants = {
   hide: { opacity: 0, x: 20 },
   idle: { opacity: 1, x: 0 },
@@ -22,12 +19,14 @@ const motionVariants = {
 
 export const GoBackButton = ({ href, className }: GoBackButtonProps) => {
   return (
-    <MotionButton
-      {...hoverableProps}
+    <Button
       className={cn(className)}
       size='inline'
       variant='link'
       exit='hide'
+      initial='idle'
+      whileHover='hovered'
+      whileFocus='hovered'
       asChild
     >
       <Link href={href}>
@@ -39,6 +38,6 @@ export const GoBackButton = ({ href, className }: GoBackButtonProps) => {
         </motion.span>
         Go back
       </Link>
-    </MotionButton>
+    </Button>
   );
 };

@@ -29,8 +29,6 @@ import { Logo } from '~ui/widgets/logo';
  * SectionFooter
  * -----------------------------------------------------------------------------------------------*/
 
-const MotionLink = motion(Link);
-
 const INITIAL_BACKGROUND_SIZE = 48;
 // The background shape is a circle. In a circle, the diagonal is equivalent to its diameter.
 const INITIAL_BACKGROUND_DIAGONAL = INITIAL_BACKGROUND_SIZE;
@@ -126,7 +124,7 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
             </Link>
 
             <Button inverse asChild>
-              <MotionLink href='/#contact'>Get in touch</MotionLink>
+              <Link href='/#contact'>Get in touch</Link>
             </Button>
           </div>
         </motion.footer>
@@ -172,9 +170,9 @@ const OpenSourceHeadline = () => (
       inverse
       asChild
     >
-      <MotionLink href={PORTFOLIO_GITHUB_REPOSITORY_URL}>
+      <Link href={PORTFOLIO_GITHUB_REPOSITORY_URL}>
         check the source-code on GitHub!
-      </MotionLink>
+      </Link>
     </Button>
   </SectionHeadline>
 );
@@ -225,10 +223,10 @@ const ArtistsHeadline = () => (
           className='inline text-base'
           variant='link'
           size='inline'
-          asChild
           inverse
+          asChild
         >
-          <MotionLink href={href}>{name}</MotionLink>
+          <Link href={href}>{name}</Link>
         </Button>
 
         {index < artists.length - 1 && ', '}
