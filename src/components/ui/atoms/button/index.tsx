@@ -3,12 +3,29 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import {
+  AnimatePresence,
   HTMLMotionProps,
   TargetAndTransition,
   VariantLabels,
   motion,
 } from 'framer-motion';
-import { ComponentPropsWithoutRef, forwardRef, useMemo } from 'react';
+import {
+  Children,
+  ComponentPropsWithoutRef,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
+
+import { useRelativeDayPart } from '~hooks/use-relative-day-part';
+
+import { Video } from '~ui/atoms/video';
 
 import { cn } from '~utils/style';
 
@@ -97,6 +114,7 @@ interface PolymorphicButtonProps
   extends ComponentPropsWithoutRef<'button'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  backgroundLayer?: ReactNode;
 }
 
 const PolymorphicButton = forwardRef<HTMLButtonElement, PolymorphicButtonProps>(
@@ -123,44 +141,162 @@ const buttonMotionProps = {
   whileTap: { scale: 0.9 },
 } as const satisfies HTMLMotionProps<'button'>;
 
-const isTargetAndTransition = (
-  field: VariantLabels | TargetAndTransition
-): field is TargetAndTransition =>
-  typeof field !== 'string' && !Array.isArray(field);
-
 interface ButtonProps
   extends ComponentPropsWithoutRef<typeof MotionPolymorphicButton> {
   disableDefaultAnimations?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const whileTapMerged = useMemo<
-    VariantLabels | TargetAndTransition | undefined
-  >(() => {
-    if (props.disableDefaultAnimations) {
-      return props.whileTap;
-    }
-    if (props.whileTap === undefined) {
-      return buttonMotionProps.whileTap;
-    }
-    return isTargetAndTransition(props.whileTap)
-      ? { ...buttonMotionProps.whileTap, ...props.whileTap }
-      : props.whileTap;
-  }, [props.disableDefaultAnimations, props.whileTap]);
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ disableDefaultAnimations, ...buttonProps }, ref) => {
+    const whileTapMerged = useMemo<
+      VariantLabels | TargetAndTransition | undefined
+    >(() => {
+      if (disableDefaultAnimations) {
+        return buttonProps.whileTap;
+      }
+      if (
+        buttonProps.whileTap === undefined ||
+        typeof buttonProps.whileTap === 'object'
+      ) {
+        return { ...buttonMotionProps.whileTap, ...buttonProps.whileTap };
+      }
+      return buttonProps.whileTap;
+    }, [buttonProps.whileTap, disableDefaultAnimations]);
 
-  return (
-    <MotionPolymorphicButton
-      {...buttonMotionProps}
-      {...props}
-      ref={ref}
-      whileTap={whileTapMerged}
-    />
-  );
-});
+    return (
+      <MotionPolymorphicButton
+        {...buttonMotionProps}
+        {...buttonProps}
+        ref={ref}
+        whileTap={whileTapMerged}
+      />
+    );
+  }
+);
 
 Button.displayName = 'Button';
 
+/* -------------------------------------------------------------------------------------------------
+ * ButtonWithVideo
+ * -----------------------------------------------------------------------------------------------*/
+
+interface ButtonWithVideoProps extends ButtonProps {
+  whenVideo?: Partial<ButtonProps>;
+  videoFileName?: string;
+}
+
+const ButtonWithVideo = forwardRef<HTMLButtonElement, ButtonWithVideoProps>(
+  ({ videoFileName, className, whenVideo, children, ...rest }, ref) => {
+    const [hovered, setHovered] = useState(false);
+    const [videoLoaded, setVideoLoaded] = useState(false);
+
+    const child = Children.only(children) as ReactElement;
+
+    const buttonProps = useMemo(
+      () => (hovered && videoLoaded ? { ...rest, ...whenVideo } : { ...rest }),
+      [hovered, rest, videoLoaded, whenVideo]
+    );
+
+    const renderChildrenWithVideoWrapper = useCallback(
+      (children: ReactNode) => (
+        <ChildrenWithVideoWrapper
+          displayBackground={hovered}
+          videoFileName={videoFileName}
+          onVideoLoaded={() => setVideoLoaded(true)}
+          onVideoDetached={() => setVideoLoaded(false)}
+        >
+          {children}
+        </ChildrenWithVideoWrapper>
+      ),
+      [hovered, videoFileName]
+    );
+
+    const cloneWithNestedChildren = useCallback(() => {
+      if (isValidElement(child)) {
+        const nestedChildren = (child.props as { children?: ReactNode })
+          ?.children;
+
+        return nestedChildren
+          ? cloneElement(child as ReactElement, {
+              children: renderChildrenWithVideoWrapper(nestedChildren),
+            })
+          : null;
+      }
+      return null;
+    }, [child, renderChildrenWithVideoWrapper]);
+
+    return (
+      <Button
+        {...buttonProps}
+        ref={ref}
+        className={cn('relative overflow-hidden', className)}
+        onHoverStart={(event, info) => {
+          setHovered(true);
+          buttonProps.onHoverStart?.(event, info);
+        }}
+        onHoverEnd={(event, info) => {
+          buttonProps.onHoverEnd?.(event, info);
+          setHovered(false);
+        }}
+      >
+        {buttonProps.asChild
+          ? cloneWithNestedChildren()
+          : renderChildrenWithVideoWrapper(children)}
+      </Button>
+    );
+  }
+);
+
+ButtonWithVideo.displayName = 'ButtonWithVideo';
+
 /* -----------------------------------------------------------------------------------------------*/
 
-export { Button };
-export type { ButtonProps };
+interface ChildrenWithVideoWrapperProps {
+  displayBackground?: boolean;
+  videoFileName?: string;
+  onVideoLoaded?: () => void;
+  onVideoDetached?: () => void;
+}
+
+const ChildrenWithVideoWrapper = ({
+  displayBackground,
+  videoFileName,
+  children,
+  onVideoLoaded,
+  onVideoDetached,
+}: PropsWithChildren<ChildrenWithVideoWrapperProps>) => {
+  const relativeDayPart = useRelativeDayPart();
+
+  return (
+    <>
+      <AnimatePresence mode='popLayout' onExitComplete={onVideoDetached}>
+        {displayBackground ? (
+          <Video
+            className='absolute inset-0 z-0 overflow-hidden rounded-full'
+            fileName={videoFileName ?? `nature-${relativeDayPart.part}`}
+            onLoadedData={onVideoLoaded}
+            initial={{ scale: 4, opacity: 0, filter: 'blur(32px)' }}
+            animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+            exit={{
+              scale: 2,
+              opacity: 0,
+              filter: 'blur(16px)',
+              transition: { type: 'spring', duration: 1.5, bounce: 0 },
+            }}
+            transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
+            disableLinkFallback
+          />
+        ) : null}
+      </AnimatePresence>
+
+      <div className='relative z-10'>{children}</div>
+    </>
+  );
+};
+
+ChildrenWithVideoWrapper.displayName = 'ChildrenWithVideoWrapper';
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { Button, ButtonWithVideo };
+export type { ButtonProps, ButtonWithVideoProps };

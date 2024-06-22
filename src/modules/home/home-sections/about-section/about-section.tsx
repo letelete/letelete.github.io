@@ -7,7 +7,7 @@ import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~constants/index';
 import { AboutAuthorPortraitsGalleryCard } from '~modules/home/home-sections/about-section/about-author-portrait-gallery-card';
 import { AboutSectionHeadline } from '~modules/home/home-sections/about-section/about-section-headline';
 
-import { Button } from '~ui/atoms/button';
+import { ButtonWithVideo } from '~ui/atoms/button';
 import { ForMobile, ForNonMobile } from '~ui/atoms/responsive';
 import { Typography } from '~ui/atoms/typography';
 import { SectionContainer } from '~ui/molecules/section/section-container';
@@ -38,9 +38,15 @@ const AboutSection = () => {
               </b>
             </Typography>
 
-            <Button className='mt-6' asChild>
+            <ButtonWithVideo
+              className='mt-6'
+              whenVideo={{ inverse: true }}
+              variant='outline'
+              asChild
+              videoFileName='read-about-google-code-in'
+            >
               <Link href={GOOGLE_CODE_IN_ARTICLE_PATH}>Read my story</Link>
-            </Button>
+            </ButtonWithVideo>
           </div>
 
           <div className='flex-1 '>

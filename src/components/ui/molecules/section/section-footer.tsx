@@ -15,7 +15,7 @@ import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~constants/index';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
 
-import { Button } from '~ui/atoms/button';
+import { Button, ButtonWithVideo } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
 import { Copyrights } from '~ui/atoms/copyrights';
 import { CoffeeEmoji } from '~ui/atoms/emojis';
@@ -123,9 +123,14 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
               <Logo variant='light' />
             </Link>
 
-            <Button inverse asChild>
+            <ButtonWithVideo
+              whenVideo={{ inverse: false }}
+              videoFileName='header-button-home'
+              inverse
+              asChild
+            >
               <Link href='/#contact'>Get in touch</Link>
-            </Button>
+            </ButtonWithVideo>
           </div>
         </motion.footer>
       </Card>

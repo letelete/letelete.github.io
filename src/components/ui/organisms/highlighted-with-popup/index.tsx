@@ -7,13 +7,15 @@ import {
   useSpring,
 } from 'framer-motion';
 import {
-  ComponentPropsWithoutRef,
   PropsWithChildren,
   MouseEvent as ReactMouseEvent,
   ReactNode,
+  forwardRef,
   useRef,
   useState,
 } from 'react';
+
+import { Video, VideoProps } from '~ui/atoms/video';
 
 import { cn, tw } from '~utils/style';
 
@@ -142,49 +144,12 @@ HighlightedWithPopup.displayName = 'HighlightedWithPopup';
  * PopupVideoContent
  * -----------------------------------------------------------------------------------------------*/
 
-interface PopupVideoContentProps
-  extends Omit<ComponentPropsWithoutRef<'video'>, 'src'> {
-  fileName: string;
-}
+interface PopupVideoContentProps extends VideoProps {}
 
-const PopupVideoContent = ({
-  fileName,
-  className,
-  width = '426',
-  height = '240',
-  controls = false,
-  preload = 'auto',
-  playsInline = true,
-  autoPlay = true,
-  loop = true,
-  muted = true,
-  ...rest
-}: PopupVideoContentProps) => (
-  <video
-    className={cn(
-      'absolute left-0 top-0 h-full w-full object-cover',
-      className
-    )}
-    width={width}
-    height={height}
-    controls={controls}
-    preload={preload}
-    playsInline={playsInline}
-    autoPlay={autoPlay}
-    loop={loop}
-    muted={muted}
-    {...rest}
-  >
-    <source src={`/videos/${fileName}.webm`} type='video/webm' />
-    <source src={`/videos/${fileName}.mp4`} type='video/mp4' />
-    <p>
-      Your browser doesn&apos;t support HTML video. Here is a
-      <a href={`/videos/${fileName}.mp4`} download={`${fileName}.mp4`}>
-        link to the video
-      </a>{' '}
-      instead.
-    </p>
-  </video>
+const PopupVideoContent = forwardRef<HTMLVideoElement, PopupVideoContentProps>(
+  ({ width = '426', height = '240', ...rest }, ref) => (
+    <Video ref={ref} width={width} height={height} {...rest} />
+  )
 );
 
 PopupVideoContent.displayName = 'PopupVideoContent';

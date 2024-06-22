@@ -79,7 +79,7 @@ const Intro = ({ className, ...rest }: IntroProps) => {
 
   const checkUserPreferenceToSkipIntro = useCallback(() => {
     if (process.env.NODE_ENV === 'development') {
-      return false;
+      return true;
     }
 
     const nowTimestamp = new Date().getTime();
