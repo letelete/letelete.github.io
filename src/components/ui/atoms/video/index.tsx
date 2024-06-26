@@ -44,6 +44,7 @@ const Video = forwardRef<HTMLVideoElement, VideoProps>(
       autoPlay={autoPlay}
       loop={loop}
       muted={muted}
+      poster={`/videos/${fileName}.webp`}
       {...rest}
     >
       <source src={`/videos/${fileName}.webm`} type='video/webm' />
