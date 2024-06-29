@@ -34,6 +34,7 @@ const config = {
   theme: {
     colors: {
       transparent: defaultColors.transparent,
+
       // Context-aware colors
       ctx: {
         primary: {
@@ -76,6 +77,7 @@ const config = {
       } as const satisfies Record<string, Background>,
       socials: {
         youtube: '#ff0000',
+        stackoverflow: '#f48023',
       },
       heart: {
         0: 'transparent',

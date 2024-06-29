@@ -1,17 +1,23 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useContext, useMemo } from 'react';
 
-import { BLOG_PATH } from '~constants/index';
+import { BLOG_PATH, SOCIALS } from '~constants/index';
 
 import { Content } from '~lib/content/provider';
 
 import { HomeContext } from '~modules/home';
 
+import { Button } from '~ui/atoms/button';
+import { Icon } from '~ui/atoms/icon';
 import { ContentCard, ContentCardContainer } from '~ui/molecules/content-card';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
+import { SectionHeadline } from '~ui/molecules/section/section-headline';
+
+import { tw } from '~utils/style';
 
 /* -------------------------------------------------------------------------------------------------
  * DigitalContributionsKnowledgeSharing
@@ -77,6 +83,23 @@ const DigitalContributionsKnowledgeSharing = () => {
           />
         ))}
       </ContentCardContainer>
+
+      <SectionHeadline className='mt-content'>
+        I also help humans on{' '}
+        <Button
+          className='hover:text-socials-stackoverflow peer inline text-[1em]'
+          size='inline'
+          variant='link'
+          asChild
+        >
+          <Link href={SOCIALS.stackoverflow.url}>StackOverflow</Link>
+        </Button>{' '}
+        <Icon
+          color={tw.theme.colors.socials.stackoverflow}
+          className='inline transition-transform peer-hover:scale-110'
+          name='stackoverflow'
+        />
+      </SectionHeadline>
     </SectionContainer>
   );
 };

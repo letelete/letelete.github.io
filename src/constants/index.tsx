@@ -36,6 +36,10 @@ export const SOCIALS = {
     url: 'https://www.youtube.com/@brunokawka',
     handle: '@brunokawka',
   },
+  stackoverflow: {
+    url: 'https://stackoverflow.com/users/8997321/bruno-kawka',
+    handle: '@bruno-kawka',
+  },
 };
 
 export const PORTFOLIO_GITHUB_REPOSITORY_URL =
