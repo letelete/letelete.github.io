@@ -1,19 +1,17 @@
-import { type RefObject, useCallback, useState } from 'react';
+import { type RefObject } from 'react';
+import { mergeRefs } from 'react-merge-refs';
+import useMeasure, { type RectReadOnly } from 'react-use-measure';
 
-import { useWindowSize } from '~hooks/use-window-size';
+type HTMLOrSVGElement = HTMLElement | SVGElement;
 
-export const useElementGeometry = (ref: RefObject<Element>) => {
-  const [geometry, setGeometry] = useState<DOMRect | null>(null);
+export type ElementGeometry = RectReadOnly;
 
-  const updateGeometry = useCallback(() => {
-    const newGeometry = ref.current?.getBoundingClientRect();
+export const useElementGeometry = <TElement extends HTMLOrSVGElement>(
+  userRef?: RefObject<TElement>
+) => {
+  const [measureRef, geometry] = useMeasure();
 
-    if (newGeometry) {
-      setGeometry(newGeometry);
-    }
-  }, [ref]);
+  const ref = userRef ? mergeRefs<TElement>([measureRef, userRef]) : measureRef;
 
-  useWindowSize(updateGeometry);
-
-  return geometry;
+  return [ref, geometry satisfies ElementGeometry] as const;
 };

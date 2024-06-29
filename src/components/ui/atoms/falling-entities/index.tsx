@@ -31,7 +31,8 @@ const FallingEntities = ({
   ...rest
 }: FallingEntitiesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const containerGeometry = useElementGeometry(containerRef);
+  const [geometryContainerRef, containerGeometry] =
+    useElementGeometry(containerRef);
 
   const containerWidth = containerGeometry?.width ?? 0;
   const containerHeight = containerGeometry?.height ?? 0;
@@ -72,7 +73,7 @@ const FallingEntities = ({
   return (
     <div
       className={cn('relative h-full w-full overflow-hidden', className)}
-      ref={containerRef}
+      ref={geometryContainerRef}
       {...rest}
     >
       {entities.map((_, idx) => {

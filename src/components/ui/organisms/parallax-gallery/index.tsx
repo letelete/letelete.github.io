@@ -49,7 +49,9 @@ export const ParallaxGallery = ({
   const currentItem = items[currentItemIndex];
 
   const containerRef = useRef<ElementRef<typeof Image>>(null);
-  const containerGeometry = useElementGeometry(containerRef);
+  const [containerGeometryRef, containerGeometry] =
+    useElementGeometry(containerRef);
+
   const imageSizes = containerGeometry
     ? `${containerGeometry.width}px`
     : undefined;
@@ -109,7 +111,7 @@ export const ParallaxGallery = ({
   return (
     <div
       className={cn('relative h-full w-full overflow-hidden', className)}
-      ref={containerRef}
+      ref={containerGeometryRef}
     >
       <ImagesPreloader
         items={items}

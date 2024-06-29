@@ -40,8 +40,8 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
 
   const cardContainerRef = useRef<HTMLDivElement>(null);
 
-  const backgroundContainerRef = useRef<HTMLDivElement>(null);
-  const backgroundGeometry = useElementGeometry(backgroundContainerRef);
+  const [backgroundContainerRef, backgroundGeometry] =
+    useElementGeometry<HTMLDivElement>();
 
   const backgroundHeight = backgroundGeometry?.height ?? 0;
   const backgroundWidth = backgroundGeometry?.width ?? 0;

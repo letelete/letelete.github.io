@@ -45,11 +45,11 @@ const HorizontalScrollCarousel = forwardRef<
     const targetRef = useRef<HTMLDivElement>(null);
     useImperativeHandle(handleRef, () => targetRef.current!);
 
-    const childrenContainerRef = useRef<HTMLDivElement>(null);
-    const childrenContainerGeometry = useElementGeometry(childrenContainerRef);
+    const [childrenContainerRef, childrenContainerGeometry] =
+      useElementGeometry<HTMLDivElement>();
     const childrenContainerWidth = childrenContainerGeometry?.width ?? 0;
 
-    const targetGeometry = useElementGeometry(targetRef);
+    const [targetGeometryRef, targetGeometry] = useElementGeometry(targetRef);
     const targetHeight = childrenContainerWidth * scrollHeightFactor;
     const targetWidth = targetGeometry?.width ?? 0;
 
@@ -76,7 +76,7 @@ const HorizontalScrollCarousel = forwardRef<
 
     return (
       <section
-        ref={targetRef}
+        ref={targetGeometryRef}
         className={cn('relative w-full', className)}
         style={{
           height: `${targetHeight}px`,
