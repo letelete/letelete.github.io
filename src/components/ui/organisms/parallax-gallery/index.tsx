@@ -1,5 +1,6 @@
 'use client';
 
+import { Player } from '@lottiefiles/react-lottie-player';
 import {
   AnimatePresence,
   Variants,
@@ -150,7 +151,7 @@ export const ParallaxGallery = ({
         />
       </AnimatePresence>
 
-      <div className='absolute bottom-1 left-1 z-20 flex flex-col gap-y-1'>
+      <div className='absolute bottom-2 left-2 z-20 flex flex-col gap-y-1'>
         <CarouselNavigationButton
           title='Show previous image'
           icon='chevron-up'
@@ -165,8 +166,7 @@ export const ParallaxGallery = ({
         />
       </div>
 
-      {/* TODO: investigate why Lottie does not work with next.js */}
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {isSwipeHintVisible && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -184,7 +184,7 @@ export const ParallaxGallery = ({
             />
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </div>
   );
 };
