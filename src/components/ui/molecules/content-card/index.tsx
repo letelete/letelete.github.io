@@ -73,8 +73,6 @@ const ContentCard = ({
             Soon
           </Typography>
         )}
-
-        {/* <Logo className='absolute bottom-2.5 right-3.5 z-10 w-[max(10%,2.5rem)]' /> */}
       </div>
     ),
     [display, displayPlaceholder]
