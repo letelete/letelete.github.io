@@ -12,12 +12,15 @@ import {
 } from '~ui/organisms/highlighted-with-popup';
 import { AuthorName } from '~ui/widgets/author-name';
 import { AuthorWorkTitle } from '~ui/widgets/author-work-title';
-import { SocialButtons } from '~ui/widgets/social-buttons';
 
-export const HeroSection = () => {
+/* -------------------------------------------------------------------------------------------------
+ * HeroSection
+ * -----------------------------------------------------------------------------------------------*/
+
+const HeroSection = () => {
   const relativeDayPart = useRelativeDayPart();
 
-  const renderNaturalPopup = useCallback(() => {
+  const renderExperiencePopup = useCallback(() => {
     return <PopupVideoContent fileName={`nature-${relativeDayPart.part}`} />;
   }, [relativeDayPart.part]);
 
@@ -27,41 +30,40 @@ export const HeroSection = () => {
         <Typography variant='hero' asChild>
           <h1>
             <p>
-              A great product sweats the{' '}
+              I believe{' '}
               <span className='font-light italic'>
-                <DynamicWeightOnHoverText text='details' />
-              </span>
-              ,
+                <DynamicWeightOnHoverText text='knowledge sharing' />
+              </span>{' '}
+              is <span className='font-bold'>key</span> to
             </p>
             <p>
-              strives for <span className='font-bold'>accessibility</span>,
-            </p>
-            <p>
-              and runs{' '}
-              <span className='font-light tracking-wider'>smoothly</span> on
-              every device.
+              becoming an{' '}
+              <span className='font-light tracking-wider'>expert</span>.
             </p>
           </h1>
         </Typography>
 
         <Typography variant='body-sm' className='mt-8' asChild>
           <h2>
-            I help teams build, scale, and release great products
-            <br />
-            that feel{' '}
-            <HighlightedWithPopup renderPopupContent={renderNaturalPopup}>
-              natural
-            </HighlightedWithPopup>
-            .
+            I convey my{' '}
+            <HighlightedWithPopup renderPopupContent={renderExperiencePopup}>
+              experience
+            </HighlightedWithPopup>{' '}
+            to help humans by writing, recording, and speaking about programming
+            and design.
           </h2>
         </Typography>
 
         <AuthorName />
 
         <AuthorWorkTitle />
-
-        <SocialButtons className='mt-4' />
       </figure>
     </section>
   );
 };
+
+HeroSection.displayName = 'HeroSection';
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { HeroSection };

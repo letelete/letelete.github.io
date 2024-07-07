@@ -12,9 +12,9 @@ import {
   useTime,
   useTransform,
 } from 'framer-motion';
-import { forwardRef, useCallback, useContext, useState } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 
-import { HomeContext } from '~modules/home';
+import { useHomeContext } from '~modules/home';
 
 import { Card } from '~ui/atoms/card';
 import { useAnimationAnchor } from '~ui/atoms/motion';
@@ -43,7 +43,7 @@ const AboutAuthorPortraitsGalleryCard = ({
   const [isTransitioningToGallery, setIsTransitioningToGallery] =
     useState(false);
 
-  const { authorPortraits } = useContext(HomeContext);
+  const { authorPortraits } = useHomeContext();
   const [galleryEnabled, setGalleryEnabled] = useState(false);
 
   const transitionToGallery = useCallback(() => {

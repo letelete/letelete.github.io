@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useMemo } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 
 import { Content } from '~lib/content/provider';
 import { ImageItem } from '~lib/images/provider';
@@ -28,6 +28,12 @@ const HomeContext = createContext<HomeContextProps>({
   blogContent: [],
   authorPortraits: [],
 });
+
+const useHomeContext = () => {
+  const context = useContext(HomeContext);
+
+  return context;
+};
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -70,5 +76,5 @@ const Home = ({ blogContent, authorPortraits, className }: HomeProps) => {
 
 /* -----------------------------------------------------------------------------------------------*/
 
-export { Home, HomeContext };
-export type { HomeProps, HomeContextProps };
+export { Home, useHomeContext };
+export type { HomeProps };

@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { PropsWithChildren, useId } from 'react';
 
@@ -20,6 +21,7 @@ const DynamicWeightOnHoverText = ({
     <>
       {text.split('').map((char) => (
         <motion.span
+          aria-hidden
           key={`${id}:${char}`}
           whileHover={{
             fontWeight: 700,
@@ -31,6 +33,7 @@ const DynamicWeightOnHoverText = ({
           {char}
         </motion.span>
       ))}
+      <VisuallyHidden>{text}</VisuallyHidden>
     </>
   );
 };

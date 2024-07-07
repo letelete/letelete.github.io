@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 
-import { BlogHeader } from '~modules/blog/blog-header';
-
 import '~styles/highlight-js/style.css';
 
 export const metadata: Metadata = {
@@ -17,8 +15,6 @@ export default function BlogLayout({
 }) {
   return (
     <>
-      <BlogHeader />
-
       <main className='flex h-full  w-full flex-col'>{children}</main>
     </>
   );
