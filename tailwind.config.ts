@@ -78,6 +78,7 @@ const config = {
       socials: {
         youtube: '#ff0000',
         stackoverflow: '#f48023',
+        reddit: '#d93900',
       },
       heart: {
         0: 'transparent',

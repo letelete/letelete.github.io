@@ -32,7 +32,7 @@ const SectionHeader = ({
       </Typography>
 
       {subtitle && (
-        <Typography color='secondary' className='text-left'>
+        <Typography color='secondary' className='text-right'>
           {subtitle}
         </Typography>
       )}

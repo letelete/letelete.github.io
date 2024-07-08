@@ -9,11 +9,14 @@ import {
   useCallback,
 } from 'react';
 
+import { ContentType } from '~lib/content/provider';
+
 import { Card, CardProps } from '~ui/atoms/card';
 import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
+import { ContentIcon } from '~ui/molecules/content-icon';
 
-import { cn } from '~utils/style';
+import { cn, tw } from '~utils/style';
 
 /* -------------------------------------------------------------------------------------------------
  * ContentCard
@@ -27,6 +30,7 @@ interface ContentCardProps extends CardProps {
   title?: string;
   display?: ReactNode;
   displayPlaceholder?: ReactNode;
+  contentType?: ContentType;
 }
 
 const ContentCard = ({
@@ -35,6 +39,7 @@ const ContentCard = ({
   title,
   display,
   displayPlaceholder,
+  contentType,
   className,
   ...rest
 }: ContentCardProps) => {
@@ -51,7 +56,7 @@ const ContentCard = ({
     return (
       <Typography
         title={title}
-        className='mt-1 line-clamp-2 h-[calc(2em*1.5)] w-full text-left leading-[1.5]'
+        className='mt-1 line-clamp-3 h-[calc(3em*1.25)] w-full text-left leading-5 sm:line-clamp-2 sm:h-[calc(2em*1.5)] sm:leading-6'
         prose={false}
         balance
       >
@@ -81,13 +86,14 @@ const ContentCard = ({
   return (
     <Card asChild className={cn('flex flex-col', className)} {...rest}>
       <MotionLink
+        className='relative'
         href={href}
         whileHover={{ y: -10 }}
         whileTap={{ scale: 0.9, opacity: 0.5 }}
         transition={{ type: 'spring', duration: 0.2 }}
       >
         <Typography
-          className='line-clamp-1 w-full text-left uppercase'
+          className='line-clamp-2 w-full text-left uppercase sm:line-clamp-1'
           variant='sm'
           color='secondary'
           weight='bold'
@@ -100,6 +106,16 @@ const ContentCard = ({
         {renderTitle()}
 
         {renderDisplay()}
+
+        {contentType ? (
+          <div className='absolute bottom-2 left-2 aspect-square h-8 w-8 rounded-full bg-ctx-button p-2 md:bottom-3 md:left-3 md:h-12 md:w-12 md:p-3'>
+            <ContentIcon
+              size={'100%'}
+              color={tw.theme.colors.ctx.button.fg.solid}
+              contentType={contentType}
+            />
+          </div>
+        ) : null}
       </MotionLink>
     </Card>
   );

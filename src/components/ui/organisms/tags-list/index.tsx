@@ -7,10 +7,21 @@ import { Tag, TagProps } from '~ui/atoms/tag';
 
 import { cn } from '~utils/style';
 
+export interface TagItem {
+  value: string;
+  matchingContentCount?: number;
+}
+
+type TagItemOrTagValue = TagItem | TagItem['value'];
+
+const isTagItem = (tag: TagItemOrTagValue): tag is TagItem => {
+  return typeof tag === 'object' && 'value' in tag;
+};
+
 export interface TagsListProps
   extends Omit<ComponentPropsWithoutRef<'ul'>, 'onChange'> {
-  tags: string[];
-  selectedTags?: string[];
+  tags: TagItemOrTagValue[];
+  selected?: TagItem['value'][];
   selectable?: boolean;
   className?: string;
   tagProps?: Partial<TagProps>;
@@ -20,7 +31,7 @@ export interface TagsListProps
 export const TagsList = ({
   tags,
   selectable,
-  selectedTags = [],
+  selected = [],
   className,
   tagProps,
   onChange,
@@ -32,7 +43,7 @@ export const TagsList = ({
 
   const toggleSelected = useCallback(
     (tag: string) => {
-      const newSelectedTags = new Set(selectedTags);
+      const newSelectedTags = new Set(selected);
 
       if (newSelectedTags.has(tag)) {
         newSelectedTags.delete(tag);
@@ -42,24 +53,24 @@ export const TagsList = ({
 
       onChange?.([...newSelectedTags]);
     },
-    [onChange, selectedTags]
+    [onChange, selected]
   );
 
   return (
     <div className={cn('relative', className)}>
       <AnimatePresence mode='popLayout'>
-        {selectedTags.length && (
+        {selected.length && (
           <FadeInMotion
             layout
             className='absolute bottom-[calc(100%+0.5rem)] left-0'
           >
             <Button
-              className='text-accent text-xs'
+              className='text-xs text-ctx-accent-secondary'
               size='inline'
               variant='link'
               onClick={handleClearAll}
             >
-              clear selection ({selectedTags.length})
+              clear selection ({selected.length})
             </Button>
           </FadeInMotion>
         )}
@@ -67,23 +78,29 @@ export const TagsList = ({
 
       <ul className='flex flex-wrap gap-2' {...rest}>
         <AnimatePresence mode='popLayout' initial={false}>
-          {tags.map((tag) => (
-            <motion.li
-              layout={selectable}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              key={tag}
-            >
-              <Tag
-                selectable={selectable}
-                label={tag}
-                onClick={() => toggleSelected(tag)}
-                selected={selectable && selectedTags.includes(tag)}
-                {...tagProps}
-              />
-            </motion.li>
-          ))}
+          {tags.map((tag: TagItem | TagItem['value']) => {
+            const value = isTagItem(tag) ? tag.value : tag;
+            const count = isTagItem(tag) ? tag.matchingContentCount : undefined;
+
+            return (
+              <motion.li
+                layout={selectable}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                key={value}
+              >
+                <Tag
+                  selectable={selectable}
+                  label={value}
+                  count={count}
+                  onClick={() => toggleSelected(value)}
+                  selected={selectable && selected.includes(value)}
+                  {...tagProps}
+                />
+              </motion.li>
+            );
+          })}
         </AnimatePresence>
       </ul>
     </div>

@@ -7,7 +7,7 @@ export const BASE_URL =
 
 export const BLOG_PATH = '/blog';
 export const BLOG_PATH_WITH_CATEGORY = (category: ContentType) =>
-  `${BLOG_PATH}?c=${category}`;
+  `${BLOG_PATH}?content=${category}`;
 
 export const GOOGLE_CODE_IN_ARTICLE_PATH = `${BLOG_PATH}/winning-google-code-in-2018`;
 
@@ -39,6 +39,10 @@ export const SOCIALS = {
   stackoverflow: {
     url: 'https://stackoverflow.com/users/8997321/bruno-kawka',
     handle: '@bruno-kawka',
+  },
+  reddit: {
+    url: 'https://www.reddit.com/user/letelete0000/',
+    handle: '@letelete0000',
   },
 };
 

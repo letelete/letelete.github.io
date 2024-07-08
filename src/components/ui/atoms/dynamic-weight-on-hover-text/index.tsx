@@ -19,15 +19,15 @@ const DynamicWeightOnHoverText = ({
 
   return (
     <>
-      {text.split('').map((char) => (
+      {text.split('').map((char, idx) => (
         <motion.span
-          aria-hidden
-          key={`${id}:${char}`}
+          key={`${id}:${char}:${idx}`}
           whileHover={{
             fontWeight: 700,
             transition: { type: 'spring', duration: 0.2, bounce: 0 },
           }}
           transition={{ type: 'spring', duration: 1, bounce: 0 }}
+          aria-hidden
           {...rest}
         >
           {char}

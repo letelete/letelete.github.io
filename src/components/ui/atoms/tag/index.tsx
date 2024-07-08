@@ -5,12 +5,14 @@ import { cn } from '~utils/style';
 
 export interface TagProps extends ButtonProps {
   label: string;
+  count?: number;
   selectable?: boolean;
   selected?: boolean;
 }
 
 export const Tag = ({
   label,
+  count,
   selectable,
   selected,
   className,
@@ -27,8 +29,8 @@ export const Tag = ({
   return (
     <Button
       className={cn(
-        'text-foreground-secondary font-normal transition-colors',
-        selected && 'text-accent',
+        'font-normal text-ctx-accent-secondary transition-opacity',
+        selected && 'bg-ctx-accent-primary',
         className
       )}
       variant='link'
@@ -36,6 +38,7 @@ export const Tag = ({
       {...rest}
     >
       #{label}
+      {count !== undefined ? ` (${count})` : null}
     </Button>
   );
 };

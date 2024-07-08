@@ -2,6 +2,7 @@
 
 import {
   InlinePlatformRedirectGitHub,
+  InlinePlatformRedirectReddit,
   InlinePlatformRedirectStackOverflow,
   InlinePlatformRedirectTwitter,
 } from '~ui/molecules/inline-platform-redirect-with-icon';
@@ -16,12 +17,20 @@ import { SectionHeadline } from '~ui/molecules/section/section-headline';
 const MoreSection = () => {
   return (
     <SectionContainer>
-      <SectionHeader title='More' />
+      <SectionHeader
+        title='More'
+        subtitle="I'm chronically online (• ◡•) You can find me around."
+      />
 
       <SectionHeadline>
-        You can see more of my work on <InlinePlatformRedirectTwitter />, more
-        of my code on <InlinePlatformRedirectGitHub />, and the rest of my
-        contributions on <InlinePlatformRedirectStackOverflow />
+        <span>
+          You can see more of my work on <InlinePlatformRedirectTwitter />, more
+          of my code on <InlinePlatformRedirectGitHub />.
+        </span>
+        <span className='mt-4 block sm:mt-0 sm:inline'>
+          I also help humans on <InlinePlatformRedirectStackOverflow />, and
+          participate in discussions on <InlinePlatformRedirectReddit />
+        </span>
       </SectionHeadline>
     </SectionContainer>
   );

@@ -4,7 +4,7 @@ import { ContentType, contentTypes } from '~lib/content/provider';
 
 export const useContentTypeQueryState = () => {
   return useQueryState<ContentType>(
-    'c',
+    'content',
     parseAsStringLiteral(contentTypes)
       .withDefault('article')
       .withOptions({ history: 'replace' })

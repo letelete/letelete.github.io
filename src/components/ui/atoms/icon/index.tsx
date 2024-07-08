@@ -11,6 +11,9 @@ import {
   Linkedin,
   LucideProps,
   Mail,
+  MessageCircle,
+  MicVocal,
+  Rocket,
   Send,
   Square,
   Twitter,
@@ -19,7 +22,7 @@ import {
 } from 'lucide-react';
 import { FC } from 'react';
 
-import { StackOverflowIcon } from '~ui/atoms/icon/custom';
+import { RedditIcon, StackOverflowIcon } from '~ui/atoms/icon/custom';
 
 import { cn, tw } from '~utils/style';
 
@@ -72,12 +75,16 @@ const icons = new Map([
   ['lightbulb', Lightbulb],
   ['linkedin', Linkedin],
   ['mail', Mail],
+  ['message-circle', MessageCircle],
+  ['mic-vocal', MicVocal],
+  ['reddit', RedditIcon],
+  ['rocket', Rocket],
   ['send', Send],
   ['square', Square],
+  ['stackoverflow', StackOverflowIcon],
   ['twitter', Twitter],
   ['volume-2', Volume2],
   ['youtube', Youtube],
-  ['stackoverflow', StackOverflowIcon],
 ] as const satisfies readonly (readonly [string, FC<LucideProps>])[]);
 
 /* -----------------------------------------------------------------------------------------------*/

@@ -4,13 +4,34 @@ import { createLucideIcon } from 'lucide-react';
  * StackOverflowIcon
  * -----------------------------------------------------------------------------------------------*/
 
-export const StackOverflowIcon = createLucideIcon('stackoverflow', [
+const StackOverflowIcon = createLucideIcon('stackoverflow', [
   [
     'path',
     {
       d: 'M9.5 9.5L16.5 13M12 5.5L17.5 10M8 13.5L15.5 15.5M4 16C4 16 4 21 4 21.5C4 22 5.5 22 5.5 22H17.5C17.5 22 19 22 19 21.5C19 21 19 18.1479 19 16M15 2L19.5 8.5M8 18H15.5',
+      key: 'p1',
     },
   ],
 ]);
 
 StackOverflowIcon.displayName = 'StackOverflowIcon';
+
+/* -------------------------------------------------------------------------------------------------
+ * RedditIcon
+ * -----------------------------------------------------------------------------------------------*/
+
+const RedditIcon = createLucideIcon('reddit', [
+  [
+    'path',
+    {
+      d: 'M8 17.5c4.17 3 8 0 8 0m-4.5-9h.67c5 0 6.33 1.5 6.33 1.5 2.5-1.5 5.5 2 3 4 0 2.5-1.83 7-9.33 7S3 17 3 14.5c-3.5-2.5-.5-6 2.5-4.5 0 0 1.52-1.37 6-1.5Zm0 0 1.5-6 3 .5M9.5 13.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm7.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm3-10a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z',
+      key: 'p1',
+    },
+  ],
+]);
+
+RedditIcon.displayName = 'RedditIcon';
+
+/* -----------------------------------------------------------------------------------------------*/
+
+export { StackOverflowIcon, RedditIcon };

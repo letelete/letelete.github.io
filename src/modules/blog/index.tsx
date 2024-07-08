@@ -8,8 +8,8 @@ import { BlogFooter } from '~modules/blog/blog-footer';
 import { BlogHeader } from '~modules/blog/blog-header';
 import { AllContributionsSection } from '~modules/blog/blog-sections/all-contributions-section';
 import { HeroSection } from '~modules/blog/blog-sections/hero-section';
+import { HighlightedContributionsSection } from '~modules/blog/blog-sections/highlighted-contributions-section';
 import { MoreSection } from '~modules/blog/blog-sections/more-section';
-import { TopWritingsSection } from '~modules/blog/blog-sections/top-writings-section';
 
 import { cn } from '~utils/style';
 
@@ -19,10 +19,12 @@ import { cn } from '~utils/style';
 
 interface BlogContextProps {
   contents: Content[];
+  highlightedContents: Content[];
 }
 
 const BlogContext = createContext<BlogContextProps>({
   contents: [],
+  highlightedContents: [],
 });
 
 const useBlogContext = () => {
@@ -35,12 +37,15 @@ const useBlogContext = () => {
 
 interface BlogProps {
   contents: Content[];
-  topWritings: Content[];
+  highlightedContents: Content[];
   className?: string;
 }
 
-const Blog = ({ contents, className }: BlogProps) => {
-  const contextValue = useMemo(() => ({ contents }), [contents]);
+const Blog = ({ contents, highlightedContents, className }: BlogProps) => {
+  const contextValue = useMemo(
+    () => ({ contents, highlightedContents }),
+    [contents, highlightedContents]
+  );
 
   return (
     <BlogContext.Provider value={contextValue}>
@@ -50,7 +55,7 @@ const Blog = ({ contents, className }: BlogProps) => {
         <div className='w-full space-y-section-sm sm:space-y-section'>
           <HeroSection />
 
-          <TopWritingsSection />
+          <HighlightedContributionsSection />
 
           <AllContributionsSection />
 

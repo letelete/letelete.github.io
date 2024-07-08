@@ -16,6 +16,7 @@ export interface Content {
   date: string;
   tags: string[];
   body: string;
+  published: boolean;
 }
 
 const getContent = async <T extends Content>(
@@ -34,7 +35,12 @@ const getContent = async <T extends Content>(
         const fileContent = await fs.readFile(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
-        return { ...data, body: content, slug: fileName, type } as T;
+        return {
+          ...data,
+          body: content,
+          slug: fileName,
+          type,
+        } as T;
       })
   );
 };

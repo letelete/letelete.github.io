@@ -110,10 +110,29 @@ InlinePlatformRedirectStackOverflow.displayName =
 
 /* -----------------------------------------------------------------------------------------------*/
 
+const InlinePlatformRedirectReddit = () => {
+  return (
+    <InlinePlatformRedirectWithIcon
+      label='Reddit'
+      link={SOCIALS.reddit.url}
+      icon='reddit'
+      buttonProps={{ className: 'hover:text-socials-reddit' }}
+      iconProps={{
+        color: tw.theme.colors.socials.reddit,
+      }}
+    />
+  );
+};
+
+InlinePlatformRedirectReddit.displayName = 'InlinePlatformRedirectReddit';
+
+/* -----------------------------------------------------------------------------------------------*/
+
 export {
   InlinePlatformRedirectWithIcon,
   InlinePlatformRedirectTwitter,
   InlinePlatformRedirectGitHub,
   InlinePlatformRedirectStackOverflow,
+  InlinePlatformRedirectReddit,
 };
 export type { InlinePlatformRedirectWithIconProps };
