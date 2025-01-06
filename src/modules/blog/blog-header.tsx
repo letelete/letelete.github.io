@@ -7,6 +7,7 @@ import { BLOG_PATH } from '~constants/index';
 import { BlogLogo } from '~modules/blog/blog-logo';
 
 import { ButtonWithVideo } from '~ui/atoms/button';
+import { ThemeToggle } from '~ui/atoms/theme/theme-toggle';
 import { AppHeader } from '~ui/molecules/app-header';
 
 /* -------------------------------------------------------------------------------------------------
@@ -24,6 +25,8 @@ const BlogHeader = () => {
         <ButtonWithVideo videoFileName='header-button-home' asChild>
           <Link href='/'>Portfolio</Link>
         </ButtonWithVideo>
+
+        <ThemeToggle />
       </nav>
     </AppHeader>
   );

@@ -5,10 +5,106 @@
 @import '~styles/reset.css';
 
 @layer base {
+  :root {
+    --base-fg-solid: 0 0% 0%;
+    --base-fg-primary: 0 0% 0% / 87%;
+    --base-fg-secondary: 0 0% 0% / 64%;
+    --base-fg-hint: 0 0% 0% / 34%;
+    --base-fg-decorative: 0 0% 0% / 16%;
+    --base-fg-destructive: 0 100% 70%;
+
+    --base-fg-inv-solid: 0 0% 100%;
+    --base-fg-inv-primary: 0 0% 100% / 87%;
+    --base-fg-inv-secondary: 0 0% 100% / 64%;
+    --base-fg-inv-hint: 0 0% 100% / 34%;
+    --base-fg-inv-decorative: 0 0% 100% / 16%;
+    --base-fg-inv-destructive: 0 100% 70%;
+
+    --ctx-primary: 0 0% 100%;
+    --ctx-primary-inv: 0 0% 0%;
+
+    --ctx-secondary: 0 0% 96.1%;
+
+    --ctx-accent-primary: 101 95.5% 92.2%;
+    --ctx-accent-primary-fg: 90.9 75.6% 19.2%;
+
+    --ctx-accent-secondary: 90.9 75.6% 19.2%;
+    --ctx-accent-secondary-fg: 0 0% 100%;
+    --ctx-accent-secondary-fg-secondary: 0 0% 0% / 87%;
+    --ctx-accent-secondary-fg-hint: 0 0% 0% / 64%;
+
+    --ctx-destructive: 0 66.7% 63.5%;
+
+    --ctx-button: 0 0% 0%;
+    --ctx-button-inv: 0 0% 100%;
+
+    --socials-youtube: 0 100% 50%;
+    --socials-stackoverflow: 28.6 87.5% 54.1%;
+    --socials-reddit: 8.2 100% 43.5%;
+
+    --heart-0: 0 0% 0% / 0%;
+    --heart-1: 0 0% 0%;
+    --heart-2: 0 100% 82.2%;
+    --heart-3: 0 0% 100%;
+    --heart-4: 0 67% 63.5%;
+    --heart-5: 0 67% 55.3%;
+    --heart-6: 0 67% 45.9%;
+  }
+
+  .dark {
+    --base-fg-solid: 0 0% 80%;
+    --base-fg-primary: 0 0% 100% / 64%;
+    --base-fg-secondary: 0 0% 100% / 48%;
+    --base-fg-hint: 0 0% 100% / 34%;
+    --base-fg-decorative: 0 0% 100% / 16%;
+    --base-fg-destructive: 0 67% 63.5%;
+
+    --base-fg-inv-solid: 0 0% 0%;
+    --base-fg-inv-primary: 0 0% 0% / 64%;
+    --base-fg-inv-secondary: 0 0% 0% / 48%;
+    --base-fg-inv-hint: 0 0% 0% / 34%;
+    --base-fg-inv-decorative: 0 0% 0% / 16%;
+    --base-fg-inv-destructive: 0 100% 70%;
+
+    --ctx-primary: 0 0% 7%;
+    --ctx-primary-inv: 0 0% 80%;
+
+    --ctx-secondary: 0 0% 15%;
+
+    --ctx-accent-primary: 90 21% 30%;
+    --ctx-accent-primary-fg: 100 95% 92%;
+
+    --ctx-accent-secondary: 90 45% 67%;
+    --ctx-accent-secondary-fg: 0 0% 0%;
+    --ctx-accent-secondary-fg-secondary: 0 0% 100% / 87%;
+    --ctx-accent-secondary-fg-hint: 0 0% 100% / 64%;
+
+    --ctx-destructive: 0 66.7% 55.3%;
+
+    --ctx-button: 0 0% 80%;
+    --ctx-button-inv: 0 0% 7%;
+
+    --socials-youtube: 0 100% 50%;
+    --socials-stackoverflow: 28.6 87.5% 54.1%;
+    --socials-reddit: 8.2 100% 43.5%;
+
+    --heart-0: 0 0% 100% / 0%;
+    --heart-1: 0 0% 100%;
+    --heart-2: 0 100% 82.2%;
+    --heart-3: 0 0% 0%;
+    --heart-4: 0 66.7% 55.3%;
+    --heart-5: 0 66.7% 45.9%;
+    --heart-6: 0 66.7% 35.3%;
+  }
+
   html {
     @apply min-h-screen scroll-py-section-sm scroll-smooth bg-ctx-primary text-ctx-primary-fg-primary sm:scroll-py-section;
     -webkit-tap-highlight-color: transparent;
     color-scheme: light;
+  }
+
+  .dark .html {
+    color-scheme: dark;
   }
 
   body {

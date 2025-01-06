@@ -7,6 +7,7 @@ import { BLOG_PATH } from '~constants/index';
 
 import { ButtonWithVideo } from '~ui/atoms/button';
 import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';
+import { ThemeToggle } from '~ui/atoms/theme/theme-toggle';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Logo } from '~ui/widgets/logo';
 
@@ -35,6 +36,8 @@ const HomeHeader = () => {
           <ButtonWithVideo videoFileName='header-button-home' asChild>
             <Link href='#contact'>Get in touch</Link>
           </ButtonWithVideo>
+
+          <ThemeToggle />
         </motion.nav>
       </MotionConfig>
     </AppHeader>

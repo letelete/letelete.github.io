@@ -4,21 +4,21 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 
 const baseForeground = {
-  solid: 'black',
-  primary: 'rgba(0,0,0,0.87)',
-  secondary: 'rgba(0,0,0,0.64)',
-  hint: 'rgba(0,0,0,0.34)',
-  decorative: 'rgba(0,0,0,0.16)',
-  destructive: '#ff5151',
+  solid: 'hsl(var(--base-fg-solid))',
+  primary: 'hsla(var(--base-fg-primary))',
+  secondary: 'hsla(var(--base-fg-secondary))',
+  hint: 'hsla(var(--base-fg-hint))',
+  decorative: 'hsla(var(--base-fg-decorative))',
+  destructive: 'hsl(var(--base-fg-destructive))',
 };
 
 const baseForegroundInverse = {
-  solid: 'white',
-  primary: 'rgba(255,255,255,0.87)',
-  secondary: 'rgba(255,255,255,0.64)',
-  hint: 'rgba(255,255,255,0.34)',
-  decorative: 'rgba(255,255,255,0.16)',
-  destructive: '#ff5151',
+  solid: 'hsl(var(--base-fg-inv-solid))',
+  primary: 'hsla(var(--base-fg-inv-primary))',
+  secondary: 'hsla(var(--base-fg-inv-secondary))',
+  hint: 'hsla(var(--base-fg-inv-hint))',
+  decorative: 'hsla(var(--base-fg-inv-decorative))',
+  destructive: 'hsl(var(--base-fg-inv-destructive))',
 };
 
 export type Foreground = keyof typeof baseForeground;
@@ -31,69 +31,71 @@ export interface Background {
 
 const config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  darkMode: 'class',
   theme: {
     colors: {
       transparent: defaultColors.transparent,
-
-      // Context-aware colors
       ctx: {
         primary: {
-          DEFAULT: '#fff',
+          DEFAULT: 'hsl(var(--ctx-primary))',
           fg: baseForeground,
           inverse: {
-            DEFAULT: '#000',
+            DEFAULT: 'hsl(var(--ctx-primary-inv))',
             fg: baseForegroundInverse,
           },
         },
         secondary: {
-          DEFAULT: '#f5f5f5',
+          DEFAULT: 'hsl(var(--ctx-secondary))',
           fg: baseForeground,
         },
         'accent-primary': {
-          DEFAULT: '#ECFDDE',
-          fg: { ...baseForeground, primary: '#2E590D' },
+          DEFAULT: 'hsl(var(--ctx-accent-primary))',
+          fg: {
+            ...baseForeground,
+            primary: 'hsl(var(--ctx-accent-primary-fg))',
+          },
         },
         'accent-secondary': {
-          DEFAULT: '#2E590D',
+          DEFAULT: 'hsl(var(--ctx-accent-secondary))',
           fg: {
             ...baseForegroundInverse,
-            primary: '#fff',
-            secondary: 'rgba(0,0,0,0.87)',
-            hint: 'rgba(0,0,0,0.64)',
+            primary: 'hsl(var(--ctx-accent-secondary-fg))',
+            secondary: 'hsl(var(--ctx-accent-secondary-fg-secondary))',
+            hint: 'hsl(var(--ctx-accent-secondary-fg-hint))',
           },
         },
         destructive: {
-          DEFAULT: '#ff5151',
+          DEFAULT: 'hsl(var(--ctx-destructive))',
           fg: baseForeground,
         },
         button: {
-          DEFAULT: '#000',
+          DEFAULT: 'hsl(var(--ctx-button))',
           fg: baseForegroundInverse,
           inverse: {
-            DEFAULT: '#fff',
+            DEFAULT: 'hsl(var(--ctx-button-inv))',
             fg: baseForeground,
           },
         },
       } as const satisfies Record<string, Background>,
       socials: {
-        youtube: '#ff0000',
-        stackoverflow: '#f48023',
-        reddit: '#d93900',
+        youtube: 'hsl(var(--socials-youtube))',
+        stackoverflow: 'hsl(var(--socials-stackoverflow))',
+        reddit: 'hsl(var(--socials-reddit))',
       },
       heart: {
-        0: 'transparent',
-        1: 'black',
-        2: '#FFB3B3',
-        3: 'white',
-        4: '#FF5151',
-        5: '#DC4444',
-        6: '#BA3333',
+        0: 'hsla(var(--heart-0))',
+        1: 'hsl(var(--heart-1))',
+        2: 'hsl(var(--heart-2))',
+        3: 'hsl(var(--heart-3))',
+        4: 'hsl(var(--heart-4))',
+        5: 'hsl(var(--heart-5))',
+        6: 'hsl(var(--heart-6))',
       },
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
+        sans: ['var(----font-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(----font-mono)', ...defaultTheme.fontFamily.mono],
       },
       spacing: {
         section: '8rem',

@@ -17,14 +17,12 @@
         "name": "next"
       }
     ],
-
     /* Linting */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     "baseUrl": ".",
     /* Paths */
     "paths": {
@@ -41,8 +39,8 @@
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     ".next/types/**/*.ts",
     "src/lib/articles/optimizing-your-react-application-for-the-interaction-to-next-paint-inp-web-vitals-metric.mdx"
   ],

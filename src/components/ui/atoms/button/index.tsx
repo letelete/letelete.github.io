@@ -229,7 +229,10 @@ const ButtonWithVideo = forwardRef<HTMLButtonElement, ButtonWithVideoProps>(
       <Button
         {...buttonProps}
         ref={ref}
-        className={cn('relative overflow-hidden', className)}
+        className={cn(
+          'relative overflow-hidden hover:font-semibold hover:text-[#fff]',
+          className
+        )}
         onHoverStart={(event, info) => {
           setHovered(true);
           buttonProps.onHoverStart?.(event, info);

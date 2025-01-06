@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { Nunito_Sans } from 'next/font/google';
 
@@ -9,6 +9,8 @@ import { SSRQueryClientProvider } from '~api/shared/query-client/provider';
 import { BASE_URL } from '~constants/index';
 
 import '~styles/globals.css';
+
+import { ThemeProvider } from '~ui/atoms/theme/theme-provider';
 
 import { cn, tw } from '~utils/style';
 
@@ -116,7 +118,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={cn(`${fontSans.variable} ${fontMono.variable}`)}>
-        <SSRQueryClientProvider>{children}</SSRQueryClientProvider>
+        <SSRQueryClientProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </SSRQueryClientProvider>
 
         <SpeedInsights />
         <Analytics />
