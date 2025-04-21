@@ -5,7 +5,7 @@ import '~styles/highlight-js/style.css';
 export const metadata: Metadata = {
   title: 'Blog',
   description:
-    "I'm a Frontend Engineer sharing my experience with Web Development, and UI/UX design. I write, record, and talk about programming.",
+    "I'm a Software Engineer sharing my experience with Web Development, and UI/UX design. I write, record, and talk about programming.",
 };
 
 export default function BlogLayout({
@@ -15,7 +15,7 @@ export default function BlogLayout({
 }) {
   return (
     <>
-      <main className='flex h-full  w-full flex-col'>{children}</main>
+      <main className='flex h-full w-full flex-col'>{children}</main>
     </>
   );
 }

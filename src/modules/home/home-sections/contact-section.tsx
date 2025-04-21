@@ -102,7 +102,7 @@ const socials: Social[] = [
       { text: 'Follow', cta: true },
       { text: ' me on ' },
       { text: 'YouTube', highlighted: true },
-      { text: ' for a dose of Frontend Engineering knowledge:' },
+      { text: ' for a dose of Software Engineering knowledge:' },
     ],
     link: {
       href: SOCIALS.youtube.url,

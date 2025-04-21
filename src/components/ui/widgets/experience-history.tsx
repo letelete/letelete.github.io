@@ -8,7 +8,10 @@ import {
   TrophyEmoji,
   VideoCameraEmoji,
 } from '~ui/atoms/emojis';
-import { ExperienceSegment } from '~ui/molecules/experience-segment';
+import {
+  ExperienceSegment,
+  ExperienceSegmentProps,
+} from '~ui/molecules/experience-segment';
 
 import { cn } from '~utils/style';
 
@@ -48,95 +51,119 @@ const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
 
 const experience = [
   {
-    id: 'exp-history__hello-world',
+    id: getRandomUUID(),
     leading: <ManClimbingEmoji />,
     title: 'The Beginning of the Journey',
     subtitle: 'Wrote my first "Hello, World!"',
-    startDate: new Date(Date.parse('2015-05-01')),
+    startDate: parseDate('2015-05-01'),
     endDate: undefined,
   },
   {
-    id: 'exp-history__android-developer-at-mifos-initiative',
+    id: getRandomUUID(),
     leading: <LaptopEmoji />,
     title: 'Android Developer',
     subtitle: 'Mobile-Wallet @ Mifos Initiative',
-    startDate: new Date(Date.parse('2018-10-01')),
-    endDate: new Date(Date.parse('2019-01-01')),
+    startDate: parseDate('2018-10-01'),
+    endDate: parseDate('2019-01-01'),
   },
   {
-    id: 'exp-history__google-code-in-winner',
+    id: getRandomUUID(),
     leading: <TrophyEmoji />,
     title: 'Google Code-In Winner',
     subtitle: 'International coding contest',
-    startDate: new Date(Date.parse('2019-01-01')),
+    startDate: parseDate('2019-01-01'),
     endDate: undefined,
   },
   {
-    id: 'exp-history__freelance-full-stack-developer',
+    id: getRandomUUID(),
     leading: <LaptopEmoji />,
     title: 'Freelance Full-Stack Developer',
     subtitle: undefined,
-    startDate: new Date(Date.parse('2020-12-01')),
-    endDate: new Date(Date.parse('2022-02-01')),
+    startDate: parseDate('2020-12-01'),
+    endDate: parseDate('2022-02-01'),
   },
   {
-    id: 'exp-history__frontend-engineer-upside',
+    id: getRandomUUID(),
     leading: <LaptopEmoji />,
-    title: 'Frontend Engineer',
-    subtitle: '@ Upsidelab',
-    startDate: new Date(Date.parse('2022-03-01')),
-    endDate: 'Now',
+    title: 'UI Engineer',
+    subtitle: '@ upsidelab.io',
+    startDate: parseDate('2022-03-01'),
+    endDate: parseDate('2024-09-01'),
   },
   {
-    id: 'exp-history__technical-recruiter-upside',
+    id: getRandomUUID(),
     leading: <LaptopEmoji />,
-    title: 'Technical Recruiter',
-    subtitle: '@ Upsidelab',
-    startDate: new Date(Date.parse('2022-07-01')),
-    endDate: 'Now',
+    title: 'Technical Recruiter (part-time)',
+    subtitle: '@ upsidelab.io',
+    startDate: parseDate('2022-07-01'),
+    endDate: parseDate('2025-05-01'),
   },
   {
-    id: 'exp-history__public-speaker-animating-the-web-sfi',
+    id: getRandomUUID(),
     leading: <MicrophoneEmoji />,
     title: 'Public Speaker',
     subtitle: '"Animating the Web" @ SFI',
-    startDate: new Date(Date.parse('2023-03-01')),
+    startDate: parseDate('2023-03-01'),
     endDate: undefined,
   },
   {
-    id: 'exp-history__webinar-speaker-animating-the-ui-with-performance-in-mind-using-react',
+    id: getRandomUUID(),
     leading: <MicrophoneEmoji />,
     title: 'Webinar Speaker',
     subtitle:
       '"Animating the UI with performance in mind using React" @ dev.js summit',
-    startDate: new Date(Date.parse('2023-10-01')),
+    startDate: parseDate('2023-10-01'),
     endDate: undefined,
   },
   {
-    id: 'exp-history__youtube-content-creator',
-    leading: <VideoCameraEmoji />,
-    title: 'YouTube Content Creator',
-    subtitle: '@brunokawka',
-    startDate: new Date(Date.parse('2024-03-01')),
-    endDate: 'Now',
-  },
-  {
-    id: 'exp-history__public-speaker-rethinking-ui-building-strategies-sfi',
+    id: getRandomUUID(),
     leading: <MicrophoneEmoji />,
     title: 'Public Speaker',
     subtitle: '"Rethinking UI building strategies" @ SFI',
-    startDate: new Date(Date.parse('2024-04-01')),
+    startDate: parseDate('2024-04-01'),
     endDate: undefined,
   },
   {
-    id: 'exp-history__soon',
+    id: getRandomUUID(),
+    leading: <VideoCameraEmoji />,
+    title: 'YouTube Content Creator',
+    subtitle: '@brunokawka',
+    startDate: parseDate('2024-03-01'),
+    endDate: 'Now',
+  },
+  {
+    id: getRandomUUID(),
+    leading: <LaptopEmoji />,
+    title: 'Senior UI Engineer',
+    subtitle: '@ upsidelab.io',
+    startDate: parseDate('2024-09-01'),
+    endDate: parseDate('2025-05-01'),
+  },
+  {
+    id: getRandomUUID(),
+    leading: <LaptopEmoji />,
+    title: 'Software Engineer',
+    subtitle: '@ Google',
+    startDate: parseDate('2025-05-01'),
+    endDate: 'Now',
+  },
+  {
+    id: getRandomUUID(),
     leading: <ThinkingFaceEmoji />,
     title: 'Soon',
     subtitle: undefined,
     startDate: new Date(),
     endDate: undefined,
   },
-] as const;
+] satisfies ExperienceSegmentProps[];
+
+function parseDate(date: string) {
+  return new Date(Date.parse(date));
+}
+
+function getRandomUUID() {
+  return crypto.randomUUID();
+}
 
 /* -----------------------------------------------------------------------------------------------*/
 

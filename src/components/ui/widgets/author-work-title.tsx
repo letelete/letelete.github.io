@@ -13,7 +13,7 @@ interface AuthorWorkTitleProps {
 const AuthorWorkTitle = ({ className }: AuthorWorkTitleProps) => {
   return (
     <Typography className={cn(className)} color='secondary'>
-      Frontend Engineer <span className='italic'>@Upside</span>
+      Software Engineer @ <span className='italic'>Google</span>
     </Typography>
   );
 };

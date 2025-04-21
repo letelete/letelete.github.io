@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     default: 'Bruno Kawka',
   },
   description:
-    "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
+    "I'm a Software Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
   manifest: `${BASE_URL}/manifest.webmanifest`,
   keywords: [
     'Bruno Kawka',
-    'Frontend Engineer',
+    'Software Engineer',
     'Frontend Development',
     'Tutorials',
     'Blog',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Bruno Kawka',
     description:
-      "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
+      "I'm a Software Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
     url: 'https://kawka.me',
     siteName: 'Bruno Kawka',
     locale: 'en_US',
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Bruno Kawka',
     description:
-      "I'm a Frontend Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
+      "I'm a Software Engineer specializing in creating amazing UI experiences with attention to details, performance, and accessibility.",
     siteId: '1073997624527806473',
     creator: '@brunokawka',
     creatorId: '1073997624527806473',
