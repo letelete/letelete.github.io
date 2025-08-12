@@ -2,10 +2,11 @@ import { Metadata, ResolvingMetadata } from 'next';
 
 import { BASE_URL, BLOG_PATH } from '~constants/index';
 
-import { getAllContent } from '~lib/content/provider';
+import { ContentTreeAdapter } from '~lib/content/content-tree';
+import { getBlogPayload } from '~lib/content/provider';
 
 interface MetadataProps {
-  params: { slug: string };
+  params: { slug: string[] };
 }
 
 export async function generateMetadata(
@@ -13,8 +14,8 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ) {
   const slug = params.slug;
-  const data = await getAllContent();
-  const content = data.find((content) => content.slug === slug);
+  const data = await getBlogPayload();
+  const content = ContentTreeAdapter.findNodeBySlug(data.root, slug);
 
   const parentMetadata = (await parent) as Metadata;
 
@@ -30,7 +31,7 @@ export async function generateMetadata(
     description: content.description,
     openGraph: {
       ...openGraph,
-      url: `${BASE_URL}${BLOG_PATH}/${slug}`,
+      url: `${BASE_URL}${BLOG_PATH}/${slug.join('/')}`,
       title: content.title,
       description: content.description,
       images: [content.thumbnail],

@@ -1,23 +1,28 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { getAllContent, getContentEntry } from '~lib/content/provider';
+import { ContentTreeAdapter } from '~lib/content/content-tree';
+import { getBlogPayload } from '~lib/content/provider';
 
 import { BlogContent } from '~modules/blog/blog-content/blog-content';
 import { BlogContentReportView } from '~modules/blog/blog-content/blog-content-report-view';
 
 export const generateStaticParams = async () => {
-  const content = await getAllContent();
+  const content = await getBlogPayload();
 
-  return content.map((post) => ({ slug: post.slug }));
+  return ContentTreeAdapter.getAllSlugs(content.root);
 };
 
 export default async function ContentPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string[] };
 }) {
-  const content = await getContentEntry(params.slug);
+  const blogPayload = await getBlogPayload();
+  const content = ContentTreeAdapter.findNodeBySlug(
+    blogPayload.root,
+    params.slug
+  );
 
   if (!content) {
     return notFound();

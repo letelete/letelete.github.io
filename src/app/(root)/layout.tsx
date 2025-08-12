@@ -101,7 +101,7 @@ export const metadata: Metadata = {
     creatorId: '1073997624527806473',
     images: [
       {
-        url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/800x600.jpg',
+        url: '/content/800x600.jpg',
         width: 800,
         height: 600,
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',

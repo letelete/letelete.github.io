@@ -9,7 +9,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
@@ -35,6 +36,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "framer-motion": "^11.2.11",
+    "immer": "^10.1.1",
     "lodash-es": "^4.17.21",
     "lottie-web": "^5.12.2",
     "lucide-react": "^0.402.0",
@@ -51,7 +53,8 @@
     "react-use-measure": "^2.1.1",
     "reading-time": "^1.5.0",
     "rehype-highlight": "^7.0.0",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.3",

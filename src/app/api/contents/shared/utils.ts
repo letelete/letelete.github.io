@@ -1,7 +1,7 @@
-import { getAllContent } from '~lib/content/provider';
+import { getBlogPayload } from '~lib/content/provider';
 
 export const getContentSlugs = async () => {
-  const content = await getAllContent();
+  const content = await getBlogPayload();
   return content.map((content) => content.slug);
 };
 

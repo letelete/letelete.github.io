@@ -12,6 +12,7 @@ import {
 } from '~ui/organisms/highlighted-with-popup';
 import { AuthorName } from '~ui/widgets/author-name';
 import { AuthorWorkTitle } from '~ui/widgets/author-work-title';
+import { SocialButtons } from '~ui/widgets/social-buttons';
 
 /* -------------------------------------------------------------------------------------------------
  * HeroSection
@@ -26,37 +27,42 @@ const HeroSection = () => {
 
   return (
     <section className='layout-width-limiter layout-padding flex w-full items-center'>
-      <figure className='flex flex-col'>
-        <Typography variant='hero' asChild>
+      <figure className='flex w-full flex-col items-center'>
+        <Typography className='text-center' variant='hero' asChild>
           <h1>
-            <p>
-              I believe{' '}
-              <span className='font-light italic'>
-                <DynamicWeightOnHoverText text='knowledge sharing' />
-              </span>{' '}
-              is <span className='font-bold'>key</span> to
-            </p>
-            <p>
-              becoming an{' '}
-              <span className='font-light tracking-wider'>expert</span>.
-            </p>
+            I believe{' '}
+            <span className='inline-block font-light italic'>
+              <DynamicWeightOnHoverText text='knowledge sharing' />
+            </span>{' '}
+            is <span className='font-bold'>key</span> to becoming an{' '}
+            <span className='font-light tracking-wider'>expert</span>.
           </h1>
         </Typography>
 
-        <Typography variant='body-sm' className='mt-8' asChild>
+        <Typography variant='body-sm' className='mt-8 text-center' asChild>
           <h2>
-            I convey my{' '}
+            I write, record, and talk about{' '}
             <HighlightedWithPopup renderPopupContent={renderExperiencePopup}>
-              experience
+              programming
             </HighlightedWithPopup>{' '}
-            to help humans by writing, recording, and speaking about programming
             and design.
           </h2>
         </Typography>
 
+        <Typography
+          color='hint'
+          variant='sm'
+          className='mt-0.5 text-center'
+          asChild
+        >
+          <h2>All opinions are my own.</h2>
+        </Typography>
+
         <AuthorName />
 
-        <AuthorWorkTitle />
+        <AuthorWorkTitle className='relative -mt-1' />
+
+        <SocialButtons className='mt-4' />
       </figure>
     </section>
   );

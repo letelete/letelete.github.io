@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { ComponentPropsWithoutRef } from 'react';
 
 import { Button } from '~ui/atoms/button';
 import {
@@ -13,16 +14,15 @@ import {
 
 import { cn } from '~utils/style';
 
-interface ThemeToggleProps {
-  className?: string;
-}
-
 const themeToIcon = {
   light: Sun,
   dark: Moon,
 } as const;
 
-const ThemeToggle = ({ className }: ThemeToggleProps) => {
+const ThemeToggle = ({
+  className,
+  ...rest
+}: ComponentPropsWithoutRef<typeof Button>) => {
   const { setTheme, theme } = useTheme();
 
   const currentTheme = (theme ?? DEFAULT_THEME) as Theme;
@@ -30,7 +30,7 @@ const ThemeToggle = ({ className }: ThemeToggleProps) => {
 
   return (
     <Button
-      className={cn(className, 'relative flex items-center justify-center')}
+      className={cn('relative flex items-center justify-center', className)}
       variant='ghost'
       size='icon'
       onClick={() =>
@@ -40,6 +40,7 @@ const ThemeToggle = ({ className }: ThemeToggleProps) => {
           ] ?? DEFAULT_THEME
         )
       }
+      {...rest}
     >
       <AnimatePresence mode='popLayout'>
         <motion.div

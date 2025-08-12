@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useMemo } from 'react';
 
-import { Content } from '~lib/content/provider';
+import { BlogPayload } from '~lib/content/provider';
 import { ImageItem } from '~lib/images/provider';
 
 import { HomeFooter } from '~modules/home/home-footer';
@@ -20,25 +20,26 @@ import { cn } from '~utils/style';
  * -----------------------------------------------------------------------------------------------*/
 
 interface HomeContextProps {
-  blogContent: Content[];
+  blogContent: BlogPayload;
   authorPortraits: ImageItem[];
 }
 
-const HomeContext = createContext<HomeContextProps>({
-  blogContent: [],
-  authorPortraits: [],
-});
+const HomeContext = createContext<HomeContextProps | null>(null);
 
 const useHomeContext = () => {
   const context = useContext(HomeContext);
-
+  if (context === null) {
+    throw new Error(
+      'Invalid State. Tried to use HomeContext outside of the HomeContent.Provider.'
+    );
+  }
   return context;
 };
 
 /* -----------------------------------------------------------------------------------------------*/
 
 interface HomeProps {
-  blogContent: Content[];
+  blogContent: BlogPayload;
   authorPortraits: ImageItem[];
   className?: string;
 }

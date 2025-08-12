@@ -6,6 +6,7 @@ import { FilterableBlogItemsList } from '~modules/blog/blog-items-list';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
 
+// TODO(letelete): Remove legacy section once migrated to explorer view.
 export const AllContributionsSection = () => {
   const { contents } = useBlogContext();
 

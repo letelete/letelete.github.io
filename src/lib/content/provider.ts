@@ -1,86 +1,133 @@
+import { Dirent } from 'fs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
 import path from 'path';
+import { z } from 'zod';
 
-import { findRepeatingElements } from '~utils/array';
+import {
+  ContentDirectory,
+  ContentFile,
+  ContentTreeAdapter,
+} from '~lib/content/content-tree';
 
-export const contentTypes = ['article', 'youtube-video', 'talk'] as const;
-export type ContentType = (typeof contentTypes)[number];
+const CONTENT_BASE_PATH = 'src/lib/content/nodes';
+const CONTENT_NODE_EXT_ALLOWLIST = ['.mdx'];
 
-export interface Content {
-  type: ContentType;
-  title: string;
-  description: string;
-  thumbnail: string;
-  slug: string;
-  date: string;
-  tags: string[];
-  body: string;
-  published: boolean;
+const MDXContentFileMetaSchema = z.object({
+  title: z.string(),
+  date: z.string().transform((e) => new Date(e)),
+  description: z.string(),
+  tags: z.array(z.string()),
+  published: z.boolean(),
+  thumbnail: z.string(),
+});
+
+export interface BlogPayload {
+  root: ContentDirectory;
+  highlight: ContentFile[];
+  contentSize: number;
 }
 
-const getContent = async <T extends Content>(
-  dirPath: string,
-  type: ContentType
-): Promise<T[]> => {
-  const contentPath = path.resolve(process.cwd(), dirPath);
-  const content = await fs.readdir(contentPath);
-
-  return Promise.all(
-    content
-      .filter((file) => path.extname(file) === '.mdx')
-      .map(async (file) => {
-        const filePath = `${contentPath}/${file}`;
-        const [fileName] = file.split('.');
-        const fileContent = await fs.readFile(filePath, 'utf8');
-        const { data, content } = matter(fileContent);
-
-        return {
-          ...data,
-          body: content,
-          slug: fileName,
-          type,
-        } as T;
-      })
-  );
-};
-
-const CONTENT_DIR_PATH = 'src/lib/content';
-const contentPaths: Record<ContentType, string> = {
-  article: `${CONTENT_DIR_PATH}/articles`,
-  'youtube-video': `${CONTENT_DIR_PATH}/youtube-videos`,
-  talk: `${CONTENT_DIR_PATH}/talks`,
-};
-
-export class NonUniqueSlugsError extends Error {
-  constructor(nonUniqueSlugs: string[]) {
-    super(
-      `All content slugs must be unique. Found ${nonUniqueSlugs.length} non-unique slugs: ${nonUniqueSlugs.toString()}`
+const getEntitySlug = (ent: Dirent) => {
+  const nameSegments = ent.name.split('.');
+  if (nameSegments.length > 2) {
+    throw new Error(
+      "Invalid State. Name segment length cannot exceed 2. Check if your files don't contain additional dots in the filename (e.g. a.b.c.txt), as this is currently not supported."
     );
-    this.name = 'NonUniqueSlugsError';
   }
-}
-export const getAllContent = async () => {
-  const content = (
-    await Promise.all(
-      Object.entries(contentPaths).map(([contentType, contentPath]) =>
-        getContent(contentPath, contentType as ContentType)
-      )
-    )
-  ).flat();
-
-  const nonUniqueSlugs = findRepeatingElements(content, (entry) => entry.slug);
-  if (nonUniqueSlugs.length) {
-    throw new NonUniqueSlugsError(nonUniqueSlugs);
+  const [nameWithoutExt] = ent.name.split('.');
+  if (!nameWithoutExt) {
+    throw new Error('Entity name is empty.');
   }
-
-  return content.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  return nameWithoutExt;
 };
 
-export const getContentEntry = async (slug: string) => {
-  const content = await getAllContent();
+const getContentTree = async () => {
+  const getFileNode = async (ent: Dirent, _path: string) => {
+    if (!CONTENT_NODE_EXT_ALLOWLIST.some((ext) => ent.name.includes(ext))) {
+      throw new Error(
+        `Invalid State. Unsupported ContentFileNode extension: ${ent.name}`
+      );
+    }
+    const entContent = await fs.readFile(
+      path.resolve(process.cwd(), _path),
+      'utf8'
+    );
+    const { data, content } = matter(entContent);
+    const meta = MDXContentFileMetaSchema.parse(data);
+    return {
+      type: 'file',
+      path: _path,
+      title: meta.title,
+      description: meta.description,
+      thumbnail: meta.thumbnail,
+      slug: getEntitySlug(ent),
+      date: meta.date,
+      tags: meta.tags,
+      body: content.trim(),
+      published: meta.published,
+    } satisfies ContentFile;
+  };
 
-  return content.find((content) => content.slug === slug);
+  const getDirectoryNode = async (ent: Dirent, _path: string) => {
+    // TODO(letelete): Replace generic data with relevant information about the directory.
+    const root = {
+      type: 'dir',
+      path: _path,
+      title: "Bruno Kawka's Blog",
+      description: 'Software Engineering and some more.',
+      thumbnail: '/content/talks/sfi-2023/thumbnail.webp',
+      slug: getEntitySlug(ent),
+      date: new Date(),
+      children: [],
+    } satisfies ContentDirectory;
+    return root;
+  };
+
+  const buildContentTree = async (
+    _head: ContentDirectory,
+    _path: string = CONTENT_BASE_PATH
+  ) => {
+    const dirPath = path.resolve(process.cwd(), _path);
+    const dirEnts = await fs.readdir(dirPath, { withFileTypes: true });
+    console.log('debug:', { _path, _head, dirPath, dirEnts });
+
+    for await (const ent of dirEnts) {
+      console.log('processing ent', ent);
+      const entPath = `${_path}/${ent.name}`;
+      if (ent.isFile()) {
+        const fileNode = await getFileNode(ent, entPath);
+        _head.children.push(fileNode);
+      } else if (ent.isDirectory()) {
+        const dirNode = await getDirectoryNode(ent, entPath);
+        await buildContentTree(dirNode, entPath);
+        _head.children.push(dirNode);
+      }
+    }
+  };
+
+  const root = {
+    type: 'dir',
+    path: 'blog',
+    title: "Bruno Kawka's Blog",
+    description: 'Software Engineering and some more.',
+    // TODO(letelete): Provide relevant thumbnail
+    thumbnail: '/content/talks/sfi-2023/thumbnail.webp',
+    slug: 'blog',
+    date: new Date(),
+    children: [],
+  } satisfies ContentDirectory;
+  await buildContentTree(root);
+  return root;
+};
+
+export const getBlogPayload = async (): Promise<BlogPayload> => {
+  const root = await getContentTree();
+  const contentSize = ContentTreeAdapter.getAllSlugs(root).length;
+  console.log(root, ContentTreeAdapter.getAllSlugs(root));
+  return {
+    root,
+    contentSize,
+    highlight: [],
+  };
 };

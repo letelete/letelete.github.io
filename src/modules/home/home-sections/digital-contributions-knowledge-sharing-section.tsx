@@ -5,8 +5,6 @@ import { useMemo } from 'react';
 
 import { BLOG_PATH } from '~constants/index';
 
-import { Content } from '~lib/content/provider';
-
 import { useHomeContext } from '~modules/home';
 
 import { ContentCard, ContentCardContainer } from '~ui/molecules/content-card';
@@ -22,33 +20,7 @@ import { SectionHeadline } from '~ui/molecules/section/section-headline';
 const DigitalContributionsKnowledgeSharing = () => {
   const context = useHomeContext();
 
-  const article = useMemo(
-    () => context.blogContent.find((content) => content.type === 'article'),
-    [context.blogContent]
-  );
-
-  const youtubeVideo = useMemo(
-    () =>
-      context.blogContent.find((content) => content.type === 'youtube-video'),
-    [context.blogContent]
-  );
-
-  const talk = useMemo(
-    () => context.blogContent.find((content) => content.type === 'talk'),
-    [context.blogContent]
-  );
-
-  const contents = useMemo(
-    () =>
-      [
-        { content: article, label: 'Last article' },
-        { content: youtubeVideo, label: 'Last video' },
-        { content: talk, label: 'Last talk' },
-      ].filter((entry): entry is { content: Content; label: string } =>
-        Boolean(entry.content)
-      ),
-    [article, talk, youtubeVideo]
-  );
+  const contents = useMemo(() => context.blogContent.highlight.slice(0, 3), []);
 
   return (
     <SectionContainer>
@@ -56,25 +28,22 @@ const DigitalContributionsKnowledgeSharing = () => {
         title='Digital Contributions'
         subtitle='Knowledge sharing'
       />
-
       <ContentCardContainer>
         {contents.map((entry) => (
           <ContentCard
-            href={`${BLOG_PATH}/${entry.content.slug}`}
-            key={entry.content.slug}
-            label={entry.label}
-            title={entry.content.title}
+            href={`${BLOG_PATH}/${entry.slug}`}
+            key={entry.slug}
+            label={entry.title}
+            title={entry.description}
             display={
-              entry.content.thumbnail ? (
-                <Image
-                  fill
-                  priority
-                  sizes='100%'
-                  className='object-contain'
-                  src={entry.content.thumbnail}
-                  alt={entry.content.description}
-                />
-              ) : null
+              <Image
+                fill
+                priority
+                sizes='100%'
+                className='object-contain'
+                src={entry.thumbnail}
+                alt=''
+              />
             }
           />
         ))}

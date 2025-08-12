@@ -2,13 +2,12 @@
 
 import { createContext, useContext, useMemo } from 'react';
 
-import { Content } from '~lib/content/provider';
+import { BlogPayload } from '~lib/content/provider';
 
+import { BlogContentExplorer } from '~modules/blog/blog-content-explorer';
 import { BlogFooter } from '~modules/blog/blog-footer';
 import { BlogHeader } from '~modules/blog/blog-header';
-import { AllContributionsSection } from '~modules/blog/blog-sections/all-contributions-section';
 import { HeroSection } from '~modules/blog/blog-sections/hero-section';
-import { HighlightedContributionsSection } from '~modules/blog/blog-sections/highlighted-contributions-section';
 import { MoreSection } from '~modules/blog/blog-sections/more-section';
 
 import { cn } from '~utils/style';
@@ -18,35 +17,31 @@ import { cn } from '~utils/style';
  * -----------------------------------------------------------------------------------------------*/
 
 interface BlogContextProps {
-  contents: Content[];
-  highlightedContents: Content[];
+  payload: BlogPayload;
 }
 
-const BlogContext = createContext<BlogContextProps>({
-  contents: [],
-  highlightedContents: [],
-});
+const BlogContext = createContext<BlogContextProps | null>(null);
 
 const useBlogContext = () => {
   const context = useContext(BlogContext);
-
+  if (context === null) {
+    throw new Error(
+      'Invalid State. Tried to use BlogContent outside BlogContent.Provider.'
+    );
+  }
   return context;
 };
 
 /* -----------------------------------------------------------------------------------------------*/
 
 interface BlogProps {
-  contents: Content[];
-  highlightedContents: Content[];
+  payload: BlogPayload;
   className?: string;
 }
 
-const Blog = ({ contents, highlightedContents, className }: BlogProps) => {
-  const contextValue = useMemo(
-    () => ({ contents, highlightedContents }),
-    [contents, highlightedContents]
-  );
-
+const Blog = ({ payload, className }: BlogProps) => {
+  const contextValue = useMemo(() => ({ payload }), [payload]);
+  console.log('debug:blogPayload', payload);
   return (
     <BlogContext.Provider value={contextValue}>
       <main className={cn('min-h-screen space-y-6', className)}>
@@ -55,9 +50,7 @@ const Blog = ({ contents, highlightedContents, className }: BlogProps) => {
         <div className='w-full space-y-section-sm sm:space-y-section'>
           <HeroSection />
 
-          <HighlightedContributionsSection />
-
-          <AllContributionsSection />
+          <BlogContentExplorer />
 
           <MoreSection />
         </div>

@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 
-import { BLOG_PATH } from '~constants/index';
-
-import { BlogLogo } from '~modules/blog/blog-logo';
-
 import { ButtonWithVideo } from '~ui/atoms/button';
+import { ForMobile, ForNonMobile } from '~ui/atoms/responsive';
 import { ThemeToggle } from '~ui/atoms/theme/theme-toggle';
 import { AppHeader } from '~ui/molecules/app-header';
+import { Logo } from '~ui/widgets/logo';
 
 /* -------------------------------------------------------------------------------------------------
  * BlogHeader
@@ -16,14 +14,17 @@ import { AppHeader } from '~ui/molecules/app-header';
 
 const BlogHeader = () => {
   return (
-    <AppHeader innerClassName='flex gap-x-2 justify-between'>
-      <Link title='Blog' href={BLOG_PATH}>
-        <BlogLogo />
-      </Link>
-
+    <AppHeader innerClassName='flex gap-x-2 justify-center'>
       <nav className='flex items-center gap-x-2'>
         <ButtonWithVideo videoFileName='header-button-home' asChild>
-          <Link href='/'>Portfolio</Link>
+          <Link href='/'>
+            <ForMobile>
+              <Logo variant='light' width={20} />
+            </ForMobile>
+            <ForNonMobile>
+              <Logo variant='light' width={40} />
+            </ForNonMobile>
+          </Link>
         </ButtonWithVideo>
 
         <ThemeToggle />
