@@ -1,29 +1,17 @@
-import { Content } from '~lib/content/provider';
+'use client';
 
-import { BlogContentArticle } from '~modules/blog/blog-content/blog-content-article';
-import { BlogContentFooter } from '~modules/blog/blog-content/blog-content-footer';
-import { BlogContentHeader } from '~modules/blog/blog-content/blog-content-header';
-import { BlogTwoPaneContainer } from '~modules/blog/blog-two-pane-container';
+import { usePathname } from 'next/navigation';
+
+import { ContentDirectory } from '~lib/content/content-tree';
+
+import { BlogContentExplorer } from '~modules/blog/blog-content-explorer';
 
 export interface BlogContentProps {
-  content: Content;
+  root: ContentDirectory;
 }
 
-export function BlogContent({ content }: BlogContentProps) {
-  return (
-    <BlogTwoPaneContainer
-      leadingClassName='sm:max-w-[35%]'
-      leading={<BlogContentHeader content={content} />}
-      trailing={
-        <>
-          <BlogContentArticle body={content.body} />
+export function BlogContent({ root }: BlogContentProps) {
+  const pathname = usePathname();
 
-          <BlogContentFooter
-            className='relative z-50 mt-section-sm sm:mt-section'
-            content={content}
-          />
-        </>
-      }
-    />
-  );
+  return <BlogContentExplorer path={pathname} root={root} />;
 }

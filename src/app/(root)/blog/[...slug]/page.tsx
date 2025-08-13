@@ -7,22 +7,24 @@ import { getBlogPayload } from '~lib/content/provider';
 import { BlogContent } from '~modules/blog/blog-content/blog-content';
 import { BlogContentReportView } from '~modules/blog/blog-content/blog-content-report-view';
 
-export const generateStaticParams = async () => {
+export async function generateStaticParams() {
   const content = await getBlogPayload();
 
   return ContentTreeAdapter.getAllSlugs(content.root);
-};
+}
 
 export default async function ContentPage({
   params,
 }: {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }) {
   const blogPayload = await getBlogPayload();
-  const content = ContentTreeAdapter.findNodeBySlug(
-    blogPayload.root,
-    params.slug
-  );
+  const { slug } = await params;
+
+  const content = ContentTreeAdapter.findNodeBySlug(blogPayload.root, [
+    'blog',
+    ...slug,
+  ]);
 
   if (!content) {
     return notFound();
@@ -37,8 +39,7 @@ export default async function ContentPage({
       }
     >
       <BlogContentReportView contentSlug={content.slug} />
-
-      <BlogContent content={content} />
+      <BlogContent root={blogPayload.root} />
     </Suspense>
   );
 }

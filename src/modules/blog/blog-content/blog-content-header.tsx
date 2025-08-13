@@ -4,8 +4,6 @@ import { AnimatePresence } from 'framer-motion';
 
 import { BLOG_PATH_WITH_CATEGORY } from '~constants/index';
 
-import { Content, ContentType } from '~lib/content/provider';
-
 import { BlogContentGoBackButton } from '~modules/blog/blog-content/blog-content-go-back-button';
 import { BlogContentLikeButton } from '~modules/blog/blog-content/blog-content-like-button';
 

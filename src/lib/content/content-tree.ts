@@ -40,9 +40,6 @@ const findNodeByPath = (
   root: ContentNode,
   path: string
 ): ContentNode | null => {
-  if (path.startsWith('/')) {
-    throw new Error('Illegal argument formatting. Do not include prefix "/".');
-  }
   const traverse = (head: ContentNode): ContentNode | null => {
     if (isContentFileNode(head)) {
       return head.path === path ? head : null;
@@ -66,25 +63,32 @@ const findNodeBySlug = (
   slug: string[]
 ): ContentNode | null => {
   const traverse = (head: ContentNode, slug: string[]): ContentNode | null => {
-    const slugHead = slug.pop();
+    if (!slug.length) {
+      return null;
+    }
+    const slugHead = slug[0];
     if (isContentFileNode(head)) {
       return head.slug === slugHead ? head : null;
     }
     if (head.slug === slugHead) {
       return head;
     }
+    let res: ContentNode | null = null;
     for (const child of head.children) {
-      const res = traverse(child, [...slug]);
+      res = traverse(child, slug.slice(1));
       if (res !== null) {
-        return res;
+        break;
       }
     }
-    return null;
+    return res;
   };
-  return traverse(root, slug.toReversed());
+  return traverse(root, slug);
 };
 
-const getAllSlugs = (root: ContentNode): { slug: string[] }[] => {
+const getAllSlugs = (
+  root: ContentNode,
+  includeRoot = false
+): { slug: string[] }[] => {
   const traverse = (head: ContentNode, slugs: string[]): string[][] => {
     slugs.push(head.slug);
     if (isContentFileNode(head)) {
@@ -95,13 +99,44 @@ const getAllSlugs = (root: ContentNode): { slug: string[] }[] => {
     });
   };
   if (isContentFileNode(root)) {
+    if (includeRoot) {
+      return [];
+    }
     return [{ slug: [root.slug] }];
   }
-  return root.children
+  const slugs = root.children
     .map((child) => {
-      return traverse(child, [root.slug]).map((slug) => ({ slug }));
+      return traverse(child, includeRoot ? [root.slug] : []).map((slug) => ({
+        slug,
+      }));
     })
     .flat();
+  return slugs.reduce(
+    (internal, { slug }) => {
+      if (internal.markUniqueSlug(slug, internal._collisionSet)) {
+        internal.chunks.push({ slug });
+      }
+      for (let i = 1; i < slug.length; ++i) {
+        const chunk = slug.slice(0, -i);
+        if (internal.markUniqueSlug(chunk, internal._collisionSet)) {
+          internal.chunks.push({ slug: chunk });
+        }
+      }
+      return internal;
+    },
+    {
+      chunks: [] as { slug: string[] }[],
+      _collisionSet: new Set<string>(),
+      markUniqueSlug: (slug: string[], _collisionSet: Set<string>) => {
+        const hash = slug.join('/');
+        if (_collisionSet.has(hash)) {
+          return false;
+        }
+        _collisionSet.add(hash);
+        return true;
+      },
+    }
+  ).chunks;
 };
 
 const ContentTreeAdapter = {

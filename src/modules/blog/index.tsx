@@ -7,6 +7,7 @@ import { BlogPayload } from '~lib/content/provider';
 import { BlogContentExplorer } from '~modules/blog/blog-content-explorer';
 import { BlogFooter } from '~modules/blog/blog-footer';
 import { BlogHeader } from '~modules/blog/blog-header';
+import { ContentExplorerSection } from '~modules/blog/blog-sections/content-explorer-section';
 import { HeroSection } from '~modules/blog/blog-sections/hero-section';
 import { MoreSection } from '~modules/blog/blog-sections/more-section';
 
@@ -41,7 +42,6 @@ interface BlogProps {
 
 const Blog = ({ payload, className }: BlogProps) => {
   const contextValue = useMemo(() => ({ payload }), [payload]);
-  console.log('debug:blogPayload', payload);
   return (
     <BlogContext.Provider value={contextValue}>
       <main className={cn('min-h-screen space-y-6', className)}>
@@ -50,7 +50,7 @@ const Blog = ({ payload, className }: BlogProps) => {
         <div className='w-full space-y-section-sm sm:space-y-section'>
           <HeroSection />
 
-          <BlogContentExplorer />
+          <ContentExplorerSection />
 
           <MoreSection />
         </div>

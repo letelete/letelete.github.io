@@ -50,7 +50,7 @@ const getContentTree = async () => {
       );
     }
     const entContent = await fs.readFile(
-      path.resolve(process.cwd(), _path),
+      path.resolve(process.cwd(), `${CONTENT_BASE_PATH}/${_path}`),
       'utf8'
     );
     const { data, content } = matter(entContent);
@@ -84,16 +84,14 @@ const getContentTree = async () => {
     return root;
   };
 
-  const buildContentTree = async (
-    _head: ContentDirectory,
-    _path: string = CONTENT_BASE_PATH
-  ) => {
-    const dirPath = path.resolve(process.cwd(), _path);
+  const buildContentTree = async (_head: ContentDirectory, _path: string) => {
+    const dirPath = path.resolve(
+      process.cwd(),
+      `${CONTENT_BASE_PATH}/${_path}`
+    );
     const dirEnts = await fs.readdir(dirPath, { withFileTypes: true });
-    console.log('debug:', { _path, _head, dirPath, dirEnts });
 
     for await (const ent of dirEnts) {
-      console.log('processing ent', ent);
       const entPath = `${_path}/${ent.name}`;
       if (ent.isFile()) {
         const fileNode = await getFileNode(ent, entPath);
@@ -106,9 +104,10 @@ const getContentTree = async () => {
     }
   };
 
+  const _path = '/blog';
   const root = {
     type: 'dir',
-    path: 'blog',
+    path: _path,
     title: "Bruno Kawka's Blog",
     description: 'Software Engineering and some more.',
     // TODO(letelete): Provide relevant thumbnail
@@ -117,14 +116,13 @@ const getContentTree = async () => {
     date: new Date(),
     children: [],
   } satisfies ContentDirectory;
-  await buildContentTree(root);
+  await buildContentTree(root, _path);
   return root;
 };
 
 export const getBlogPayload = async (): Promise<BlogPayload> => {
   const root = await getContentTree();
   const contentSize = ContentTreeAdapter.getAllSlugs(root).length;
-  console.log(root, ContentTreeAdapter.getAllSlugs(root));
   return {
     root,
     contentSize,
