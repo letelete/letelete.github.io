@@ -1,8 +1,14 @@
 'use client';
 
+import { useIsomorphicLayoutEffect } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { useEffect, useMemo } from 'react';
+import { useBlogStore } from 'src/store/blog-store';
 
-import { ContentDirectory } from '~lib/content/content-tree';
+import {
+  ContentDirectory,
+  ContentTreeAdapter,
+} from '~lib/content/content-tree';
 
 import { BlogContentExplorer } from '~modules/blog/blog-content/blog-content-explorer/blog-content-explorer';
 
@@ -11,7 +17,19 @@ export interface BlogContentProps {
 }
 
 export function BlogContent({ root }: BlogContentProps) {
-  const pathname = usePathname();
+  const slugs = useMemo(
+    () =>
+      ContentTreeAdapter.getAllSlugs(root).map(({ slug }) => slug.join('/')),
+    [root]
+  );
 
-  return <BlogContentExplorer path={pathname} root={root} />;
+  const setPaths = useBlogStore((state) => state.setPaths);
+  const expandAll = useBlogStore((state) => state.expandAll);
+
+  useEffect(() => {
+    setPaths(slugs);
+    expandAll();
+  }, [slugs, setPaths, expandAll]);
+
+  return <BlogContentExplorer root={root} />;
 }

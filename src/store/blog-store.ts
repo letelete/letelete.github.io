@@ -23,10 +23,10 @@ const useBlogStore = create<BlogState>((set) => ({
         );
       })
     ),
-  expand: () =>
+  expand: (ids) =>
     set((state) =>
       produce(state, (draft) => {
-        draft.expanded.forEach((i) => draft.expanded.add(i));
+        ids.forEach((i) => draft.expanded.add(i));
       })
     ),
   expandAll: () =>
@@ -38,13 +38,13 @@ const useBlogStore = create<BlogState>((set) => ({
   collapse: () =>
     set((state) =>
       produce(state, (draft) => {
-        draft.paths.forEach((i) => draft.expanded.add(i));
+        draft.paths.forEach((i) => draft.expanded.delete(i));
       })
     ),
   collapseAll: () =>
     set((state) =>
       produce(state, (draft) => {
-        draft.paths.forEach((i) => draft.expanded.add(i));
+        draft.paths.forEach((i) => draft.expanded.delete(i));
       })
     ),
 }));
