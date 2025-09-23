@@ -7,28 +7,23 @@ import {
   isContentFileNode,
 } from '~lib/content/content-tree';
 
-interface BlogContentExplorerProps {
+const BlogContentExplorer = ({
+  path,
+  root,
+}: {
   className?: string;
   path: string;
   root: ContentDirectory;
-}
-
-const BlogContentExplorer = ({ path, root }: BlogContentExplorerProps) => {
-  console.log('debug:', 'searching by path', path);
+}) => {
   const node = useMemo(
     () => ContentTreeAdapter.findNodeByPath(root, path),
     [path]
   );
 
   if (node === null) {
-    return <div>Not found</div>;
+    console.warn(`Node not found for path: ${path}`);
+    return null;
   }
-
-  console.log(
-    'Found node',
-    node,
-    isContentFileNode(node) ? 'Its a file' : node?.children
-  );
 
   if (isContentFileNode(node)) {
     return (
@@ -57,4 +52,3 @@ const BlogContentExplorer = ({ path, root }: BlogContentExplorerProps) => {
 BlogContentExplorer.displayName = 'BlogContentExplorer';
 
 export { BlogContentExplorer };
-export type { BlogContentExplorerProps };

@@ -4,7 +4,7 @@ import { createContext, useContext, useMemo } from 'react';
 
 import { BlogPayload } from '~lib/content/provider';
 
-import { BlogContentExplorer } from '~modules/blog/blog-content-explorer';
+import { BlogContentExplorer } from '~modules/blog/blog-content/blog-content-explorer/blog-content-explorer';
 import { BlogFooter } from '~modules/blog/blog-footer';
 import { BlogHeader } from '~modules/blog/blog-header';
 import { ContentExplorerSection } from '~modules/blog/blog-sections/content-explorer-section';

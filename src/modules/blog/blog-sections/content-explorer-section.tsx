@@ -1,7 +1,7 @@
 'use client';
 
 import { useBlogContext } from '~modules/blog';
-import { BlogContentExplorer } from '~modules/blog/blog-content-explorer';
+import { BlogContentExplorer } from '~modules/blog/blog-content/blog-content-explorer/blog-content-explorer';
 
 import { SectionContainer } from '~ui/molecules/section/section-container';
 
