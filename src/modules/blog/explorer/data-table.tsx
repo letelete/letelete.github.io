@@ -6,7 +6,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { ComponentPropsWithoutRef } from 'react';
 
+import { Icon, IconName } from '~ui/atoms/icon';
 import {
   Table,
   TableBody,
@@ -15,16 +17,19 @@ import {
   TableHeader,
   TableRow,
 } from '~ui/atoms/table';
+import { Typography } from '~ui/atoms/typography';
 
-interface ContentDataTableProps<TData, TValue> {
+import { cn } from '~utils/style';
+
+interface BlogExplorerDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-function ContentDataTable<TData, TValue>({
+function BlogExplorerDataTable<TData, TValue>({
   columns,
   data,
-}: ContentDataTableProps<TData, TValue>) {
+}: BlogExplorerDataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
@@ -56,6 +61,7 @@ function ContentDataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
+                className='border-none'
                 key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
               >
@@ -78,6 +84,68 @@ function ContentDataTable<TData, TValue>({
     </div>
   );
 }
-ContentDataTable.displayName = 'ContentDataTable';
+BlogExplorerDataTable.displayName = 'BlogExplorerDataTable';
 
-export { ContentDataTable };
+const BlogExplorerFile = ({
+  className,
+  iconName = 'file',
+  ...rest
+}: ComponentPropsWithoutRef<typeof BlogExplorerItem>) => {
+  return <BlogExplorerItem iconName={iconName} {...rest} />;
+};
+BlogExplorerFile.displayName = 'BlogExplorerFile';
+
+const BlogExplorerFolder = ({
+  className,
+  iconName = 'folder',
+  ...rest
+}: ComponentPropsWithoutRef<typeof BlogExplorerItem>) => {
+  return <BlogExplorerItem iconName={iconName} {...rest} />;
+};
+BlogExplorerFolder.displayName = 'BlogExplorerFolder';
+
+const BlogExplorerItem = ({
+  className,
+  iconName,
+  ...rest
+}: ComponentPropsWithoutRef<'div'> & {
+  iconName: IconName;
+  disabled?: boolean;
+}) => {
+  return (
+    <div
+      className={cn(
+        'text-ctx-secondary-fg-primary focus:bg-ctx-secondary',
+        className
+      )}
+      {...rest}
+    >
+      <BlogExplorerLabel>
+        <Icon name={iconName} className='text-body-sm' />
+      </BlogExplorerLabel>
+    </div>
+  );
+};
+BlogExplorerItem.displayName = 'BlogExplorerItem';
+
+const BlogExplorerLabel = ({
+  className,
+  children,
+  disabled,
+  ...rest
+}: ComponentPropsWithoutRef<typeof Typography> & {
+  disabled?: boolean;
+}) => {
+  return (
+    <Typography
+      variant='body-sm'
+      className={cn('text-current', disabled && 'text-opacity-30', className)}
+      {...rest}
+    >
+      {children}
+    </Typography>
+  );
+};
+BlogExplorerLabel.displayName = 'BlogExplorerLabel';
+
+export { BlogExplorerDataTable };

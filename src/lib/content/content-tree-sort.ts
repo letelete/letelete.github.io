@@ -18,9 +18,9 @@ const sortCmpAsc: ContentCmp = (a, b) => {
     return dateRank;
   }
   if (isContentDirectoryNode(a)) {
-    return -1;
+    return 1;
   }
-  return 1;
+  return -1;
 };
 
 const sortCmpDesc: ContentCmp = (a, b) => {
@@ -32,9 +32,9 @@ const sortCmpDesc: ContentCmp = (a, b) => {
     return dateRank;
   }
   if (isContentDirectoryNode(a)) {
-    return -1;
+    return 1;
   }
-  return 1;
+  return -1;
 };
 
 const contentComparators = {
@@ -48,7 +48,7 @@ function toSortedTree(dir: ContentDirectory, type: 'asc' | 'desc' = 'asc') {
     if (isContentFileNode(root)) {
       return;
     }
-    dir.children.forEach((child) => traverse(child));
+    root.children.forEach((child) => traverse(child));
     root.children.sort(cmp);
   };
   return produce(dir, (draft) => {

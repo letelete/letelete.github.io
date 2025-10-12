@@ -2,10 +2,6 @@ import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * SectionContainer
- * -----------------------------------------------------------------------------------------------*/
-
 interface SectionContainerProps extends ComponentPropsWithoutRef<'section'> {}
 
 const SectionContainer = forwardRef<HTMLDivElement, SectionContainerProps>(
@@ -26,8 +22,6 @@ const SectionContainer = forwardRef<HTMLDivElement, SectionContainerProps>(
 );
 
 SectionContainer.displayName = 'SectionContainer';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { SectionContainer };
 export type { SectionContainerProps };

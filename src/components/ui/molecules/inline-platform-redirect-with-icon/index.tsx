@@ -8,10 +8,6 @@ import { Icon, IconName, IconProps } from '~ui/atoms/icon';
 
 import { cn, tw } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * InlinePlatformRedirectWithIcon
- * -----------------------------------------------------------------------------------------------*/
-
 interface InlinePlatformRedirectWithIconProps
   extends ComponentPropsWithoutRef<'span'> {
   label: string;
@@ -55,10 +51,6 @@ const InlinePlatformRedirectWithIcon = ({
 
 InlinePlatformRedirectWithIcon.displayName = 'InlinePlatformRedirectWithIcon';
 
-/* -------------------------------------------------------------------------------------------------
- * PlatformRedirectTwitter
- * -----------------------------------------------------------------------------------------------*/
-
 const InlinePlatformRedirectTwitter = () => {
   return (
     <InlinePlatformRedirectWithIcon
@@ -71,10 +63,6 @@ const InlinePlatformRedirectTwitter = () => {
 
 InlinePlatformRedirectTwitter.displayName = 'PlatformRedirectTwitter';
 
-/* -------------------------------------------------------------------------------------------------
- * PlatformRedirectGitHub
- * -----------------------------------------------------------------------------------------------*/
-
 const InlinePlatformRedirectGitHub = () => {
   return (
     <InlinePlatformRedirectWithIcon
@@ -86,10 +74,6 @@ const InlinePlatformRedirectGitHub = () => {
 };
 
 InlinePlatformRedirectGitHub.displayName = 'PlatformRedirectGitHub';
-
-/* -------------------------------------------------------------------------------------------------
- * PlatformRedirectStackOverflow
- * -----------------------------------------------------------------------------------------------*/
 
 const InlinePlatformRedirectStackOverflow = () => {
   return (
@@ -108,8 +92,6 @@ const InlinePlatformRedirectStackOverflow = () => {
 InlinePlatformRedirectStackOverflow.displayName =
   'PlatformRedirectStackOverflow';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const InlinePlatformRedirectReddit = () => {
   return (
     <InlinePlatformRedirectWithIcon
@@ -125,8 +107,6 @@ const InlinePlatformRedirectReddit = () => {
 };
 
 InlinePlatformRedirectReddit.displayName = 'InlinePlatformRedirectReddit';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export {
   InlinePlatformRedirectWithIcon,

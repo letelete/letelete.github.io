@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { memo } from 'react';
 import rehypeHighlight from 'rehype-highlight';
 
-import { BlogMarkdown } from '~modules/blog/blog-markdown';
+import { BlogMarkdownComponents } from '~modules/blog/explorer/renderers/reader/content/blog-markdown-components';
 
 export interface BlogContentArticle {
   body: string;
@@ -14,7 +14,7 @@ const BlogContentArticle = memo(({ body }: BlogContentArticle) => (
   <article>
     <MDXRemote
       source={body}
-      components={BlogMarkdown}
+      components={BlogMarkdownComponents}
       options={{
         mdxOptions: {
           remarkPlugins: [],

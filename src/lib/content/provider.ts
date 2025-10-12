@@ -1,3 +1,4 @@
+import { Content } from '@prisma/client';
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
@@ -8,6 +9,7 @@ import {
   ContentDirectory,
   ContentFile,
   ContentTreeAdapter,
+  isContentDirectoryNode,
 } from '~lib/content/content-tree';
 
 const CONTENT_BASE_PATH = 'src/lib/content/nodes';
@@ -70,11 +72,10 @@ const getContentTree = async () => {
   };
 
   const getDirectoryNode = async (ent: Dirent, _path: string) => {
-    // TODO(letelete): Replace generic data with relevant information about the directory.
     const root = {
       type: 'dir',
       path: _path,
-      title: "Bruno Kawka's Blog",
+      title: ent.name,
       description: 'Software Engineering and some more.',
       thumbnail: '/content/talks/sfi-2023/thumbnail.webp',
       slug: getEntitySlug(ent),
@@ -104,11 +105,29 @@ const getContentTree = async () => {
     }
   };
 
+  const updateDirectoriesMetadata = (_root: ContentDirectory) => {
+    const findLatestTime = (_head: ContentDirectory) => {
+      let headLatestTime = 0;
+      _head.children.forEach((node) => {
+        if (isContentDirectoryNode(node)) {
+          const latestTime = findLatestTime(node);
+          node.date = new Date(latestTime);
+        }
+        const candidate = isContentDirectoryNode(node)
+          ? findLatestTime(node)
+          : node.date.getTime();
+        headLatestTime = Math.max(headLatestTime, candidate);
+      });
+      return headLatestTime;
+    };
+    _root.date = new Date(findLatestTime(_root));
+  };
+
   const _path = '/blog';
   const root = {
     type: 'dir',
     path: _path,
-    title: "Bruno Kawka's Blog",
+    title: 'root',
     description: 'Software Engineering and some more.',
     // TODO(letelete): Provide relevant thumbnail
     thumbnail: '/content/talks/sfi-2023/thumbnail.webp',
@@ -117,6 +136,7 @@ const getContentTree = async () => {
     children: [],
   } satisfies ContentDirectory;
   await buildContentTree(root, _path);
+  updateDirectoriesMetadata(root);
   return root;
 };
 
@@ -124,7 +144,7 @@ export const getBlogPayload = async (): Promise<BlogPayload> => {
   const root = await getContentTree();
   const contentSize = ContentTreeAdapter.getAllSlugs(root).length;
   return {
-    root,
+    root: ContentTreeAdapter.toSortedTree(root, 'desc'),
     contentSize,
     highlight: [],
   };

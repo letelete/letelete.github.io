@@ -4,8 +4,6 @@ import { Suspense } from 'react';
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
 
-import { BlogContent } from '~modules/blog/blog-content/blog-content';
-import { BlogContentReportView } from '~modules/blog/blog-content/blog-content-report-view';
 
 export async function generateStaticParams() {
   const content = await getBlogPayload();

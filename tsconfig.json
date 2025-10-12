@@ -23,18 +23,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     /* Paths */
     "paths": {
-      "~api/*": ["src/app/api/*"],
-      "~constants/*": ["src/constants/*"],
-      "~hooks/*": ["src/hooks/*"],
-      "~lib/*": ["src/lib/*"],
-      "~modules/*": ["src/modules/*"],
-      "~services/*": ["src/services/*"],
-      "~styles/*": ["src/styles/*"],
-      "~ui/*": ["src/components/ui/*"],
-      "~utils/*": ["src/utils/*"]
+      "~api/*": ["./src/app/api/*"],
+      "~constants/*": ["./src/constants/*"],
+      "~hooks/*": ["./src/hooks/*"],
+      "~lib/*": ["./src/lib/*"],
+      "~modules/*": ["./src/modules/*"],
+      "~services/*": ["./src/services/*"],
+      "~styles/*": ["./src/styles/*"],
+      "~ui/*": ["./src/components/ui/*"],
+      "~utils/*": ["./src/utils/*"]
     }
   },
   "include": [

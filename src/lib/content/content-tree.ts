@@ -26,6 +26,15 @@ interface ContentFile {
 
 type ContentNode = ContentDirectory | ContentFile;
 
+interface FlatContentNode {
+  date: Date;
+  slug: string;
+  path: string;
+  title: string;
+  type: ContentNode['type'];
+  depth: number;
+}
+
 const isContentDirectoryNode = (
   node: ContentNode
 ): node is ContentDirectory => {
@@ -139,12 +148,39 @@ const getAllSlugs = (
   ).chunks;
 };
 
+const toFlatten = (root: ContentNode): FlatContentNode[] => {
+  const toFlatContentNode = (node: ContentNode, depth: number) => ({
+    date: node.date,
+    slug: node.slug,
+    path: node.path,
+    title: node.title,
+    type: node.type,
+    depth,
+  });
+  const traverse = (
+    node: ContentNode,
+    list: FlatContentNode[],
+    depth = 0
+  ): FlatContentNode[] => {
+    list.push(toFlatContentNode(node, depth));
+    if (isContentFileNode(node)) {
+      return list;
+    }
+    node.children.forEach((child) => {
+      traverse(child, list, depth + 1);
+    });
+    return list;
+  };
+  return traverse(root, []);
+};
+
 const ContentTreeAdapter = {
   toSortedTree,
+  toFlatten,
   findNodeByPath,
   findNodeBySlug,
   getAllSlugs,
 };
 
 export { ContentTreeAdapter, isContentDirectoryNode, isContentFileNode };
-export type { ContentDirectory, ContentFile, ContentNode };
+export type { ContentDirectory, ContentFile, ContentNode, FlatContentNode };

@@ -1,21 +1,16 @@
 'use client';
 
 import { createContext, useContext, useMemo } from 'react';
+import z from 'zod';
 
+import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { BlogPayload } from '~lib/content/provider';
 
-import { BlogContentExplorer } from '~modules/blog/blog-content/blog-content-explorer/blog-content-explorer';
-import { BlogFooter } from '~modules/blog/blog-footer';
-import { BlogHeader } from '~modules/blog/blog-header';
-import { ContentExplorerSection } from '~modules/blog/blog-sections/content-explorer-section';
-import { HeroSection } from '~modules/blog/blog-sections/hero-section';
-import { MoreSection } from '~modules/blog/blog-sections/more-section';
+import { BlogExplorer } from '~modules/blog/explorer';
+import { ExplorerEntity } from '~modules/blog/explorer/columns';
 
+import { shortDate } from '~utils/string';
 import { cn } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * Blog
- * -----------------------------------------------------------------------------------------------*/
 
 interface BlogContextProps {
   payload: BlogPayload;
@@ -33,29 +28,19 @@ const useBlogContext = () => {
   return context;
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
-interface BlogProps {
+const Blog = ({
+  payload,
+  className,
+}: {
   payload: BlogPayload;
   className?: string;
-}
-
-const Blog = ({ payload, className }: BlogProps) => {
+}) => {
   const contextValue = useMemo(() => ({ payload }), [payload]);
+
   return (
     <BlogContext.Provider value={contextValue}>
       <main className={cn('min-h-screen space-y-6', className)}>
-        <BlogHeader />
-
-        <div className='w-full space-y-section-sm sm:space-y-section'>
-          <HeroSection />
-
-          <ContentExplorerSection />
-
-          <MoreSection />
-        </div>
-
-        <BlogFooter />
+        <BlogExplorer />
       </main>
     </BlogContext.Provider>
   );
@@ -63,7 +48,4 @@ const Blog = ({ payload, className }: BlogProps) => {
 
 Blog.displayName = 'Blog';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 export { Blog, useBlogContext };
-export type { BlogProps };
