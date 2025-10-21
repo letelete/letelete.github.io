@@ -1,9 +1,12 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
 
+import { BlogViewRegistrar } from '~modules/blog/views-registrar/blog-view-registrar';
+
+import { Typography } from '~ui/atoms/typography';
 
 export async function generateStaticParams() {
   const content = await getBlogPayload();
@@ -28,6 +31,11 @@ export default async function ContentPage({
     return notFound();
   }
 
+  if (content.type === 'dir') {
+    // TODO: once URL is state, open /blog?q=... accordingly :)
+    redirect('/blog');
+  }
+
   return (
     <Suspense
       fallback={
@@ -36,8 +44,15 @@ export default async function ContentPage({
         </div>
       }
     >
-      <BlogContentReportView contentSlug={content.slug} />
-      <BlogContent root={blogPayload.root} />
+      <BlogViewRegistrar slug={content.slug} />
+      <div>
+        <Typography>Title: {content.title}</Typography>
+        <Typography>Slug: {JSON.stringify(slug)}</Typography>
+        <hr />
+        <code>
+          <pre>{JSON.stringify(content, null, 4)}</pre>
+        </code>
+      </div>
     </Suspense>
   );
 }

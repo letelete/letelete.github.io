@@ -1,67 +1,75 @@
 'use client';
 
-import { ColumnDef, Row } from '@tanstack/react-table';
+import { Column, ColumnDef } from '@tanstack/react-table';
 import { CSSProperties, ComponentPropsWithoutRef, useMemo } from 'react';
-import z from 'zod';
 
+import {
+  ExplorerEntity,
+  ExplorerEntityType,
+  formatEntityDate,
+  parseFromRow,
+} from '~modules/blog/explorer/entities';
+
+import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 import { Typography } from '~ui/atoms/typography';
 
 import { cn } from '~utils/style';
 
-const ExplorerEntityType = z.enum(['file', 'dir']);
-
-export const ExplorerEntity = z.object({
-  modifiedAt: z.string(),
-  id: z.string(),
-  path: z.string(),
-  title: z.string(),
-  type: ExplorerEntityType,
-  depth: z.number(),
-});
-
-function parseFromRow(row: Row<z.infer<typeof ExplorerEntity>>) {
-  console.log({ row });
-  return ExplorerEntity.parse({
-    id: row.original['id'],
-    title: row.original['title'],
-    path: row.original['path'],
-    type: row.original['type'],
-    depth: row.original['depth'],
-    modifiedAt: row.original['modifiedAt'],
-  } as z.infer<typeof ExplorerEntity>) as z.infer<typeof ExplorerEntity>;
-}
-
-export const columns: ColumnDef<z.infer<typeof ExplorerEntity>>[] = [
+export const columns: ColumnDef<ExplorerEntity>[] = [
   {
     accessorKey: 'name',
-    header: () => (
-      <Typography className='text-nowrap' variant='body-sm'>
-        name
-      </Typography>
+    header: ({ column }) => (
+      <SortHeaderButton column={column}>name</SortHeaderButton>
     ),
+
     cell: ({ row }) => {
       const entity = parseFromRow(row);
       return (
-        <EntityNameCell depth={entity.depth} entityType={entity.type}>
-          {entity.title}
+        <EntityNameCell depth={row.depth} entityType={entity.type}>
+          {entity.label}
         </EntityNameCell>
       );
     },
   },
   {
     accessorKey: 'date_modified',
-    header: () => (
-      <Typography className='text-nowrap' variant='body-sm'>
+    header: ({ column }) => (
+      <SortHeaderButton className='w-fit text-right' column={column}>
         modified at
-      </Typography>
+      </SortHeaderButton>
     ),
     cell: ({ row }) => {
       const entity = parseFromRow(row);
-      return <EntityDateCell date={entity.modifiedAt} />;
+      return <EntityDateCell date={formatEntityDate(entity.date)} />;
     },
   },
 ];
+
+function SortHeaderButton({
+  children,
+  className,
+  column,
+  ...rest
+}: ComponentPropsWithoutRef<typeof Button> & {
+  column: Column<ExplorerEntity>;
+}) {
+  return (
+    <Button
+      className={cn('relative -ml-2 px-2 py-1', className)}
+      size='inline'
+      variant='ghost'
+      onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+      {...rest}
+    >
+      <Typography className='text-nowrap' variant='body-sm'>
+        {children}
+      </Typography>
+      <Icon name='arrow-up-down' className='ml-2' size={12} />
+    </Button>
+  );
+}
+SortHeaderButton.displayName = 'SortHeaderButton';
 
 function EntityNameCell({
   children,
@@ -71,7 +79,7 @@ function EntityNameCell({
   variant = 'body-sm',
   ...rest
 }: ComponentPropsWithoutRef<typeof Typography> & {
-  entityType: z.infer<typeof ExplorerEntity>['type'];
+  entityType: ExplorerEntityType;
   depth?: number;
 }) {
   const iconProps = useMemo<ComponentPropsWithoutRef<typeof Icon>>(() => {
@@ -80,7 +88,7 @@ function EntityNameCell({
         return { name: 'folder' };
       case 'file':
       default:
-        return { name: 'file' };
+        return { name: 'file-text' };
     }
   }, [entityType]);
   return (

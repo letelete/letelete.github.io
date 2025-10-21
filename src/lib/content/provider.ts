@@ -1,4 +1,4 @@
-import { Content } from '@prisma/client';
+import { SubTrigger } from '@radix-ui/react-dropdown-menu';
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
@@ -41,7 +41,15 @@ const getEntitySlug = (ent: Dirent) => {
   if (!nameWithoutExt) {
     throw new Error('Entity name is empty.');
   }
-  return nameWithoutExt;
+  return nameWithoutExt.toLowerCase();
+};
+
+const getEntityLabel = (ent: Dirent) => {
+  const slug = getEntitySlug(ent);
+  if (ent.isDirectory()) {
+    return slug;
+  }
+  return `${slug}.md`;
 };
 
 const getContentTree = async () => {
@@ -61,6 +69,7 @@ const getContentTree = async () => {
       type: 'file',
       path: _path,
       title: meta.title,
+      label: getEntityLabel(ent),
       description: meta.description,
       thumbnail: meta.thumbnail,
       slug: getEntitySlug(ent),
@@ -76,6 +85,7 @@ const getContentTree = async () => {
       type: 'dir',
       path: _path,
       title: ent.name,
+      label: getEntityLabel(ent),
       description: 'Software Engineering and some more.',
       thumbnail: '/content/talks/sfi-2023/thumbnail.webp',
       slug: getEntitySlug(ent),
@@ -128,6 +138,7 @@ const getContentTree = async () => {
     type: 'dir',
     path: _path,
     title: 'root',
+    label: '~',
     description: 'Software Engineering and some more.',
     // TODO(letelete): Provide relevant thumbnail
     thumbnail: '/content/talks/sfi-2023/thumbnail.webp',

@@ -2,10 +2,12 @@ import {
   AlertOctagon,
   ArrowLeft,
   ArrowUp,
+  ArrowUpDown,
   ArrowUpRight,
   ChevronDown,
   ChevronUp,
   File,
+  FileText,
   Folder,
   Github,
   Heart,
@@ -29,10 +31,6 @@ import { FC } from 'react';
 import { RedditIcon, StackOverflowIcon } from '~ui/atoms/icon/custom';
 
 import { cn, tw } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * Icon
- * -----------------------------------------------------------------------------------------------*/
 
 interface IconProps extends LucideProps {
   name: IconName;
@@ -65,15 +63,15 @@ const Icon = ({ size = 16, name, className, ...props }: IconProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const icons = new Map([
   ['alert-octagon', AlertOctagon],
   ['arrow-left', ArrowLeft],
+  ['arrow-up-down', ArrowUpDown],
   ['arrow-up-right', ArrowUpRight],
   ['arrow-up', ArrowUp],
   ['chevron-down', ChevronDown],
   ['chevron-up', ChevronUp],
+  ['file-text', FileText],
   ['file', File],
   ['folder', Folder],
   ['folder', Folder],
@@ -95,8 +93,6 @@ const icons = new Map([
   ['volume-2', Volume2],
   ['youtube', Youtube],
 ] as const satisfies readonly (readonly [string, FC<LucideProps>])[]);
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Icon, icons };
 export type { IconProps, IconName };
