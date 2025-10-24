@@ -2,7 +2,7 @@
 
 import {
   ColumnDef,
-  ExpandedState,
+  Row,
   SortingState,
   flexRender,
   getCoreRowModel,
@@ -10,16 +10,24 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useRouter } from 'next/navigation';
 import {
+  ElementRef,
   HTMLAttributes,
+  KeyboardEvent,
   TdHTMLAttributes,
   ThHTMLAttributes,
   forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
+import { mergeRefs } from 'react-merge-refs';
 
-import { isContentDirectoryNode } from '~lib/content/content-tree';
+import { ContentNode, isContentDirectoryNode } from '~lib/content/content-tree';
 
+import { useBlogExplorerState } from '~modules/blog/explorer/data-table-model';
 import { ExplorerEntity, parseFromRow } from '~modules/blog/explorer/entities';
 
 import { cn } from '~utils/style';
@@ -36,8 +44,10 @@ function BlogExplorerDataTable({
   columns,
   data,
 }: BlogExplorerDataTableProps<ExplorerData, ExplorerValue>) {
+  const router = useRouter();
+
+  const store = useBlogExplorerState();
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const table = useReactTable({
     data,
@@ -45,69 +55,77 @@ function BlogExplorerDataTable({
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    onExpandedChange: setExpanded,
+    onExpandedChange: store.setExpanded,
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: (row) => isContentDirectoryNode(parseFromRow(row)),
     getSubRows: (row) => (isContentDirectoryNode(row) ? row.children : []),
     state: {
       sorting,
-      expanded,
+      expanded: store.expanded,
     },
   });
 
+  console.log(store.autoFocusId, store.expanded);
+  const handleInteractiveRowClick = useCallback((row: Row<ContentNode>) => {
+    store.setAutoFocusId(row.id);
+    row.getToggleExpandedHandler()();
+    const entity = parseFromRow(row);
+    if (entity.type === 'file') {
+      router.push(entity.path);
+    }
+  }, []);
+
   return (
-    <div className='overflow-hidden rounded-md'>
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <InteractiveTableRow
-                onClick={row.getToggleExpandedHandler()}
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </InteractiveTableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCellEmptyPlaceholder colSpan={columns.length}>
-                No results.
-              </TableCellEmptyPlaceholder>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+    <Table>
+      <TableHeader>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map((header) => {
+              return (
+                <TableHead key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </TableHead>
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody>
+        {table.getRowModel().rows?.length ? (
+          table.getRowModel().rows.map((row) => (
+            <InteractiveTableRow
+              onClick={() => handleInteractiveRowClick(row)}
+              key={row.id}
+              data-state={row.getIsSelected() && 'selected'}
+              autoFocus={store.autoFocusId === row.id}
+            >
+              {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </InteractiveTableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCellEmptyPlaceholder colSpan={columns.length}>
+              No results.
+            </TableCellEmptyPlaceholder>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
   );
 }
-BlogExplorerDataTable.displayName = 'BlogExplorerDataTable';
 
 const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
-    <div className='relative w-full overflow-auto'>
+    <div className='relative w-full'>
       <table
         ref={ref}
         className={cn('w-full caption-bottom text-sm', className)}
@@ -130,7 +148,11 @@ const TableBody = forwardRef<
   HTMLTableSectionElement,
   HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <tbody ref={ref} className={cn(className)} {...props} />
+  <tbody
+    ref={ref}
+    className={cn('flex flex-col gap-y-[1px]', className)}
+    {...props}
+  />
 ));
 TableBody.displayName = 'TableBody';
 
@@ -163,10 +185,64 @@ TableRow.displayName = 'TableRow';
 
 const InteractiveTableRow = forwardRef<
   HTMLTableRowElement,
-  HTMLAttributes<HTMLTableRowElement>
->(({ className, ...props }, ref) => (
-  <TableRow className={cn(className)} {...props} ref={ref} />
-));
+  HTMLAttributes<HTMLTableRowElement> & { onClick?: VoidFunction }
+>(({ className, onClick, autoFocus, ...props }, ref) => {
+  const localRef = useRef<ElementRef<typeof TableRow>>(null);
+  const handleClick = useCallback(() => {
+    onClick?.();
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLTableRowElement>) => {
+      const key = e.key;
+      const current = e.currentTarget;
+
+      if (key === 'ArrowDown' || key === 'ArrowUp') {
+        e.preventDefault();
+        const next =
+          key === 'ArrowDown'
+            ? current.nextElementSibling
+            : current.previousElementSibling;
+        if (next instanceof HTMLElement) {
+          next.focus();
+        }
+        return;
+      }
+
+      if (key === 'Enter' || key === ' ') {
+        e.preventDefault();
+        handleClick();
+      }
+    },
+    [handleClick]
+  );
+
+  useEffect(() => {
+    if (autoFocus) {
+      localRef.current?.focus();
+    }
+  }, [autoFocus]);
+
+  return (
+    <TableRow
+      className={cn(
+        'bg-ctx-primary',
+        'focus:ring-inset-0 rounded-none focus:outline-none focus:ring-1 focus:ring-ctx-primary-inverse focus:ring-offset-ctx-primary-inverse',
+        'hover:bg-ctx-secondary',
+        'active:bg-ctx-secondary/50 active:duration-[0.05s]',
+        'transition-colors duration-[0.01s]',
+        className
+      )}
+      role='button'
+      aria-label='File'
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      {...props}
+      ref={mergeRefs([localRef, ref])}
+    />
+  );
+});
 InteractiveTableRow.displayName = 'InteractiveTableRow';
 
 const TableHead = forwardRef<

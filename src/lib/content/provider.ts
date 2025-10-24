@@ -31,17 +31,7 @@ export interface BlogPayload {
 }
 
 const getEntitySlug = (ent: Dirent) => {
-  const nameSegments = ent.name.split('.');
-  if (nameSegments.length > 2) {
-    throw new Error(
-      "Invalid State. Name segment length cannot exceed 2. Check if your files don't contain additional dots in the filename (e.g. a.b.c.txt), as this is currently not supported."
-    );
-  }
-  const [nameWithoutExt] = ent.name.split('.');
-  if (!nameWithoutExt) {
-    throw new Error('Entity name is empty.');
-  }
-  return nameWithoutExt.toLowerCase();
+  return ent.name.toLowerCase();
 };
 
 const getEntityLabel = (ent: Dirent) => {
@@ -103,6 +93,9 @@ const getContentTree = async () => {
     const dirEnts = await fs.readdir(dirPath, { withFileTypes: true });
 
     for await (const ent of dirEnts) {
+      if (CONTENT_NODE_EXT_ALLOWLIST.length <= 0) {
+        throw new Error('Invalid State: CONTENT_NODE_EXT_ALLOWLIST is empty.');
+      }
       const entPath = `${_path}/${ent.name}`;
       if (ent.isFile()) {
         const fileNode = await getFileNode(ent, entPath);
