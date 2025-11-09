@@ -11,10 +11,6 @@ import { ThemeToggle } from '~ui/atoms/theme/theme-toggle';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Logo } from '~ui/widgets/logo';
 
-/* -------------------------------------------------------------------------------------------------
- * HomeHeader
- * -----------------------------------------------------------------------------------------------*/
-
 const HomeHeader = () => {
   return (
     <AppHeader innerClassName='flex gap-x-2 justify-between'>
@@ -45,7 +41,5 @@ const HomeHeader = () => {
 };
 
 HomeHeader.displayName = 'HomeHeader';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { HomeHeader };

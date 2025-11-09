@@ -2,10 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { timeInMs } from '~utils/time';
 
-/* -------------------------------------------------------------------------------------------------
- * useRelativeDayPart
- * -----------------------------------------------------------------------------------------------*/
-
 const dayParts = ['morning', 'afternoon', 'evening', 'night'] as const;
 const dayPartPhases = ['early', 'mid', 'late'] as const;
 
@@ -66,8 +62,6 @@ const dayPartsInfoDescending = startHoursDescending.map(
   }
 );
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const DEFAULT_REFRESH_DELAY = timeInMs.minute;
 
 const generateLatestTimestamp = () => {
@@ -106,7 +100,5 @@ const useRelativeDayPart = (refreshDelay = DEFAULT_REFRESH_DELAY) => {
 };
 
 useRelativeDayPart.displayName = 'useRelativeDayPart';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { useRelativeDayPart };

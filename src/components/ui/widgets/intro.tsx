@@ -20,10 +20,6 @@ import { Logo } from '~ui/widgets/logo';
 import { cn } from '~utils/style';
 import { timeInMs } from '~utils/time';
 
-/* -------------------------------------------------------------------------------------------------
- * Intro
- * -----------------------------------------------------------------------------------------------*/
-
 const PREFERENCE_DO_NOT_SHOW_INTRO_KEY = 'intro:do-not-show:timestamp';
 const PREFERENCE_DO_NOT_SHOW_INTRO_TIME_IN_MS = timeInMs.hour * 2;
 
@@ -49,8 +45,6 @@ const PROMPTER_TEXT_ANIMATION_DURATION = prompterParts
   .reduce((sum, duration) => sum + duration, 0);
 
 const QUOTE_TRANSITION_DURATION = PROMPTER_TEXT_ANIMATION_DURATION * 0.25;
-
-/* -----------------------------------------------------------------------------------------------*/
 
 interface IntroProps extends HTMLMotionProps<'div'> {}
 
@@ -265,8 +259,6 @@ const Intro = ({ className, ...rest }: IntroProps) => {
 };
 
 Intro.displayName = 'Intro';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Intro };
 export type { IntroProps };

@@ -4,10 +4,6 @@ import { Typography } from '~ui/atoms/typography';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * SectionHeader
- * -----------------------------------------------------------------------------------------------*/
-
 interface SectionHeaderProps extends ComponentPropsWithoutRef<'div'> {
   title: string;
   subtitle?: string;
@@ -41,8 +37,6 @@ const SectionHeader = ({
 };
 
 SectionHeader.displayName = 'SectionHeader';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { SectionHeader };
 export type { SectionHeaderProps };

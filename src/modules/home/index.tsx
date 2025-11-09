@@ -15,10 +15,6 @@ import { HeroSection } from '~modules/home/home-sections/hero-section';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Home
- * -----------------------------------------------------------------------------------------------*/
-
 interface HomeContextProps {
   blogContent: BlogPayload;
   authorPortraits: ImageItem[];
@@ -35,8 +31,6 @@ const useHomeContext = () => {
   }
   return context;
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 interface HomeProps {
   blogContent: BlogPayload;
@@ -74,8 +68,6 @@ const Home = ({ blogContent, authorPortraits, className }: HomeProps) => {
     </HomeContext.Provider>
   );
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Home, useHomeContext };
 export type { HomeProps };

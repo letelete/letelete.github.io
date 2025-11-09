@@ -2,10 +2,6 @@ import { Typography } from '~ui/atoms/typography';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * AuthorWorkTitle
- * -----------------------------------------------------------------------------------------------*/
-
 interface AuthorWorkTitleProps {
   className?: string;
 }
@@ -19,8 +15,6 @@ const AuthorWorkTitle = ({ className }: AuthorWorkTitleProps) => {
 };
 
 AuthorWorkTitle.displayName = 'AuthorWorkTitle';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AuthorWorkTitle };
 export type { AuthorWorkTitleProps };

@@ -15,10 +15,6 @@ import {
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * ExperienceHistory
- * -----------------------------------------------------------------------------------------------*/
-
 interface ExperienceHistoryProps extends ComponentPropsWithoutRef<'div'> {}
 
 const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
@@ -46,8 +42,6 @@ const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
     )}
   </figure>
 );
-
-/* -----------------------------------------------------------------------------------------------*/
 
 const experience = [
   {
@@ -164,8 +158,6 @@ function parseDate(date: string) {
 function getRandomUUID() {
   return crypto.randomUUID();
 }
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ExperienceHistory };
 export type { ExperienceHistoryProps };

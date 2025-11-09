@@ -47,6 +47,4 @@ const useLockScroll = (options?: {
 
 useLockScroll.displayName = 'useLockScroll';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 export { useLockScroll };

@@ -24,10 +24,6 @@ import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 import { Logo } from '~ui/widgets/logo';
 
-/* -------------------------------------------------------------------------------------------------
- * SectionFooter
- * -----------------------------------------------------------------------------------------------*/
-
 const INITIAL_BACKGROUND_SIZE = 48;
 // The background shape is a circle. In a circle, the diagonal is equivalent to its diameter.
 const INITIAL_BACKGROUND_DIAGONAL = INITIAL_BACKGROUND_SIZE;
@@ -157,10 +153,6 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
 
 SectionFooter.displayName = 'SectionFooter';
 
-/* -------------------------------------------------------------------------------------------------
- * OpenSourceHeadline
- * -----------------------------------------------------------------------------------------------*/
-
 const OpenSourceHeadline = () => (
   <SectionHeadline disablePadding inverse>
     <span className='text-foreground-primary'>
@@ -182,10 +174,6 @@ const OpenSourceHeadline = () => (
 );
 
 OpenSourceHeadline.displayName = 'OpenSourceHeadline';
-
-/* -------------------------------------------------------------------------------------------------
- * ArtistsHeadline
- * -----------------------------------------------------------------------------------------------*/
 
 const artists = [
   {
@@ -214,8 +202,6 @@ const artists = [
   },
 ];
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const ArtistsHeadline = () => (
   <SectionHeadline disablePadding inverse>
     Thanks to{' '}
@@ -241,7 +227,5 @@ const ArtistsHeadline = () => (
 );
 
 ArtistsHeadline.displayName = 'ArtistsHeadline';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { SectionFooter };

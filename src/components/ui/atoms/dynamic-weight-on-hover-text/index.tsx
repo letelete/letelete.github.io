@@ -2,10 +2,6 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { PropsWithChildren, useId } from 'react';
 
-/* -------------------------------------------------------------------------------------------------
- * DynamicWeightOnHoverText
- * -----------------------------------------------------------------------------------------------*/
-
 interface DynamicWeightOnHoverTextProps
   extends Omit<HTMLMotionProps<'span'>, 'children'> {
   text: string;
@@ -39,8 +35,6 @@ const DynamicWeightOnHoverText = ({
 };
 
 DynamicWeightOnHoverText.displayName = 'DynamicWeightOnHoverText';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { DynamicWeightOnHoverText };
 export type { DynamicWeightOnHoverTextProps };

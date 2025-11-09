@@ -3,10 +3,6 @@ import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Card
- * -----------------------------------------------------------------------------------------------*/
-
 interface CardProps extends ComponentPropsWithoutRef<'div'> {
   asChild?: boolean;
   disablePadding?: boolean;
@@ -31,8 +27,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = 'Card';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Card };
 export type { CardProps };

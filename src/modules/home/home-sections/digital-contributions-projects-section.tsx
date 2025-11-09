@@ -3,10 +3,6 @@
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
 
-/* -------------------------------------------------------------------------------------------------
- * DigitalContributionsProjects
- * -----------------------------------------------------------------------------------------------*/
-
 // TODO: :)
 const DigitalContributionsProjects = () => {
   return (
@@ -17,7 +13,5 @@ const DigitalContributionsProjects = () => {
 };
 
 DigitalContributionsProjects.displayName = 'DigitalContributionsProjects';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { DigitalContributionsProjects };

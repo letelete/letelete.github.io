@@ -23,10 +23,6 @@ import { AuthorPortraitsGallery } from '~ui/widgets/author-portraits-gallery';
 import { cn } from '~utils/style';
 import { checkFps60 } from '~utils/time';
 
-/* -------------------------------------------------------------------------------------------------
- * AuthorPortraitsGallery
- * -----------------------------------------------------------------------------------------------*/
-
 interface AboutAuthorPortraitsGalleryCardProps {
   className?: string;
 }
@@ -146,10 +142,6 @@ const AboutAuthorPortraitsGalleryCard = ({
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * PortraitIllustration
- * -----------------------------------------------------------------------------------------------*/
-
 const isHoveringDefinition = (d: AnimationDefinition): d is 'hovering' => {
   return typeof d === 'string' && d === 'hovering';
 };
@@ -250,8 +242,6 @@ const PortraitIllustration = forwardRef<
 });
 
 PortraitIllustration.displayName = 'PortraitIllustration';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AboutAuthorPortraitsGalleryCard };
 export type { AboutAuthorPortraitsGalleryCardProps };

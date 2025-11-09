@@ -2,10 +2,6 @@ import { SVGMotionProps, motion } from 'framer-motion';
 
 import { tw } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * AuthorSign
- * -----------------------------------------------------------------------------------------------*/
-
 interface AuthorSignProps extends Partial<SVGMotionProps<SVGElement>> {
   width?: number;
   height?: number;
@@ -42,8 +38,6 @@ const AuthorSign = ({
 };
 
 AuthorSign.displayName = 'AuthorSign';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AuthorSign };
 export type { AuthorSignProps };

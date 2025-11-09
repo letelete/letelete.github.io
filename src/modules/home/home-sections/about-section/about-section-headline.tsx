@@ -1,8 +1,5 @@
 import { useCallback } from 'react';
 
-/* -------------------------------------------------------------------------------------------------
- * AboutSectionHeadline
- * -----------------------------------------------------------------------------------------------*/
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 import {
   HighlightedWithPopup,
@@ -54,7 +51,5 @@ const AboutSectionHeadline = () => {
 };
 
 AboutSectionHeadline.displayName = 'AboutSectionHeadline';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AboutSectionHeadline };

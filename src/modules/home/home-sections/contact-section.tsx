@@ -11,10 +11,6 @@ import { SectionHeader } from '~ui/molecules/section/section-header';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * ContactSection
- * -----------------------------------------------------------------------------------------------*/
-
 const ContactSection = () => {
   return (
     <SectionContainer id='contact'>
@@ -75,8 +71,6 @@ const ContactSection = () => {
 };
 
 ContactSection.displayName = 'ContactSection';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 interface Social {
   id: string;
@@ -190,7 +184,5 @@ const socials: Social[] = [
     },
   },
 ];
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ContactSection };

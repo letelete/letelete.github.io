@@ -9,10 +9,6 @@ import {
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * AuthorPortraitsGallery
- * -----------------------------------------------------------------------------------------------*/
-
 interface AuthorPortraitsGalleryProps
   extends Omit<Partial<ParallaxGalleryProps>, 'items'> {
   images: ImageItem[];
@@ -31,8 +27,6 @@ const AuthorPortraitsGallery = ({
     />
   );
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AuthorPortraitsGallery };
 export type { AuthorPortraitsGalleryProps };

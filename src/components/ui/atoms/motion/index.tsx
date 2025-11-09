@@ -10,10 +10,6 @@ import {
 
 export const LAYOUT_ID_HOME_LOGO = 'home:logo';
 
-/* -------------------------------------------------------------------------------------------------
- * HeartBeatMotion
- * -----------------------------------------------------------------------------------------------*/
-
 interface HeartBeatMotionProps extends HTMLMotionProps<'div'> {}
 
 const HeartBeatMotion = forwardRef<HTMLDivElement, HeartBeatMotionProps>(
@@ -35,10 +31,6 @@ const HeartBeatMotion = forwardRef<HTMLDivElement, HeartBeatMotionProps>(
 
 HeartBeatMotion.displayName = 'HeartBeatMotion';
 
-/* -------------------------------------------------------------------------------------------------
- * FadeInMotion
- * -----------------------------------------------------------------------------------------------*/
-
 interface FadeInMotionProps extends HTMLMotionProps<'div'> {}
 
 const FadeInMotion = forwardRef<HTMLDivElement, FadeInMotionProps>(
@@ -59,10 +51,6 @@ const FadeInMotion = forwardRef<HTMLDivElement, FadeInMotionProps>(
 );
 
 FadeInMotion.displayName = 'FadeInMotion';
-
-/* -------------------------------------------------------------------------------------------------
- * RevealInUpMotion
- * -----------------------------------------------------------------------------------------------*/
 
 interface RevealInUpMotionProps extends HTMLMotionProps<'div'> {}
 
@@ -86,10 +74,6 @@ const RevealInUpMotion = forwardRef<HTMLDivElement, RevealInUpMotionProps>(
 
 RevealInUpMotion.displayName = 'RevealInUpMotion';
 
-/* -------------------------------------------------------------------------------------------------
- * PopInMotion
- * -----------------------------------------------------------------------------------------------*/
-
 interface PopInMotionProps extends HTMLMotionProps<'div'> {}
 
 const PopInMotion = forwardRef<HTMLDivElement, PopInMotionProps>(
@@ -111,10 +95,6 @@ const PopInMotion = forwardRef<HTMLDivElement, PopInMotionProps>(
 );
 
 PopInMotion.displayName = 'PopInMotion';
-
-/* -------------------------------------------------------------------------------------------------
- * AnimationScopeAnchor
- * -----------------------------------------------------------------------------------------------*/
 
 class HTMLAttributeSelector<TValue extends string | number | symbol> {
   key: string;
@@ -174,8 +154,6 @@ const useAnimationAnchor = <TAnchorName extends string>(
 
   return anchorsMap;
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export {
   HeartBeatMotion,

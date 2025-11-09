@@ -19,10 +19,6 @@ import { Video, VideoProps } from '~ui/atoms/video';
 
 import { cn, tw } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Highlighted
- * -----------------------------------------------------------------------------------------------*/
-
 const getRelativeCoordinates = <
   T extends HTMLElement = HTMLElement,
   E = MouseEvent,
@@ -52,8 +48,6 @@ const getRelativeCoordinates = <
       (position.y - offset.top - offset.height / 2) / (offset.height / 2),
   };
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 const popupPositionSpringConfig = {
   bounce: 0,
@@ -140,10 +134,6 @@ const HighlightedWithPopup = ({
 
 HighlightedWithPopup.displayName = 'HighlightedWithPopup';
 
-/* -------------------------------------------------------------------------------------------------
- * PopupVideoContent
- * -----------------------------------------------------------------------------------------------*/
-
 interface PopupVideoContentProps extends VideoProps {}
 
 const PopupVideoContent = forwardRef<HTMLVideoElement, PopupVideoContentProps>(
@@ -153,8 +143,6 @@ const PopupVideoContent = forwardRef<HTMLVideoElement, PopupVideoContentProps>(
 );
 
 PopupVideoContent.displayName = 'PopupVideoContent';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { HighlightedWithPopup, PopupVideoContent };
 export type { HighlightedWithPopupProps, PopupVideoContentProps };

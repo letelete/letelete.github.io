@@ -28,10 +28,6 @@ import { Icon, IconProps } from '~ui/atoms/icon';
 
 import { cn, tw } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Listenable
- * -----------------------------------------------------------------------------------------------*/
-
 type ListenableState = 'playing' | 'paused' | 'idle';
 
 interface ListenableContextProps {
@@ -50,8 +46,6 @@ const useListenableContext = () => {
 };
 
 useListenableContext.displayName = 'useListenableContext';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 interface ListenableHandle {
   play(timestamp?: number): void;
@@ -95,8 +89,6 @@ const ListenableContextProvider = forwardRef<
 });
 
 ListenableContextProvider.displayName = 'ListenableContextProviders';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 interface ListenableProps extends ComponentPropsWithoutRef<'div'> {
   src: string;
@@ -188,10 +180,6 @@ const Listenable = ({
 
 Listenable.displayName = 'Listenable';
 
-/* -------------------------------------------------------------------------------------------------
- * ListenableHighlight
- * -----------------------------------------------------------------------------------------------*/
-
 type ListenableHighlightSegment =
   | [start: number, end: number]
   | [start: number];
@@ -262,8 +250,6 @@ const ListenableHighlight = ({
 };
 
 ListenableHighlight.displayName = 'ListenableHighlight';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Listenable, useListenableContext, ListenableHighlight };
 export type {

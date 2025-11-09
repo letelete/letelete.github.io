@@ -1,9 +1,5 @@
 import { createLucideIcon } from 'lucide-react';
 
-/* -------------------------------------------------------------------------------------------------
- * StackOverflowIcon
- * -----------------------------------------------------------------------------------------------*/
-
 const StackOverflowIcon = createLucideIcon('stackoverflow', [
   [
     'path',
@@ -16,10 +12,6 @@ const StackOverflowIcon = createLucideIcon('stackoverflow', [
 
 StackOverflowIcon.displayName = 'StackOverflowIcon';
 
-/* -------------------------------------------------------------------------------------------------
- * RedditIcon
- * -----------------------------------------------------------------------------------------------*/
-
 const RedditIcon = createLucideIcon('reddit', [
   [
     'path',
@@ -31,7 +23,5 @@ const RedditIcon = createLucideIcon('reddit', [
 ]);
 
 RedditIcon.displayName = 'RedditIcon';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { StackOverflowIcon, RedditIcon };

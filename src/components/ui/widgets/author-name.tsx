@@ -3,10 +3,6 @@ import { Listenable, ListenableHighlight } from '~ui/organisms/listenable';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * AuthorName
- * -----------------------------------------------------------------------------------------------*/
-
 interface AuthorNameProps {
   className?: string;
 }
@@ -27,8 +23,6 @@ const AuthorName = ({ className }: AuthorNameProps) => {
 };
 
 AuthorName.displayName = 'AuthorName';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AuthorName };
 export type { AuthorNameProps };

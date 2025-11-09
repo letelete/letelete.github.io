@@ -4,10 +4,6 @@ import { Typography, TypographyProps } from '~ui/atoms/typography';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * SectionHeadline
- * -----------------------------------------------------------------------------------------------*/
-
 interface SectionHeadlineProps extends TypographyProps {
   disablePadding?: boolean;
 }
@@ -32,8 +28,6 @@ const SectionHeadline = ({
 );
 
 SectionHeadline.displayName = 'SectionHeadline';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { SectionHeadline };
 export type { SectionHeadlineProps };

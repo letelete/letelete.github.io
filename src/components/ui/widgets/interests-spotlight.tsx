@@ -7,10 +7,6 @@ import { ParallaxMarquee } from '~ui/organisms/parallax-marquee';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * InterestsSpotlight
- * -----------------------------------------------------------------------------------------------*/
-
 interface InterestsSpotlightProps extends ComponentPropsWithoutRef<'div'> {}
 
 const InterestsSpotlight = ({
@@ -69,8 +65,6 @@ const InterestsSpotlight = ({
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const professional = [
   'React',
   'Next.js',
@@ -107,8 +101,6 @@ const personal = [
   'Spotify wrapped',
   'Filmweb',
 ];
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { InterestsSpotlight };
 export type { InterestsSpotlightProps };

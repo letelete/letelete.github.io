@@ -3,10 +3,6 @@ import { forwardRef } from 'react';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Video
- * -----------------------------------------------------------------------------------------------*/
-
 interface VideoProps extends Omit<HTMLMotionProps<'video'>, 'src'> {
   fileName: string;
   disableLinkFallback?: boolean;
@@ -66,8 +62,6 @@ const Video = forwardRef<HTMLVideoElement, VideoProps>(
 );
 
 Video.displayName = 'Video';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Video };
 export type { VideoProps };

@@ -15,10 +15,6 @@ import { SectionHeader } from '~ui/molecules/section/section-header';
 import { AuthorSign } from '~ui/widgets/author-sign';
 import { InterestsSpotlight } from '~ui/widgets/interests-spotlight';
 
-/* -------------------------------------------------------------------------------------------------
- * AboutSection
- * -----------------------------------------------------------------------------------------------*/
-
 const AboutSection = () => {
   return (
     <div>
@@ -75,7 +71,5 @@ const AboutSection = () => {
 };
 
 AboutSection.displayName = 'AboutSection';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AboutSection };

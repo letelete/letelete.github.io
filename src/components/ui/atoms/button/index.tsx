@@ -29,10 +29,6 @@ import { Video } from '~ui/atoms/video';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Button
- * -----------------------------------------------------------------------------------------------*/
-
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-full font-sans text-sm font-normal leading-none tracking-tighter transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50',
   {
@@ -133,8 +129,6 @@ const PolymorphicButton = forwardRef<HTMLButtonElement, PolymorphicButtonProps>(
 
 PolymorphicButton.displayName = 'PolymorphicButton';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const MotionPolymorphicButton = motion(PolymorphicButton);
 
 const buttonMotionProps = {
@@ -175,10 +169,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-
-/* -------------------------------------------------------------------------------------------------
- * ButtonWithVideo
- * -----------------------------------------------------------------------------------------------*/
 
 interface ButtonWithVideoProps extends ButtonProps {
   whenVideo?: Partial<ButtonProps>;
@@ -252,8 +242,6 @@ const ButtonWithVideo = forwardRef<HTMLButtonElement, ButtonWithVideoProps>(
 
 ButtonWithVideo.displayName = 'ButtonWithVideo';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 interface ChildrenWithVideoWrapperProps {
   displayBackground?: boolean;
   videoFileName?: string;
@@ -298,8 +286,6 @@ const ChildrenWithVideoWrapper = ({
 };
 
 ChildrenWithVideoWrapper.displayName = 'ChildrenWithVideoWrapper';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Button, ButtonWithVideo };
 export type { ButtonProps, ButtonWithVideoProps };

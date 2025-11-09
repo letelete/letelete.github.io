@@ -13,14 +13,13 @@ import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 
-/* -------------------------------------------------------------------------------------------------
- * DigitalContributionsKnowledgeSharing
- * -----------------------------------------------------------------------------------------------*/
-
 const DigitalContributionsKnowledgeSharing = () => {
   const context = useHomeContext();
 
-  const contents = useMemo(() => context.blogContent.highlight.slice(0, 3), []);
+  const contents = useMemo(
+    () => context.blogContent.highlight.slice(0, 3),
+    [context.blogContent.highlight]
+  );
 
   return (
     <SectionContainer>
@@ -58,7 +57,5 @@ const DigitalContributionsKnowledgeSharing = () => {
 
 DigitalContributionsKnowledgeSharing.displayName =
   'DigitalContributionsKnowledgeSharing';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { DigitalContributionsKnowledgeSharing };

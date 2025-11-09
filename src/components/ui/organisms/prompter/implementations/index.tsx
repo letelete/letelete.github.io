@@ -9,10 +9,6 @@ import {
   PrompterRenderer,
 } from '~ui/organisms/prompter';
 
-/* -------------------------------------------------------------------------------------------------
- * HighlightPrompter
- * -----------------------------------------------------------------------------------------------*/
-
 type HighlightPrompterPlayEvent = (
   part: PrompterPart,
   at: number,
@@ -99,8 +95,6 @@ const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
 );
 
 HighlightPrompter.displayName = 'HighlightPrompter';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { HighlightPrompter };
 export type { HighlightPrompterProps };

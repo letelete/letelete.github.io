@@ -10,10 +10,6 @@ import {
   useState,
 } from 'react';
 
-/* -------------------------------------------------------------------------------------------------
- * Prompter
- * -----------------------------------------------------------------------------------------------*/
-
 const DEFAULT_PART_DURATION = 0.015;
 
 type PrompterRenderer = (
@@ -58,8 +54,6 @@ interface PrompterHandle {
   pause(): void;
   jumpTo(index: number | PrompterJumpKey): void;
 }
-
-/* -----------------------------------------------------------------------------------------------*/
 
 const Prompter = forwardRef<PrompterHandle, PrompterProps>(
   (
@@ -221,8 +215,6 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
 
 Prompter.displayName = 'Prompter';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 type Split<T extends string> = T extends `${infer First} ${infer Rest}`
   ? First | Split<Rest>
   : T;
@@ -256,8 +248,6 @@ const createPrompterParts = <
     };
   });
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Prompter, createPrompterParts };
 export type {

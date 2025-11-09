@@ -11,10 +11,6 @@ import {
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * ForMobile
- * -----------------------------------------------------------------------------------------------*/
-
 interface ForMobileProps {
   children: ReactNode;
 }
@@ -35,10 +31,6 @@ const ForMobile = forwardRef<unknown, ForMobileProps>(({ children }, ref) => {
 });
 
 ForMobile.displayName = 'ForMobile';
-
-/* -------------------------------------------------------------------------------------------------
- * ForNonMobile
- * -----------------------------------------------------------------------------------------------*/
 
 interface ForNonMobileProps {
   children: ReactNode;
@@ -62,8 +54,6 @@ const ForNonMobile = forwardRef<unknown, ForNonMobileProps>(
 );
 
 ForNonMobile.displayName = 'ForNonMobile';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ForMobile, ForNonMobile };
 export type { ForMobileProps, ForNonMobileProps };

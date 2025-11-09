@@ -4,10 +4,6 @@ import { forwardRef, memo } from 'react';
 
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Skeleton
- * -----------------------------------------------------------------------------------------------*/
-
 type SkeletonProps = HTMLMotionProps<'div'>;
 
 const Skeleton = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
@@ -32,10 +28,6 @@ const Skeleton = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
 );
 
 Skeleton.displayName = 'Skeleton';
-
-/* -------------------------------------------------------------------------------------------------
- * TextSkeleton
- * -----------------------------------------------------------------------------------------------*/
 
 const textSkeletonVariants = cva(cn('w-full rounded-full'), {
   variants: {
@@ -68,8 +60,6 @@ const TextSkeleton = memo(
 );
 
 TextSkeleton.displayName = 'TextSkeleton';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Skeleton, TextSkeleton };
 export type { SkeletonProps, TextSkeletonProps };

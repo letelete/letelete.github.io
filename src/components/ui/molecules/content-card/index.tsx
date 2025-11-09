@@ -9,18 +9,11 @@ import {
   useCallback,
 } from 'react';
 
-import { ContentType } from '~lib/content/provider';
-
 import { Card, CardProps } from '~ui/atoms/card';
 import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-import { ContentIcon } from '~ui/molecules/content-icon';
 
-import { cn, tw } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * ContentCard
- * -----------------------------------------------------------------------------------------------*/
+import { cn } from '~utils/style';
 
 const MotionLink = motion(Link);
 
@@ -30,7 +23,6 @@ interface ContentCardProps extends CardProps {
   title?: string;
   display?: ReactNode;
   displayPlaceholder?: ReactNode;
-  contentType?: ContentType;
 }
 
 const ContentCard = ({
@@ -39,7 +31,6 @@ const ContentCard = ({
   title,
   display,
   displayPlaceholder,
-  contentType,
   className,
   ...rest
 }: ContentCardProps) => {
@@ -106,26 +97,12 @@ const ContentCard = ({
         {renderTitle()}
 
         {renderDisplay()}
-
-        {contentType ? (
-          <div className='absolute bottom-2 left-2 aspect-square h-8 w-8 rounded-full bg-ctx-button p-2 md:bottom-3 md:left-3 md:h-12 md:w-12 md:p-3'>
-            <ContentIcon
-              size={'100%'}
-              color={tw.theme.colors.ctx.button.fg.solid}
-              contentType={contentType}
-            />
-          </div>
-        ) : null}
       </MotionLink>
     </Card>
   );
 };
 
 ContentCard.displayName = 'ContentCard';
-
-/* -------------------------------------------------------------------------------------------------
- * ContentCardContainer
- * -----------------------------------------------------------------------------------------------*/
 
 interface ContentCardContainerProps extends ComponentPropsWithoutRef<'div'> {}
 
@@ -157,8 +134,6 @@ const ContentCardContainer = ({
 };
 
 ContentCardContainer.displayName = 'ContentCardContainer';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ContentCard, ContentCardContainer };
 export type { ContentCardProps, ContentCardContainerProps };
