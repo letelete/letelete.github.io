@@ -1,6 +1,5 @@
 'use client';
 
-import { Player } from '@lottiefiles/react-lottie-player';
 import {
   AnimatePresence,
   Variants,
@@ -10,6 +9,7 @@ import {
 } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 import { ComponentType, ElementRef, useMemo, useRef, useState } from 'react';
+import { LottiePlayer } from '~/components/ui/atoms/lottie-player';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
 
@@ -175,7 +175,7 @@ export const ParallaxGallery = ({
             transition={{ type: 'spring', delay: 1 }}
             className='absolute right-1 top-1 z-30 flex rounded-full p-1 backdrop-blur-sm sm:hidden'
           >
-            <Player
+            <LottiePlayer
               autoplay
               loop
               speed={0.5}
