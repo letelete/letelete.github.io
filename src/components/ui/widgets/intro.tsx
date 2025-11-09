@@ -31,7 +31,7 @@ const PROMPTER_DURATION_PER_PART = 0.075;
 const PROMPTER_PART_TRANSITION_DURATION = PROMPTER_DURATION_PER_PART * 5;
 
 const PROMPTER_TEXT =
-  'Taste is maybe the biggest deciding factor in whether a product ends up *feeling* good or not, regardless of how much skill is involved.' as const;
+  'Taste is maybe the biggest deciding factor in whether a product ends up *feeling* good or not, regardless of how much skill is involved.';
 
 const prompterParts = createPrompterParts(
   PROMPTER_TEXT,

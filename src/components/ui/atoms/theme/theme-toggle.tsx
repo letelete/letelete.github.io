@@ -26,7 +26,7 @@ const ThemeToggle = ({
   const { setTheme, theme } = useTheme();
 
   const currentTheme = (theme ?? DEFAULT_THEME) as Theme;
-  const Icon = themeToIcon[currentTheme as keyof typeof themeToIcon];
+  const Icon = themeToIcon[currentTheme];
 
   return (
     <Button

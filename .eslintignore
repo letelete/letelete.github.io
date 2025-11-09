@@ -4,3 +4,4 @@ prettier.config.js
 .next
 .eslintrc.js
 next.config.mjs
+!.storybook

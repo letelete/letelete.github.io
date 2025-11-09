@@ -1,5 +1,4 @@
 import {
-  MotionValue,
   motion,
   useMotionValue,
   useScroll,
@@ -33,14 +32,9 @@ export const ParallaxMarquee = ({
     damping: 50,
     stiffness: 400,
   });
-  const velocityFactor = useTransform(
-    smoothVelocity as MotionValue<number>,
-    [0, 1000],
-    [0, 5],
-    {
-      clamp: false,
-    }
-  );
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
 
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
 

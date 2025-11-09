@@ -1,4 +1,3 @@
-import { SubTrigger } from '@radix-ui/react-dropdown-menu';
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
@@ -70,7 +69,7 @@ const getContentTree = async () => {
     } satisfies ContentFile;
   };
 
-  const getDirectoryNode = async (ent: Dirent, _path: string) => {
+  const getDirectoryNode = (ent: Dirent, _path: string) => {
     const root = {
       type: 'dir',
       path: _path,
@@ -101,7 +100,7 @@ const getContentTree = async () => {
         const fileNode = await getFileNode(ent, entPath);
         _head.children.push(fileNode);
       } else if (ent.isDirectory()) {
-        const dirNode = await getDirectoryNode(ent, entPath);
+        const dirNode = getDirectoryNode(ent, entPath);
         await buildContentTree(dirNode, entPath);
         _head.children.push(dirNode);
       }

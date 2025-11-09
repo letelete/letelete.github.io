@@ -1,7 +1,7 @@
 'use client';
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import {
   ElementRef,
   forwardRef,
@@ -11,7 +11,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import is from 'zod/v4/locales/is.cjs';
 
 import { LIKES_PER_USER_LIMIT } from '~api/contents/shared/controllers';
 
@@ -154,14 +153,11 @@ const ContentLikeButton = ({
   const displayType =
     userLike.likesDraft > 0 ? ('draft' as const) : ('total' as const);
 
-  // :)
-  console.log(userLike.likeFeedback);
-
   const handleLikeClick = useCallback(() => {
     if (!userLike.reachedLikesLimit) {
       userLike.incrementLikes();
     }
-  }, [userLike.incrementLikes, userLike.reachedLikesLimit]);
+  }, [userLike]);
 
   return (
     <figure

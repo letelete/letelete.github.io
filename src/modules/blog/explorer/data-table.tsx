@@ -65,15 +65,17 @@ function BlogExplorerDataTable({
     },
   });
 
-  console.log(store.autoFocusId, store.expanded);
-  const handleInteractiveRowClick = useCallback((row: Row<ContentNode>) => {
-    store.setAutoFocusId(row.id);
-    row.getToggleExpandedHandler()();
-    const entity = parseFromRow(row);
-    if (entity.type === 'file') {
-      router.push(entity.path);
-    }
-  }, []);
+  const handleInteractiveRowClick = useCallback(
+    (row: Row<ContentNode>) => {
+      store.setAutoFocusId(row.id);
+      row.getToggleExpandedHandler()();
+      const entity = parseFromRow(row);
+      if (entity.type === 'file') {
+        router.push(entity.path);
+      }
+    },
+    [router, store]
+  );
 
   return (
     <Table>
@@ -190,7 +192,7 @@ const InteractiveTableRow = forwardRef<
   const localRef = useRef<ElementRef<typeof TableRow>>(null);
   const handleClick = useCallback(() => {
     onClick?.();
-  }, []);
+  }, [onClick]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLTableRowElement>) => {

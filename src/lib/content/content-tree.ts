@@ -1,5 +1,3 @@
-import { headers } from 'next/headers';
-
 import { toSortedTree } from '~lib/content/content-tree-sort';
 
 interface ContentDirectory {

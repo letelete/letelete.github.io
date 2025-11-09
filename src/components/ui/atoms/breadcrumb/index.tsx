@@ -43,7 +43,7 @@ const BreadcrumbLink = forwardRef<
     <Comp
       data-slot='breadcrumb-link'
       className={cn('hover:text-foreground transition-colors', className)}
-      ref={ref as any}
+      ref={ref as never}
       {...props}
     />
   );

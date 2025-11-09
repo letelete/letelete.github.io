@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  MotionValue,
   motion,
   useMotionValueEvent,
   useScroll,
@@ -70,7 +69,7 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
   );
   const animationProgressSpring = useSpring(animationProgress, {
     bounce: 0,
-  }) as MotionValue<number>;
+  });
 
   const scale = useTransform(
     animationProgressSpring,

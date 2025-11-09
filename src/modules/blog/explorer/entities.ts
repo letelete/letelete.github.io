@@ -9,7 +9,7 @@ type ExplorerEntity = ContentNode;
 type ExplorerEntityType = ContentNode['type'];
 
 function parseFromRow(row: Row<ExplorerEntity>) {
-  return row.original as ExplorerEntity;
+  return row.original;
 }
 
 function formatEntityDate(date: Date) {

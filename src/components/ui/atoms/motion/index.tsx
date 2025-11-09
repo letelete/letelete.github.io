@@ -130,7 +130,7 @@ class HTMLAttributeSelector<TValue extends string | number | symbol> {
   }
 }
 
-const ANCHOR_HTML_ATTRIBUTE = `data-animation-anchor` as const;
+const ANCHOR_HTML_ATTRIBUTE = `data-animation-anchor`;
 
 const useAnimationAnchor = <TAnchorName extends string>(
   names: TAnchorName[]
