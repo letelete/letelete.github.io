@@ -1,21 +1,38 @@
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
+import { BASE_URL, BLOG_PATH } from '~/constants';
 
-import '~styles/highlight-js/style.css';
+export async function generateMetadata(_: never, parent: ResolvingMetadata) {
+  const parentMetadata = (await parent) as Metadata;
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description:
-    "I'm a Software Engineer sharing my experience with Web Development, and UI/UX design. I write, record, and talk about programming.",
-};
+  const openGraph = parentMetadata.openGraph!;
+  const twitter = parentMetadata.twitter!;
+  const url = `${BASE_URL}${BLOG_PATH}`;
+  const title = 'Bruno Kawka | Blog';
+  const description =
+    "I'm a Software Engineer @ Google. I write, record, and talk about programming, UI and lifestyle.";
 
-export default function BlogLayout({
+  return {
+    ...parentMetadata,
+    title,
+    description,
+    openGraph: {
+      ...openGraph,
+      url,
+      title,
+      description,
+    },
+    twitter: {
+      ...twitter,
+      title,
+      description,
+    },
+  } satisfies Metadata;
+}
+
+export default function ContentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <main className='flex h-full w-full flex-col'>{children}</main>
-    </>
-  );
+  return <>{children}</>;
 }
