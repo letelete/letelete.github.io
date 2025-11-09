@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
-import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~constants/index';
+import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~/constants';
 
 import { AboutAuthorPortraitsGalleryCard } from '~modules/home/home-sections/about-section/about-author-portrait-gallery-card';
 import { AboutSectionHeadline } from '~modules/home/home-sections/about-section/about-section-headline';

@@ -3,12 +3,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { Nunito_Sans } from 'next/font/google';
+import { BASE_URL } from '~/constants';
 
 import { SSRQueryClientProvider } from '~api/shared/query-client/provider';
 
-import { BASE_URL } from '~constants/index';
-
-import '~styles/globals.css';
+import '~styles/global.css';
 
 import { ThemeProvider } from '~ui/atoms/theme/theme-provider';
 
@@ -43,17 +42,13 @@ export const metadata: Metadata = {
   keywords: [
     'Bruno Kawka',
     'Software Engineer',
-    'Frontend Development',
+    'Frontend',
     'Tutorials',
     'Blog',
     'React',
-    'Javascript',
-    'Typescript',
     'Next.js',
-    'React developer',
     'Web Performance',
     'UI/UX Design',
-    'Full-stack Developer',
     'React Query',
     'Portfolio',
     'Blog Writer',

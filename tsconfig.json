@@ -6,27 +6,21 @@
     "skipLibCheck": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "node16",
-    "moduleResolution": "node16",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    /* Linting */
+    "plugins": [{ "name": "next" }],
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    /* Paths */
     "paths": {
+      "~/*": ["./src/*"],
       "~api/*": ["./src/app/api/*"],
-      "~constants/*": ["./src/constants/*"],
       "~hooks/*": ["./src/hooks/*"],
       "~lib/*": ["./src/lib/*"],
       "~modules/*": ["./src/modules/*"],
@@ -37,11 +31,13 @@
     }
   },
   "include": [
+    "src/global.d.ts",
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
+    "src/**/*.css",
     ".next/types/**/*.ts",
-    "src/lib/articles/optimizing-your-react-application-for-the-interaction-to-next-paint-inp-web-vitals-metric.mdx"
+    ".storybook/**/*.ts"
   ],
   "exclude": ["node_modules", ".next"]
 }

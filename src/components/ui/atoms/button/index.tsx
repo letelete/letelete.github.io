@@ -138,6 +138,7 @@ const buttonMotionProps = {
 interface ButtonProps
   extends ComponentPropsWithoutRef<typeof MotionPolymorphicButton> {
   disableDefaultAnimations?: boolean;
+  children?: ReactNode;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -173,6 +174,7 @@ Button.displayName = 'Button';
 interface ButtonWithVideoProps extends ButtonProps {
   whenVideo?: Partial<ButtonProps>;
   videoFileName?: string;
+  children?: ReactNode;
 }
 
 const ButtonWithVideo = forwardRef<HTMLButtonElement, ButtonWithVideoProps>(

@@ -1,4 +1,4 @@
-import { isResponseBodyError } from '../types';
+import { isResponseBodyError } from '~api/shared/types';
 
 export const apiFetch = async <TResponse>(
   endpoint: string,

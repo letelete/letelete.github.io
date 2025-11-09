@@ -2,8 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import * as React from 'react';
-
-import { STORAGE_KEY_THEME } from '~constants/storage-keys';
+import { STORAGE_KEY_THEME } from '~/constants';
 
 import { DEFAULT_THEME } from '~ui/atoms/theme/theme-config';
 

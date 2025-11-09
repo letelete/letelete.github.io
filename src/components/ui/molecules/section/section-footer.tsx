@@ -9,8 +9,7 @@ import {
 } from 'framer-motion';
 import Link from 'next/link';
 import { PropsWithChildren, useRef, useState } from 'react';
-
-import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~constants/index';
+import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~/constants';
 
 import { useElementGeometry } from '~hooks/use-element-geometry';
 

@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
-import { SOCIALS } from '~constants/index';
+import { SOCIALS } from '~/constants';
 
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';

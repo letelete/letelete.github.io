@@ -2,8 +2,7 @@
 
 import { MotionConfig, motion } from 'framer-motion';
 import Link from 'next/link';
-
-import { BLOG_PATH } from '~constants/index';
+import { BLOG_PATH } from '~/constants';
 
 import { ButtonWithVideo } from '~ui/atoms/button';
 import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';

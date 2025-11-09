@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ComponentPropsWithoutRef } from 'react';
-
-import { SOCIALS } from '~constants/index';
+import { SOCIALS } from '~/constants';
 
 import { Button, ButtonProps } from '~ui/atoms/button';
 import { Icon, IconName, IconProps } from '~ui/atoms/icon';

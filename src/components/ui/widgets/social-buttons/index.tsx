@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-
-import { SOCIALS } from '~constants/index';
+import { SOCIALS } from '~/constants';
 
 import { Button } from '~ui/atoms/button';
 import { IconProps } from '~ui/atoms/icon';

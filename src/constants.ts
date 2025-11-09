@@ -44,3 +44,5 @@ export const SOCIALS = {
 
 export const PORTFOLIO_GITHUB_REPOSITORY_URL =
   'https://github.com/letelete/letelete.github.io';
+
+export const STORAGE_KEY_THEME = 'me.kawka.theme';

@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
-
-import { BASE_URL, BLOG_PATH } from '~constants/index';
+import { BASE_URL, BLOG_PATH } from '~/constants';
 
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';

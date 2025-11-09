@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import { useMemo } from 'react';
-
-import { BLOG_PATH } from '~constants/index';
+import { BLOG_PATH } from '~/constants';
 
 import { useHomeContext } from '~modules/home';
 
