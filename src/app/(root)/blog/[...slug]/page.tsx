@@ -1,5 +1,9 @@
 import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
+import { SectionContainer } from '~/components/ui/molecules/section/section-container';
+import { BlogExplorer } from '~/modules/blog/explorer';
+import { BlogHeader } from '~/modules/blog/header/blog-header';
+import { cn } from '~/utils/style';
 
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
@@ -45,14 +49,14 @@ export default async function ContentPage({
       }
     >
       <BlogViewRegistrar slug={content.slug} />
-      <div>
-        <Typography>Title: {content.title}</Typography>
-        <Typography>Slug: {JSON.stringify(slug)}</Typography>
-        <hr />
-        <code>
-          <pre>{JSON.stringify(content, null, 4)}</pre>
-        </code>
-      </div>
+
+      <main className={cn('min-h-screen space-y-6')}>
+        <BlogHeader />
+        <SectionContainer>
+          <Typography>Title: {content.title}</Typography>
+          <Typography>Slug: {JSON.stringify(slug)}</Typography>
+        </SectionContainer>
+      </main>
     </Suspense>
   );
 }

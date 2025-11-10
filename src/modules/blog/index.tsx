@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useMemo } from 'react';
+import { BlogHeader } from '~/modules/blog/header/blog-header';
 
 import { BlogPayload } from '~lib/content/provider';
 
@@ -36,6 +37,7 @@ const Blog = ({
   return (
     <BlogContext.Provider value={contextValue}>
       <main className={cn('min-h-screen space-y-6', className)}>
+        <BlogHeader />
         <BlogExplorer />
       </main>
     </BlogContext.Provider>

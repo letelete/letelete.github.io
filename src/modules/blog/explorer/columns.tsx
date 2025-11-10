@@ -123,7 +123,7 @@ function EntityDateCell({
 }) {
   return (
     <Typography
-      className={cn('flex-0 w-fit flex-nowrap text-nowrap', className)}
+      className={cn('flex-nowrap text-nowrap text-right opacity-60', className)}
       variant={variant}
       {...rest}
     >

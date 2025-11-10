@@ -32,3 +32,17 @@ export const compactNumber = (num: number) => {
 export const readingTime = (text: string) => {
   return getReadingTime(text).text;
 };
+
+export const truncateMiddle = (text: string, limit: number) => {
+  if (text.length <= limit) {
+    return text;
+  }
+  if (limit <= 3) {
+    return text.slice(0, limit);
+  }
+  const ellipsis = '...';
+  const keep = limit - ellipsis.length;
+  const front = Math.ceil(keep / 2);
+  const back = Math.floor(keep / 2);
+  return `${text.slice(0, front)}${ellipsis}${text.slice(text.length - back)}`;
+};
