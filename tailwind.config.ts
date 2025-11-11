@@ -33,6 +33,10 @@ const config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+      mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
+    },
     colors: {
       transparent: defaultColors.transparent,
       ctx: {
@@ -93,10 +97,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ['var(----font-sans)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(----font-mono)', ...defaultTheme.fontFamily.mono],
-      },
       spacing: {
         section: '8rem',
         'section-sm': '6rem',
@@ -106,6 +106,7 @@ const config = {
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     plugin(function ({ matchVariant }) {
       matchVariant(
         'nth',

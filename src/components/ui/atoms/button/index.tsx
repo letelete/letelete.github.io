@@ -41,6 +41,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'px-4 py-3',
+        sm: 'px-3 py-2',
         icon: 'aspect-square p-2',
         inline: '',
       },

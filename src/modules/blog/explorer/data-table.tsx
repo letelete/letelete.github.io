@@ -12,6 +12,7 @@ import {
 } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
 import {
+  ComponentPropsWithoutRef,
   ElementRef,
   HTMLAttributes,
   KeyboardEvent,
@@ -41,9 +42,12 @@ interface BlogExplorerDataTableProps<ExplorerData, ExplorerValue> {
 }
 
 function BlogExplorerDataTable({
+  className,
   columns,
   data,
-}: BlogExplorerDataTableProps<ExplorerData, ExplorerValue>) {
+  ...rest
+}: BlogExplorerDataTableProps<ExplorerData, ExplorerValue> &
+  ComponentPropsWithoutRef<typeof Table>) {
   const router = useRouter();
 
   const store = useBlogExplorerState();
@@ -63,6 +67,10 @@ function BlogExplorerDataTable({
       sorting,
       expanded: store.expanded,
     },
+    defaultColumn: {
+      minSize: 0,
+      size: 0,
+    },
   });
 
   const handleInteractiveRowClick = useCallback(
@@ -78,7 +86,7 @@ function BlogExplorerDataTable({
   );
 
   return (
-    <Table>
+    <Table className={cn(className)} {...rest}>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
@@ -127,10 +135,16 @@ function BlogExplorerDataTable({
 
 const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
-    <div className='relative w-full'>
+    <div
+      data-slot='table-container'
+      className='relative w-full overflow-x-auto'
+    >
       <table
         ref={ref}
-        className={cn('w-full caption-bottom text-sm', className)}
+        className={cn(
+          'relative w-full caption-bottom border-separate ',
+          className
+        )}
         {...props}
       />
     </div>
@@ -142,7 +156,12 @@ const TableHeader = forwardRef<
   HTMLTableSectionElement,
   HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn(className)} {...props} />
+  <thead
+    ref={ref}
+    data-slot='table-header'
+    className={cn(className)}
+    {...props}
+  />
 ));
 TableHeader.displayName = 'TableHeader';
 
@@ -152,7 +171,8 @@ const TableBody = forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn('flex flex-col gap-y-[1px]', className)}
+    data-slot='table-body'
+    className={cn('divide-border divide-y', className)}
     {...props}
   />
 ));
@@ -164,7 +184,8 @@ const TableFooter = forwardRef<
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
-    className={cn('bg-muted/50  font-medium', className)}
+    data-slot='table-footer'
+    className={cn('bg-muted/50 font-medium', className)}
     {...props}
   />
 ));
@@ -176,6 +197,7 @@ const TableRow = forwardRef<
 >(({ className, ...props }, ref) => (
   <tr
     ref={ref}
+    data-slot='table-row'
     className={cn(
       'hover:bg-muted/50 data-[state=selected]:bg-muted transition-colors',
       className
@@ -228,11 +250,7 @@ const InteractiveTableRow = forwardRef<
   return (
     <TableRow
       className={cn(
-        'bg-ctx-primary',
-        'focus:ring-inset-0 rounded-none focus:outline-none focus:ring-1 focus:ring-ctx-primary-inverse focus:ring-offset-ctx-primary-inverse',
-        'hover:bg-ctx-secondary',
-        'active:bg-ctx-secondary/50 active:duration-[0.05s]',
-        'transition-colors duration-[0.01s]',
+        'focus:ring-inset-0 focus:ring-offset-ctx-primary-invert active:duration-[0.05 rounded-none bg-ctx-primary transition-colors duration-[0.01s] hover:bg-ctx-secondary focus:outline-none focus:ring-1 focus:ring-ctx-primary-inverse active:bg-ctx-secondary/50',
         className
       )}
       role='button'
@@ -253,6 +271,7 @@ const TableHead = forwardRef<
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
+    data-slot='table-head'
     className={cn(
       'text-muted-foreground h-10 px-2 text-left align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
       className
@@ -268,6 +287,7 @@ const TableCell = forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
+    data-slot='table-cell'
     className={cn(
       'p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
       className
@@ -282,9 +302,10 @@ const TableCellEmptyPlaceholder = forwardRef<
   TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <TableCell
+    ref={ref}
+    data-slot='table-cell'
     className={cn('h-24 text-center', className)}
     {...props}
-    ref={ref}
   />
 ));
 TableCellEmptyPlaceholder.displayName = 'TableCellEmptyPlaceholder';
@@ -295,6 +316,7 @@ const TableCaption = forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
+    data-slot='table-caption'
     className={cn('text-muted-foreground mt-4 text-sm', className)}
     {...props}
   />

@@ -1,6 +1,6 @@
 'use client';
 
-import { Column, ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table';
 import { CSSProperties, ComponentPropsWithoutRef, useMemo } from 'react';
 
 import {
@@ -10,7 +10,6 @@ import {
   parseFromRow,
 } from '~modules/blog/explorer/entities';
 
-import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 import { Typography } from '~ui/atoms/typography';
 
@@ -19,10 +18,7 @@ import { cn } from '~utils/style';
 export const columns: ColumnDef<ExplorerEntity>[] = [
   {
     accessorKey: 'name',
-    header: ({ column }) => (
-      <SortHeaderButton column={column}>name</SortHeaderButton>
-    ),
-
+    header: () => <EntityHeader>name</EntityHeader>,
     cell: ({ row }) => {
       const entity = parseFromRow(row);
       return (
@@ -34,11 +30,7 @@ export const columns: ColumnDef<ExplorerEntity>[] = [
   },
   {
     accessorKey: 'date_modified',
-    header: ({ column }) => (
-      <SortHeaderButton className='w-fit text-right' column={column}>
-        modified at
-      </SortHeaderButton>
-    ),
+    header: () => <EntityHeader className='inline'>modified at</EntityHeader>,
     cell: ({ row }) => {
       const entity = parseFromRow(row);
       return <EntityDateCell date={formatEntityDate(entity.date)} />;
@@ -46,30 +38,25 @@ export const columns: ColumnDef<ExplorerEntity>[] = [
   },
 ];
 
-function SortHeaderButton({
+function EntityHeader({
   children,
   className,
-  column,
+  color = 'hint',
+  variant = 'body-sm',
   ...rest
-}: ComponentPropsWithoutRef<typeof Button> & {
-  column: Column<ExplorerEntity>;
-}) {
+}: ComponentPropsWithoutRef<typeof Typography>) {
   return (
-    <Button
-      className={cn('relative -ml-2 px-2 py-1', className)}
-      size='inline'
-      variant='ghost'
-      onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+    <Typography
+      className={cn('line-clamp-1 max-w-full truncate', className)}
+      color={color}
+      variant={variant}
       {...rest}
     >
-      <Typography className='text-nowrap' variant='body-sm'>
-        {children}
-      </Typography>
-      <Icon name='arrow-up-down' className='ml-2' size={12} />
-    </Button>
+      {children}
+    </Typography>
   );
 }
-SortHeaderButton.displayName = 'SortHeaderButton';
+EntityHeader.displayName = 'EntityHeader';
 
 function EntityNameCell({
   children,
@@ -99,7 +86,7 @@ function EntityNameCell({
         } as CSSProperties & { '--row-depth-pl': string }
       }
       className={cn(
-        'flex max-w-full flex-1 flex-nowrap items-center gap-x-1 text-nowrap pl-[--row-depth-pl]',
+        'flex w-full flex-nowrap items-center gap-x-1 pl-[--row-depth-pl]',
         className
       )}
       variant={variant}
@@ -107,7 +94,7 @@ function EntityNameCell({
     >
       <Icon {...iconProps} className='text-[1em]' />
       &nbsp;
-      {children}
+      <span className='line-clamp-1 max-w-full truncate'>{children}</span>
     </Typography>
   );
 }
@@ -123,11 +110,13 @@ function EntityDateCell({
 }) {
   return (
     <Typography
-      className={cn('flex-nowrap text-nowrap text-right opacity-60', className)}
+      className={cn('whitespace-nowrap', className)}
+      color='secondary'
       variant={variant}
       {...rest}
+      asChild
     >
-      {date}
+      <span>{date}</span>
     </Typography>
   );
 }

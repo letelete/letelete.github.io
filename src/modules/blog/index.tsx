@@ -1,13 +1,16 @@
 'use client';
 
 import { createContext, useContext, useMemo } from 'react';
+import { MainContainer } from '~/components/ui/molecules/section/main-container';
+import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
+import { BlogExplorerSection } from '~/modules/blog/blog-explorer-section';
+import { BlogExternalLinksSection } from '~/modules/blog/blog-external-links-section';
+import { BlogHeroSection } from '~/modules/blog/blog-hero-section';
 import { BlogHeader } from '~/modules/blog/header/blog-header';
+import { HomeFooter } from '~/modules/home/home-footer';
+import { ContactSection } from '~/modules/home/home-sections/contact-section';
 
 import { BlogPayload } from '~lib/content/provider';
-
-import { BlogExplorer } from '~modules/blog/explorer';
-
-import { cn } from '~utils/style';
 
 interface BlogContextProps {
   payload: BlogPayload;
@@ -36,10 +39,21 @@ const Blog = ({
 
   return (
     <BlogContext.Provider value={contextValue}>
-      <main className={cn('min-h-screen space-y-6', className)}>
+      <MainContainer className={className}>
         <BlogHeader />
-        <BlogExplorer />
-      </main>
+
+        <SectionsGroupContainer>
+          <BlogHeroSection />
+
+          <BlogExplorerSection />
+
+          <BlogExternalLinksSection />
+
+          <ContactSection />
+
+          <HomeFooter />
+        </SectionsGroupContainer>
+      </MainContainer>
     </BlogContext.Provider>
   );
 };

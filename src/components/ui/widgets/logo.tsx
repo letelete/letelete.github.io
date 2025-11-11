@@ -10,7 +10,7 @@ interface LogoProps extends Partial<SVGMotionProps<SVGElement>> {
   variant?: 'dark' | 'light';
 }
 
-const Logo = ({ width = 85, height, variant = 'dark', ...rest }: LogoProps) => {
+const Logo = ({ width = 50, height, variant = 'dark', ...rest }: LogoProps) => {
   const color =
     variant === 'dark'
       ? tw.theme.colors.ctx.primary.fg.solid

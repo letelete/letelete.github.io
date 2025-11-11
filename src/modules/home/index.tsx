@@ -1,6 +1,8 @@
 'use client';
 
 import { createContext, useContext, useMemo } from 'react';
+import { MainContainer } from '~/components/ui/molecules/section/main-container';
+import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
 
 import { BlogPayload } from '~lib/content/provider';
 import { ImageItem } from '~lib/images/provider';
@@ -12,8 +14,6 @@ import { ContactSection } from '~modules/home/home-sections/contact-section';
 import { DigitalContributionsKnowledgeSharing } from '~modules/home/home-sections/digital-contributions-knowledge-sharing-section';
 import { ExperienceSection } from '~modules/home/home-sections/experience-section';
 import { HeroSection } from '~modules/home/home-sections/hero-section';
-
-import { cn } from '~utils/style';
 
 interface HomeContextProps {
   blogContent: BlogPayload;
@@ -46,10 +46,10 @@ const Home = ({ blogContent, authorPortraits, className }: HomeProps) => {
 
   return (
     <HomeContext.Provider value={contextValue}>
-      <main className={cn('min-h-screen space-y-6', className)}>
+      <MainContainer className={className}>
         <HomeHeader />
 
-        <div className='w-full space-y-section-sm sm:space-y-section'>
+        <SectionsGroupContainer>
           <HeroSection />
 
           <DigitalContributionsKnowledgeSharing />
@@ -63,8 +63,8 @@ const Home = ({ blogContent, authorPortraits, className }: HomeProps) => {
           <ContactSection />
 
           <HomeFooter />
-        </div>
-      </main>
+        </SectionsGroupContainer>
+      </MainContainer>
     </HomeContext.Provider>
   );
 };

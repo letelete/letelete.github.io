@@ -1,16 +1,13 @@
 import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
-import { SectionContainer } from '~/components/ui/molecules/section/section-container';
-import { BlogExplorer } from '~/modules/blog/explorer';
+import { MainContainer } from '~/components/ui/molecules/section/main-container';
+import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
 import { BlogHeader } from '~/modules/blog/header/blog-header';
-import { cn } from '~/utils/style';
 
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
 
 import { BlogViewRegistrar } from '~modules/blog/views-registrar/blog-view-registrar';
-
-import { Typography } from '~ui/atoms/typography';
 
 export async function generateStaticParams() {
   const content = await getBlogPayload();
@@ -50,13 +47,11 @@ export default async function ContentPage({
     >
       <BlogViewRegistrar slug={content.slug} />
 
-      <main className={cn('min-h-screen space-y-6')}>
+      <MainContainer>
         <BlogHeader />
-        <SectionContainer>
-          <Typography>Title: {content.title}</Typography>
-          <Typography>Slug: {JSON.stringify(slug)}</Typography>
-        </SectionContainer>
-      </main>
+
+        <SectionsGroupContainer></SectionsGroupContainer>
+      </MainContainer>
     </Suspense>
   );
 }
