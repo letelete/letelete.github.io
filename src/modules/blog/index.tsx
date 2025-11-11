@@ -3,9 +3,9 @@
 import { createContext, useContext, useMemo } from 'react';
 import { MainContainer } from '~/components/ui/molecules/section/main-container';
 import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
-import { BlogExplorerSection } from '~/modules/blog/blog-explorer-section';
-import { BlogExternalLinksSection } from '~/modules/blog/blog-external-links-section';
-import { BlogHeroSection } from '~/modules/blog/blog-hero-section';
+import { BlogExplorerSection } from '~/modules/blog/sections/blog-explorer-section';
+import { BlogExternalLinksSection } from '~/modules/blog/sections/blog-external-links-section';
+import { BlogHeroSection } from '~/modules/blog/sections/blog-hero-section';
 import { BlogHeader } from '~/modules/blog/header/blog-header';
 import { HomeFooter } from '~/modules/home/home-footer';
 import { ContactSection } from '~/modules/home/home-sections/contact-section';

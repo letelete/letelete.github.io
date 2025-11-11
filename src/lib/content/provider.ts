@@ -38,7 +38,7 @@ const getEntityLabel = (ent: Dirent) => {
   if (ent.isDirectory()) {
     return slug;
   }
-  return `${slug}.md`;
+  return slug;
 };
 
 const getContentTree = async () => {

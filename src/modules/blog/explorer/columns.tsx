@@ -6,7 +6,6 @@ import { CSSProperties, ComponentPropsWithoutRef, useMemo } from 'react';
 import {
   ExplorerEntity,
   ExplorerEntityType,
-  formatEntityDate,
   parseFromRow,
 } from '~modules/blog/explorer/entities';
 
@@ -26,14 +25,6 @@ export const columns: ColumnDef<ExplorerEntity>[] = [
           {entity.label}
         </EntityNameCell>
       );
-    },
-  },
-  {
-    accessorKey: 'date_modified',
-    header: () => <EntityHeader className='inline'>modified at</EntityHeader>,
-    cell: ({ row }) => {
-      const entity = parseFromRow(row);
-      return <EntityDateCell date={formatEntityDate(entity.date)} />;
     },
   },
 ];
@@ -99,25 +90,3 @@ function EntityNameCell({
   );
 }
 EntityNameCell.displayName = 'EntityNameCell';
-
-function EntityDateCell({
-  className,
-  date,
-  variant = 'body-sm',
-  ...rest
-}: Omit<ComponentPropsWithoutRef<typeof Typography>, 'children'> & {
-  date: string;
-}) {
-  return (
-    <Typography
-      className={cn('whitespace-nowrap', className)}
-      color='secondary'
-      variant={variant}
-      {...rest}
-      asChild
-    >
-      <span>{date}</span>
-    </Typography>
-  );
-}
-EntityDateCell.displayName = 'EntityDateCell';
