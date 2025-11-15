@@ -1,13 +1,10 @@
 import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
-import { MainContainer } from '~/components/ui/molecules/section/main-container';
-import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
-import { BlogHeader } from '~/modules/blog/header/blog-header';
+import { BlogViewRegistrar } from '~/modules/blog/components/views-registrar/blog-view-registrar';
+import { BlogContentPage } from '~/modules/blog/pages/content';
 
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
-
-import { BlogViewRegistrar } from '~modules/blog/views-registrar/blog-view-registrar';
 
 export async function generateStaticParams() {
   const content = await getBlogPayload();
@@ -47,11 +44,7 @@ export default async function ContentPage({
     >
       <BlogViewRegistrar slug={content.slug} />
 
-      <MainContainer>
-        <BlogHeader />
-
-        <SectionsGroupContainer></SectionsGroupContainer>
-      </MainContainer>
+      <BlogContentPage payload={blogPayload} file={content} />
     </Suspense>
   );
 }

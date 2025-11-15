@@ -5,12 +5,12 @@ import {
   EntityDateCell,
   EntityHeader,
   EntityNameCell,
-} from '~/modules/blog/explorer/blog-explorer-components';
+} from '~/modules/blog/components/explorer/blog-explorer-components';
 import {
   ExplorerEntity,
   formatEntityDate,
   parseFromRow,
-} from '~/modules/blog/explorer/blog-explorer-entities';
+} from '~/modules/blog/components/explorer/blog-explorer-entities';
 
 type Column = ColumnDef<ExplorerEntity>;
 

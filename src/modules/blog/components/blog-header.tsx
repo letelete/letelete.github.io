@@ -13,7 +13,7 @@ import { Logo } from '~ui/widgets/logo';
 const BlogHeader = () => {
   return (
     <>
-      <AppHeader mode='dynamic' innerClassName='flex justify-between gap-x-2'>
+      <AppHeader innerClassName='flex justify-between gap-x-2'>
         <div className='flex items-center'>
           <Button size='inline' variant='link' asChild>
             <Link title='Home' href={'/'}>

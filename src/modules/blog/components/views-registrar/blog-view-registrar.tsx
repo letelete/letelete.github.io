@@ -1,8 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-
-import { useBlogRegisterView } from '~modules/blog/views-registrar/use-blog-register-view';
+import { useBlogRegisterView } from '~/modules/blog/components/views-registrar/use-blog-register-view';
 
 /**
  * Updates unique view counts for the given `slug`.

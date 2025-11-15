@@ -3,9 +3,9 @@
 import { produce } from 'immer';
 import { useMemo } from 'react';
 import { SectionContainer } from '~/components/ui/molecules/section/section-container';
-import { useBlogContext } from '~/modules/blog';
-import { BlogExplorer } from '~/modules/blog/explorer';
-import { columns } from '~/modules/blog/explorer/blog-explorer-columns';
+import { useBlogContext } from '~/modules/blog/blog-context';
+import { BlogExplorer } from '~/modules/blog/components/explorer';
+import { columns } from '~/modules/blog/components/explorer/blog-explorer-columns';
 import { cn } from '~/utils/style';
 
 const BlogExplorerSection = ({ className }: { className?: string }) => {

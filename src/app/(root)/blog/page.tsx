@@ -1,10 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
+import { BlogViewRegistrar } from '~/modules/blog/components/views-registrar/blog-view-registrar';
+import { BlogHomePage } from '~/modules/blog/pages/home';
 
 import { getBlogPayload } from '~lib/content/provider';
-
-import { Blog } from '~modules/blog';
-import { BlogViewRegistrar } from '~modules/blog/views-registrar/blog-view-registrar';
 
 export default async function BlogPage() {
   const payload = await getBlogPayload();
@@ -22,7 +21,7 @@ export default async function BlogPage() {
       }
     >
       <BlogViewRegistrar slug={payload.root.slug} />
-      <Blog payload={payload} />
+      <BlogHomePage payload={payload} />
     </Suspense>
   );
 }

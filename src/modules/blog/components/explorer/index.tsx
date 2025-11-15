@@ -9,9 +9,9 @@ import {
 import {
   BlogExplorerDataTable,
   collectExpandedState,
-} from '~/modules/blog/explorer/blog-explorer-data-table';
-import { ExplorerEntity } from '~/modules/blog/explorer/blog-explorer-entities';
-import { BlogExplorerProvider } from '~/modules/blog/explorer/blog-explorer-store';
+} from '~/modules/blog/components/explorer/blog-explorer-data-table';
+import { ExplorerEntity } from '~/modules/blog/components/explorer/blog-explorer-entities';
+import { BlogExplorerProvider } from '~/modules/blog/components/explorer/blog-explorer-store';
 
 interface BlogExplorerProps {
   className?: string;

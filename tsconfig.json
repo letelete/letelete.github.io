@@ -38,6 +38,6 @@
     "src/**/*.css",
     ".next/types/**/*.ts",
     ".storybook/**/*.ts"
-  ],
+, "src/modules/blog/blog-context.tsx"  ],
   "exclude": ["node_modules", ".next"]
 }

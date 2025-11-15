@@ -18,7 +18,7 @@ import {
 import { mergeRefs } from 'react-merge-refs';
 import { Icon } from '~/components/ui/atoms/icon';
 import { Typography } from '~/components/ui/atoms/typography';
-import { ExplorerEntityType } from '~/modules/blog/explorer/blog-explorer-entities';
+import { ExplorerEntityType } from '~/modules/blog/components/explorer/blog-explorer-entities';
 import { cn } from '~/utils/style';
 
 const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(

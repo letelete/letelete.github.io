@@ -23,10 +23,10 @@ interface BlogExplorerState extends BlogExplorerProps {
 type BlogExplorerStore = ReturnType<typeof createBlogExplorerStore>;
 
 const createBlogExplorerStore = (initProps?: Partial<BlogExplorerProps>) => {
-  const ROOT_ID = '0';
+  const FIRST_ELEMENT_ID = '0';
   const DEFAULT_STATE: BlogExplorerProps = {
-    expanded: { ROOT_ID: true },
-    autoFocusId: ROOT_ID,
+    expanded: {},
+    autoFocusId: FIRST_ELEMENT_ID,
   };
   return create<BlogExplorerState>()(
     persist<BlogExplorerState>(

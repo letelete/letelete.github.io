@@ -20,12 +20,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '~/modules/blog/explorer/blog-explorer-components';
+} from '~/modules/blog/components/explorer/blog-explorer-components';
 import {
   ExplorerEntity,
   parseFromRow,
-} from '~/modules/blog/explorer/blog-explorer-entities';
-import { useBlogExplorer } from '~/modules/blog/explorer/blog-explorer-store';
+} from '~/modules/blog/components/explorer/blog-explorer-entities';
+import { useBlogExplorer } from '~/modules/blog/components/explorer/blog-explorer-store';
 
 import { ContentNode, isContentDirectoryNode } from '~lib/content/content-tree';
 

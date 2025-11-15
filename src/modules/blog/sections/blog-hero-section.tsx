@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
+import { SectionContainer } from '~/components/ui/molecules/section/section-container';
 
 import { useRelativeDayPart } from '~hooks/use-relative-day-part';
 
@@ -22,7 +23,7 @@ const BlogHeroSection = () => {
   }, [relativeDayPart.part]);
 
   return (
-    <section className='layout-width-limiter layout-padding flex w-full items-center'>
+    <SectionContainer className='layout-width-limiter layout-padding flex w-full items-center'>
       <figure className='flex w-full flex-col items-center text-center'>
         <Typography variant='hero' asChild>
           <h1>
@@ -60,7 +61,7 @@ const BlogHeroSection = () => {
 
         <SocialButtons className='mt-4' />
       </figure>
-    </section>
+    </SectionContainer>
   );
 };
 BlogHeroSection.displayName = 'BlogHeroSection';
