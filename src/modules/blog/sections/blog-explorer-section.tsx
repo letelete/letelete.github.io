@@ -4,8 +4,8 @@ import { produce } from 'immer';
 import { useMemo } from 'react';
 import { SectionContainer } from '~/components/ui/molecules/section/section-container';
 import { useBlogContext } from '~/modules/blog';
-import { columns } from '~/modules/blog/explorer/columns';
-import { BlogExplorerDataTable } from '~/modules/blog/explorer/data-table';
+import { BlogExplorer } from '~/modules/blog/explorer';
+import { columns } from '~/modules/blog/explorer/blog-explorer-columns';
 import { cn } from '~/utils/style';
 
 const BlogExplorerSection = ({ className }: { className?: string }) => {
@@ -20,7 +20,7 @@ const BlogExplorerSection = ({ className }: { className?: string }) => {
     <SectionContainer
       className={cn('border-t border-ctx-primary-fg-decorative', className)}
     >
-      <BlogExplorerDataTable columns={columns} data={root.children} />
+      <BlogExplorer columns={columns} data={root.children} />
     </SectionContainer>
   );
 };

@@ -21,7 +21,8 @@ const BlogExternalLinksSection = () => {
       <SectionHeadline>
         <span>
           You can see more of my work on <InlinePlatformRedirectTwitter />, more
-          of my code on <InlinePlatformRedirectGitHub />.
+          of my code on <InlinePlatformRedirectGitHub />
+          {'. '}
         </span>
         <span className='mt-4 block sm:mt-0 sm:inline'>
           I also help humans on <InlinePlatformRedirectStackOverflow />, and

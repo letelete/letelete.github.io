@@ -1,0 +1,100 @@
+'use client';
+
+import { ExpandedState } from '@tanstack/react-table';
+import { produce } from 'immer';
+import { PropsWithChildren, createContext, useContext, useRef } from 'react';
+import { create, useStore } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+
+interface BlogExplorerProps {
+  expanded: ExpandedState;
+  autoFocusId: string | null;
+}
+
+interface BlogExplorerState extends BlogExplorerProps {
+  actions: {
+    setAutoFocusId: (id: string) => void;
+    setExpanded: (
+      updater: ExpandedState | ((prev: ExpandedState) => ExpandedState)
+    ) => void;
+  };
+}
+
+type BlogExplorerStore = ReturnType<typeof createBlogExplorerStore>;
+
+const createBlogExplorerStore = (initProps?: Partial<BlogExplorerProps>) => {
+  const ROOT_ID = '0';
+  const DEFAULT_STATE: BlogExplorerProps = {
+    expanded: { ROOT_ID: true },
+    autoFocusId: ROOT_ID,
+  };
+  return create<BlogExplorerState>()(
+    persist<BlogExplorerState>(
+      (set) => ({
+        ...DEFAULT_STATE,
+        ...initProps,
+        actions: {
+          setAutoFocusId: (id) =>
+            set((state) =>
+              produce(state, (draft) => {
+                draft.autoFocusId = id;
+              })
+            ),
+          setExpanded: (updater) =>
+            set((state) =>
+              produce(state, (draft) => {
+                draft.expanded =
+                  typeof updater === 'function'
+                    ? updater(state.expanded)
+                    : updater;
+              })
+            ),
+        },
+      }),
+      {
+        name: 'blog-explorer-state-storage',
+        storage: createJSONStorage(() => sessionStorage),
+        merge: (_persistedState, currentState) => {
+          const persistedState = _persistedState as Partial<BlogExplorerState>;
+          return produce(currentState, (draft) => {
+            draft.expanded = {
+              ...(typeof persistedState.expanded === 'object'
+                ? persistedState.expanded
+                : {}),
+              [persistedState.autoFocusId ?? '0']: true,
+            };
+          });
+        },
+      }
+    )
+  );
+};
+
+const BlogExplorerContext = createContext<BlogExplorerStore | null>(null);
+
+type BlogExplorerProviderProps = PropsWithChildren<BlogExplorerProps>;
+
+function BlogExplorerProvider({
+  children,
+  ...props
+}: Partial<BlogExplorerProviderProps>) {
+  const storeRef = useRef<BlogExplorerStore>(createBlogExplorerStore(props));
+  if (!storeRef.current) {
+    storeRef.current = createBlogExplorerStore(props);
+  }
+  return (
+    <BlogExplorerContext.Provider value={storeRef.current}>
+      {children}
+    </BlogExplorerContext.Provider>
+  );
+}
+
+function useBlogExplorer<T>(selector: (state: BlogExplorerState) => T): T {
+  const store = useContext(BlogExplorerContext);
+  if (!store) {
+    throw new Error('Missing BlogExplorerContext.Provider in the tree');
+  }
+  return useStore(store, selector);
+}
+
+export { createBlogExplorerStore, BlogExplorerProvider, useBlogExplorer };

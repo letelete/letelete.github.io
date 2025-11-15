@@ -103,22 +103,6 @@ const socials: Social[] = [
     },
   },
   {
-    id: 'twitter',
-    icon: {
-      name: 'twitter',
-      color: undefined,
-    },
-    content: [
-      { text: 'Be up-to-date', cta: true },
-      { text: ' with my Frontend findings on ' },
-      { text: 'X (Twitter):', highlighted: true },
-    ],
-    link: {
-      href: SOCIALS.twitter.url,
-      label: SOCIALS.twitter.handle,
-    },
-  },
-  {
     id: 'github',
     icon: {
       name: 'github',
