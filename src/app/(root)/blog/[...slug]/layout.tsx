@@ -1,5 +1,8 @@
 import { Metadata, ResolvingMetadata } from 'next';
+import { SidebarProvider } from '~/components/ui/atoms/sidebar';
+import { MainContainer } from '~/components/ui/molecules/section/main-container';
 import { BASE_URL, BLOG_PATH } from '~/constants';
+import { BlogContentExplorerSidebar } from '~/modules/blog/pages/content/blog-content-explorer-sidebar';
 
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
@@ -49,5 +52,17 @@ export default function ContentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <SidebarProvider
+      defaultOpen
+      style={{
+        '--sidebar-width': '20rem',
+        '--sidebar-width-mobile': '20rem',
+      }}
+    >
+      <BlogContentExplorerSidebar />
+
+      <MainContainer>{children}</MainContainer>
+    </SidebarProvider>
+  );
 }

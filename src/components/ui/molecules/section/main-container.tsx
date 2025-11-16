@@ -8,7 +8,7 @@ const MainContainer = forwardRef<
 >(({ children, className, ...rest }, ref) => {
   return (
     <main
-      className={cn('min-h-screen space-y-6', className)}
+      className={cn('relative min-h-screen w-full space-y-6', className)}
       ref={ref}
       {...rest}
     >
