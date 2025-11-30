@@ -1,13 +1,14 @@
+import * as React from 'react';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { cn } from '~utils/style';
 
-export interface FadeOverlayProps extends ComponentPropsWithoutRef<'div'> {
+export interface FadeOverlayProps
+  extends React.ComponentPropsWithoutRef<'div'> {
   overlayProps?: HTMLMotionProps<'div'>;
   overflow?: boolean;
 }
 
-const FadeOverlay = forwardRef<HTMLDivElement, FadeOverlayProps>(
+const FadeOverlay = React.forwardRef<HTMLDivElement, FadeOverlayProps>(
   ({ className, overlayProps, children, overflow, ...rest }, ref) => {
     return (
       <div

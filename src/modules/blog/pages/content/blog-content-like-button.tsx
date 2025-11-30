@@ -1,16 +1,8 @@
 'use client';
 
+import * as React from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { AnimatePresence } from 'framer-motion';
-import {
-  ElementRef,
-  forwardRef,
-  useCallback,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
 import { LIKES_PER_USER_LIMIT } from '~api/contents/shared/controllers';
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 import { useUpdateContentLikes } from '~services/content/use-update-content-likes';
@@ -80,13 +72,13 @@ const useLikeModel = ({
   delayBeforeSubmit?: number;
 }) => {
   const { mutateAsync: likeContent } = useUpdateContentLikes();
-  const submitLikesTimeout = useRef<NodeJS.Timeout>();
+  const submitLikesTimeout = React.useRef<NodeJS.Timeout>();
 
-  const [likesDraft, setLikesDraft] = useState(0);
+  const [likesDraft, setLikesDraft] = React.useState(0);
   const likesTotal = userTotalLikes + likesDraft;
   const reachedLikesLimit = checkLikesLimit(likesTotal);
 
-  const submitLikes = useCallback(
+  const submitLikes = React.useCallback(
     async (likesAmount: number) => {
       try {
         await likeContent({ likesAmount, slug });
@@ -97,7 +89,7 @@ const useLikeModel = ({
     [likeContent, slug]
   );
 
-  const incrementLikes = useCallback(() => {
+  const incrementLikes = React.useCallback(() => {
     clearTimeout(submitLikesTimeout.current);
 
     const newLikesDraft = checkLikesLimit(likesTotal)
@@ -112,7 +104,7 @@ const useLikeModel = ({
     setLikesDraft(newLikesDraft);
   }, [delayBeforeSubmit, likesDraft, likesTotal, submitLikes, userTotalLikes]);
 
-  const likeFeedback = useMemo(
+  const likeFeedback = React.useMemo(
     () => getFeedbackMessageForLikes(likesTotal),
     [likesTotal]
   );
@@ -135,7 +127,7 @@ const ContentLikeButton = ({
   className?: string;
   size?: HeartSize;
 }) => {
-  const buttonId = useId();
+  const buttonId = React.useId();
 
   const { data, isLoading } = useGetContentStatistics({
     slug: contentSlug,
@@ -149,7 +141,7 @@ const ContentLikeButton = ({
   const displayType =
     userLike.likesDraft > 0 ? ('draft' as const) : ('total' as const);
 
-  const handleLikeClick = useCallback(() => {
+  const handleLikeClick = React.useCallback(() => {
     if (!userLike.reachedLikesLimit) {
       userLike.incrementLikes();
     }
@@ -203,8 +195,8 @@ const ContentLikeButton = ({
 };
 ContentLikeButton.displayName = 'ContentLikeButton';
 
-const LikesCounter = forwardRef<
-  ElementRef<typeof Typography>,
+const LikesCounter = React.forwardRef<
+  React.ElementRef<typeof Typography>,
   TypographyProps & {
     value: number;
     userTotalLikes: number;

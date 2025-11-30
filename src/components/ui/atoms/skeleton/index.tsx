@@ -1,11 +1,11 @@
+import * as React from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { type HTMLMotionProps, motion } from 'framer-motion';
-import { forwardRef, memo } from 'react';
 import { cn } from '~utils/style';
 
 type SkeletonProps = HTMLMotionProps<'div'>;
 
-const Skeleton = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
+const Skeleton = React.forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
   ({ className, ...props }, ref) => {
     return (
       <motion.div
@@ -47,7 +47,7 @@ interface TextSkeletonProps
   extends SkeletonProps,
     VariantProps<typeof textSkeletonVariants> {}
 
-const TextSkeleton = memo(
+const TextSkeleton = React.memo(
   ({ variant, className, ...rest }: TextSkeletonProps) => {
     return (
       <Skeleton

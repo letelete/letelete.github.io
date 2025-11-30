@@ -1,48 +1,32 @@
 'use client';
 
-import {
-  CSSProperties,
-  ComponentPropsWithoutRef,
-  ElementRef,
-  HTMLAttributes,
-  KeyboardEvent,
-  TdHTMLAttributes,
-  ThHTMLAttributes,
-  forwardRef,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import * as React from 'react';
 import { mergeRefs } from 'react-merge-refs';
 import { Icon } from '~/components/ui/atoms/icon';
 import { Typography } from '~/components/ui/atoms/typography';
 import { ExplorerEntityType } from '~/modules/blog/components/explorer/blog-explorer-entities';
 import { cn } from '~/utils/style';
 
-const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      data-slot='table-container'
-      className='relative w-full overflow-x-auto'
-    >
-      <table
-        ref={ref}
-        className={cn(
-          'relative w-full caption-bottom border-separate ',
-          className
-        )}
-        {...props}
-      />
-    </div>
-  )
-);
+const Table = React.forwardRef<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement>
+>(({ className, ...props }, ref) => (
+  <div data-slot='table-container' className='relative w-full overflow-x-auto'>
+    <table
+      ref={ref}
+      className={cn(
+        'relative w-full caption-bottom border-separate ',
+        className
+      )}
+      {...props}
+    />
+  </div>
+));
 Table.displayName = 'Table';
 
-const TableHeader = forwardRef<
+const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
+  React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
@@ -53,9 +37,9 @@ const TableHeader = forwardRef<
 ));
 TableHeader.displayName = 'TableHeader';
 
-const TableBody = forwardRef<
+const TableBody = React.forwardRef<
   HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
+  React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
@@ -66,9 +50,9 @@ const TableBody = forwardRef<
 ));
 TableBody.displayName = 'TableBody';
 
-const TableFooter = forwardRef<
+const TableFooter = React.forwardRef<
   HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
+  React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
@@ -79,9 +63,9 @@ const TableFooter = forwardRef<
 ));
 TableFooter.displayName = 'TableFooter';
 
-const TableRow = forwardRef<
+const TableRow = React.forwardRef<
   HTMLTableRowElement,
-  HTMLAttributes<HTMLTableRowElement>
+  React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
   <tr
     ref={ref}
@@ -95,9 +79,9 @@ const TableRow = forwardRef<
 ));
 TableRow.displayName = 'TableRow';
 
-const TableHead = forwardRef<
+const TableHead = React.forwardRef<
   HTMLTableCellElement,
-  ThHTMLAttributes<HTMLTableCellElement>
+  React.ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
@@ -111,9 +95,9 @@ const TableHead = forwardRef<
 ));
 TableHead.displayName = 'TableHead';
 
-const TableCell = forwardRef<
+const TableCell = React.forwardRef<
   HTMLTableCellElement,
-  TdHTMLAttributes<HTMLTableCellElement>
+  React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
@@ -127,9 +111,9 @@ const TableCell = forwardRef<
 ));
 TableCell.displayName = 'TableCell';
 
-const TableCellEmptyPlaceholder = forwardRef<
+const TableCellEmptyPlaceholder = React.forwardRef<
   HTMLTableCellElement,
-  TdHTMLAttributes<HTMLTableCellElement>
+  React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <TableCell
     ref={ref}
@@ -140,9 +124,9 @@ const TableCellEmptyPlaceholder = forwardRef<
 ));
 TableCellEmptyPlaceholder.displayName = 'TableCellEmptyPlaceholder';
 
-const TableCaption = forwardRef<
+const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
-  HTMLAttributes<HTMLTableCaptionElement>
+  React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
@@ -153,17 +137,17 @@ const TableCaption = forwardRef<
 ));
 TableCaption.displayName = 'TableCaption';
 
-const InteractiveTableRow = forwardRef<
+const InteractiveTableRow = React.forwardRef<
   HTMLTableRowElement,
-  HTMLAttributes<HTMLTableRowElement> & { onClick?: VoidFunction }
+  React.HTMLAttributes<HTMLTableRowElement> & { onClick?: VoidFunction }
 >(({ className, onClick, autoFocus, ...props }, ref) => {
-  const localRef = useRef<ElementRef<typeof TableRow>>(null);
-  const handleClick = useCallback(() => {
+  const localRef = React.useRef<React.ElementRef<typeof TableRow>>(null);
+  const handleClick = React.useCallback(() => {
     onClick?.();
   }, [onClick]);
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLTableRowElement>) => {
+  const handleKeyDown = React.useCallback(
+    (e: React.KeyboardEvent<HTMLTableRowElement>) => {
       const key = e.key;
       const current = e.currentTarget;
 
@@ -187,7 +171,7 @@ const InteractiveTableRow = forwardRef<
     [handleClick]
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (autoFocus) {
       localRef.current?.focus();
     }
@@ -211,7 +195,7 @@ const InteractiveTableRow = forwardRef<
 });
 InteractiveTableRow.displayName = 'InteractiveTableRow';
 
-const ExpanderTableRow = memo(() => (
+const ExpanderTableRow = React.memo(() => (
   <TableRow className='pointer-events-none invisible' aria-disabled>
     <TableCell>
       <EntityNameCell entityType={'dir'}>
@@ -231,7 +215,7 @@ function EntityHeader({
   color = 'hint',
   variant = 'body-sm',
   ...rest
-}: ComponentPropsWithoutRef<typeof Typography>) {
+}: React.ComponentPropsWithoutRef<typeof Typography>) {
   return (
     <Typography
       className={cn('line-clamp-1 inline-block max-w-full truncate', className)}
@@ -252,11 +236,13 @@ function EntityNameCell({
   depth = 0,
   variant = 'body-sm',
   ...rest
-}: ComponentPropsWithoutRef<typeof Typography> & {
+}: React.ComponentPropsWithoutRef<typeof Typography> & {
   entityType: ExplorerEntityType;
   depth?: number;
 }) {
-  const iconProps = useMemo<ComponentPropsWithoutRef<typeof Icon>>(() => {
+  const iconProps = React.useMemo<
+    React.ComponentPropsWithoutRef<typeof Icon>
+  >(() => {
     switch (entityType) {
       case 'dir':
         return { name: 'folder' };
@@ -270,7 +256,7 @@ function EntityNameCell({
       style={
         {
           '--row-depth-pl': `${depth * 1.25}rem`,
-        } as CSSProperties & { '--row-depth-pl': string }
+        } as React.CSSProperties & { '--row-depth-pl': string }
       }
       className={cn(
         'flex w-full flex-nowrap items-center gap-x-1 pl-[--row-depth-pl]',
@@ -292,7 +278,7 @@ function EntityDateCell({
   date,
   variant = 'body-sm',
   ...rest
-}: Omit<ComponentPropsWithoutRef<typeof Typography>, 'children'> & {
+}: Omit<React.ComponentPropsWithoutRef<typeof Typography>, 'children'> & {
   date: string;
 }) {
   return (

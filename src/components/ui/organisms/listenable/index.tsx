@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import {
   AnimatePresence,
   MotionValue,
@@ -9,18 +10,6 @@ import {
   useMotionValueEvent,
   useTransform,
 } from 'framer-motion';
-import {
-  ComponentPropsWithoutRef,
-  PropsWithChildren,
-  createContext,
-  forwardRef,
-  useCallback,
-  useContext,
-  useId,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
 import useSound from 'use-sound';
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
@@ -33,12 +22,14 @@ interface ListenableContextProps {
   state: ListenableState;
 }
 
-const ListenableContext = createContext<ListenableContextProps | null>(null);
+const ListenableContext = React.createContext<ListenableContextProps | null>(
+  null
+);
 
 ListenableContext.displayName = 'ListenableContext';
 
 const useListenableContext = () => {
-  const context = useContext(ListenableContext);
+  const context = React.useContext(ListenableContext);
 
   return context;
 };
@@ -51,14 +42,14 @@ interface ListenableHandle {
   stop(): void;
 }
 
-const ListenableContextProvider = forwardRef<
+const ListenableContextProvider = React.forwardRef<
   ListenableHandle,
-  PropsWithChildren
+  React.PropsWithChildren
 >(({ children }, ref) => {
   const timestamp = useMotionValue(0);
-  const [state, setState] = useState<ListenableState>('idle');
+  const [state, setState] = React.useState<ListenableState>('idle');
 
-  useImperativeHandle(ref, () => ({
+  React.useImperativeHandle(ref, () => ({
     play(userTimestamp = 0) {
       setState('playing');
       timestamp.set(userTimestamp);
@@ -88,7 +79,7 @@ const ListenableContextProvider = forwardRef<
 
 ListenableContextProvider.displayName = 'ListenableContextProviders';
 
-interface ListenableProps extends ComponentPropsWithoutRef<'div'> {
+interface ListenableProps extends React.ComponentPropsWithoutRef<'div'> {
   src: string;
   iconProps?: Partial<IconProps>;
   playTitle?: string;
@@ -107,9 +98,9 @@ const Listenable = ({
   playAriaLabel = 'Listen to source text',
   stopAriaLabel = 'Stop listening',
   ...rest
-}: PropsWithChildren<ListenableProps>) => {
-  const listenableHandle = useRef<ListenableHandle>(null);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+}: React.PropsWithChildren<ListenableProps>) => {
+  const listenableHandle = React.useRef<ListenableHandle>(null);
+  const [isAudioPlaying, setIsAudioPlaying] = React.useState(false);
 
   const [play, { stop }] = useSound(src, {
     onend: () => {
@@ -118,19 +109,19 @@ const Listenable = ({
     },
   });
 
-  const handlePlayAudio = useCallback(() => {
+  const handlePlayAudio = React.useCallback(() => {
     setIsAudioPlaying(true);
     play();
     listenableHandle.current?.play();
   }, [play]);
 
-  const handleStopAudio = useCallback(() => {
+  const handleStopAudio = React.useCallback(() => {
     stop();
     setIsAudioPlaying(false);
     listenableHandle.current?.stop();
   }, [stop]);
 
-  const handleToggleAudio = useCallback(() => {
+  const handleToggleAudio = React.useCallback(() => {
     if (isAudioPlaying) {
       handleStopAudio();
     } else {
@@ -193,7 +184,7 @@ const ListenableHighlight = ({
   text,
   isolate,
 }: ListenableHighlightProps) => {
-  const id = useId();
+  const id = React.useId();
 
   const listenableContext = useListenableContext();
 
@@ -201,7 +192,7 @@ const ListenableHighlight = ({
     () => listenableContext?.timestamp.get() ?? 0
   );
 
-  const [matchesTimestamp, setMatchesTimestamp] = useState(false);
+  const [matchesTimestamp, setMatchesTimestamp] = React.useState(false);
   const highlighted =
     matchesTimestamp && listenableContext && listenableContext.state !== 'idle';
 

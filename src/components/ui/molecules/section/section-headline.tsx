@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import * as React from 'react';
 import { Typography, TypographyProps } from '~ui/atoms/typography';
 import { cn } from '~utils/style';
 
@@ -11,7 +11,7 @@ const SectionHeadline = ({
   children,
   disablePadding,
   ...rest
-}: PropsWithChildren<SectionHeadlineProps>) => (
+}: React.PropsWithChildren<SectionHeadlineProps>) => (
   <Typography
     className={cn(
       'mx-auto text-center',

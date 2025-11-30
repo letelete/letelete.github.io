@@ -1,15 +1,15 @@
+import * as React from 'react';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef, ReactNode, useCallback } from 'react';
 
-export interface LocationTag extends ComponentPropsWithoutRef<'span'> {
+export interface LocationTag extends React.ComponentPropsWithoutRef<'span'> {
   name: string;
   place: string;
   href?: string;
 }
 
 export const LocationTag = ({ name, place, href, ...rest }: LocationTag) => {
-  const renderAsLink = useCallback(
-    (element: ReactNode, href: string) => (
+  const renderAsLink = React.useCallback(
+    (element: React.ReactNode, href: string) => (
       <Link className='underline' href={href}>
         {element}
       </Link>

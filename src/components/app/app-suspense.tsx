@@ -1,13 +1,13 @@
-import { ComponentPropsWithoutRef, Suspense } from 'react';
+import * as React from 'react';
 import { cn } from '~/utils/style';
 
 function AppSuspense({
   children,
   className,
   ...rest
-}: ComponentPropsWithoutRef<'div'>) {
+}: React.ComponentPropsWithoutRef<'div'>) {
   return (
-    <Suspense
+    <React.Suspense
       fallback={
         <div
           className={cn(
@@ -21,7 +21,7 @@ function AppSuspense({
       }
     >
       {children}
-    </Suspense>
+    </React.Suspense>
   );
 }
 AppSuspense.displayName = 'AppSuspense';

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import * as React from 'react';
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 import {
   HighlightedWithPopup,
@@ -6,16 +6,16 @@ import {
 } from '~ui/organisms/highlighted-with-popup';
 
 const AboutSectionHeadline = () => {
-  const renderSFIPolandPopupContent = useCallback(
+  const renderSFIPolandPopupContent = React.useCallback(
     () => <PopupVideoContent fileName='conference-sfi-poland' />,
     []
   );
 
-  const renderReactDaysBerlinPopupContent = useCallback(
+  const renderReactDaysBerlinPopupContent = React.useCallback(
     () => <PopupVideoContent fileName='conference-react-days-berlin' />,
     []
   );
-  const renderWeAreDevelopersBerlinPopupContent = useCallback(
+  const renderWeAreDevelopersBerlinPopupContent = React.useCallback(
     () => <PopupVideoContent fileName='conference-we-are-developers-berlin' />,
     []
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import {
@@ -9,19 +10,6 @@ import {
   VariantLabels,
   motion,
 } from 'framer-motion';
-import {
-  Children,
-  ComponentPropsWithoutRef,
-  PropsWithChildren,
-  ReactElement,
-  ReactNode,
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
 import { useRelativeDayPart } from '~hooks/use-relative-day-part';
 import { Video } from '~ui/atoms/video';
 import { cn } from '~utils/style';
@@ -105,25 +93,26 @@ const buttonVariants = cva(
 );
 
 interface PolymorphicButtonProps
-  extends ComponentPropsWithoutRef<'button'>,
+  extends React.ComponentPropsWithoutRef<'button'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  backgroundLayer?: ReactNode;
+  backgroundLayer?: React.ReactNode;
 }
 
-const PolymorphicButton = forwardRef<HTMLButtonElement, PolymorphicButtonProps>(
-  ({ className, variant, size, asChild = false, inverse, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button';
+const PolymorphicButton = React.forwardRef<
+  HTMLButtonElement,
+  PolymorphicButtonProps
+>(({ className, variant, size, asChild = false, inverse, ...props }, ref) => {
+  const Comp = asChild ? Slot : 'button';
 
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, inverse, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
+  return (
+    <Comp
+      className={cn(buttonVariants({ variant, size, inverse, className }))}
+      ref={ref}
+      {...props}
+    />
+  );
+});
 
 PolymorphicButton.displayName = 'PolymorphicButton';
 
@@ -134,14 +123,14 @@ const buttonMotionProps = {
 } as const satisfies HTMLMotionProps<'button'>;
 
 interface ButtonProps
-  extends ComponentPropsWithoutRef<typeof MotionPolymorphicButton> {
+  extends React.ComponentPropsWithoutRef<typeof MotionPolymorphicButton> {
   disableDefaultAnimations?: boolean;
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ disableDefaultAnimations, ...buttonProps }, ref) => {
-    const whileTapMerged = useMemo<
+    const whileTapMerged = React.useMemo<
       VariantLabels | TargetAndTransition | undefined
     >(() => {
       if (disableDefaultAnimations) {
@@ -172,73 +161,74 @@ Button.displayName = 'Button';
 interface ButtonWithVideoProps extends ButtonProps {
   whenVideo?: Partial<ButtonProps>;
   videoFileName?: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
-const ButtonWithVideo = forwardRef<HTMLButtonElement, ButtonWithVideoProps>(
-  ({ videoFileName, className, whenVideo, children, ...rest }, ref) => {
-    const [hovered, setHovered] = useState(false);
-    const [videoLoaded, setVideoLoaded] = useState(false);
+const ButtonWithVideo = React.forwardRef<
+  HTMLButtonElement,
+  ButtonWithVideoProps
+>(({ videoFileName, className, whenVideo, children, ...rest }, ref) => {
+  const [hovered, setHovered] = React.useState(false);
+  const [videoLoaded, setVideoLoaded] = React.useState(false);
 
-    const child = Children.only(children) as ReactElement;
+  const child = React.Children.only(children) as React.ReactElement;
 
-    const buttonProps = useMemo(
-      () => (hovered && videoLoaded ? { ...rest, ...whenVideo } : { ...rest }),
-      [hovered, rest, videoLoaded, whenVideo]
-    );
+  const buttonProps = React.useMemo(
+    () => (hovered && videoLoaded ? { ...rest, ...whenVideo } : { ...rest }),
+    [hovered, rest, videoLoaded, whenVideo]
+  );
 
-    const renderChildrenWithVideoWrapper = useCallback(
-      (children: ReactNode) => (
-        <ChildrenWithVideoWrapper
-          displayBackground={hovered}
-          videoFileName={videoFileName}
-          onVideoLoaded={() => setVideoLoaded(true)}
-          onVideoDetached={() => setVideoLoaded(false)}
-        >
-          {children}
-        </ChildrenWithVideoWrapper>
-      ),
-      [hovered, videoFileName]
-    );
-
-    const cloneWithNestedChildren = useCallback(() => {
-      if (isValidElement(child)) {
-        const nestedChildren = (child.props as { children?: ReactNode })
-          ?.children;
-
-        return nestedChildren
-          ? cloneElement(child as ReactElement, {
-              children: renderChildrenWithVideoWrapper(nestedChildren),
-            })
-          : null;
-      }
-      return null;
-    }, [child, renderChildrenWithVideoWrapper]);
-
-    return (
-      <Button
-        {...buttonProps}
-        ref={ref}
-        className={cn(
-          'relative overflow-hidden hover:font-semibold hover:text-[#fff]',
-          className
-        )}
-        onHoverStart={(event, info) => {
-          setHovered(true);
-          buttonProps.onHoverStart?.(event, info);
-        }}
-        onHoverEnd={(event, info) => {
-          buttonProps.onHoverEnd?.(event, info);
-          setHovered(false);
-        }}
+  const renderChildrenWithVideoWrapper = React.useCallback(
+    (children: React.ReactNode) => (
+      <ChildrenWithVideoWrapper
+        displayBackground={hovered}
+        videoFileName={videoFileName}
+        onVideoLoaded={() => setVideoLoaded(true)}
+        onVideoDetached={() => setVideoLoaded(false)}
       >
-        {buttonProps.asChild
-          ? cloneWithNestedChildren()
-          : renderChildrenWithVideoWrapper(children)}
-      </Button>
-    );
-  }
-);
+        {children}
+      </ChildrenWithVideoWrapper>
+    ),
+    [hovered, videoFileName]
+  );
+
+  const cloneWithNestedChildren = React.useCallback(() => {
+    if (React.isValidElement(child)) {
+      const nestedChildren = (child.props as { children?: React.ReactNode })
+        ?.children;
+
+      return nestedChildren
+        ? React.cloneElement(child as React.ReactElement, {
+            children: renderChildrenWithVideoWrapper(nestedChildren),
+          })
+        : null;
+    }
+    return null;
+  }, [child, renderChildrenWithVideoWrapper]);
+
+  return (
+    <Button
+      {...buttonProps}
+      ref={ref}
+      className={cn(
+        'relative overflow-hidden hover:font-semibold hover:text-[#fff]',
+        className
+      )}
+      onHoverStart={(event, info) => {
+        setHovered(true);
+        buttonProps.onHoverStart?.(event, info);
+      }}
+      onHoverEnd={(event, info) => {
+        buttonProps.onHoverEnd?.(event, info);
+        setHovered(false);
+      }}
+    >
+      {buttonProps.asChild
+        ? cloneWithNestedChildren()
+        : renderChildrenWithVideoWrapper(children)}
+    </Button>
+  );
+});
 
 ButtonWithVideo.displayName = 'ButtonWithVideo';
 
@@ -255,7 +245,7 @@ const ChildrenWithVideoWrapper = ({
   children,
   onVideoLoaded,
   onVideoDetached,
-}: PropsWithChildren<ChildrenWithVideoWrapperProps>) => {
+}: React.PropsWithChildren<ChildrenWithVideoWrapperProps>) => {
   const relativeDayPart = useRelativeDayPart();
 
   return (

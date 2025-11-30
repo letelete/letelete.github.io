@@ -1,14 +1,5 @@
+import * as React from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import {
-  ReactNode,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
 
 const DEFAULT_PART_DURATION = 0.015;
 
@@ -18,7 +9,7 @@ type PrompterRenderer = (
   params: {
     parts: PrompterPart[];
   }
-) => ReactNode;
+) => React.ReactNode;
 
 type PrompterState = 'idle' | 'playing' | 'paused' | 'completed';
 type PrompterStateInternal = PrompterState | 'initial';
@@ -55,7 +46,7 @@ interface PrompterHandle {
   jumpTo(index: number | PrompterJumpKey): void;
 }
 
-const Prompter = forwardRef<PrompterHandle, PrompterProps>(
+const Prompter = React.forwardRef<PrompterHandle, PrompterProps>(
   (
     {
       parts,
@@ -74,18 +65,18 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       );
     }
 
-    const playerTimeoutRef = useRef<NodeJS.Timeout>();
+    const playerTimeoutRef = React.useRef<NodeJS.Timeout>();
 
     const [promptingState, setPromptingState] =
-      useState<PrompterStateInternal>('initial');
+      React.useState<PrompterStateInternal>('initial');
 
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const currentPart = useMemo(
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+    const currentPart = React.useMemo(
       () => parts[currentIndex],
       [currentIndex, parts]
     );
 
-    const play = useCallback(() => {
+    const play = React.useCallback(() => {
       const index = 0;
 
       setCurrentIndex(index);
@@ -94,7 +85,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       onPlay?.(true, { at: index, length: parts.length, state: 'playing' });
     }, [onPlay, parts.length]);
 
-    const stop = useCallback(() => {
+    const stop = React.useCallback(() => {
       const index = 0;
 
       setCurrentIndex(index);
@@ -103,7 +94,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       onPlay?.(false, { at: index, length: parts.length, state: 'idle' });
     }, [onPlay, parts.length]);
 
-    const pause = useCallback(() => {
+    const pause = React.useCallback(() => {
       setPromptingState('paused');
 
       onPlay?.(false, {
@@ -113,7 +104,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       });
     }, [currentIndex, onPlay, parts.length]);
 
-    const next = useCallback(() => {
+    const next = React.useCallback(() => {
       let done = false;
 
       setCurrentIndex((currentIndex) => {
@@ -137,7 +128,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       return done;
     }, [onPlay, parts.length]);
 
-    const jumpTo = useCallback(
+    const jumpTo = React.useCallback(
       (value: number | PrompterJumpKey) => {
         const getJumpIndex = (value: number | PrompterJumpKey) => {
           if (value === 'start') {
@@ -161,7 +152,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       [onPlay, parts.length, promptingState]
     );
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
       play,
       next,
       stop,
@@ -169,13 +160,13 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       jumpTo,
     }));
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (autoplay && promptingState === 'initial') {
         play();
       }
     }, [autoplay, play, promptingState]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (promptingState !== 'playing') {
         return;
       }
@@ -188,7 +179,7 @@ const Prompter = forwardRef<PrompterHandle, PrompterProps>(
       return () => clearTimeout(playerTimeoutRef.current);
     }, [currentPart, onPlay, next, parts.length, promptingState, duration]);
 
-    const renderPart = useCallback(
+    const renderPart = React.useCallback(
       (part: PrompterPart, index: number) => {
         if (renderer) {
           return renderer(part, index, { parts });

@@ -1,8 +1,8 @@
 'use client';
 
+import * as React from 'react';
 import { ExpandedState } from '@tanstack/react-table';
 import { produce } from 'immer';
-import { PropsWithChildren, createContext, useContext, useRef } from 'react';
 import { create, useStore } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
@@ -70,15 +70,17 @@ const createBlogExplorerStore = (initProps?: Partial<BlogExplorerProps>) => {
   );
 };
 
-const BlogExplorerContext = createContext<BlogExplorerStore | null>(null);
+const BlogExplorerContext = React.createContext<BlogExplorerStore | null>(null);
 
-type BlogExplorerProviderProps = PropsWithChildren<BlogExplorerProps>;
+type BlogExplorerProviderProps = React.PropsWithChildren<BlogExplorerProps>;
 
 function BlogExplorerProvider({
   children,
   ...props
 }: Partial<BlogExplorerProviderProps>) {
-  const storeRef = useRef<BlogExplorerStore>(createBlogExplorerStore(props));
+  const storeRef = React.useRef<BlogExplorerStore>(
+    createBlogExplorerStore(props)
+  );
   if (!storeRef.current) {
     storeRef.current = createBlogExplorerStore(props);
   }
@@ -90,7 +92,7 @@ function BlogExplorerProvider({
 }
 
 function useBlogExplorer<T>(selector: (state: BlogExplorerState) => T): T {
-  const store = useContext(BlogExplorerContext);
+  const store = React.useContext(BlogExplorerContext);
   if (!store) {
     throw new Error('Missing BlogExplorerContext.Provider in the tree');
   }

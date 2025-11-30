@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
+import * as React from 'react';
 import { useRelativeDayPart } from '~hooks/use-relative-day-part';
 import { DynamicWeightOnHoverText } from '~ui/atoms/dynamic-weight-on-hover-text';
 import { Typography } from '~ui/atoms/typography';
@@ -16,7 +16,7 @@ import { SectionContainer } from '~/components/ui/molecules/section/section-cont
 const BlogHeroSection = () => {
   const relativeDayPart = useRelativeDayPart();
 
-  const renderNaturalPopup = useCallback(() => {
+  const renderNaturalPopup = React.useCallback(() => {
     return <PopupVideoContent fileName={`nature-${relativeDayPart.part}`} />;
   }, [relativeDayPart.part]);
 

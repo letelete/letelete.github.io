@@ -1,11 +1,11 @@
-import { ComponentProps } from 'react';
+import * as React from 'react';
 import { Button } from '~ui/atoms/button';
 import { Icon, IconName } from '~ui/atoms/icon';
 import { VisuallyHidden } from '~ui/atoms/visually-hidden';
 import { cn, tw } from '~utils/style';
 
 export interface CarouselNavigationButton
-  extends ComponentProps<typeof Button> {
+  extends React.ComponentProps<typeof Button> {
   title: string;
   icon: IconName;
   accessibleText: string;

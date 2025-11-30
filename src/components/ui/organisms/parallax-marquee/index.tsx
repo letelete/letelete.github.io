@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   motion,
   useMotionValue,
@@ -7,11 +8,11 @@ import {
   useVelocity,
   wrap,
 } from 'framer-motion';
-import { ComponentPropsWithoutRef, useRef } from 'react';
 import { useAnimationFrameInView } from '~hooks/use-animation-frame-in-view';
 import { cn } from '~utils/style';
 
-export interface ParallaxMarqueeProps extends ComponentPropsWithoutRef<'div'> {
+export interface ParallaxMarqueeProps
+  extends React.ComponentPropsWithoutRef<'div'> {
   baseVelocity: number;
 }
 
@@ -21,7 +22,7 @@ export const ParallaxMarquee = ({
   className,
   ...rest
 }: ParallaxMarqueeProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
@@ -36,7 +37,7 @@ export const ParallaxMarquee = ({
 
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
 
-  const directionFactor = useRef<number>(1);
+  const directionFactor = React.useRef<number>(1);
   useAnimationFrameInView(containerRef, (_, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 

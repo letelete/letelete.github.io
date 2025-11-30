@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import * as React from 'react';
 import { Button } from '~ui/atoms/button';
 import { IconProps } from '~ui/atoms/icon';
 import { IconLink } from '~ui/atoms/icon-link';
@@ -38,7 +38,8 @@ const socials: SocialEntry[] = [
   },
 ];
 
-export interface SocialButtonsProps extends ComponentPropsWithoutRef<'div'> {}
+export interface SocialButtonsProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 export const SocialButtons = ({ className, ...rest }: SocialButtonsProps) => {
   return (

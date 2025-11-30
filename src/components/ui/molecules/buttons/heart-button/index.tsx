@@ -1,11 +1,5 @@
+import * as React from 'react';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-import {
-  MouseEventHandler,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
 import { StaggeredGrid } from '~ui/atoms/staggered-grid';
 import {
   phasesLength,
@@ -52,7 +46,7 @@ export const HeartButton = ({
   size = 'base',
   ...rest
 }: HeartButtonProps) => {
-  const phaseIndex = useMemo(() => {
+  const phaseIndex = React.useMemo(() => {
     if (phase === 'first') {
       return 0;
     }
@@ -63,16 +57,19 @@ export const HeartButton = ({
   }, [phase]);
 
   const [heartBitmap, colorsMap] = useIncrementalHeart(phaseIndex);
-  const heartBitmapFlat = useMemo(() => heartBitmap.flat(), [heartBitmap]);
+  const heartBitmapFlat = React.useMemo(
+    () => heartBitmap.flat(),
+    [heartBitmap]
+  );
 
   const cols = heartBitmap.length;
-  const [id, setId] = useState(0);
+  const [id, setId] = React.useState(0);
 
   const tileSize = getTileSize(size);
 
-  const containerRef = useRef<HTMLButtonElement>(null);
+  const containerRef = React.useRef<HTMLButtonElement>(null);
 
-  const handleButtonClick: MouseEventHandler = useCallback(
+  const handleButtonClick: React.MouseEventHandler = React.useCallback(
     (event) => {
       if (disabled) {
         event.preventDefault();

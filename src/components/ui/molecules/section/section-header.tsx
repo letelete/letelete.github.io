@@ -1,8 +1,8 @@
-import { ComponentPropsWithoutRef } from 'react';
+import * as React from 'react';
 import { Typography } from '~ui/atoms/typography';
 import { cn } from '~utils/style';
 
-interface SectionHeaderProps extends ComponentPropsWithoutRef<'div'> {
+interface SectionHeaderProps extends React.ComponentPropsWithoutRef<'div'> {
   title: string;
   subtitle?: string;
 }

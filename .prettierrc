@@ -14,6 +14,7 @@
   ],
   "tailwindFunctions": ["clsx", "cn", "cva"],
   "importOrder": [
+    "^react$",
     "<THIRD_PARTY_MODULES>",
     "^~(api|hooks|lib|modules|services|styles|ui|utils)/(.*)$",
     "^~/(.*)$",

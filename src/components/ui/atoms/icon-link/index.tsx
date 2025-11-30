@@ -1,5 +1,5 @@
+import * as React from 'react';
 import Link, { LinkProps } from 'next/link';
-import { ElementRef, forwardRef } from 'react';
 import { Icon, IconProps } from '~ui/atoms/icon';
 import { VisuallyHidden } from '~ui/atoms/visually-hidden';
 
@@ -8,7 +8,7 @@ interface IconLinkProps extends LinkProps {
   accessibleLabel: string;
 }
 
-const IconLink = forwardRef<ElementRef<typeof Link>, IconLinkProps>(
+const IconLink = React.forwardRef<React.ElementRef<typeof Link>, IconLinkProps>(
   ({ iconProps, accessibleLabel, ...rest }, ref) => {
     return (
       <Link ref={ref} {...rest}>

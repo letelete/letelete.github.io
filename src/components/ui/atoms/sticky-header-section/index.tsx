@@ -1,10 +1,10 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
+import * as React from 'react';
 import { cn } from '~utils/style';
 
 export interface StickyHeaderSectionProps
-  extends ComponentPropsWithoutRef<'div'> {
-  header: ReactNode;
-  body: ReactNode;
+  extends React.ComponentPropsWithoutRef<'div'> {
+  header: React.ReactNode;
+  body: React.ReactNode;
   headerClassName?: string;
   bodyClassName?: string;
 }

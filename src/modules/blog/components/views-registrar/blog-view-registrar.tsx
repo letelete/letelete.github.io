@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import * as React from 'react';
 import { useBlogRegisterView } from '~/modules/blog/components/views-registrar/use-blog-register-view';
 
 /**
@@ -8,7 +8,7 @@ import { useBlogRegisterView } from '~/modules/blog/components/views-registrar/u
  *
  * @remarks A client-side renderer when the `useBlogRegisterView` hook cannot be used directly.
  */
-const BlogViewRegistrar = memo(({ slug }: { slug: string }) => {
+const BlogViewRegistrar = React.memo(({ slug }: { slug: string }) => {
   useBlogRegisterView({ slug });
 
   return null;

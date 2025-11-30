@@ -1,11 +1,11 @@
-import { ReactNode, useCallback } from 'react';
+import * as React from 'react';
 import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 import { Typography } from '~ui/atoms/typography';
 import { NotificationDotPulse } from '~ui/molecules/notification-dot-pulse';
 import { monthNameAndYearDate } from '~utils/string';
 
 export interface ExperienceSegmentProps extends Partial<LineSegmentProps> {
-  leading: ReactNode;
+  leading: React.ReactNode;
   title: string;
   subtitle?: string;
   startDate: Date;
@@ -20,7 +20,7 @@ export const ExperienceSegment = ({
   endDate,
   ...rest
 }: ExperienceSegmentProps) => {
-  const checkExperienceEndDate = useCallback(
+  const checkExperienceEndDate = React.useCallback(
     (endDate: unknown): endDate is 'Now' =>
       typeof endDate === 'string' && endDate === 'Now',
     []

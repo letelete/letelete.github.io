@@ -1,7 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
-import { useMemo } from 'react';
 import {
   ContentNode,
   isContentDirectoryNode,
@@ -20,7 +20,7 @@ interface BlogExplorerProps {
 }
 
 const BlogExplorer = ({ className, data, columns }: BlogExplorerProps) => {
-  const initialExpandedState = useMemo(
+  const initialExpandedState = React.useMemo(
     () =>
       collectExpandedState(
         data,

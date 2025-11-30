@@ -1,12 +1,12 @@
+import * as React from 'react';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef } from 'react';
 import { Button, ButtonProps } from '~ui/atoms/button';
 import { Icon, IconName, IconProps } from '~ui/atoms/icon';
 import { cn, tw } from '~utils/style';
 import { SOCIALS } from '~/constants';
 
 interface InlinePlatformRedirectWithIconProps
-  extends ComponentPropsWithoutRef<'span'> {
+  extends React.ComponentPropsWithoutRef<'span'> {
   label: string;
   link: string;
   icon: IconName;

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect } from 'react';
+import * as React from 'react';
 
 const CLASS_NAME = 'lock-scroll';
 
@@ -6,9 +6,12 @@ const useLockScroll = (options?: {
   immediate?: boolean;
   forceScrollPosition?: number;
 }) => {
-  const getElement = useCallback(() => document.querySelector('html'), []);
+  const getElement = React.useCallback(
+    () => document.querySelector('html'),
+    []
+  );
 
-  const lockScroll = useCallback(() => {
+  const lockScroll = React.useCallback(() => {
     const element = getElement();
 
     if (!element) {
@@ -18,7 +21,7 @@ const useLockScroll = (options?: {
     element.classList.add(CLASS_NAME);
   }, [getElement]);
 
-  const unlockScroll = useCallback(() => {
+  const unlockScroll = React.useCallback(() => {
     const element = getElement();
 
     if (!element) {
@@ -32,13 +35,13 @@ const useLockScroll = (options?: {
     }
   }, [getElement, options?.forceScrollPosition]);
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     if (options?.immediate) {
       lockScroll();
     }
   }, [lockScroll, options?.immediate]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     return () => unlockScroll();
   }, [unlockScroll]);
 

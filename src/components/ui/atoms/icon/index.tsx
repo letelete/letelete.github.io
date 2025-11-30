@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   AlertOctagon,
   ArrowLeft,
@@ -26,7 +27,6 @@ import {
   Volume2,
   Youtube,
 } from 'lucide-react';
-import { FC } from 'react';
 import { RedditIcon, StackOverflowIcon } from '~ui/atoms/icon/custom';
 import { cn, tw } from '~utils/style';
 
@@ -90,7 +90,7 @@ const icons = new Map([
   ['twitter', Twitter],
   ['volume-2', Volume2],
   ['youtube', Youtube],
-] as const satisfies readonly (readonly [string, FC<LucideProps>])[]);
+] as const satisfies readonly (readonly [string, React.FC<LucideProps>])[]);
 
 export { Icon, icons };
 export type { IconProps, IconName };

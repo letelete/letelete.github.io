@@ -1,7 +1,7 @@
-import { useLayoutEffect } from 'react';
+import * as React from 'react';
 
 export const useWindowSize = (onResize: () => (() => void) | void) => {
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     let cleanupFn: (() => void) | void;
 
     const handleResize = () => {

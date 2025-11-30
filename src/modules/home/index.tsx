@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useMemo } from 'react';
+import * as React from 'react';
 import { BlogPayload } from '~lib/content/provider';
 import { ImageItem } from '~lib/images/provider';
 import { HomeFooter } from '~modules/home/home-footer';
@@ -18,10 +18,10 @@ interface HomeContextProps {
   authorPortraits: ImageItem[];
 }
 
-const HomeContext = createContext<HomeContextProps | null>(null);
+const HomeContext = React.createContext<HomeContextProps | null>(null);
 
 const useHomeContext = () => {
-  const context = useContext(HomeContext);
+  const context = React.useContext(HomeContext);
   if (context === null) {
     throw new Error(
       'Invalid State. Tried to use HomeContext outside of the HomeContent.Provider.'
@@ -37,7 +37,7 @@ interface HomeProps {
 }
 
 const Home = ({ blogContent, authorPortraits, className }: HomeProps) => {
-  const contextValue = useMemo(
+  const contextValue = React.useMemo(
     () => ({ blogContent, authorPortraits }),
     [authorPortraits, blogContent]
   );

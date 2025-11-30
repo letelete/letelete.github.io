@@ -1,14 +1,8 @@
 'use client';
 
+import * as React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-  ComponentPropsWithoutRef,
-  ElementRef,
-  Fragment,
-  forwardRef,
-  useMemo,
-} from 'react';
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -25,14 +19,14 @@ interface BlogBreadcrumbsProps {
   className?: string;
 }
 
-const BlogBreadcrumbs = forwardRef<
-  ElementRef<'nav'>,
-  ComponentPropsWithoutRef<'nav'> & {
+const BlogBreadcrumbs = React.forwardRef<
+  React.ElementRef<'nav'>,
+  React.ComponentPropsWithoutRef<'nav'> & {
     path: string[];
     truncate?: number;
   }
 >(({ className, path, truncate }, ref) => {
-  const items = useMemo(() => {
+  const items = React.useMemo(() => {
     const data = path
       .map((entry) => entry.replace(/\.(.+)$/, ''))
       .map((label, index) => ({
@@ -68,7 +62,7 @@ const BlogBreadcrumbs = forwardRef<
       <Breadcrumb>
         <BreadcrumbList className='max-w-full flex-nowrap overflow-hidden whitespace-nowrap rounded-full'>
           {items.map((item, index) => (
-            <Fragment key={item.href}>
+            <React.Fragment key={item.href}>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link href={item.href}>{item.label}</Link>
@@ -76,7 +70,7 @@ const BlogBreadcrumbs = forwardRef<
               </BreadcrumbItem>
 
               {index < items.length - 1 ? <BreadcrumbSeparator /> : null}
-            </Fragment>
+            </React.Fragment>
           ))}
         </BreadcrumbList>
       </Breadcrumb>

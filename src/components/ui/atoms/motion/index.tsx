@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import { ReactElement, forwardRef, useCallback, useId, useMemo } from 'react';
 import {
   fadeInMotionVariants,
   heartBeatMotionVariants,
@@ -11,7 +11,7 @@ export const LAYOUT_ID_HOME_LOGO = 'home:logo';
 
 interface HeartBeatMotionProps extends HTMLMotionProps<'div'> {}
 
-const HeartBeatMotion = forwardRef<HTMLDivElement, HeartBeatMotionProps>(
+const HeartBeatMotion = React.forwardRef<HTMLDivElement, HeartBeatMotionProps>(
   ({ children, ...rest }, ref) => {
     return (
       <motion.div
@@ -32,7 +32,7 @@ HeartBeatMotion.displayName = 'HeartBeatMotion';
 
 interface FadeInMotionProps extends HTMLMotionProps<'div'> {}
 
-const FadeInMotion = forwardRef<HTMLDivElement, FadeInMotionProps>(
+const FadeInMotion = React.forwardRef<HTMLDivElement, FadeInMotionProps>(
   ({ children, ...rest }, ref) => {
     return (
       <motion.div
@@ -53,29 +53,30 @@ FadeInMotion.displayName = 'FadeInMotion';
 
 interface RevealInUpMotionProps extends HTMLMotionProps<'div'> {}
 
-const RevealInUpMotion = forwardRef<HTMLDivElement, RevealInUpMotionProps>(
-  ({ children, transition, ...rest }, ref) => {
-    return (
-      <motion.div
-        ref={ref}
-        transition={{ type: 'spring', duration: 1, ...transition }}
-        variants={revealInUpMotionVariants}
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        {...rest}
-      >
-        {children}
-      </motion.div>
-    );
-  }
-);
+const RevealInUpMotion = React.forwardRef<
+  HTMLDivElement,
+  RevealInUpMotionProps
+>(({ children, transition, ...rest }, ref) => {
+  return (
+    <motion.div
+      ref={ref}
+      transition={{ type: 'spring', duration: 1, ...transition }}
+      variants={revealInUpMotionVariants}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      {...rest}
+    >
+      {children}
+    </motion.div>
+  );
+});
 
 RevealInUpMotion.displayName = 'RevealInUpMotion';
 
 interface PopInMotionProps extends HTMLMotionProps<'div'> {}
 
-const PopInMotion = forwardRef<HTMLDivElement, PopInMotionProps>(
+const PopInMotion = React.forwardRef<HTMLDivElement, PopInMotionProps>(
   ({ children, transition, ...rest }, ref) => {
     return (
       <motion.div
@@ -114,9 +115,9 @@ const ANCHOR_HTML_ATTRIBUTE = `data-animation-anchor`;
 const useAnimationAnchor = <TAnchorName extends string>(
   names: TAnchorName[]
 ) => {
-  const id = useId();
+  const id = React.useId();
 
-  const getHTMLSelector = useCallback(
+  const getHTMLSelector = React.useCallback(
     (name: TAnchorName) => {
       const selector = new HTMLAttributeSelector(
         ANCHOR_HTML_ATTRIBUTE,
@@ -127,7 +128,7 @@ const useAnimationAnchor = <TAnchorName extends string>(
     [id]
   );
 
-  const anchorsMap = useMemo(
+  const anchorsMap = React.useMemo(
     () =>
       Object.fromEntries(
         names.map((name) => {
@@ -145,7 +146,7 @@ const useAnimationAnchor = <TAnchorName extends string>(
         TAnchorName,
         {
           selector: string;
-          props: ReactElement['props'];
+          props: React.ReactElement['props'];
         }
       >,
     [getHTMLSelector, names]

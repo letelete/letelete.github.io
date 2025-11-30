@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import {
   motion,
   useMotionValueEvent,
@@ -8,7 +9,6 @@ import {
   useTransform,
 } from 'framer-motion';
 import Link from 'next/link';
-import { PropsWithChildren, useRef, useState } from 'react';
 import { useElementGeometry } from '~hooks/use-element-geometry';
 import { Button, ButtonWithVideo } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
@@ -27,10 +27,10 @@ const INITIAL_BACKGROUND_DIAGONAL = INITIAL_BACKGROUND_SIZE;
 
 const MIN_FOOTER_CONTENT_HEIGHT_VH = 80;
 
-const SectionFooter = ({ children }: PropsWithChildren) => {
-  const [heartPhase, setHeartPhase] = useState<'last' | number>('last');
+const SectionFooter = ({ children }: React.PropsWithChildren) => {
+  const [heartPhase, setHeartPhase] = React.useState<'last' | number>('last');
 
-  const cardContainerRef = useRef<HTMLDivElement>(null);
+  const cardContainerRef = React.useRef<HTMLDivElement>(null);
 
   const [backgroundContainerRef, backgroundGeometry] =
     useElementGeometry<HTMLDivElement>();
@@ -50,7 +50,7 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
   });
 
   // Do not animate track anymore once the animation completes
-  const userSeenCompleteAnimation = useRef<boolean>(false);
+  const userSeenCompleteAnimation = React.useRef<boolean>(false);
   useMotionValueEvent(scrollYProgress, 'change', (value) => {
     if (value === 1.0) {
       userSeenCompleteAnimation.current = true;

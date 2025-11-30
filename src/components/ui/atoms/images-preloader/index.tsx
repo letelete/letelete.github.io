@@ -1,5 +1,5 @@
+import * as React from 'react';
 import Image from 'next/image';
-import { memo } from 'react';
 import { ImageItem } from '~lib/images/provider';
 
 export interface ImagesPreloaderProps {
@@ -8,7 +8,7 @@ export interface ImagesPreloaderProps {
   height?: number;
 }
 
-const ImagesPreloader = memo(
+const ImagesPreloader = React.memo(
   ({ items, width = 1, height = 1 }: ImagesPreloaderProps) => (
     <div className='hidden' aria-hidden>
       {items.map((item) => (

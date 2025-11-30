@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import {
   AnimatePresence,
   Variants,
@@ -8,7 +9,6 @@ import {
   wrap,
 } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
-import { ComponentType, ElementRef, useMemo, useRef, useState } from 'react';
 import { useElementGeometry } from '~hooks/use-element-geometry';
 import { ImageItem } from '~lib/images/provider';
 import { Icon } from '~ui/atoms/icon';
@@ -29,7 +29,7 @@ export interface ParallaxGalleryProps {
 }
 
 const MotionImage = motion(
-  Image as ComponentType<Omit<ImageProps, 'onDragEnd'>>
+  Image as React.ComponentType<Omit<ImageProps, 'onDragEnd'>>
 );
 
 const swipePower = (offset: number, velocity: number) => {
@@ -41,11 +41,11 @@ export const ParallaxGallery = ({
   className,
   visualHint,
 }: ParallaxGalleryProps) => {
-  const [[pageId, direction], setPage] = useState([0, 0]);
+  const [[pageId, direction], setPage] = React.useState([0, 0]);
   const currentItemIndex = wrap(0, items.length, pageId);
   const currentItem = items[currentItemIndex];
 
-  const containerRef = useRef<ElementRef<typeof Image>>(null);
+  const containerRef = React.useRef<React.ElementRef<typeof Image>>(null);
   const [containerGeometryRef, containerGeometry] =
     useElementGeometry(containerRef);
 
@@ -54,12 +54,12 @@ export const ParallaxGallery = ({
     : undefined;
 
   const isInView = useInView(containerRef);
-  const [userPaginatedGallery, setUserPaginatedGallery] = useState(false);
+  const [userPaginatedGallery, setUserPaginatedGallery] = React.useState(false);
   const isSwipeHintVisible = isInView && visualHint && !userPaginatedGallery;
 
   const swipeOffset = containerGeometry?.height ?? 100;
   const swipeConfidenceThreshold = swipeOffset / 4;
-  const variants = useMemo(
+  const variants = React.useMemo(
     () =>
       ({
         'scroll-hint': {

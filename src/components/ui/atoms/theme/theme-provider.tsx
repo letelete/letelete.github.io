@@ -1,7 +1,7 @@
 'use client';
 
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import * as React from 'react';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { DEFAULT_THEME } from '~ui/atoms/theme/theme-config';
 import { STORAGE_KEY_THEME } from '~/constants';
 

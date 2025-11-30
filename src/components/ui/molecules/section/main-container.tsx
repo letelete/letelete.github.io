@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import * as React from 'react';
 import { cn } from '~utils/style';
 
-const MainContainer = forwardRef<
-  ElementRef<'main'>,
-  ComponentPropsWithoutRef<'main'>
+const MainContainer = React.forwardRef<
+  React.ElementRef<'main'>,
+  React.ComponentPropsWithoutRef<'main'>
 >(({ children, className, ...rest }, ref) => {
   return (
     <main

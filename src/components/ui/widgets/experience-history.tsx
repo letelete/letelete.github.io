@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import * as React from 'react';
 import {
   LaptopEmoji,
   ManClimbingEmoji,
@@ -13,7 +13,8 @@ import {
 } from '~ui/molecules/experience-segment';
 import { cn } from '~utils/style';
 
-interface ExperienceHistoryProps extends ComponentPropsWithoutRef<'div'> {}
+interface ExperienceHistoryProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
   <figure

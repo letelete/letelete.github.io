@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import { forwardRef } from 'react';
 import { cn } from '~utils/style';
 
 interface VideoProps extends Omit<HTMLMotionProps<'video'>, 'src'> {
@@ -7,7 +7,7 @@ interface VideoProps extends Omit<HTMLMotionProps<'video'>, 'src'> {
   disableLinkFallback?: boolean;
 }
 
-const Video = forwardRef<HTMLVideoElement, VideoProps>(
+const Video = React.forwardRef<HTMLVideoElement, VideoProps>(
   (
     {
       fileName,

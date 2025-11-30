@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import {
   AnimationDefinition,
   SVGMotionProps,
@@ -12,7 +13,6 @@ import {
   useTime,
   useTransform,
 } from 'framer-motion';
-import { forwardRef, useCallback, useState } from 'react';
 import { useHomeContext } from '~modules/home';
 import { Card } from '~ui/atoms/card';
 import { useAnimationAnchor } from '~ui/atoms/motion';
@@ -34,12 +34,12 @@ const AboutAuthorPortraitsGalleryCard = ({
     'illustration',
   ] as const);
   const [isTransitioningToGallery, setIsTransitioningToGallery] =
-    useState(false);
+    React.useState(false);
 
   const { authorPortraits } = useHomeContext();
-  const [galleryEnabled, setGalleryEnabled] = useState(false);
+  const [galleryEnabled, setGalleryEnabled] = React.useState(false);
 
-  const transitionToGallery = useCallback(() => {
+  const transitionToGallery = React.useCallback(() => {
     const animateAndEnableGallery = async () => {
       setIsTransitioningToGallery(true);
 
@@ -148,7 +148,7 @@ enum Velocity {
   HOVERING = 1.5,
 }
 
-const PortraitIllustration = forwardRef<
+const PortraitIllustration = React.forwardRef<
   SVGSVGElement,
   SVGMotionProps<SVGSVGElement>
 >(({ className, ...rest }, ref) => {

@@ -1,13 +1,13 @@
+import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { ChevronRight, MoreHorizontal } from 'lucide-react';
-import { ComponentProps, ElementRef, forwardRef } from 'react';
 import { cn } from '~utils/style';
 
-function Breadcrumb({ ...props }: ComponentProps<'nav'>) {
+function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label='breadcrumb' data-slot='breadcrumb' {...props} />;
 }
 
-function BreadcrumbList({ className, ...props }: ComponentProps<'ol'>) {
+function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
   return (
     <ol
       data-slot='breadcrumb-list'
@@ -20,7 +20,7 @@ function BreadcrumbList({ className, ...props }: ComponentProps<'ol'>) {
   );
 }
 
-function BreadcrumbItem({ className, ...props }: ComponentProps<'li'>) {
+function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
   return (
     <li
       data-slot='breadcrumb-item'
@@ -30,9 +30,9 @@ function BreadcrumbItem({ className, ...props }: ComponentProps<'li'>) {
   );
 }
 
-const BreadcrumbLink = forwardRef<
-  ElementRef<'a'>,
-  ComponentProps<'a'> & {
+const BreadcrumbLink = React.forwardRef<
+  React.ElementRef<'a'>,
+  React.ComponentProps<'a'> & {
     asChild?: boolean;
   }
 >(({ className, asChild, ...props }, ref) => {
@@ -49,7 +49,7 @@ const BreadcrumbLink = forwardRef<
 });
 BreadcrumbLink.displayName = 'BreadcrumbLink';
 
-function BreadcrumbPage({ className, ...props }: ComponentProps<'span'>) {
+function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
       data-slot='breadcrumb-page'
@@ -66,7 +66,7 @@ function BreadcrumbSeparator({
   children,
   className,
   ...props
-}: ComponentProps<'li'>) {
+}: React.ComponentProps<'li'>) {
   return (
     <li
       data-slot='breadcrumb-separator'
@@ -80,7 +80,10 @@ function BreadcrumbSeparator({
   );
 }
 
-function BreadcrumbEllipsis({ className, ...props }: ComponentProps<'span'>) {
+function BreadcrumbEllipsis({
+  className,
+  ...props
+}: React.ComponentProps<'span'>) {
   return (
     <span
       data-slot='breadcrumb-ellipsis'

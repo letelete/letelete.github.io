@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   HTMLMotionProps,
   motion,
@@ -6,18 +7,17 @@ import {
   useScroll,
   useVelocity,
 } from 'framer-motion';
-import { ReactNode, forwardRef, useState } from 'react';
 import { cn, vhToPx } from '~utils/style';
 
 export interface AppHeaderProps extends HTMLMotionProps<'header'> {
   innerClassName?: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
   mode?: 'compact' | 'normal' | 'dynamic';
 }
 
-const AppHeader = forwardRef<HTMLDivElement, AppHeaderProps>(
+const AppHeader = React.forwardRef<HTMLDivElement, AppHeaderProps>(
   ({ className, innerClassName, children, mode = 'dynamic', ...rest }, ref) => {
-    const [compact, setCompact] = useState(false);
+    const [compact, setCompact] = React.useState(false);
 
     const { scrollY } = useScroll();
     const scrollVelocity = useVelocity(scrollY);

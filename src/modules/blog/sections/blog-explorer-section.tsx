@@ -1,7 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import { produce } from 'immer';
-import { useMemo } from 'react';
 import { SectionContainer } from '~/components/ui/molecules/section/section-container';
 import { useBlogContext } from '~/modules/blog/blog-context';
 import { BlogExplorer } from '~/modules/blog/components/explorer';
@@ -10,7 +10,7 @@ import { cn } from '~/utils/style';
 
 const BlogExplorerSection = ({ className }: { className?: string }) => {
   const context = useBlogContext();
-  const root = useMemo(() => {
+  const root = React.useMemo(() => {
     return produce(context.payload.root, (draft) => {
       return draft;
     });

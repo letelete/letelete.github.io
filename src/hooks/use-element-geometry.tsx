@@ -1,4 +1,4 @@
-import { type RefObject } from 'react';
+import * as React from 'react';
 import { mergeRefs } from 'react-merge-refs';
 import useMeasure, { type RectReadOnly } from 'react-use-measure';
 
@@ -7,7 +7,7 @@ type HTMLOrSVGElement = HTMLElement | SVGElement;
 export type ElementGeometry = RectReadOnly;
 
 export const useElementGeometry = <TElement extends HTMLOrSVGElement>(
-  userRef?: RefObject<TElement>
+  userRef?: React.RefObject<TElement>
 ) => {
   const [measureRef, geometry] = useMeasure();
 

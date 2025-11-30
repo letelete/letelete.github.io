@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import * as React from 'react';
 import { useUpdateContentViews } from '~services/content/use-update-content-views';
 
 /**
@@ -9,7 +9,7 @@ import { useUpdateContentViews } from '~services/content/use-update-content-view
 const useBlogRegisterView = ({ slug }: { slug: string }) => {
   const { mutate: markContentSeen } = useUpdateContentViews();
 
-  useEffect(() => {
+  React.useEffect(() => {
     markContentSeen({ slug });
   }, [slug, markContentSeen]);
 

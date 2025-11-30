@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { Variant, motion } from 'framer-motion';
-import { forwardRef, useCallback } from 'react';
 import {
   Prompter,
   PrompterHandle,
@@ -23,7 +23,10 @@ interface HighlightPrompterProps extends Omit<PrompterProps, 'renderer'> {
   onPlayComplete?: HighlightPrompterPlayEvent;
 }
 
-const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
+const HighlightPrompter = React.forwardRef<
+  PrompterHandle,
+  HighlightPrompterProps
+>(
   (
     {
       inactiveStyle = { opacity: 0.34, filter: 'blur(8px)' },
@@ -36,7 +39,7 @@ const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
     },
     ref
   ) => {
-    const partContentRenderer: PrompterRenderer = useCallback(
+    const partContentRenderer: PrompterRenderer = React.useCallback(
       (part, index, params) => {
         if (partRenderer) {
           return partRenderer(part, index, params);
@@ -49,7 +52,7 @@ const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
       [partRenderer]
     );
 
-    const renderer: PrompterRenderer = useCallback(
+    const renderer: PrompterRenderer = React.useCallback(
       (_part, index, params) => {
         return (
           <div className='flex flex-wrap gap-0.5'>

@@ -1,7 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useLockScroll } from '~hooks/use-lock-document-scroll';
 import { Button } from '~ui/atoms/button';
 import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';
@@ -51,15 +51,15 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     forceScrollPosition: 0,
   });
 
-  const [isCreditsVisible, setIsCreditsVisible] = useState(false);
-  const prompterHandle = useRef<PrompterHandle>(null);
+  const [isCreditsVisible, setIsCreditsVisible] = React.useState(false);
+  const prompterHandle = React.useRef<PrompterHandle>(null);
 
-  const [displayIntro, setDisplayIntro] = useState(true);
-  const [introCompleted, setIntroCompleted] = useState(false);
+  const [displayIntro, setDisplayIntro] = React.useState(true);
+  const [introCompleted, setIntroCompleted] = React.useState(false);
   const [userRequestedToSkipIntro, setUserRequestedToSkipIntro] =
-    useState(false);
+    React.useState(false);
 
-  const saveUserPreferenceToSkipIntro = useCallback(() => {
+  const saveUserPreferenceToSkipIntro = React.useCallback(() => {
     const nowTimestamp = new Date().getTime();
 
     localStorage.setItem(
@@ -68,7 +68,7 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     );
   }, []);
 
-  const checkUserPreferenceToSkipIntro = useCallback(() => {
+  const checkUserPreferenceToSkipIntro = React.useCallback(() => {
     if (process.env.NODE_ENV === 'development') {
       return true;
     }
@@ -97,23 +97,23 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     );
   }, []);
 
-  const cleanup = useCallback(() => {
+  const cleanup = React.useCallback(() => {
     unlockScroll();
   }, [unlockScroll]);
 
-  const handleIntroComplete = useCallback(() => {
+  const handleIntroComplete = React.useCallback(() => {
     setIntroCompleted(true);
     saveUserPreferenceToSkipIntro();
     cleanup();
   }, [cleanup, saveUserPreferenceToSkipIntro]);
 
-  const skipIntro = useCallback(() => {
+  const skipIntro = React.useCallback(() => {
     setUserRequestedToSkipIntro(true);
     saveUserPreferenceToSkipIntro();
     cleanup();
   }, [cleanup, saveUserPreferenceToSkipIntro]);
 
-  const partRenderer: PrompterRenderer = useCallback(
+  const partRenderer: PrompterRenderer = React.useCallback(
     (part) => (
       <Typography variant='heading' italic>
         {part.value}
@@ -122,7 +122,7 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     []
   );
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const userPrefersToSkipIntro = checkUserPreferenceToSkipIntro();
     setDisplayIntro(!userPrefersToSkipIntro);
     if (userPrefersToSkipIntro) {

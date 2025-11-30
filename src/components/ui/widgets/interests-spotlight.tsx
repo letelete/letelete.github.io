@@ -1,22 +1,23 @@
+import * as React from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { ComponentPropsWithoutRef, useCallback } from 'react';
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import { Typography } from '~ui/atoms/typography';
 import { ParallaxMarquee } from '~ui/organisms/parallax-marquee';
 import { cn } from '~utils/style';
 
-interface InterestsSpotlightProps extends ComponentPropsWithoutRef<'div'> {}
+interface InterestsSpotlightProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 const InterestsSpotlight = ({
   className,
   ...rest
 }: InterestsSpotlightProps) => {
-  const renderOuterItem = useCallback(
+  const renderOuterItem = React.useCallback(
     (label: string) => <Typography key={label}>{label}</Typography>,
     []
   );
 
-  const renderInnerItem = useCallback(
+  const renderInnerItem = React.useCallback(
     (label: string) => (
       <Typography color='secondary' key={label}>
         {label}

@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import {
   ColumnDef,
   Row,
@@ -9,7 +10,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
-import { ComponentPropsWithoutRef, useCallback } from 'react';
 import { ContentNode, isContentDirectoryNode } from '~lib/content/content-tree';
 import { cn } from '~utils/style';
 import {
@@ -43,7 +43,7 @@ function BlogExplorerDataTable({
   data,
   ...rest
 }: BlogExplorerDataTableProps<ExplorerData, ExplorerValue> &
-  ComponentPropsWithoutRef<typeof Table>) {
+  React.ComponentPropsWithoutRef<typeof Table>) {
   const router = useRouter();
 
   const expanded = useBlogExplorer((s) => s.expanded);
@@ -64,7 +64,7 @@ function BlogExplorerDataTable({
     },
   });
 
-  const handleInteractiveRowClick = useCallback(
+  const handleInteractiveRowClick = React.useCallback(
     (row: Row<ContentNode>) => {
       setAutoFocusId(row.id);
       row.getToggleExpandedHandler()();

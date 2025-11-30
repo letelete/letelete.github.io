@@ -1,7 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { memo } from 'react';
 import rehypeHighlight from 'rehype-highlight';
 import { BlogMarkdownComponents } from '~/modules/blog/pages/content/blog-content-markdown-components';
 
@@ -9,7 +9,7 @@ export interface BlogContentArticle {
   body: string;
 }
 
-const BlogContentArticle = memo(({ body }: BlogContentArticle) => (
+const BlogContentArticle = React.memo(({ body }: BlogContentArticle) => (
   <article>
     <MDXRemote
       source={body}

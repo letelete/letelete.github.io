@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { type HTMLAttributes, forwardRef } from 'react';
 import { cn } from '~utils/style';
 
 const typographyVariants = cva('tracking-normal', {
@@ -75,13 +75,13 @@ const typographyVariants = cva('tracking-normal', {
 });
 
 export interface TypographyProps
-  extends Omit<HTMLAttributes<HTMLElement>, 'color'>,
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'color'>,
     VariantProps<typeof typographyVariants> {
   asChild?: boolean;
   balance?: boolean;
 }
 
-const Typography = forwardRef<HTMLParagraphElement, TypographyProps>(
+const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps>(
   (
     {
       asChild,

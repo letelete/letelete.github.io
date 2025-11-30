@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import * as React from 'react';
 import { cn } from '~utils/style';
 
-const SectionsGroupContainer = forwardRef<
+const SectionsGroupContainer = React.forwardRef<
   HTMLDivElement,
-  ComponentPropsWithoutRef<'div'>
+  React.ComponentPropsWithoutRef<'div'>
 >(({ children, className, ...rest }, ref) => {
   return (
     <div

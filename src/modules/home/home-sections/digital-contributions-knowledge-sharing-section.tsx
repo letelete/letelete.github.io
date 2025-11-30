@@ -1,7 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import Image from 'next/image';
-import { useMemo } from 'react';
 import { useHomeContext } from '~modules/home';
 import { ContentCard, ContentCardContainer } from '~ui/molecules/content-card';
 import { InlinePlatformRedirectStackOverflow } from '~ui/molecules/inline-platform-redirect-with-icon';
@@ -13,7 +13,7 @@ import { BLOG_PATH } from '~/constants';
 const DigitalContributionsKnowledgeSharing = () => {
   const context = useHomeContext();
 
-  const contents = useMemo(
+  const contents = React.useMemo(
     () => context.blogContent.highlight.slice(0, 3),
     [context.blogContent.highlight]
   );

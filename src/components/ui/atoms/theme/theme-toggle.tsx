@@ -1,9 +1,9 @@
 'use client';
 
+import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { ComponentPropsWithoutRef } from 'react';
 import { Button } from '~ui/atoms/button';
 import {
   DEFAULT_THEME,
@@ -20,7 +20,7 @@ const themeToIcon = {
 const ThemeToggle = ({
   className,
   ...rest
-}: ComponentPropsWithoutRef<typeof Button>) => {
+}: React.ComponentPropsWithoutRef<typeof Button>) => {
   const { setTheme, theme } = useTheme();
 
   const currentTheme = (theme ?? DEFAULT_THEME) as Theme;

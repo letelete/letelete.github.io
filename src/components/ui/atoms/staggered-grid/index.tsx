@@ -1,22 +1,12 @@
+import * as React from 'react';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import {
-  Children,
-  MutableRefObject,
-  ReactElement,
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-} from 'react';
 import { distanceEuclidean } from '~utils/math';
 import { cn } from '~utils/style';
 
 export type StartFromPosition = 'center';
 
 export interface StaggeredGridProps {
-  items: ReactNode[];
+  items: React.ReactNode[];
   startFrom?: StartFromPosition | number;
   delayPerPixel?: number;
   cols?: number;
@@ -54,7 +44,7 @@ const getOriginIndex = (
 /**
  * Places items in the grid, and animates them in a staggered-fashion starting from the `startFrom` position.
  */
-const StaggeredGrid = forwardRef<HTMLDivElement, StaggeredGridProps>(
+const StaggeredGrid = React.forwardRef<HTMLDivElement, StaggeredGridProps>(
   (
     {
       items,
@@ -65,8 +55,8 @@ const StaggeredGrid = forwardRef<HTMLDivElement, StaggeredGridProps>(
     },
     ref
   ) => {
-    const originOffset = useRef<OriginOffset>({ top: 0, left: 0 });
-    const originIndex = useMemo(
+    const originOffset = React.useRef<OriginOffset>({ top: 0, left: 0 });
+    const originIndex = React.useMemo(
       () => getOriginIndex(startFrom, items.length),
       [items.length, startFrom]
     );
@@ -106,8 +96,8 @@ export interface GridItem {
   delayPerPixel: number;
   i: number;
   originIndex: number;
-  originOffset: MutableRefObject<OriginOffset>;
-  children: ReactNode;
+  originOffset: React.MutableRefObject<OriginOffset>;
+  children: React.ReactNode;
 }
 
 const GridItem = ({
@@ -117,12 +107,12 @@ const GridItem = ({
   originOffset,
   children,
 }: GridItem) => {
-  const delayRef = useRef(0);
-  const offset = useRef<OriginOffset>({ top: 0, left: 0 });
-  const ref = useRef<HTMLDivElement>(null);
-  const child = Children.only(children) as ReactElement;
+  const delayRef = React.useRef(0);
+  const offset = React.useRef<OriginOffset>({ top: 0, left: 0 });
+  const ref = React.useRef<HTMLDivElement>(null);
+  const child = React.Children.only(children) as React.ReactElement;
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const element = ref.current;
     if (!element) {
       return;
@@ -138,7 +128,7 @@ const GridItem = ({
     }
   }, [delayPerPixel, i, originIndex, originOffset]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const elementPoint = { x: offset.current.left, y: offset.current.top };
     const originPoint = {
       x: originOffset.current.left,
@@ -161,7 +151,7 @@ const itemVariants = {
     opacity: 0.5,
     scale: 0.5,
   },
-  visible: (delayRef: MutableRefObject<number>) => ({
+  visible: (delayRef: React.MutableRefObject<number>) => ({
     opacity: 1,
     scale: 1,
     transition: {
@@ -177,7 +167,7 @@ const itemVariants = {
   }),
 };
 
-const Box = forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
+const Box = React.forwardRef<HTMLDivElement, HTMLMotionProps<'div'>>(
   ({ className, ...rest }, ref) => (
     <motion.div ref={ref} className={cn('inline-block', className)} {...rest} />
   )

@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { UseInViewOptions, useAnimationFrame, useInView } from 'framer-motion';
-import { RefObject } from 'react';
 
 export type FrameCallback = (timestamp: number, delta: number) => void;
 
@@ -7,7 +7,7 @@ export type FrameCallback = (timestamp: number, delta: number) => void;
  * Triggers animation frame `callback` when element with provided `ref` is in view.
  */
 export const useAnimationFrameInView = (
-  ref: RefObject<Element>,
+  ref: React.RefObject<Element>,
   callback: FrameCallback,
   inViewOptions?: UseInViewOptions
 ) => {
