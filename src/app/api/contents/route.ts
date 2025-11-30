@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-
 import {
   GlobalContentStatistics,
   createContentController,

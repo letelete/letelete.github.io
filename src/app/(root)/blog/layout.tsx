@@ -1,8 +1,5 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import { SidebarProvider } from '~/components/ui/atoms/sidebar';
-import { MainContainer } from '~/components/ui/molecules/section/main-container';
 import { BASE_URL, BLOG_PATH } from '~/constants';
-import { BlogContentExplorerSidebar } from '~/modules/blog/pages/content/blog-content-explorer-sidebar';
 
 export async function generateMetadata(_: never, parent: ResolvingMetadata) {
   const parentMetadata = (await parent) as Metadata;

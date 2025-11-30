@@ -14,9 +14,7 @@ import {
   useRef,
   useState,
 } from 'react';
-
 import { Video, VideoProps } from '~ui/atoms/video';
-
 import { cn, tw } from '~utils/style';
 
 const getRelativeCoordinates = <

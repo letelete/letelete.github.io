@@ -1,9 +1,7 @@
 import { ComponentProps } from 'react';
-
 import { Button } from '~ui/atoms/button';
 import { Icon, IconName } from '~ui/atoms/icon';
 import { VisuallyHidden } from '~ui/atoms/visually-hidden';
-
 import { cn, tw } from '~utils/style';
 
 export interface CarouselNavigationButton

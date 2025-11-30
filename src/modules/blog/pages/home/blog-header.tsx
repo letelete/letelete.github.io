@@ -2,13 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Button, ButtonWithVideo } from '~/components/ui/atoms/button';
-import { Typography } from '~/components/ui/atoms/typography';
-import { BLOG_PATH } from '~/constants';
-
 import { ThemeToggle } from '~ui/atoms/theme/theme-toggle';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Logo } from '~ui/widgets/logo';
+import { Button, ButtonWithVideo } from '~/components/ui/atoms/button';
+import { Typography } from '~/components/ui/atoms/typography';
+import { BLOG_PATH } from '~/constants';
 
 const BlogHeader = () => {
   return (

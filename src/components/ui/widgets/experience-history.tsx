@@ -1,5 +1,4 @@
 import { ComponentPropsWithoutRef } from 'react';
-
 import {
   LaptopEmoji,
   ManClimbingEmoji,
@@ -12,7 +11,6 @@ import {
   ExperienceSegment,
   ExperienceSegmentProps,
 } from '~ui/molecules/experience-segment';
-
 import { cn } from '~utils/style';
 
 interface ExperienceHistoryProps extends ComponentPropsWithoutRef<'div'> {}

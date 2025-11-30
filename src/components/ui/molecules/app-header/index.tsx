@@ -7,7 +7,6 @@ import {
   useVelocity,
 } from 'framer-motion';
 import { ReactNode, forwardRef, useState } from 'react';
-
 import { cn, vhToPx } from '~utils/style';
 
 export interface AppHeaderProps extends HTMLMotionProps<'header'> {

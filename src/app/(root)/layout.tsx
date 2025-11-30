@@ -3,15 +3,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { Nunito_Sans } from 'next/font/google';
-import { BASE_URL } from '~/constants';
-
-import { SSRQueryClientProvider } from '~api/shared/query-client/provider';
-
-import '~styles/global.css';
-
-import { ThemeProvider } from '~ui/atoms/theme/theme-provider';
-
 import { cn, tw } from '~utils/style';
+import { AppProviders } from '~/components/app/app-providers';
+import { AppSuspense } from '~/components/app/app-suspense';
+import { BASE_URL } from '~/constants';
 
 const fontSans = Nunito_Sans({
   subsets: ['latin'],
@@ -113,9 +108,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={cn(`${fontSans.variable} ${fontMono.variable}`)}>
-        <SSRQueryClientProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </SSRQueryClientProvider>
+        <AppSuspense>
+          <AppProviders>{children}</AppProviders>
+        </AppSuspense>
 
         <SpeedInsights />
         <Analytics />

@@ -13,13 +13,10 @@ import {
   useTransform,
 } from 'framer-motion';
 import { forwardRef, useCallback, useState } from 'react';
-
 import { useHomeContext } from '~modules/home';
-
 import { Card } from '~ui/atoms/card';
 import { useAnimationAnchor } from '~ui/atoms/motion';
 import { AuthorPortraitsGallery } from '~ui/widgets/author-portraits-gallery';
-
 import { cn } from '~utils/style';
 import { checkFps60 } from '~utils/time';
 

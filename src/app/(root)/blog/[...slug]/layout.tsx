@@ -1,11 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import { SidebarProvider } from '~/components/ui/atoms/sidebar';
-import { MainContainer } from '~/components/ui/molecules/section/main-container';
-import { BASE_URL, BLOG_PATH } from '~/constants';
-import { BlogContentExplorerSidebar } from '~/modules/blog/pages/content/blog-content-explorer-sidebar';
-
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
+import { BASE_URL, BLOG_PATH } from '~/constants';
 
 interface MetadataProps {
   params: { slug: string[] };
@@ -29,6 +25,7 @@ export async function generateMetadata(
   const twitter = parentMetadata.twitter!;
 
   return {
+    ...parentMetadata,
     title: content.title,
     description: content.description,
     openGraph: {
@@ -52,17 +49,5 @@ export default function ContentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <SidebarProvider
-      defaultOpen
-      style={{
-        '--sidebar-width': '20rem',
-        '--sidebar-width-mobile': '20rem',
-      }}
-    >
-      <BlogContentExplorerSidebar />
-
-      <MainContainer>{children}</MainContainer>
-    </SidebarProvider>
-  );
+  return <>{children}</>;
 }

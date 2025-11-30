@@ -1,8 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode, memo } from 'react';
-
 import { Button } from '~ui/atoms/button';
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 const hashSource = (id: string) => `fig-src-${id}`;

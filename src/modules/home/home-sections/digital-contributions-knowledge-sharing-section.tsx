@@ -2,15 +2,13 @@
 
 import Image from 'next/image';
 import { useMemo } from 'react';
-import { BLOG_PATH } from '~/constants';
-
 import { useHomeContext } from '~modules/home';
-
 import { ContentCard, ContentCardContainer } from '~ui/molecules/content-card';
 import { InlinePlatformRedirectStackOverflow } from '~ui/molecules/inline-platform-redirect-with-icon';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
+import { BLOG_PATH } from '~/constants';
 
 const DigitalContributionsKnowledgeSharing = () => {
   const context = useHomeContext();

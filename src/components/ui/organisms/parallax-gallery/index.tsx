@@ -9,18 +9,14 @@ import {
 } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 import { ComponentType, ElementRef, useMemo, useRef, useState } from 'react';
-import { LottiePlayer } from '~/components/ui/atoms/lottie-player';
-
 import { useElementGeometry } from '~hooks/use-element-geometry';
-
 import { ImageItem } from '~lib/images/provider';
-
 import { Icon } from '~ui/atoms/icon';
 import { ImagesPreloader } from '~ui/atoms/images-preloader';
 import { VisuallyHidden } from '~ui/atoms/visually-hidden';
 import { CarouselNavigationButton } from '~ui/molecules/buttons/carousel-navigation-button';
-
 import { cn } from '~utils/style';
+import { LottiePlayer } from '~/components/ui/atoms/lottie-player';
 
 export const clearClipPath = 'inset(0% 0% 0% 0% round 10px)';
 

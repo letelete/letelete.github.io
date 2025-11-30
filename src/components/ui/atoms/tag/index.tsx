@@ -1,6 +1,5 @@
 import { Button, ButtonProps } from '~ui/atoms/button';
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export interface TagProps extends ButtonProps {

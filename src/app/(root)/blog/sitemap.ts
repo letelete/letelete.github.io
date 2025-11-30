@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
-import { BASE_URL, BLOG_PATH } from '~/constants';
-
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
+import { BASE_URL, BLOG_PATH } from '~/constants';
 
 const GOOGLE_SITEMAP_LIMIT = 50_000;
 

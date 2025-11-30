@@ -1,6 +1,5 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import { type HTMLMotionProps, motion } from 'framer-motion';
-
 import { cn } from '~utils/style';
 
 const notificationDotVariants = cva(

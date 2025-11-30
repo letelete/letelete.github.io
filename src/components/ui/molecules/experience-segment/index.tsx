@@ -1,9 +1,7 @@
 import { ReactNode, useCallback } from 'react';
-
 import { LineSegment, LineSegmentProps } from '~ui/atoms/line-segment';
 import { Typography } from '~ui/atoms/typography';
 import { NotificationDotPulse } from '~ui/molecules/notification-dot-pulse';
-
 import { monthNameAndYearDate } from '~utils/string';
 
 export interface ExperienceSegmentProps extends Partial<LineSegmentProps> {

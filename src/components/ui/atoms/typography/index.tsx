@@ -1,7 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { type HTMLAttributes, forwardRef } from 'react';
-
 import { cn } from '~utils/style';
 
 const typographyVariants = cva('tracking-normal', {

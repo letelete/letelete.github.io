@@ -1,9 +1,7 @@
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-
 import { Skeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export interface MdxVideoPlayerProps {

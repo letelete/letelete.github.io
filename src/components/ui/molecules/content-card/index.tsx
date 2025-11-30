@@ -8,11 +8,9 @@ import {
   isValidElement,
   useCallback,
 } from 'react';
-
 import { Card, CardProps } from '~ui/atoms/card';
 import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 const MotionLink = motion(Link);

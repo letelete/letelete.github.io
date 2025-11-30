@@ -1,6 +1,5 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
-
 import { cn } from '~utils/style';
 
 export interface FadeOverlayProps extends ComponentPropsWithoutRef<'div'> {

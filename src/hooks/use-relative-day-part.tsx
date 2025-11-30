@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-
 import { timeInMs } from '~utils/time';
 
 const dayParts = ['morning', 'afternoon', 'evening', 'night'] as const;

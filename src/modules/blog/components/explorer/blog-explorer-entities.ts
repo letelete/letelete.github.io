@@ -1,9 +1,7 @@
 'use client';
 
 import { Row } from '@tanstack/react-table';
-
 import { ContentNode } from '~lib/content/content-tree';
-
 import { shortDate } from '~utils/string';
 
 type ExplorerEntity = ContentNode;

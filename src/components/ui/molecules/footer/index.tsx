@@ -1,7 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-
 import { Copyrights } from '~ui/atoms/copyrights';
-
 import { cn } from '~utils/style';
 
 export interface FooterProps extends ComponentPropsWithoutRef<'footer'> {}

@@ -4,14 +4,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { ComponentPropsWithoutRef } from 'react';
-
 import { Button } from '~ui/atoms/button';
 import {
   DEFAULT_THEME,
   THEMES,
   type Theme,
 } from '~ui/atoms/theme/theme-config';
-
 import { cn } from '~utils/style';
 
 const themeToIcon = {

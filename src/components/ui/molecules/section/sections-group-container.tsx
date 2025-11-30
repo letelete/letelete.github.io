@@ -1,5 +1,4 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
-
 import { cn } from '~utils/style';
 
 const SectionsGroupContainer = forwardRef<

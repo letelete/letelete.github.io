@@ -1,7 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 interface SectionHeaderProps extends ComponentPropsWithoutRef<'div'> {

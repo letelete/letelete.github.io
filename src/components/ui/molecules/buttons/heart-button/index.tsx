@@ -6,13 +6,11 @@ import {
   useRef,
   useState,
 } from 'react';
-
 import { StaggeredGrid } from '~ui/atoms/staggered-grid';
 import {
   phasesLength,
   useIncrementalHeart,
 } from '~ui/molecules/buttons/heart-button/incremental-heart/use-incremental-heart';
-
 import { cn } from '~utils/style';
 
 export type HeartSize = 'base' | 'sm' | 'xs';

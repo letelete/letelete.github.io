@@ -10,7 +10,6 @@ import {
   useMemo,
   useRef,
 } from 'react';
-
 import { distanceEuclidean } from '~utils/math';
 import { cn } from '~utils/style';
 

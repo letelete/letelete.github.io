@@ -11,12 +11,9 @@ import {
   useRef,
   useState,
 } from 'react';
-
 import { LIKES_PER_USER_LIMIT } from '~api/contents/shared/controllers';
-
 import { useGetContentStatistics } from '~services/content/use-get-content-statistics';
 import { useUpdateContentLikes } from '~services/content/use-update-content-likes';
-
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
 import { FadeInMotion, PopInMotion } from '~ui/atoms/motion';
@@ -24,7 +21,6 @@ import { popInMotionVariants } from '~ui/atoms/motion/lib';
 import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography, TypographyProps } from '~ui/atoms/typography';
 import { HeartSize } from '~ui/molecules/buttons/heart-button';
-
 import { pickRandom } from '~utils/array';
 import { cn } from '~utils/style';
 

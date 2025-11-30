@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { createContentController } from '~api/contents/shared/controllers';
 import { isSlugMatchingContent } from '~api/contents/shared/utils';
 import { getApiContextValue } from '~api/shared/middleware';

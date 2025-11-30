@@ -1,12 +1,10 @@
 'use client';
 
 import { ImageItem } from '~lib/images/provider';
-
 import {
   ParallaxGallery,
   ParallaxGalleryProps,
 } from '~ui/organisms/parallax-gallery';
-
 import { cn } from '~utils/style';
 
 interface AuthorPortraitsGalleryProps

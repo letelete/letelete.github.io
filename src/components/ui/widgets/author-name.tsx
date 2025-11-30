@@ -1,6 +1,5 @@
 import { Typography } from '~ui/atoms/typography';
 import { Listenable, ListenableHighlight } from '~ui/organisms/listenable';
-
 import { cn } from '~utils/style';
 
 interface AuthorNameProps {

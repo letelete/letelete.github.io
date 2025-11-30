@@ -1,5 +1,4 @@
 import type { Content, ContentInteraction, User } from '@prisma/client';
-
 import { ModelClient } from '~api/shared/model-client';
 
 export type { Content, ContentInteraction, User };

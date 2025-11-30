@@ -1,7 +1,5 @@
 import { memo } from 'react';
-
 import { Typography, TypographyProps } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export interface CopyrightsProps extends TypographyProps {}

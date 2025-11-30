@@ -4,7 +4,6 @@ import {
   ThHTMLAttributes,
   forwardRef,
 } from 'react';
-
 import { cn } from '~utils/style';
 
 const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(

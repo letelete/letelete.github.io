@@ -2,22 +2,18 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Button, ButtonWithVideo } from '~/components/ui/atoms/button';
-import { SidebarTrigger } from '~/components/ui/atoms/sidebar';
-import { Typography } from '~/components/ui/atoms/typography';
-import { BLOG_PATH } from '~/constants';
-
 import { ThemeToggle } from '~ui/atoms/theme/theme-toggle';
 import { AppHeader } from '~ui/molecules/app-header';
 import { Logo } from '~ui/widgets/logo';
+import { Button, ButtonWithVideo } from '~/components/ui/atoms/button';
+import { Typography } from '~/components/ui/atoms/typography';
+import { BLOG_PATH } from '~/constants';
 
 const BlogContentHeader = () => {
   return (
     <>
       <AppHeader innerClassName='flex justify-between gap-x-2'>
         <div className='flex items-center'>
-          <SidebarTrigger />
-
           <Button className='ml-2' size='inline' variant='link' asChild>
             <Link title='Home' href={'/'}>
               <Logo />

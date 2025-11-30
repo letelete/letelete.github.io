@@ -2,9 +2,7 @@
 
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-
 import { useLockScroll } from '~hooks/use-lock-document-scroll';
-
 import { Button } from '~ui/atoms/button';
 import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';
 import { Typography } from '~ui/atoms/typography';
@@ -16,7 +14,6 @@ import {
 } from '~ui/organisms/prompter';
 import { HighlightPrompter } from '~ui/organisms/prompter/implementations';
 import { Logo } from '~ui/widgets/logo';
-
 import { cn } from '~utils/style';
 import { timeInMs } from '~utils/time';
 

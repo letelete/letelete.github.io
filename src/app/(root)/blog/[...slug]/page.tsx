@@ -1,10 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
-import { Suspense } from 'react';
-import { BlogViewRegistrar } from '~/modules/blog/components/views-registrar/blog-view-registrar';
-import { BlogContentPage } from '~/modules/blog/pages/content';
-
 import { ContentTreeAdapter } from '~lib/content/content-tree';
 import { getBlogPayload } from '~lib/content/provider';
+import { BlogContentPage } from '~/modules/blog/pages/content';
 
 export async function generateStaticParams() {
   const content = await getBlogPayload();
@@ -30,21 +27,8 @@ export default async function ContentPage({
   }
 
   if (content.type === 'dir') {
-    // TODO: once URL is state, open /blog?q=... accordingly :)
     redirect('/blog');
   }
 
-  return (
-    <Suspense
-      fallback={
-        <div className='flex h-full w-full items-center justify-center'>
-          Loading...
-        </div>
-      }
-    >
-      <BlogViewRegistrar slug={content.slug} />
-
-      <BlogContentPage payload={blogPayload} file={content} />
-    </Suspense>
-  );
+  return <BlogContentPage payload={blogPayload} file={content} />;
 }

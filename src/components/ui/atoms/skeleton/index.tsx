@@ -1,7 +1,6 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import { type HTMLMotionProps, motion } from 'framer-motion';
 import { forwardRef, memo } from 'react';
-
 import { cn } from '~utils/style';
 
 type SkeletonProps = HTMLMotionProps<'div'>;

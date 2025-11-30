@@ -22,11 +22,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-
 import { useRelativeDayPart } from '~hooks/use-relative-day-part';
-
 import { Video } from '~ui/atoms/video';
-
 import { cn } from '~utils/style';
 
 const buttonVariants = cva(

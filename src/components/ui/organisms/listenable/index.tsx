@@ -22,10 +22,8 @@ import {
   useState,
 } from 'react';
 import useSound from 'use-sound';
-
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
-
 import { cn, tw } from '~utils/style';
 
 type ListenableState = 'playing' | 'paused' | 'idle';

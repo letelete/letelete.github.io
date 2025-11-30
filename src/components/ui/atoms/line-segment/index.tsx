@@ -1,5 +1,4 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
-
 import { cn } from '~utils/style';
 
 export interface LineSegmentProps extends ComponentPropsWithoutRef<'div'> {

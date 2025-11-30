@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { ComponentPropsWithoutRef } from 'react';
-
 import { cn } from '~utils/style';
 
 export interface TextUnderlineProps extends ComponentPropsWithoutRef<'div'> {

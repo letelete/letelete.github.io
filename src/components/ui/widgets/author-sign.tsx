@@ -1,5 +1,4 @@
 import { SVGMotionProps, motion } from 'framer-motion';
-
 import { tw } from '~utils/style';
 
 interface AuthorSignProps extends Partial<SVGMotionProps<SVGElement>> {

@@ -1,11 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~/constants';
-
 import { AboutAuthorPortraitsGalleryCard } from '~modules/home/home-sections/about-section/about-author-portrait-gallery-card';
 import { AboutSectionHeadline } from '~modules/home/home-sections/about-section/about-section-headline';
-
 import { ButtonWithVideo } from '~ui/atoms/button';
 import { ForMobile, ForNonMobile } from '~ui/atoms/responsive';
 import { Typography } from '~ui/atoms/typography';
@@ -13,6 +10,7 @@ import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
 import { AuthorSign } from '~ui/widgets/author-sign';
 import { InterestsSpotlight } from '~ui/widgets/interests-spotlight';
+import { GOOGLE_CODE_IN_ARTICLE_PATH } from '~/constants';
 
 const AboutSection = () => {
   return (

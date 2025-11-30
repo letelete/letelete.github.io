@@ -27,9 +27,7 @@ import {
   Youtube,
 } from 'lucide-react';
 import { FC } from 'react';
-
 import { RedditIcon, StackOverflowIcon } from '~ui/atoms/icon/custom';
-
 import { cn, tw } from '~utils/style';
 
 interface IconProps extends LucideProps {

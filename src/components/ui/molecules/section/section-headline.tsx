@@ -1,7 +1,5 @@
 import { PropsWithChildren } from 'react';
-
 import { Typography, TypographyProps } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 interface SectionHeadlineProps extends TypographyProps {

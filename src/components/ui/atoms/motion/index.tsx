@@ -1,6 +1,5 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { ReactElement, forwardRef, useCallback, useId, useMemo } from 'react';
-
 import {
   fadeInMotionVariants,
   heartBeatMotionVariants,

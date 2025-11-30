@@ -1,10 +1,8 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { ComponentPropsWithoutRef, useCallback } from 'react';
-
 import { FadeOverlay } from '~ui/atoms/fade-overlay';
 import { Typography } from '~ui/atoms/typography';
 import { ParallaxMarquee } from '~ui/organisms/parallax-marquee';
-
 import { cn } from '~utils/style';
 
 interface InterestsSpotlightProps extends ComponentPropsWithoutRef<'div'> {}

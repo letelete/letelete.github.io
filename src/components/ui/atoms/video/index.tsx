@@ -1,6 +1,5 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { forwardRef } from 'react';
-
 import { cn } from '~utils/style';
 
 interface VideoProps extends Omit<HTMLMotionProps<'video'>, 'src'> {

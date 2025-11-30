@@ -1,5 +1,4 @@
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export interface MdxYoutubeEmbedProps {

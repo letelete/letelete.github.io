@@ -11,9 +11,7 @@ import {
   useImperativeHandle,
   useRef,
 } from 'react';
-
 import { useElementGeometry } from '~hooks/use-element-geometry';
-
 import { cn } from '~utils/style';
 
 export interface HorizontalScrollCarouselProps

@@ -1,5 +1,4 @@
 import { produce } from 'immer';
-
 import {
   ContentDirectory,
   ContentNode,

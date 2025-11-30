@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 import {
   HighlightedWithPopup,

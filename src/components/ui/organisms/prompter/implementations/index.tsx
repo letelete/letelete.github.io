@@ -1,6 +1,5 @@
 import { Variant, motion } from 'framer-motion';
 import { forwardRef, useCallback } from 'react';
-
 import {
   Prompter,
   PrompterHandle,

@@ -3,6 +3,5 @@
   "files.associations": {
     "*.css": "css",
     "css": "css"
-  },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  }
 }

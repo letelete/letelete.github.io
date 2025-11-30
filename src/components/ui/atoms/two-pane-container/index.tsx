@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { ComponentPropsWithoutRef } from 'react';
-
 import { cn } from '~utils/style';
 
 export interface TwoPaneContainerProps extends ComponentPropsWithoutRef<'div'> {

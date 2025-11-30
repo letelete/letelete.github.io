@@ -1,7 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-
 import { Icon, IconProps } from '~ui/atoms/icon';
-
 import { cn, tw } from '~utils/style';
 
 type AsideType = 'idea' | 'error';

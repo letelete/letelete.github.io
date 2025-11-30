@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-
 import { useUpdateContentViews } from '~services/content/use-update-content-views';
 
 /**

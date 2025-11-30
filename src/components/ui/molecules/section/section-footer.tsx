@@ -9,10 +9,7 @@ import {
 } from 'framer-motion';
 import Link from 'next/link';
 import { PropsWithChildren, useRef, useState } from 'react';
-import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~/constants';
-
 import { useElementGeometry } from '~hooks/use-element-geometry';
-
 import { Button, ButtonWithVideo } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
 import { Copyrights } from '~ui/atoms/copyrights';
@@ -22,6 +19,7 @@ import { HeartButton } from '~ui/molecules/buttons/heart-button';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 import { Logo } from '~ui/widgets/logo';
+import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~/constants';
 
 const INITIAL_BACKGROUND_SIZE = 48;
 // The background shape is a circle. In a circle, the diagonal is equivalent to its diameter.

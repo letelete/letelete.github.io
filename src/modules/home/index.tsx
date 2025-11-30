@@ -1,12 +1,8 @@
 'use client';
 
 import { createContext, useContext, useMemo } from 'react';
-import { MainContainer } from '~/components/ui/molecules/section/main-container';
-import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
-
 import { BlogPayload } from '~lib/content/provider';
 import { ImageItem } from '~lib/images/provider';
-
 import { HomeFooter } from '~modules/home/home-footer';
 import { HomeHeader } from '~modules/home/home-header';
 import { AboutSection } from '~modules/home/home-sections/about-section/about-section';
@@ -14,6 +10,8 @@ import { ContactSection } from '~modules/home/home-sections/contact-section';
 import { DigitalContributionsKnowledgeSharing } from '~modules/home/home-sections/digital-contributions-knowledge-sharing-section';
 import { ExperienceSection } from '~modules/home/home-sections/experience-section';
 import { HeroSection } from '~modules/home/home-sections/hero-section';
+import { MainContainer } from '~/components/ui/molecules/section/main-container';
+import { SectionsGroupContainer } from '~/components/ui/molecules/section/sections-group-container';
 
 interface HomeContextProps {
   blogContent: BlogPayload;

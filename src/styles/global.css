@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~styles/reset.css';
-
 @layer base {
   :root {
     --base-fg-solid: 0 0% 0%;
@@ -50,14 +48,23 @@
     --heart-5: 0 67% 55.3%;
     --heart-6: 0 67% 45.9%;
 
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --editor-padding: 1rem;
+    --syntax-text: #000000;
+    --syntax-string: #555555;
+    --syntax-comment: #888888;
+    --syntax-variable: #444444;
+    --syntax-variable-2: #000000;
+    --syntax-variable-3: #555555;
+    --syntax-number: #222222;
+    --syntax-atom: #444444;
+    --syntax-keyword: #333333;
+    --syntax-property: #444444;
+    --syntax-definition: #111111;
+    --syntax-meta: #555555;
+    --syntax-operator: #333333;
+    --syntax-attribute: #444444;
+    --syntax-tag: #333333;
+    --frame-background: #ffffff;
   }
 
   .dark {
@@ -105,14 +112,22 @@
     --heart-5: 0 66.7% 45.9%;
     --heart-6: 0 66.7% 35.3%;
 
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.439 0 0);
+    --syntax-text: #fff;
+    --syntax-string: #a7a7a7;
+    --syntax-comment: #666666;
+    --syntax-variable: #a7a7a7;
+    --syntax-variable-2: #ffffff;
+    --syntax-variable-3: #a7a7a7;
+    --syntax-number: #ffffff;
+    --syntax-atom: #a7a7a7;
+    --syntax-keyword: #a7a7a7;
+    --syntax-property: #a7a7a7;
+    --syntax-definition: #ffffff;
+    --syntax-meta: #a7a7a7;
+    --syntax-operator: #a7a7a7;
+    --syntax-attribute: #a7a7a7;
+    --syntax-tag: #a7a7a7;
+    --frame-background: #111;
   }
 
   html {
@@ -136,6 +151,87 @@
 
   ::selection {
     @apply bg-ctx-accent-secondary text-ctx-accent-secondary-fg-primary;
+  }
+
+  pre {
+    padding: var(--editor-padding);
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-size: 0.875rem;
+    border-radius: 13px;
+    color: var(--frame-background);
+  }
+
+  code {
+    color: var(--syntax-variable);
+  }
+
+  pre,
+  code {
+    font-family: var(--font-mono);
+    line-height: 1.6;
+  }
+
+  .hljs {
+    color: var(--syntax-text);
+  }
+  .hljs-subst,
+  .hljs-tag {
+    color: var(--syntax-tag);
+  }
+  .hljs-bullet,
+  .hljs-link,
+  .hljs-literal,
+  .hljs-number,
+  .hljs-quote,
+  .hljs-regexp {
+    color: var(--syntax-number);
+  }
+  .hljs-attr,
+  .hljs-code,
+  .hljs-section,
+  .hljs-selector-class,
+  .hljs-title {
+    color: var(--syntax-definition);
+  }
+  .hljs-strong {
+    font-weight: 700;
+  }
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  .hljs-keyword,
+  .hljs-name,
+  .hljs-selector-tag {
+    color: var(--syntax-keyword);
+  }
+  .hljs-attribute,
+  .hljs-property,
+  .hljs-symbol {
+    color: var(--syntax-property);
+  }
+  .hljs-class .hljs-title,
+  .hljs-params,
+  .hljs-title.class_ {
+    color: var(--syntax-definition);
+  }
+  .hljs-addition,
+  .hljs-built_in,
+  .hljs-selector-attr,
+  .hljs-selector-id,
+  .hljs-selector-pseudo,
+  .hljs-string {
+    color: var(--syntax-string);
+  }
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-variable {
+    color: var(--syntax-variable);
+  }
+  .hljs-comment,
+  .hljs-deletion,
+  .hljs-meta {
+    color: var(--syntax-comment);
   }
 }
 

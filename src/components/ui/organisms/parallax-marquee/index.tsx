@@ -8,9 +8,7 @@ import {
   wrap,
 } from 'framer-motion';
 import { ComponentPropsWithoutRef, useRef } from 'react';
-
 import { useAnimationFrameInView } from '~hooks/use-animation-frame-in-view';
-
 import { cn } from '~utils/style';
 
 export interface ParallaxMarqueeProps extends ComponentPropsWithoutRef<'div'> {

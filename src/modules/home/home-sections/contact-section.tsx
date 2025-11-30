@@ -1,14 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { SOCIALS } from '~/constants';
-
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
-
 import { cn } from '~utils/style';
+import { SOCIALS } from '~/constants';
 
 const ContactSection = () => {
   return (

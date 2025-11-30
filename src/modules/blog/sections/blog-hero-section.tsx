@@ -1,10 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import { SectionContainer } from '~/components/ui/molecules/section/section-container';
-
 import { useRelativeDayPart } from '~hooks/use-relative-day-part';
-
 import { DynamicWeightOnHoverText } from '~ui/atoms/dynamic-weight-on-hover-text';
 import { Typography } from '~ui/atoms/typography';
 import {
@@ -14,6 +11,7 @@ import {
 import { AuthorName } from '~ui/widgets/author-name';
 import { AuthorWorkTitle } from '~ui/widgets/author-work-title';
 import { SocialButtons } from '~ui/widgets/social-buttons';
+import { SectionContainer } from '~/components/ui/molecules/section/section-container';
 
 const BlogHeroSection = () => {
   const relativeDayPart = useRelativeDayPart();

@@ -1,7 +1,5 @@
 import ImagePrimitive, { ImageProps as ImagePrimitiveProps } from 'next/image';
-
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export interface MdxImageProps extends ImagePrimitiveProps {

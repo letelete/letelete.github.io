@@ -10,7 +10,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-
 import { cn } from '~utils/style';
 
 interface ForMobileProps {
