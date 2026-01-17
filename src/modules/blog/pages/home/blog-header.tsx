@@ -14,7 +14,7 @@ const BlogHeader = () => {
     <>
       <AppHeader innerClassName='flex justify-between gap-x-2'>
         <div className='flex items-center'>
-          <Button className='ml-2' size='inline' variant='link' asChild>
+          <Button size='inline' variant='link' asChild>
             <Link title='Home' href={'/'}>
               <Logo />
             </Link>
