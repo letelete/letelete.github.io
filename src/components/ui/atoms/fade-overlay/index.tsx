@@ -25,7 +25,7 @@ const FadeOverlay = React.forwardRef<HTMLDivElement, FadeOverlayProps>(
         <motion.div
           {...overlayProps}
           className={cn(
-            'absolute left-0 top-0 z-10 h-full w-full bg-gradient-to-r from-ctx-primary to-transparent',
+            'pointer-events-none absolute left-0 top-0 z-10 h-full w-full bg-gradient-to-r from-ctx-primary to-transparent',
             overlayProps?.className
           )}
         />

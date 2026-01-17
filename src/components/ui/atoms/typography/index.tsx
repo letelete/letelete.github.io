@@ -25,6 +25,7 @@ const typographyVariants = cva('tracking-normal', {
       accent: 'text-ctx-accent-secondary',
       hint: 'text-ctx-primary-fg-hint',
       destructive: 'text-ctx-primary-fg-destructive',
+      currentColor: '',
     },
     prose: {
       true: 'max-w-prose',

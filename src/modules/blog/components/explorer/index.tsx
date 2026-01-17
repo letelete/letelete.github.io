@@ -1,44 +1,20 @@
-'use client';
-
-import * as React from 'react';
-import { ColumnDef } from '@tanstack/react-table';
-import {
-  ContentNode,
-  isContentDirectoryNode,
-} from '~/lib/content/content-tree';
-import {
-  BlogExplorerDataTable,
-  collectExpandedState,
-} from '~/modules/blog/components/explorer/blog-explorer-data-table';
-import { ExplorerEntity } from '~/modules/blog/components/explorer/blog-explorer-entities';
-import { BlogExplorerProvider } from '~/modules/blog/components/explorer/blog-explorer-store';
+import { ContentFile } from '~/lib/content/content-tree';
+import { BlogExplorerFileNode } from '~/modules/blog/components/explorer/blog-explorer-file-node';
+import { BlogExplorerList } from '~/modules/blog/components/explorer/blog-explorer-list';
+import { cn } from '~/utils/style';
 
 interface BlogExplorerProps {
   className?: string;
-  data: ContentNode[];
-  columns: ColumnDef<ExplorerEntity>[];
+  files: ContentFile[];
 }
 
-const BlogExplorer = ({ className, data, columns }: BlogExplorerProps) => {
-  const initialExpandedState = React.useMemo(
-    () =>
-      collectExpandedState(
-        data,
-        (_, index) => index.toString(),
-        (row) => isContentDirectoryNode(row),
-        (row) => (isContentDirectoryNode(row) ? row.children : null)
-      ),
-    [data]
-  );
-
+const BlogExplorer = ({ className, files }: BlogExplorerProps) => {
   return (
-    <BlogExplorerProvider expanded={initialExpandedState}>
-      <BlogExplorerDataTable
-        className={className}
-        columns={columns}
-        data={data}
-      />
-    </BlogExplorerProvider>
+    <BlogExplorerList className={cn('', className)}>
+      {files.map((f) => (
+        <BlogExplorerFileNode key={f.slug} file={f} />
+      ))}
+    </BlogExplorerList>
   );
 };
 BlogExplorer.displayName = 'BlogExplorer';
