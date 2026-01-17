@@ -121,7 +121,7 @@ const SectionFooter = ({ children }: React.PropsWithChildren) => {
               inverse
               asChild
             >
-              <Link href='#contact'>Get in touch</Link>
+              <Link href='/#contact'>Get in touch</Link>
             </ButtonWithVideo>
           </div>
         </motion.footer>
