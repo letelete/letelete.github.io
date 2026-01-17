@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const useHasMultipleLines = <TElement extends HTMLElement>() => {
   const ref = React.useRef<TElement>(null);
