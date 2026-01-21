@@ -35,7 +35,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "framer-motion": "^11.2.11",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.23",
     "lottie-web": "^5.12.2",
     "lucide-react": "^0.402.0",
     "next": "14.1.1",
