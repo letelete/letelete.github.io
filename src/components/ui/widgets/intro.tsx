@@ -1,10 +1,8 @@
 'use client';
 
+import * as React from 'react';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-
 import { useLockScroll } from '~hooks/use-lock-document-scroll';
-
 import { Button } from '~ui/atoms/button';
 import { LAYOUT_ID_HOME_LOGO } from '~ui/atoms/motion';
 import { Typography } from '~ui/atoms/typography';
@@ -16,13 +14,8 @@ import {
 } from '~ui/organisms/prompter';
 import { HighlightPrompter } from '~ui/organisms/prompter/implementations';
 import { Logo } from '~ui/widgets/logo';
-
 import { cn } from '~utils/style';
 import { timeInMs } from '~utils/time';
-
-/* -------------------------------------------------------------------------------------------------
- * Intro
- * -----------------------------------------------------------------------------------------------*/
 
 const PREFERENCE_DO_NOT_SHOW_INTRO_KEY = 'intro:do-not-show:timestamp';
 const PREFERENCE_DO_NOT_SHOW_INTRO_TIME_IN_MS = timeInMs.hour * 2;
@@ -31,7 +24,7 @@ const PROMPTER_DURATION_PER_PART = 0.075;
 const PROMPTER_PART_TRANSITION_DURATION = PROMPTER_DURATION_PER_PART * 5;
 
 const PROMPTER_TEXT =
-  'Taste is maybe the biggest deciding factor in whether a product ends up *feeling* good or not, regardless of how much skill is involved.' as const;
+  'Taste is maybe the biggest deciding factor in whether a product ends up *feeling* good or not, regardless of how much skill is involved.';
 
 const prompterParts = createPrompterParts(
   PROMPTER_TEXT,
@@ -50,8 +43,6 @@ const PROMPTER_TEXT_ANIMATION_DURATION = prompterParts
 
 const QUOTE_TRANSITION_DURATION = PROMPTER_TEXT_ANIMATION_DURATION * 0.25;
 
-/* -----------------------------------------------------------------------------------------------*/
-
 interface IntroProps extends HTMLMotionProps<'div'> {}
 
 const Intro = ({ className, ...rest }: IntroProps) => {
@@ -60,15 +51,15 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     forceScrollPosition: 0,
   });
 
-  const [isCreditsVisible, setIsCreditsVisible] = useState(false);
-  const prompterHandle = useRef<PrompterHandle>(null);
+  const [isCreditsVisible, setIsCreditsVisible] = React.useState(false);
+  const prompterHandle = React.useRef<PrompterHandle>(null);
 
-  const [displayIntro, setDisplayIntro] = useState(true);
-  const [introCompleted, setIntroCompleted] = useState(false);
+  const [displayIntro, setDisplayIntro] = React.useState(true);
+  const [introCompleted, setIntroCompleted] = React.useState(false);
   const [userRequestedToSkipIntro, setUserRequestedToSkipIntro] =
-    useState(false);
+    React.useState(false);
 
-  const saveUserPreferenceToSkipIntro = useCallback(() => {
+  const saveUserPreferenceToSkipIntro = React.useCallback(() => {
     const nowTimestamp = new Date().getTime();
 
     localStorage.setItem(
@@ -77,7 +68,7 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     );
   }, []);
 
-  const checkUserPreferenceToSkipIntro = useCallback(() => {
+  const checkUserPreferenceToSkipIntro = React.useCallback(() => {
     if (process.env.NODE_ENV === 'development') {
       return true;
     }
@@ -106,23 +97,23 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     );
   }, []);
 
-  const cleanup = useCallback(() => {
+  const cleanup = React.useCallback(() => {
     unlockScroll();
   }, [unlockScroll]);
 
-  const handleIntroComplete = useCallback(() => {
+  const handleIntroComplete = React.useCallback(() => {
     setIntroCompleted(true);
     saveUserPreferenceToSkipIntro();
     cleanup();
   }, [cleanup, saveUserPreferenceToSkipIntro]);
 
-  const skipIntro = useCallback(() => {
+  const skipIntro = React.useCallback(() => {
     setUserRequestedToSkipIntro(true);
     saveUserPreferenceToSkipIntro();
     cleanup();
   }, [cleanup, saveUserPreferenceToSkipIntro]);
 
-  const partRenderer: PrompterRenderer = useCallback(
+  const partRenderer: PrompterRenderer = React.useCallback(
     (part) => (
       <Typography variant='heading' italic>
         {part.value}
@@ -131,7 +122,7 @@ const Intro = ({ className, ...rest }: IntroProps) => {
     []
   );
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const userPrefersToSkipIntro = checkUserPreferenceToSkipIntro();
     setDisplayIntro(!userPrefersToSkipIntro);
     if (userPrefersToSkipIntro) {
@@ -265,8 +256,6 @@ const Intro = ({ className, ...rest }: IntroProps) => {
 };
 
 Intro.displayName = 'Intro';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Intro };
 export type { IntroProps };

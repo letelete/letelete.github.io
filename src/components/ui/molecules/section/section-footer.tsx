@@ -1,7 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import {
-  MotionValue,
   motion,
   useMotionValueEvent,
   useScroll,
@@ -9,12 +9,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import Link from 'next/link';
-import { PropsWithChildren, useRef, useState } from 'react';
-
-import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~constants/index';
-
 import { useElementGeometry } from '~hooks/use-element-geometry';
-
 import { Button, ButtonWithVideo } from '~ui/atoms/button';
 import { Card } from '~ui/atoms/card';
 import { Copyrights } from '~ui/atoms/copyrights';
@@ -24,10 +19,7 @@ import { HeartButton } from '~ui/molecules/buttons/heart-button';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeadline } from '~ui/molecules/section/section-headline';
 import { Logo } from '~ui/widgets/logo';
-
-/* -------------------------------------------------------------------------------------------------
- * SectionFooter
- * -----------------------------------------------------------------------------------------------*/
+import { PORTFOLIO_GITHUB_REPOSITORY_URL } from '~/constants';
 
 const INITIAL_BACKGROUND_SIZE = 48;
 // The background shape is a circle. In a circle, the diagonal is equivalent to its diameter.
@@ -35,10 +27,10 @@ const INITIAL_BACKGROUND_DIAGONAL = INITIAL_BACKGROUND_SIZE;
 
 const MIN_FOOTER_CONTENT_HEIGHT_VH = 80;
 
-const SectionFooter = ({ children }: PropsWithChildren) => {
-  const [heartPhase, setHeartPhase] = useState<'last' | number>('last');
+const SectionFooter = ({ children }: React.PropsWithChildren) => {
+  const [heartPhase, setHeartPhase] = React.useState<'last' | number>('last');
 
-  const cardContainerRef = useRef<HTMLDivElement>(null);
+  const cardContainerRef = React.useRef<HTMLDivElement>(null);
 
   const [backgroundContainerRef, backgroundGeometry] =
     useElementGeometry<HTMLDivElement>();
@@ -58,7 +50,7 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
   });
 
   // Do not animate track anymore once the animation completes
-  const userSeenCompleteAnimation = useRef<boolean>(false);
+  const userSeenCompleteAnimation = React.useRef<boolean>(false);
   useMotionValueEvent(scrollYProgress, 'change', (value) => {
     if (value === 1.0) {
       userSeenCompleteAnimation.current = true;
@@ -70,7 +62,7 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
   );
   const animationProgressSpring = useSpring(animationProgress, {
     bounce: 0,
-  }) as MotionValue<number>;
+  });
 
   const scale = useTransform(
     animationProgressSpring,
@@ -158,10 +150,6 @@ const SectionFooter = ({ children }: PropsWithChildren) => {
 
 SectionFooter.displayName = 'SectionFooter';
 
-/* -------------------------------------------------------------------------------------------------
- * OpenSourceHeadline
- * -----------------------------------------------------------------------------------------------*/
-
 const OpenSourceHeadline = () => (
   <SectionHeadline disablePadding inverse>
     <span className='text-foreground-primary'>
@@ -183,10 +171,6 @@ const OpenSourceHeadline = () => (
 );
 
 OpenSourceHeadline.displayName = 'OpenSourceHeadline';
-
-/* -------------------------------------------------------------------------------------------------
- * ArtistsHeadline
- * -----------------------------------------------------------------------------------------------*/
 
 const artists = [
   {
@@ -215,8 +199,6 @@ const artists = [
   },
 ];
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const ArtistsHeadline = () => (
   <SectionHeadline disablePadding inverse>
     Thanks to{' '}
@@ -242,7 +224,5 @@ const ArtistsHeadline = () => (
 );
 
 ArtistsHeadline.displayName = 'ArtistsHeadline';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { SectionFooter };

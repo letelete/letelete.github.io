@@ -1,10 +1,8 @@
-import { ComponentPropsWithoutRef } from 'react';
-
+import * as React from 'react';
 import { Copyrights } from '~ui/atoms/copyrights';
-
 import { cn } from '~utils/style';
 
-export interface FooterProps extends ComponentPropsWithoutRef<'footer'> {}
+export interface FooterProps extends React.ComponentPropsWithoutRef<'footer'> {}
 
 export const Footer = ({ className, children, ...rest }: FooterProps) => {
   return (

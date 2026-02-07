@@ -1,19 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-
-import { SOCIALS } from '~constants/index';
-
 import { Button } from '~ui/atoms/button';
 import { Icon, IconProps } from '~ui/atoms/icon';
 import { SectionContainer } from '~ui/molecules/section/section-container';
 import { SectionHeader } from '~ui/molecules/section/section-header';
-
 import { cn } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * ContactSection
- * -----------------------------------------------------------------------------------------------*/
+import { SOCIALS } from '~/constants';
 
 const ContactSection = () => {
   return (
@@ -76,8 +69,6 @@ const ContactSection = () => {
 
 ContactSection.displayName = 'ContactSection';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 interface Social {
   id: string;
   icon: {
@@ -107,22 +98,6 @@ const socials: Social[] = [
     link: {
       href: SOCIALS.youtube.url,
       label: SOCIALS.youtube.handle,
-    },
-  },
-  {
-    id: 'twitter',
-    icon: {
-      name: 'twitter',
-      color: undefined,
-    },
-    content: [
-      { text: 'Be up-to-date', cta: true },
-      { text: ' with my Frontend findings on ' },
-      { text: 'X (Twitter):', highlighted: true },
-    ],
-    link: {
-      href: SOCIALS.twitter.url,
-      label: SOCIALS.twitter.handle,
     },
   },
   {
@@ -190,7 +165,5 @@ const socials: Social[] = [
     },
   },
 ];
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ContactSection };

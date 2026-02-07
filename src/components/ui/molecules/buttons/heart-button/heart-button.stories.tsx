@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { HeartButton } from '~ui/molecules/buttons/heart-button';
 
 const meta = {

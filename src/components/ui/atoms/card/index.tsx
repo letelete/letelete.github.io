@@ -1,18 +1,13 @@
+import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * Card
- * -----------------------------------------------------------------------------------------------*/
-
-interface CardProps extends ComponentPropsWithoutRef<'div'> {
+interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   asChild?: boolean;
   disablePadding?: boolean;
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ asChild, className, disablePadding, ...rest }, ref) => {
     const Comp = asChild ? Slot : 'div';
 
@@ -31,8 +26,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = 'Card';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Card };
 export type { CardProps };

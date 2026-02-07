@@ -1,36 +1,34 @@
 'use client';
 
+import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
 import { Button } from '~ui/atoms/button';
 import {
   DEFAULT_THEME,
   THEMES,
   type Theme,
 } from '~ui/atoms/theme/theme-config';
-
 import { cn } from '~utils/style';
-
-interface ThemeToggleProps {
-  className?: string;
-}
 
 const themeToIcon = {
   light: Sun,
   dark: Moon,
 } as const;
 
-const ThemeToggle = ({ className }: ThemeToggleProps) => {
+const ThemeToggle = ({
+  className,
+  ...rest
+}: React.ComponentPropsWithoutRef<typeof Button>) => {
   const { setTheme, theme } = useTheme();
 
   const currentTheme = (theme ?? DEFAULT_THEME) as Theme;
-  const Icon = themeToIcon[currentTheme as keyof typeof themeToIcon];
+  const Icon = themeToIcon[currentTheme];
 
   return (
     <Button
-      className={cn(className, 'relative flex items-center justify-center')}
+      className={cn('relative flex items-center justify-center', className)}
       variant='ghost'
       size='icon'
       onClick={() =>
@@ -40,6 +38,7 @@ const ThemeToggle = ({ className }: ThemeToggleProps) => {
           ] ?? DEFAULT_THEME
         )
       }
+      {...rest}
     >
       <AnimatePresence mode='popLayout'>
         <motion.div

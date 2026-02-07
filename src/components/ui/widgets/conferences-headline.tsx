@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
-
 import { LocationTag } from '~ui/atoms/location-tag';
 import { Typography, TypographyProps } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 const conferences = [

@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-
 import { Button } from '~ui/atoms/button';
 import { Icon } from '~ui/atoms/icon';
-
 import { cn, tw } from '~utils/style';
 
 export interface GoBackButtonProps {

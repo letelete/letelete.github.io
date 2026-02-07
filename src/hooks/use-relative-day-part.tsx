@@ -1,10 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-
+import * as React from 'react';
 import { timeInMs } from '~utils/time';
-
-/* -------------------------------------------------------------------------------------------------
- * useRelativeDayPart
- * -----------------------------------------------------------------------------------------------*/
 
 const dayParts = ['morning', 'afternoon', 'evening', 'night'] as const;
 const dayPartPhases = ['early', 'mid', 'late'] as const;
@@ -66,8 +61,6 @@ const dayPartsInfoDescending = startHoursDescending.map(
   }
 );
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const DEFAULT_REFRESH_DELAY = timeInMs.minute;
 
 const generateLatestTimestamp = () => {
@@ -75,11 +68,11 @@ const generateLatestTimestamp = () => {
 };
 
 const useRelativeDayPart = (refreshDelay = DEFAULT_REFRESH_DELAY) => {
-  const [latestTimestamp, setLatestTimestamp] = useState(
+  const [latestTimestamp, setLatestTimestamp] = React.useState(
     generateLatestTimestamp()
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     const intervalId = setInterval(
       () => setLatestTimestamp(generateLatestTimestamp()),
       refreshDelay
@@ -88,7 +81,7 @@ const useRelativeDayPart = (refreshDelay = DEFAULT_REFRESH_DELAY) => {
     return () => clearInterval(intervalId);
   }, [refreshDelay]);
 
-  return useMemo<RelativeDayPart>(() => {
+  return React.useMemo<RelativeDayPart>(() => {
     const date = new Date(latestTimestamp);
     const hour = date.getHours();
 
@@ -106,7 +99,5 @@ const useRelativeDayPart = (refreshDelay = DEFAULT_REFRESH_DELAY) => {
 };
 
 useRelativeDayPart.displayName = 'useRelativeDayPart';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { useRelativeDayPart };

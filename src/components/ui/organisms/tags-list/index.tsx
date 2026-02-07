@@ -1,10 +1,8 @@
+import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ComponentPropsWithoutRef, useCallback } from 'react';
-
 import { Button } from '~ui/atoms/button';
 import { FadeInMotion } from '~ui/atoms/motion';
 import { Tag, TagProps } from '~ui/atoms/tag';
-
 import { cn } from '~utils/style';
 
 export interface TagItem {
@@ -19,7 +17,7 @@ const isTagItem = (tag: TagItemOrTagValue): tag is TagItem => {
 };
 
 export interface TagsListProps
-  extends Omit<ComponentPropsWithoutRef<'ul'>, 'onChange'> {
+  extends Omit<React.ComponentPropsWithoutRef<'ul'>, 'onChange'> {
   tags: TagItemOrTagValue[];
   selected?: TagItem['value'][];
   selectable?: boolean;
@@ -37,11 +35,11 @@ export const TagsList = ({
   onChange,
   ...rest
 }: TagsListProps) => {
-  const handleClearAll = useCallback(() => {
+  const handleClearAll = React.useCallback(() => {
     onChange?.([]);
   }, [onChange]);
 
-  const toggleSelected = useCallback(
+  const toggleSelected = React.useCallback(
     (tag: string) => {
       const newSelectedTags = new Set(selected);
 

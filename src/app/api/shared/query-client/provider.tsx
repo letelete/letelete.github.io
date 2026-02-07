@@ -1,8 +1,7 @@
 'use client';
 
+import * as React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode } from 'react';
-
 import { makeQueryClient } from '~api/shared/query-client';
 
 let browserQueryClient: QueryClient | undefined = undefined;
@@ -19,7 +18,7 @@ function getQueryClient() {
 export const SSRQueryClientProvider = ({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) => {
   const queryClient = getQueryClient();
 

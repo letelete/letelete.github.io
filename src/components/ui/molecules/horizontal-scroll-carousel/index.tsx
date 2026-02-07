@@ -1,23 +1,15 @@
+import * as React from 'react';
 import {
   HTMLMotionProps,
   motion,
   useScroll,
   useTransform,
 } from 'framer-motion';
-import {
-  ComponentPropsWithoutRef,
-  RefObject,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-} from 'react';
-
 import { useElementGeometry } from '~hooks/use-element-geometry';
-
 import { cn } from '~utils/style';
 
 export interface HorizontalScrollCarouselProps
-  extends ComponentPropsWithoutRef<'div'> {
+  extends React.ComponentPropsWithoutRef<'div'> {
   reversed?: boolean;
   childrenContainerClass?: string;
   /**
@@ -27,7 +19,7 @@ export interface HorizontalScrollCarouselProps
   scrollHeightFactor?: number;
 }
 
-const HorizontalScrollCarousel = forwardRef<
+const HorizontalScrollCarousel = React.forwardRef<
   HTMLDivElement,
   HorizontalScrollCarouselProps
 >(
@@ -42,8 +34,8 @@ const HorizontalScrollCarousel = forwardRef<
     },
     handleRef
   ) => {
-    const targetRef = useRef<HTMLDivElement>(null);
-    useImperativeHandle(handleRef, () => targetRef.current!);
+    const targetRef = React.useRef<HTMLDivElement>(null);
+    React.useImperativeHandle(handleRef, () => targetRef.current!);
 
     const [childrenContainerRef, childrenContainerGeometry] =
       useElementGeometry<HTMLDivElement>();
@@ -100,7 +92,7 @@ const HorizontalScrollCarousel = forwardRef<
 HorizontalScrollCarousel.displayName = 'HorizontalScrollingCarousel';
 
 export interface HorizontalScrollContentContainerProps
-  extends ComponentPropsWithoutRef<'div'> {}
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 const HorizontalScrollContentContainer = ({
   children,
@@ -118,7 +110,7 @@ export interface HorizontalScrollButtonContainerProps
   reversed?: boolean;
 }
 
-const HorizontalScrollButtonContainer = forwardRef<
+const HorizontalScrollButtonContainer = React.forwardRef<
   HTMLDivElement,
   HorizontalScrollButtonContainerProps
 >(({ reversed, children, ...rest }, horizontalScrollCarouselRef) => {
@@ -135,7 +127,7 @@ const HorizontalScrollButtonContainer = forwardRef<
       initial={{ opacity: 0, x: reversed ? -16 : 16 }}
       transition={{ type: 'spring', bounce: 0 }}
       viewport={{
-        root: horizontalScrollCarouselRef as RefObject<HTMLDivElement>,
+        root: horizontalScrollCarouselRef as React.RefObject<HTMLDivElement>,
         amount: 0.8,
         once: true,
       }}

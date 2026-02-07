@@ -1,10 +1,5 @@
 import { SVGMotionProps, motion } from 'framer-motion';
-
 import { tw } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * Logo
- * -----------------------------------------------------------------------------------------------*/
 
 const VIEWBOX_PADDING_Y = 16;
 
@@ -14,7 +9,7 @@ interface LogoProps extends Partial<SVGMotionProps<SVGElement>> {
   variant?: 'dark' | 'light';
 }
 
-const Logo = ({ width = 85, height, variant = 'dark', ...rest }: LogoProps) => {
+const Logo = ({ width = 50, height, variant = 'dark', ...rest }: LogoProps) => {
   const color =
     variant === 'dark'
       ? tw.theme.colors.ctx.primary.fg.solid
@@ -57,8 +52,6 @@ const Logo = ({ width = 85, height, variant = 'dark', ...rest }: LogoProps) => {
 
 Logo.displayName = 'Logo';
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const FunPath = ({ ...rest }: SVGMotionProps<SVGPathElement>) => {
   return (
     <motion.path
@@ -72,8 +65,6 @@ const FunPath = ({ ...rest }: SVGMotionProps<SVGPathElement>) => {
 };
 
 FunPath.displayPath = 'FunPath';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { Logo };
 export type { LogoProps };

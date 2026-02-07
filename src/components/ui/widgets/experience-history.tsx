@@ -1,5 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
-
+import * as React from 'react';
 import {
   LaptopEmoji,
   ManClimbingEmoji,
@@ -12,14 +11,10 @@ import {
   ExperienceSegment,
   ExperienceSegmentProps,
 } from '~ui/molecules/experience-segment';
-
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * ExperienceHistory
- * -----------------------------------------------------------------------------------------------*/
-
-interface ExperienceHistoryProps extends ComponentPropsWithoutRef<'div'> {}
+interface ExperienceHistoryProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
   <figure
@@ -46,8 +41,6 @@ const ExperienceHistory = ({ className, ...rest }: ExperienceHistoryProps) => (
     )}
   </figure>
 );
-
-/* -----------------------------------------------------------------------------------------------*/
 
 const experience = [
   {
@@ -164,8 +157,6 @@ function parseDate(date: string) {
 function getRandomUUID() {
   return crypto.randomUUID();
 }
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ExperienceHistory };
 export type { ExperienceHistoryProps };

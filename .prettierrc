@@ -14,18 +14,12 @@
   ],
   "tailwindFunctions": ["clsx", "cn", "cva"],
   "importOrder": [
+    "^react$",
     "<THIRD_PARTY_MODULES>",
-    "^~api/(.*)$",
-    "^~constants/(.*)$",
-    "^~hooks/(.*)$",
-    "^~lib/(.*)$",
-    "^~modules/(.*)$",
-    "^~services/(.*)$",
-    "^~styles/(.*)$",
-    "^~ui/(.*)$",
-    "^~utils/(.*)$",
-    "^[./]"
+    "^~(api|hooks|lib|modules|services|styles|ui|utils)/(.*)$",
+    "^~/(.*)$",
+    ".*\\.css$"
   ],
-  "importOrderSeparation": true,
+  "importOrderSeparation": false,
   "importOrderSortSpecifiers": true
 }

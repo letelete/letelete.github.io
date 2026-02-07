@@ -1,17 +1,11 @@
 'use client';
 
 import { ImageItem } from '~lib/images/provider';
-
 import {
   ParallaxGallery,
   ParallaxGalleryProps,
 } from '~ui/organisms/parallax-gallery';
-
 import { cn } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * AuthorPortraitsGallery
- * -----------------------------------------------------------------------------------------------*/
 
 interface AuthorPortraitsGalleryProps
   extends Omit<Partial<ParallaxGalleryProps>, 'items'> {
@@ -31,8 +25,6 @@ const AuthorPortraitsGallery = ({
     />
   );
 };
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AuthorPortraitsGallery };
 export type { AuthorPortraitsGalleryProps };

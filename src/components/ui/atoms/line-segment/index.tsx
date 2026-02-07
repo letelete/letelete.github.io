@@ -1,10 +1,10 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
-
+import * as React from 'react';
 import { cn } from '~utils/style';
 
-export interface LineSegmentProps extends ComponentPropsWithoutRef<'div'> {
-  leading: ReactNode;
-  trailing: ReactNode;
+export interface LineSegmentProps
+  extends React.ComponentPropsWithoutRef<'div'> {
+  leading: React.ReactNode;
+  trailing: React.ReactNode;
 }
 
 export const LineSegment = ({

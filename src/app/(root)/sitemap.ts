@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
-
-import { BASE_URL, BLOG_PATH } from '~constants/index';
+import { BASE_URL, BLOG_PATH } from '~/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

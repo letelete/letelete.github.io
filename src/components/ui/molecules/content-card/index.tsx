@@ -1,26 +1,10 @@
+import * as React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-  Children,
-  ComponentPropsWithoutRef,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-  useCallback,
-} from 'react';
-
-import { ContentType } from '~lib/content/provider';
-
 import { Card, CardProps } from '~ui/atoms/card';
 import { TextSkeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-import { ContentIcon } from '~ui/molecules/content-icon';
-
-import { cn, tw } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * ContentCard
- * -----------------------------------------------------------------------------------------------*/
+import { cn } from '~utils/style';
 
 const MotionLink = motion(Link);
 
@@ -28,9 +12,8 @@ interface ContentCardProps extends CardProps {
   label: string;
   href: string;
   title?: string;
-  display?: ReactNode;
-  displayPlaceholder?: ReactNode;
-  contentType?: ContentType;
+  display?: React.ReactNode;
+  displayPlaceholder?: React.ReactNode;
 }
 
 const ContentCard = ({
@@ -39,11 +22,10 @@ const ContentCard = ({
   title,
   display,
   displayPlaceholder,
-  contentType,
   className,
   ...rest
 }: ContentCardProps) => {
-  const renderTitle = useCallback(() => {
+  const renderTitle = React.useCallback(() => {
     if (!title) {
       return (
         <div className='mt-1 flex w-full flex-col gap-y-1.5'>
@@ -65,7 +47,7 @@ const ContentCard = ({
     );
   }, [title]);
 
-  const renderDisplay = useCallback(
+  const renderDisplay = React.useCallback(
     () => (
       <div className='relative mt-8 flex aspect-video w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-ctx-secondary'>
         {display ?? displayPlaceholder ?? (
@@ -106,16 +88,6 @@ const ContentCard = ({
         {renderTitle()}
 
         {renderDisplay()}
-
-        {contentType ? (
-          <div className='absolute bottom-2 left-2 aspect-square h-8 w-8 rounded-full bg-ctx-button p-2 md:bottom-3 md:left-3 md:h-12 md:w-12 md:p-3'>
-            <ContentIcon
-              size={'100%'}
-              color={tw.theme.colors.ctx.button.fg.solid}
-              contentType={contentType}
-            />
-          </div>
-        ) : null}
       </MotionLink>
     </Card>
   );
@@ -123,11 +95,8 @@ const ContentCard = ({
 
 ContentCard.displayName = 'ContentCard';
 
-/* -------------------------------------------------------------------------------------------------
- * ContentCardContainer
- * -----------------------------------------------------------------------------------------------*/
-
-interface ContentCardContainerProps extends ComponentPropsWithoutRef<'div'> {}
+interface ContentCardContainerProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 const ContentCardContainer = ({
   className,
@@ -142,9 +111,9 @@ const ContentCardContainer = ({
       )}
       {...rest}
     >
-      {Children.map(children, (child) => {
-        if (isValidElement<{ className: string }>(child)) {
-          return cloneElement(child, {
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement<{ className: string }>(child)) {
+          return React.cloneElement(child, {
             className: cn(
               'relative h-fit max-sm:nth-[2n-1]:-mt-12 sm:nth-[3n-1]:-mt-12 sm:nth-[3n-2]:-mt-24'
             ),
@@ -157,8 +126,6 @@ const ContentCardContainer = ({
 };
 
 ContentCardContainer.displayName = 'ContentCardContainer';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { ContentCard, ContentCardContainer };
 export type { ContentCardProps, ContentCardContainerProps };

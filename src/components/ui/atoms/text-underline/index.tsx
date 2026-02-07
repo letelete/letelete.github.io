@@ -1,9 +1,9 @@
+import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ComponentPropsWithoutRef } from 'react';
-
 import { cn } from '~utils/style';
 
-export interface TextUnderlineProps extends ComponentPropsWithoutRef<'div'> {
+export interface TextUnderlineProps
+  extends React.ComponentPropsWithoutRef<'div'> {
   /**
    * Allows to animate the underline within the given scopeId only.
    */

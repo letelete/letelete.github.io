@@ -7,42 +7,35 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    /* Linting */
+    "plugins": [{ "name": "next" }],
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
-    /* Paths */
     "paths": {
-      "~api/*": ["src/app/api/*"],
-      "~constants/*": ["src/constants/*"],
-      "~hooks/*": ["src/hooks/*"],
-      "~lib/*": ["src/lib/*"],
-      "~modules/*": ["src/modules/*"],
-      "~services/*": ["src/services/*"],
-      "~styles/*": ["src/styles/*"],
-      "~ui/*": ["src/components/ui/*"],
-      "~utils/*": ["src/utils/*"]
+      "~/*": ["./src/*"],
+      "~api/*": ["./src/app/api/*"],
+      "~hooks/*": ["./src/hooks/*"],
+      "~lib/*": ["./src/lib/*"],
+      "~modules/*": ["./src/modules/*"],
+      "~services/*": ["./src/services/*"],
+      "~ui/*": ["./src/components/ui/*"],
+      "~utils/*": ["./src/utils/*"]
     }
   },
   "include": [
     "next-env.d.ts",
+    "src/global.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     ".next/types/**/*.ts",
-    "src/lib/articles/optimizing-your-react-application-for-the-interaction-to-next-paint-inp-web-vitals-metric.mdx"
+    ".storybook/**/*.ts"
   ],
   "exclude": ["node_modules", ".next"]
 }

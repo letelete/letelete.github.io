@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { apiMiddleware } from '~api/shared/middleware';
 
 export async function middleware(req: NextRequest) {

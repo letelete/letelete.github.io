@@ -1,11 +1,18 @@
+import * as React from 'react';
 import {
   AlertOctagon,
   ArrowLeft,
   ArrowUp,
+  ArrowUpDown,
   ArrowUpRight,
   ChevronDown,
   ChevronUp,
+  File,
+  FileText,
+  Folder,
   Github,
+  Heart,
+  Home,
   Image,
   Lightbulb,
   Linkedin,
@@ -13,6 +20,7 @@ import {
   Mail,
   MessageCircle,
   MicVocal,
+  Repeat2,
   Rocket,
   Send,
   Square,
@@ -20,15 +28,8 @@ import {
   Volume2,
   Youtube,
 } from 'lucide-react';
-import { FC } from 'react';
-
 import { RedditIcon, StackOverflowIcon } from '~ui/atoms/icon/custom';
-
 import { cn, tw } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * Icon
- * -----------------------------------------------------------------------------------------------*/
 
 interface IconProps extends LucideProps {
   name: IconName;
@@ -61,21 +62,27 @@ const Icon = ({ size = 16, name, className, ...props }: IconProps) => {
   );
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const icons = new Map([
   ['alert-octagon', AlertOctagon],
   ['arrow-left', ArrowLeft],
+  ['arrow-up-down', ArrowUpDown],
   ['arrow-up-right', ArrowUpRight],
   ['arrow-up', ArrowUp],
   ['chevron-down', ChevronDown],
   ['chevron-up', ChevronUp],
+  ['file-text', FileText],
+  ['file', File],
+  ['folder', Folder],
+  ['folder', Folder],
   ['github', Github],
+  ['heart', Heart],
+  ['home', Home],
   ['image', Image],
   ['lightbulb', Lightbulb],
   ['linkedin', Linkedin],
   ['mail', Mail],
   ['message-circle', MessageCircle],
+  ['repeat', Repeat2],
   ['mic-vocal', MicVocal],
   ['reddit', RedditIcon],
   ['rocket', Rocket],
@@ -85,9 +92,7 @@ const icons = new Map([
   ['twitter', Twitter],
   ['volume-2', Volume2],
   ['youtube', Youtube],
-] as const satisfies readonly (readonly [string, FC<LucideProps>])[]);
-
-/* -----------------------------------------------------------------------------------------------*/
+] as const satisfies readonly (readonly [string, React.FC<LucideProps>])[]);
 
 export { Icon, icons };
 export type { IconProps, IconName };

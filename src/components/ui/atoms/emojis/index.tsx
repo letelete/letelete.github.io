@@ -1,7 +1,3 @@
-import Image, { ImageProps } from 'next/image';
-
-import { cn } from '~utils/style';
-
 import coffee from '/public/emojis/coffee.webp';
 import laptop from '/public/emojis/laptop.webp';
 import manClimbing from '/public/emojis/man-climbing.webp';
@@ -13,6 +9,8 @@ import thinkingFace from '/public/emojis/thinking-face.webp';
 import trophy from '/public/emojis/trophy.webp';
 import unicorn from '/public/emojis/unicorn.webp';
 import videoCamera from '/public/emojis/video-camera.webp';
+import Image, { ImageProps } from 'next/image';
+import { cn } from '~utils/style';
 
 export type BaseEmojiProps = ImageProps;
 

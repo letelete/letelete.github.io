@@ -1,7 +1,5 @@
 import { MDXComponents } from 'mdx/types';
-
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export const Markdown: MDXComponents = {

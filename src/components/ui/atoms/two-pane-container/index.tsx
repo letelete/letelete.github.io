@@ -1,11 +1,10 @@
-import { ReactNode } from 'react';
-import { ComponentPropsWithoutRef } from 'react';
-
+import * as React from 'react';
 import { cn } from '~utils/style';
 
-export interface TwoPaneContainerProps extends ComponentPropsWithoutRef<'div'> {
-  leading: ReactNode;
-  trailing: ReactNode;
+export interface TwoPaneContainerProps
+  extends React.ComponentPropsWithoutRef<'div'> {
+  leading: React.ReactNode;
+  trailing: React.ReactNode;
   leadingClassName?: string;
   trailingClassName?: string;
 }

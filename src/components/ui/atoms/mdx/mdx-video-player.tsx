@@ -1,9 +1,7 @@
+import * as React from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-
 import { Skeleton } from '~ui/atoms/skeleton';
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
 export interface MdxVideoPlayerProps {
@@ -19,7 +17,7 @@ export const MdxVideoPlayer = ({
   src,
   title,
 }: MdxVideoPlayerProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   return (

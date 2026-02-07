@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
 import { SocialButtons } from './index';
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'Features/SocialButtons',

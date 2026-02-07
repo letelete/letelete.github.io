@@ -1,12 +1,9 @@
-import { ComponentPropsWithoutRef } from 'react';
-
-import { SOCIALS } from '~constants/index';
-
+import * as React from 'react';
 import { Button } from '~ui/atoms/button';
 import { IconProps } from '~ui/atoms/icon';
 import { IconLink } from '~ui/atoms/icon-link';
-
 import { cn } from '~utils/style';
+import { SOCIALS } from '~/constants';
 
 interface SocialEntry {
   id: string;
@@ -41,7 +38,8 @@ const socials: SocialEntry[] = [
   },
 ];
 
-export interface SocialButtonsProps extends ComponentPropsWithoutRef<'div'> {}
+export interface SocialButtonsProps
+  extends React.ComponentPropsWithoutRef<'div'> {}
 
 export const SocialButtons = ({ className, ...rest }: SocialButtonsProps) => {
   return (

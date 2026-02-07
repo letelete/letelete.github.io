@@ -1,6 +1,5 @@
+import * as React from 'react';
 import { Variant, motion } from 'framer-motion';
-import { forwardRef, useCallback } from 'react';
-
 import {
   Prompter,
   PrompterHandle,
@@ -8,10 +7,6 @@ import {
   PrompterProps,
   PrompterRenderer,
 } from '~ui/organisms/prompter';
-
-/* -------------------------------------------------------------------------------------------------
- * HighlightPrompter
- * -----------------------------------------------------------------------------------------------*/
 
 type HighlightPrompterPlayEvent = (
   part: PrompterPart,
@@ -28,7 +23,10 @@ interface HighlightPrompterProps extends Omit<PrompterProps, 'renderer'> {
   onPlayComplete?: HighlightPrompterPlayEvent;
 }
 
-const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
+const HighlightPrompter = React.forwardRef<
+  PrompterHandle,
+  HighlightPrompterProps
+>(
   (
     {
       inactiveStyle = { opacity: 0.34, filter: 'blur(8px)' },
@@ -41,7 +39,7 @@ const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
     },
     ref
   ) => {
-    const partContentRenderer: PrompterRenderer = useCallback(
+    const partContentRenderer: PrompterRenderer = React.useCallback(
       (part, index, params) => {
         if (partRenderer) {
           return partRenderer(part, index, params);
@@ -54,7 +52,7 @@ const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
       [partRenderer]
     );
 
-    const renderer: PrompterRenderer = useCallback(
+    const renderer: PrompterRenderer = React.useCallback(
       (_part, index, params) => {
         return (
           <div className='flex flex-wrap gap-0.5'>
@@ -99,8 +97,6 @@ const HighlightPrompter = forwardRef<PrompterHandle, HighlightPrompterProps>(
 );
 
 HighlightPrompter.displayName = 'HighlightPrompter';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { HighlightPrompter };
 export type { HighlightPrompterProps };

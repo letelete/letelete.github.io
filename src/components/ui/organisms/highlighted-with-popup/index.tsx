@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   AnimatePresence,
   HTMLMotionProps,
@@ -6,28 +7,14 @@ import {
   motion,
   useSpring,
 } from 'framer-motion';
-import {
-  PropsWithChildren,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
-  forwardRef,
-  useRef,
-  useState,
-} from 'react';
-
 import { Video, VideoProps } from '~ui/atoms/video';
-
 import { cn, tw } from '~utils/style';
-
-/* -------------------------------------------------------------------------------------------------
- * Highlighted
- * -----------------------------------------------------------------------------------------------*/
 
 const getRelativeCoordinates = <
   T extends HTMLElement = HTMLElement,
   E = MouseEvent,
 >(
-  event: ReactMouseEvent<T, E>,
+  event: React.MouseEvent<T, E>,
   referenceElement: T
 ) => {
   const position = {
@@ -53,8 +40,6 @@ const getRelativeCoordinates = <
   };
 };
 
-/* -----------------------------------------------------------------------------------------------*/
-
 const popupPositionSpringConfig = {
   bounce: 0,
   stiffness: 100,
@@ -62,7 +47,7 @@ const popupPositionSpringConfig = {
 } as const satisfies SpringOptions;
 
 interface HighlightedWithPopupProps extends HTMLMotionProps<'div'> {
-  renderPopupContent: () => ReactNode;
+  renderPopupContent: () => React.ReactNode;
   popupContainerClassName?: string;
 }
 
@@ -72,10 +57,10 @@ const HighlightedWithPopup = ({
   popupContainerClassName,
   renderPopupContent,
   ...rest
-}: PropsWithChildren<HighlightedWithPopupProps>) => {
-  const [hovering, setHovering] = useState(false);
-  const containerRef = useRef<HTMLSpanElement>(null);
-  const popupRef = useRef<HTMLSpanElement>(null);
+}: React.PropsWithChildren<HighlightedWithPopupProps>) => {
+  const [hovering, setHovering] = React.useState(false);
+  const containerRef = React.useRef<HTMLSpanElement>(null);
+  const popupRef = React.useRef<HTMLSpanElement>(null);
 
   const x = useSpring(0, popupPositionSpringConfig);
   const y = useSpring(0, popupPositionSpringConfig);
@@ -140,21 +125,16 @@ const HighlightedWithPopup = ({
 
 HighlightedWithPopup.displayName = 'HighlightedWithPopup';
 
-/* -------------------------------------------------------------------------------------------------
- * PopupVideoContent
- * -----------------------------------------------------------------------------------------------*/
-
 interface PopupVideoContentProps extends VideoProps {}
 
-const PopupVideoContent = forwardRef<HTMLVideoElement, PopupVideoContentProps>(
-  ({ width = '426', height = '240', ...rest }, ref) => (
-    <Video ref={ref} width={width} height={height} {...rest} />
-  )
-);
+const PopupVideoContent = React.forwardRef<
+  HTMLVideoElement,
+  PopupVideoContentProps
+>(({ width = '426', height = '240', ...rest }, ref) => (
+  <Video ref={ref} width={width} height={height} {...rest} />
+));
 
 PopupVideoContent.displayName = 'PopupVideoContent';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { HighlightedWithPopup, PopupVideoContent };
 export type { HighlightedWithPopupProps, PopupVideoContentProps };

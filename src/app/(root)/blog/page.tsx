@@ -1,28 +1,19 @@
-import { ContentType, getAllContent } from '~lib/content/provider';
-
-import { Blog } from '~modules/blog';
-
-const HIGHLIGHTED_CONTENT_PRIORITY = [
-  'article',
-  'youtube-video',
-  'talk',
-] as ContentType[];
+import { notFound } from 'next/navigation';
+import { getBlogPayload } from '~lib/content/provider';
+import { BlogViewRegistrar } from '~/modules/blog/components/views-registrar/blog-view-registrar';
+import { BlogHomePage } from '~/modules/blog/pages/home';
 
 export default async function BlogPage() {
-  const contents = await getAllContent();
-  const publishedContent = contents.filter((content) => content.published);
-  const highlightedContents = publishedContent
-    .sort((a, b) => {
-      const aPriority = HIGHLIGHTED_CONTENT_PRIORITY.indexOf(a.type);
-      const bPriority = HIGHLIGHTED_CONTENT_PRIORITY.indexOf(b.type);
-      return aPriority - bPriority;
-    })
-    .slice(0, 3);
+  const payload = await getBlogPayload();
+
+  if (!payload.root) {
+    return notFound();
+  }
 
   return (
-    <Blog
-      contents={publishedContent}
-      highlightedContents={highlightedContents}
-    />
+    <>
+      <BlogViewRegistrar slug={payload.root.slug} />
+      <BlogHomePage payload={payload} />
+    </>
   );
 }

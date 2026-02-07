@@ -1,25 +1,15 @@
 'use client';
 
+import * as React from 'react';
 import {
   HTMLMotionProps,
   UseInViewOptions,
   motion,
   useInView,
 } from 'framer-motion';
-import {
-  Children,
-  ComponentPropsWithoutRef,
-  ReactElement,
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from 'react';
 
-export interface NavigatableProps extends ComponentPropsWithoutRef<'div'> {
+export interface NavigatableProps
+  extends React.ComponentPropsWithoutRef<'div'> {
   onSectionInView: (sectionId: string) => void;
   scrollIntoViewOptions?: ScrollIntoViewOptions;
   inViewOptions?: UseInViewOptions;
@@ -39,7 +29,10 @@ export interface NavigatableSectionHandler {
   scrollIntoView: (arg: ScrollIntoViewOptions | boolean) => void;
 }
 
-const NavigatablePrimitive = forwardRef<NavigatableHandler, NavigatableProps>(
+const NavigatablePrimitive = React.forwardRef<
+  NavigatableHandler,
+  NavigatableProps
+>(
   (
     {
       onSectionInView,
@@ -55,10 +48,10 @@ const NavigatablePrimitive = forwardRef<NavigatableHandler, NavigatableProps>(
     },
     handler
   ) => {
-    const sectionRefs = useRef<NavigatableSectionHandler[]>([]);
-    const sectionIdsOrder = useRef<string[]>([]);
+    const sectionRefs = React.useRef<NavigatableSectionHandler[]>([]);
+    const sectionIdsOrder = React.useRef<string[]>([]);
 
-    useImperativeHandle(handler, () => ({
+    React.useImperativeHandle(handler, () => ({
       scrollTo: (sectionId) => {
         const index = sectionIdsOrder.current.findIndex(
           (value) => value === sectionId
@@ -72,7 +65,7 @@ const NavigatablePrimitive = forwardRef<NavigatableHandler, NavigatableProps>(
       },
     }));
 
-    const handleSectionInView = useCallback(
+    const handleSectionInView = React.useCallback(
       (sectionId: string) => {
         onSectionInView(sectionId);
       },
@@ -81,12 +74,12 @@ const NavigatablePrimitive = forwardRef<NavigatableHandler, NavigatableProps>(
 
     return (
       <div {...rest}>
-        {Children.map(children, (child, index) => {
-          if (!isValidElement(child)) {
+        {React.Children.map(children, (child, index) => {
+          if (!React.isValidElement(child)) {
             return null;
           }
 
-          return cloneElement(child as ReactElement, {
+          return React.cloneElement(child as React.ReactElement, {
             ref: (ref: NavigatableSectionHandler) => {
               if (!ref) {
                 return null;
@@ -105,21 +98,21 @@ const NavigatablePrimitive = forwardRef<NavigatableHandler, NavigatableProps>(
 
 NavigatablePrimitive.displayName = 'Navigatable';
 
-const NavigatableSection = forwardRef<
+const NavigatableSection = React.forwardRef<
   NavigatableSectionHandler,
   NavigatableSection
 >(({ sectionId, children, inViewOptions, onInView, ...rest }, handler) => {
-  const internalRef = useRef<HTMLDivElement>(null);
+  const internalRef = React.useRef<HTMLDivElement>(null);
 
   const isInView = useInView(internalRef, inViewOptions);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isInView) {
       onInView?.(sectionId);
     }
   }, [isInView, onInView, sectionId]);
 
-  useImperativeHandle(handler, () => ({
+  React.useImperativeHandle(handler, () => ({
     getSectionId: () => sectionId,
     scrollIntoView: (arg) => internalRef?.current?.scrollIntoView(arg),
   }));

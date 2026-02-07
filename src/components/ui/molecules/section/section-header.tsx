@@ -1,14 +1,8 @@
-import { ComponentPropsWithoutRef } from 'react';
-
+import * as React from 'react';
 import { Typography } from '~ui/atoms/typography';
-
 import { cn } from '~utils/style';
 
-/* -------------------------------------------------------------------------------------------------
- * SectionHeader
- * -----------------------------------------------------------------------------------------------*/
-
-interface SectionHeaderProps extends ComponentPropsWithoutRef<'div'> {
+interface SectionHeaderProps extends React.ComponentPropsWithoutRef<'div'> {
   title: string;
   subtitle?: string;
 }
@@ -41,8 +35,6 @@ const SectionHeader = ({
 };
 
 SectionHeader.displayName = 'SectionHeader';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { SectionHeader };
 export type { SectionHeaderProps };

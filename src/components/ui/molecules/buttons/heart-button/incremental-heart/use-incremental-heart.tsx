@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-
+import * as React from 'react';
 import { pipe } from '~utils/functional';
 import { tw } from '~utils/style';
 
@@ -79,7 +78,7 @@ export const phasesLength = phases.length;
 export const useIncrementalHeart = (phase: number) => {
   assertValidPhase(phase);
 
-  const phaseBitmap = useMemo(() => {
+  const phaseBitmap = React.useMemo(() => {
     const pipeBody = phases.filter((_fn, i) => i <= phase);
 
     return pipe(...pipeBody)(finalBitmap);

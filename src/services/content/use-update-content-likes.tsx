@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import {
   UpdateContentLikesProps,
   updateContentLikes,
 } from '~api/shared/repository';
-
 import { contentKeys } from '~services/content/_query-key-factory';
 
 export const useUpdateContentLikes = () => {

@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import {
   AnimationDefinition,
   SVGMotionProps,
@@ -12,20 +13,12 @@ import {
   useTime,
   useTransform,
 } from 'framer-motion';
-import { forwardRef, useCallback, useState } from 'react';
-
 import { useHomeContext } from '~modules/home';
-
 import { Card } from '~ui/atoms/card';
 import { useAnimationAnchor } from '~ui/atoms/motion';
 import { AuthorPortraitsGallery } from '~ui/widgets/author-portraits-gallery';
-
 import { cn } from '~utils/style';
 import { checkFps60 } from '~utils/time';
-
-/* -------------------------------------------------------------------------------------------------
- * AuthorPortraitsGallery
- * -----------------------------------------------------------------------------------------------*/
 
 interface AboutAuthorPortraitsGalleryCardProps {
   className?: string;
@@ -41,12 +34,12 @@ const AboutAuthorPortraitsGalleryCard = ({
     'illustration',
   ] as const);
   const [isTransitioningToGallery, setIsTransitioningToGallery] =
-    useState(false);
+    React.useState(false);
 
   const { authorPortraits } = useHomeContext();
-  const [galleryEnabled, setGalleryEnabled] = useState(false);
+  const [galleryEnabled, setGalleryEnabled] = React.useState(false);
 
-  const transitionToGallery = useCallback(() => {
+  const transitionToGallery = React.useCallback(() => {
     const animateAndEnableGallery = async () => {
       setIsTransitioningToGallery(true);
 
@@ -146,10 +139,6 @@ const AboutAuthorPortraitsGalleryCard = ({
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * PortraitIllustration
- * -----------------------------------------------------------------------------------------------*/
-
 const isHoveringDefinition = (d: AnimationDefinition): d is 'hovering' => {
   return typeof d === 'string' && d === 'hovering';
 };
@@ -159,7 +148,7 @@ enum Velocity {
   HOVERING = 1.5,
 }
 
-const PortraitIllustration = forwardRef<
+const PortraitIllustration = React.forwardRef<
   SVGSVGElement,
   SVGMotionProps<SVGSVGElement>
 >(({ className, ...rest }, ref) => {
@@ -250,8 +239,6 @@ const PortraitIllustration = forwardRef<
 });
 
 PortraitIllustration.displayName = 'PortraitIllustration';
-
-/* -----------------------------------------------------------------------------------------------*/
 
 export { AboutAuthorPortraitsGalleryCard };
 export type { AboutAuthorPortraitsGalleryCardProps };

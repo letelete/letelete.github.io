@@ -1,12 +1,10 @@
-import { ComponentPropsWithoutRef } from 'react';
-
+import * as React from 'react';
 import { Icon, IconProps } from '~ui/atoms/icon';
-
 import { cn, tw } from '~utils/style';
 
 type AsideType = 'idea' | 'error';
 
-export interface MdxAsideProps extends ComponentPropsWithoutRef<'aside'> {
+export interface MdxAsideProps extends React.ComponentPropsWithoutRef<'aside'> {
   type?: AsideType;
 }
 

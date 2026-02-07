@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
-
 import {
   NotificationDot,
   NotificationDotProps,
 } from '~ui/atoms/notification-dot';
-
 import { cn } from '~utils/style';
 
 export interface NotificationDotPulseProps extends NotificationDotProps {}

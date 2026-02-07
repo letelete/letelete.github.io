@@ -3,16 +3,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { Nunito_Sans } from 'next/font/google';
-
-import { SSRQueryClientProvider } from '~api/shared/query-client/provider';
-
-import { BASE_URL } from '~constants/index';
-
-import '~styles/globals.css';
-
-import { ThemeProvider } from '~ui/atoms/theme/theme-provider';
-
 import { cn, tw } from '~utils/style';
+import { AppProviders } from '~/components/app/app-providers';
+import { AppSuspense } from '~/components/app/app-suspense';
+import { BASE_URL } from '~/constants';
 
 const fontSans = Nunito_Sans({
   subsets: ['latin'],
@@ -43,17 +37,13 @@ export const metadata: Metadata = {
   keywords: [
     'Bruno Kawka',
     'Software Engineer',
-    'Frontend Development',
+    'Frontend',
     'Tutorials',
     'Blog',
     'React',
-    'Javascript',
-    'Typescript',
     'Next.js',
-    'React developer',
     'Web Performance',
     'UI/UX Design',
-    'Full-stack Developer',
     'React Query',
     'Portfolio',
     'Blog Writer',
@@ -101,7 +91,7 @@ export const metadata: Metadata = {
     creatorId: '1073997624527806473',
     images: [
       {
-        url: 'https://vsupu83zlkfucch6.public.blob.vercel-storage.com/800x600.jpg',
+        url: '/content/800x600.jpg',
         width: 800,
         height: 600,
         alt: 'Headshot of Bruno Kawka from the shoulders up smiling in the black t-shirt, and black glasses.',
@@ -118,9 +108,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={cn(`${fontSans.variable} ${fontMono.variable}`)}>
-        <SSRQueryClientProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </SSRQueryClientProvider>
+        <AppSuspense>
+          <AppProviders>{children}</AppProviders>
+        </AppSuspense>
 
         <SpeedInsights />
         <Analytics />
