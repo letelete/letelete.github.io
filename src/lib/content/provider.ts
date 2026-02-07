@@ -110,13 +110,14 @@ const getContentTree = async () => {
     const findLatestTime = (_head: ContentDirectory) => {
       let headLatestTime = 0;
       _head.children.forEach((node) => {
+        let candidate: number;
         if (isContentDirectoryNode(node)) {
           const latestTime = findLatestTime(node);
           node.date = new Date(latestTime);
+          candidate = latestTime;
+        } else {
+          candidate = node.date.getTime();
         }
-        const candidate = isContentDirectoryNode(node)
-          ? findLatestTime(node)
-          : node.date.getTime();
         headLatestTime = Math.max(headLatestTime, candidate);
       });
       return headLatestTime;

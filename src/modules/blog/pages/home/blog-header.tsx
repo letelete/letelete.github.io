@@ -19,10 +19,8 @@ const BlogHeader = () => {
               <Logo />
             </Link>
           </Button>
-          <motion.div
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
+
+          <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
             <Link href={BLOG_PATH}>
               <Typography variant='body-sm'>
                 <span className='font-mono leading-none'>{'::blog'}</span>

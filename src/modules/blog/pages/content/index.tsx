@@ -7,7 +7,6 @@ import { SectionsGroupContainer } from '~/components/ui/molecules/section/sectio
 import { ContentFile } from '~/lib/content/content-tree';
 import { BlogContextProvider } from '~/modules/blog/blog-context';
 import { BlogContentArticle } from '~/modules/blog/pages/content/blog-content-article';
-import { BlogContentHeader } from '~/modules/blog/pages/content/blog-content-header';
 import { BlogExternalLinksSection } from '~/modules/blog/sections/blog-external-links-section';
 
 const BlogContentPage = ({
@@ -20,11 +19,9 @@ const BlogContentPage = ({
   return (
     <MainContainer>
       <BlogContextProvider payload={payload}>
-        <BlogContentHeader />
-
         <SectionsGroupContainer>
           <SectionContainer>
-            <BlogContentArticle body={file.body} />
+            <BlogContentArticle body={file.body} title={file.title} />
           </SectionContainer>
           <BlogExternalLinksSection />
         </SectionsGroupContainer>

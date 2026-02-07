@@ -1,5 +1,6 @@
 import { Metadata, ResolvingMetadata } from 'next';
 import { BASE_URL, BLOG_PATH } from '~/constants';
+import { BlogHeader } from '~/modules/blog/pages/home/blog-header';
 
 export async function generateMetadata(_: never, parent: ResolvingMetadata) {
   const parentMetadata = (await parent) as Metadata;
@@ -34,5 +35,10 @@ export default function ContentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <BlogHeader />
+      {children}
+    </>
+  );
 }
