@@ -1,11 +1,12 @@
 node_modules/
-.next/
-.swc/
+bin/
+tmp/
 .*.env
 .env*
-
+*_templ.go
+*_templ.txt
+public/css/styles.css
 # OS generated files #
-######################
 .DS_Store
 .DS_Store?
 **/.DS_Store

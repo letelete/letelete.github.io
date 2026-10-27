@@ -1,0 +1,70 @@
+package templates
+
+import "github.com/letelete/letelete.github.io/templates/components"
+
+const title = "Bruno Kawka — Software Engineer @ Google"
+const description = "Software Engineer @ Google. Passionate about software engineering, UI/UX design, performance, and accessibility."
+const tags = "Bruno Kawka, Software Engineer, Frontend, React, Next.js, TypeScript, Google"
+
+const ctx_title = "Bruno Kawka"
+const ctx_name_transcript = "/ˈbru.nɔ ˈkaf.ka/"
+const ctx_social_github = "https://github.com/letelete"
+const ctx_social_linkedin = "https://www.linkedin.com/in/brunokawka/"
+const ctx_social_reddit = "https://www.reddit.com/user/letelete0000/"
+const ctx_social_mail = "brunokawka+kawkame@proton.me"
+
+var ctx_bio = []string{
+	"I currently work as a Software Engineer @ Google, YouTube Ads. Formerly a Senior UI Engineer @ Upside.",
+	"I got into programming at 14 by modding video games with Lua and C++, won an international Google coding contest 3 years later.",
+	"I dedicated years to mastering web and mobile engineering, specializing in UI architecture, accessibility, and motion design. I was giving talks at conferences, writing technical articles, and consulting.",
+}
+
+templ Home() {
+	@Layout(title, description, tags) {
+		@components.Header(components.HeaderOptions{HasLogo: true})
+		<main class="layout-base flex-col justify-center">
+			<section class="section">
+				<h1 class="font-medium">{ ctx_title }</h1>
+				<audio id="name-pronunciation" src="/public/sfx/author-name-pronunciation.mp3" preload="auto"></audio>
+				@components.Button(components.ButtonOptions{
+					Variant: components.ButtonVariantLink,
+					Class:   "w-fit",
+					OnClick: playAudio("name-pronunciation"),
+				}) {
+					<span class="font-medium text-ctx-accent-primary">{ ctx_name_transcript }</span>
+				}
+			</section>
+			<section class="section gap-y-4">
+				@toMultilineParagraph(ctx_bio)
+			</section>
+			<section class="section !flex-row gap-x-8 text-ctx-primary-fg-primary">
+				<a href={ templ.SafeURL(ctx_social_github) } target="_blank" rel="noopener noreferrer">
+					@components.Icon(components.IconOptions{Name: components.IconGithub})
+				</a>
+				<a href={ templ.SafeURL(ctx_social_linkedin) } target="_blank" rel="noopener noreferrer">
+					@components.Icon(components.IconOptions{Name: components.IconLinkedin})
+				</a>
+				<a href={ templ.SafeURL(ctx_social_reddit) } target="_blank" rel="noopener noreferrer">
+					@components.Icon(components.IconOptions{Name: components.IconReddit})
+				</a>
+				<a href={ templ.SafeURL("mailto:" + ctx_social_mail) }>
+					@components.Icon(components.IconOptions{Name: components.IconMail})
+				</a>
+			</section>
+		</main>
+	}
+}
+
+templ toMultilineParagraph(arr []string) {
+	for _, x := range arr {
+		<p class="font-medium">{ x }</p>
+	}
+}
+
+script playAudio(id string) {
+	const a = document.getElementById(id);
+	if (a) {
+		a.currentTime = 0;
+		a.play();
+	}
+}

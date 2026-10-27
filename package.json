@@ -1,0 +1,13 @@
+{
+  "name": "portfolio",
+  "version": "6.0.0",
+  "private": true,
+  "scripts": {
+    "css:build": "tailwindcss -i ./styles/globals.css -o ./public/css/styles.css --minify",
+    "css:watch": "tailwindcss -i ./styles/globals.css -o ./public/css/styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
+

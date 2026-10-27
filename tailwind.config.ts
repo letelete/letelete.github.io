@@ -30,7 +30,7 @@ export interface Background {
 }
 
 const config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: ['./templates/**/*.{templ,html,js}', './internal/**/*.{go,templ}'],
   darkMode: 'class',
   theme: {
     colors: {
@@ -94,8 +94,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(----font-sans)', ...defaultTheme.fontFamily.sans],
-        mono: ['var(----font-mono)', ...defaultTheme.fontFamily.mono],
+        sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
       },
       spacing: {
         section: '8rem',

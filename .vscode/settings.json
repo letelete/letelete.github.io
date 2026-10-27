@@ -1,0 +1,22 @@
+{
+  "go.goroot": "/usr/local/go",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true
+  },
+  "[templ]": {
+    "editor.defaultFormatter": "a-h.templ",
+    "editor.formatOnSave": true
+  },
+  "tailwindCSS.includeLanguages": {
+    "templ": "html"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["class=\\{?\"([^\"]*)\"\\}?", "([^\\s]+)"]
+  ],
+  "cSpell.words": [
+    "onclick",
+    "templ"
+  ]
+}
+

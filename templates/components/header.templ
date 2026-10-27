@@ -1,0 +1,13 @@
+package components
+
+type HeaderOptions struct {
+	HasLogo bool
+}
+
+templ Header(o HeaderOptions) {
+	<header class="flex items-center min-h-16 layout-base">
+		if o.HasLogo {
+			<img src="/public/logo.svg" alt="Logo" class="h-4 object-contain"/>
+		}
+	</header>
+}

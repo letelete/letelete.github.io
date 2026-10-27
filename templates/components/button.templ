@@ -1,0 +1,49 @@
+package components
+
+type ButtonVariant string
+
+const (
+	ButtonVariantDefault ButtonVariant = "button-default"
+	ButtonVariantGhost   ButtonVariant = "button-ghost"
+	ButtonVariantLink    ButtonVariant = "button-link"
+)
+
+type ButtonOptions struct {
+	Variant ButtonVariant
+	Class   string
+	OnClick templ.ComponentScript
+	Attrs   templ.Attributes
+}
+
+func buttonVariantClass(v ButtonVariant) string {
+	if v == "" {
+		return string(ButtonVariantDefault)
+	}
+	return string(v)
+}
+
+templ Button(o ButtonOptions) {
+	<button
+		type="button"
+		class={ "group/button button", buttonVariantClass(o.Variant), o.Class }
+		if o.OnClick.Function != "" {
+			onclick={ o.OnClick }
+		}
+		{ o.Attrs... }
+	>
+		{ children... }
+	</button>
+}
+
+templ IconButton(o ButtonOptions) {
+	<button
+		type="button"
+		class={ "group/button button size-8", buttonVariantClass(ButtonVariantGhost), o.Class }
+		if o.OnClick.Function != "" {
+			onclick={ o.OnClick }
+		}
+		{ o.Attrs... }
+	>
+		{ children... }
+	</button>
+}

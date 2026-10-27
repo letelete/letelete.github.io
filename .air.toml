@@ -1,0 +1,29 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  bin = "./tmp/main"
+  cmd = "go build -o ./tmp/main ./cmd/server"
+  delay = 200
+  exclude_dir = ["tmp", "bin", "node_modules", "public", "styles", "scripts", ".git", ".vscode"]
+  exclude_regex = ["_test\\.go", "_templ\\.txt"]
+  exclude_unchanged = false
+  follow_symlink = false
+  include_ext = ["go"]
+  kill_delay = "0s"
+  log = "build-errors.log"
+  send_interrupt = true
+  stop_on_error = true
+
+[color]
+  build = "yellow"
+  main = "magenta"
+  runner = "green"
+  watcher = "cyan"
+
+[log]
+  time = false
+
+[misc]
+  clean_on_exit = true
+
