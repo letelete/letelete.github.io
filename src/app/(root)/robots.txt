@@ -1,4 +1,0 @@
-User-Agent: *
-Allow: /
-
-Sitemap: https://kawka.me/sitemap.xml
